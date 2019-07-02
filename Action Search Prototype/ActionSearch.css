@@ -1,0 +1,14 @@
+body {
+	background-color: powderblue;
+	font-family: 'DM Sans';
+}
+
+#myInput {
+	height: 30px;
+	width: 200px;
+	border-radius: 5px;
+	font-size: 15px;
+	font-family: 'DM Sans';
+	padding-left: 10px;
+	padding-top: 3px;
+}
