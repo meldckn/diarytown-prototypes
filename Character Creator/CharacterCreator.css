@@ -1,8 +1,26 @@
 body {
 	background-color: powderblue;
+}
+
+#command {
+	color: red;
+}
+
+#charStatus {
+	color: green;
+}
+
+#spriteContainer {
 	display: inline-block;
 }
 
-h2 {
-	color: red;
+.styledTextFields {
+	width: 150px;
+	height: 30px;
+	border-radius: 4px;
+	font-size: 15px;
+	margin-left: 5px;
+	margin-top: 10px;
+	padding-left: 7px;
+	display: block;
 }
