@@ -1,29 +1,65 @@
-<html>
-<head>
-		<meta charset="UTF-8">
-		<title>Document</title>
-		<link rel="stylesheet"  href="/style.css">
-</head>
-<body>
-	<h1> Date: </h1>
-	<p>Overall feeling: It was a _____ day</p>
-	<button id = "mybutton">Click me!</button>
-	<button id = "togglebutton"> Click this to toggle! </button>
-	<input type  = "text" placeholder = "Type here..." id = "myinput">
-	<p id = "output"></p>
-	
-	<div id = "square-container">
-	<div id  = "square"></div></div>
-	<div id = "circle" ></div>
-	<div class="vertical-menu">
-	  <a href="#" class="active">Day 1</a>
-	  <a href="#">Day 2</a>
-	  <a href="#">Day 3</a>
-	  <a href="#">Day 4</a>
-	  <a href="#">Day 5</a>
-	</div>
-	<script src="/script.js"></script>
+ <!DOCTYPE html>
+ <!-- Template by html.am -->
+ <html>
+ <head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<title>Diarycraft UI</title>	
+ 	<link rel="stylesheet" type="text/css" href="style.css">
 
 
-</body>
-<html>
+ </head>
+
+ <body>
+ 	<img draggable="true">
+
+
+ 	<header id="header"><p>DiaryCraft</p></header>
+ 	
+ 	<div id="container">
+
+ 		<main id="center" class="column flexcontainer">
+ 			<div class ="flexitem">
+
+ 				<h1>Words</h1>
+
+ 			</div>
+ 			<div class = "flexitem">
+ 				<h1>Collection</h1>
+ 			</div>								
+ 		</main>
+
+ 		<nav id="left" class="column">
+ 			<h1>Choose the day</h1>
+
+ 			<div class="vertical-menu">
+ 				<a href="#" class="active">Day 1</a>
+ 				<a href="#">Day 2</a>
+ 				<a href="#">Day 3</a>
+ 				<a href="#">Day 4</a>
+ 				<a href="#">Day 5</a>
+ 				<a href="#">Day 6</a>
+ 				<a href="#">Day 7</a>
+ 				<a href="#">Day 8</a>
+ 				<a href="#">Day 9</a>
+ 				<a href="#">Day 10</a>
+ 			</div>
+ 		</nav>
+ 		<main id="right" class="column flexcontainer">
+ 			<div class ="flexitem">
+ 				<h1>General</h1>
+
+ 			</div>
+ 			<div class = "flexitem">
+ 				<h1>Collection</h1>
+ 			</div>								
+ 		</main>
+ 	</div>
+
+ 	<div id="footer-wrapper">
+ 		<footer id="footer"><p>Final sentence</p></footer>
+ 	</div>
+
+ </body>
+ </html>
+ 

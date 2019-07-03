@@ -1,5 +1,5 @@
 
-let buttonclicked = true;
+/*let buttonclicked = true;
 let mybutton = document.getElementById('mybutton');
 mybutton.onclick = function() {
 		if(buttonclicked){
@@ -29,6 +29,7 @@ mybutton.onclick = function() {
 window.onkeyup = function() {
 	console.log(event);
 }
+*/
 //get mouse coordinate on click and place circles there
 function showCoords(event) {
   var xcoord = event.clientX;
@@ -46,7 +47,7 @@ window.onmousemove = function(event){
 
 
 
-
+/*
 //initializing the toggle button
 let buttonstate = true;
 let rightbutton = document.getElementById('togglebutton');
@@ -54,6 +55,10 @@ togglebutton.onclick = function stop(){
 	buttonstate = !buttonstate;
 
 }
+*/
+ 
+
+/*
 //moving the box
 let currentX = 0;
 let currentY = 0;
@@ -96,4 +101,4 @@ window.setInterval(function(){
 	} else if (currentX === minX && currentY === minY) {
 		moveDirection = 'right';
 	}
-}, 1);
+}, 1);*/
