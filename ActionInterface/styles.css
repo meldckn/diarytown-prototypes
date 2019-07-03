@@ -1,14 +1,65 @@
-var elems = Document.getElementsByTagName('div');
-var increase = Math.PI * 2 / elems.length;
-var x = 0, y = 0, angle = 0;
+body {
+	
+	background-color: black; /* This is a number from 0-255 */
+	font-family:"Nova Round";
+	margin-bottom:40rem;
+}
+br {
+	font-size:10;
+}
+h1 {
+	color: white;
+	font-size:50;
+	margin-top: 20;
+}
 
-for (var i = 0; i < elems.length; i++) {
-  elem = elems[i];
-  // modify to change the radius and position of a circle
-  x = 100 * Math.cos(angle) + 200;
-  y = 100 * Math.sin(angle) + 200;
-  elem.style.position = 'absolute';
-  elem.style.left = x + 'px';
-  elem.style.top = y + 'px';
-  angle += increase;
+p {
+	color: white;
+}
+button {
+	background-color: black;
+	padding: 10px 10px;
+	border-radius: 20px;
+	color: #C2FEFA;
+	font-family: "Nova Round";
+	border: 1px solid #C2FEFA;
+	margin-bottom: 1rem;
+	font-size: 20;
+
+}
+button:hover {
+	background-color: #C2FEFA;
+	padding: 10px 10px;
+	border-radius: 20px;
+	color: black;
+	font-family: "Nova Round";
+	border: 1px solid black;
+}
+.actionButtonDiv {
+	margin-left:0rem;
+	width: 80%;
+
+}
+.actionButton {
+	margin-right: 0.8rem;
+	opacity:0;
+	font-size:15;
+	border: 1px solid #99FEB4;
+	color: #99FEB4;
+}
+.actionButton:hover {
+	background-color: #99FEB4;
+	color: black;
+}
+
+:focus {
+	outline: none;
+}
+
+.actionTextDiv {
+	color: white;
+	opacity: 0;
+}
+#bitBigger {
+	font-size: 23;
 }
