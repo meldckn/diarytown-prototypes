@@ -1,6 +1,7 @@
 let imageNames = ["1Char", "2Char", "3Char"];
 
 let command = document.getElementById("command");
+let charStatus = document.getElementById("charStatus");
 let charName;
 let charAge;
 
@@ -35,7 +36,7 @@ function chooseSprite() {
 }
 
 function chooseNameAndAge() {
-	command.innerText = "Choose a Name For Your Character"
+	command.innerText = "Choose a Name For Your Character";
 	nameField = document.createElement("input");
 	nameField.setAttribute("type", "text");
 	nameField.setAttribute("placeholder", "Enter your name...");
@@ -47,10 +48,13 @@ function chooseNameAndAge() {
 	nameField.onchange = function() {
 		nameField.style.display = "none";
 		charName = nameField.value;
-		document.getElementById("charStatus").innerText += "Name: " + charName;
+		charStatus.innerText += "Name: " + charName;
+		charStatus.style.fontSize = "17px";
+		charStatus.style.fontWeight = "bold";
+		charStatus.style.marginBottom = "10px";
+		charStatus.style.marginLeft = "0px";
 
-
-		command.innerText = "Choose an Age For Your Character"
+		command.innerText = "Choose an Age For Your Character";
 		ageField = document.createElement("input");
 		ageField.setAttribute("type", "text");
 		ageField.setAttribute("placeholder", "Enter your age...");
@@ -62,13 +66,32 @@ function chooseNameAndAge() {
 		ageField.onchange = function() {
 			ageField.style.display = "none";
 			charAge = ageField.value;
-			document.getElementById("charStatus").innerText += "\n Age: " + charAge;
+			charStatus.innerText += "\n Age: " + charAge;
+			chooseTraits();
 		}
 	}
 }
 
 function chooseTraits() {
-	
+	command.innerText = "Choose 3 Traits That Suit Your Character";
+	for (let traitName of traitNames) {
+		let img = document.createElement("img");
+		img.setAttribute("src", traitName + ".png");
+		img.id = traitName;
+
+		img.className = "styledTraits";
+
+		if (traitName === traitNames[0]) {
+			img.style.marginLeft = "0px";
+		}
+
+		document.getElementById("traitContainer").appendChild(img);
+
+		img.onclick = function() {
+			charStatus.appendChild(img);
+			document.getElementById("traitContainer").getElementsByTagName("img")[0].style.marginLeft = "0px";
+		}
+	}
 }
 
 chooseSprite();
