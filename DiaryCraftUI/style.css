@@ -1,0 +1,31 @@
+body{
+	font-family:Georgia;
+	background-color: rgb(255,255,153);
+}
+#square-container{
+	border:1px solid blue;
+	position: relative;
+	height: 300px;
+	width: 300px;
+
+}
+
+#square {
+	background: blue;
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	left:200px;
+	top:0px;
+
+}
+
+#circle {
+	background: green;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: absolute;
+
+}
+
