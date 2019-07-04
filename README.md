@@ -4,4 +4,6 @@ Prototypes for Diarytown, a game about making a virtual world from diary entries
 - **[Action Search Prototype](https://meldckn.github.io/diarytown-prototypes/Action%20Search%20Prototype/)**
 - **[ActionInterface](https://meldckn.github.io/diarytown-prototypes/ActionInterface)**
 - **[Character Creator](https://meldckn.github.io/diarytown-prototypes/Character%20Creator)**
+- **[DiaryCraftUI](https://meldckn.github.io/diarytown-prototypes/DiaryCraftUI)**
+- **[random-diary-entry-generator](https://meldckn.github.io/diarytown-prototypes/random-diary-entry-generator/indexrdeg.html)**
 
