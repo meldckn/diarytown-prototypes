@@ -84,12 +84,17 @@ for (let category of categories) {
 		isOpen =!isOpen;
 		if (isOpen === true) {
 			let actionButtonDivs = document.querySelectorAll('.actionButtonDiv');
+
+
+
 			for (let ABD of actionButtonDivs) {
 				if (ABD.parentNode.id === CCN) {
 					continue;
 				}
 				closeCategory(ABD);
 			}
+
+
 			for (let action of category.actions) {
 				let actionButton = document.createElement("button");
 				
@@ -200,10 +205,7 @@ for (let category of categories) {
 						window.setTimeout(function(){
 							actionTextDiv.innerText = "";
 						}, 300);
-					}
-
-					
-					
+					}	
 				}
 			}
 		} else {
@@ -212,7 +214,6 @@ for (let category of categories) {
 		}
 	}
 }
-
 
 footer.appendChild(actionTextDiv);
 
