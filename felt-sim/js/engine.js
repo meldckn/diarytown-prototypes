@@ -63,12 +63,13 @@ function processEffect(db, effect){
 // Add an event to the DB, run all its effects, and return an updated DB.
 function addEvent(db, event) {
   // add the actual event to the DB as an entity
-  db = datascript.db_with(db, [{
-    ':db/id': -1,
-    type: event.type,
-    actor: event.actor,
-    target: event.target
-  }]);
+  let eventEntity = {':db/id': -1};
+  for (let prop of Object.keys(event)) {
+    // add all properties of event (except effects) to DB
+    if (['effects'].indexOf(prop) !== -1) continue;
+    eventEntity[prop] = event[prop];
+  }
+  db = datascript.db_with(db, [eventEntity]);
   let eventID = newestEID(db);
   // process the event's effects
   for (let effect of event.effects){
