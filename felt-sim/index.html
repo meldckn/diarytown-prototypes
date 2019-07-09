@@ -10,15 +10,54 @@
   <script src="js/app.js" defer></script>
   <style>
   body {
-  	font-family: monospace;
+    padding: 0;
+    font-family: monospace;
     font-size: 1.2rem;
+  }
+  #app {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .left {
+    width: 70%;
+  }
+  .right {
+    background: #eee;
+    width: 30%;
+  }
+  #queryInput {
+    font-family: monospace;
+    font-size: 1rem;
+    width: 100%;
+  }
+  #queryButton {
+    width: 100%;
+    text-align: center;
+  }
+  #queryResults {
+    overflow-x: scroll;
+  }
+  #queryResults tr:first-of-type {
+    font-weight: bold;
+  }
+  #queryResults td {
+    padding-right: 0.5rem;
   }
   </style>
 </head>
 <body>
   <div id="app">
-  	<button id="playPauseButton">Pause simulation</button>
-  	<div id="log"></div>
+    <div class="left">
+      <button id="playPauseButton">Pause simulation</button>
+      <div id="log"></div>
+    </div>
+    <div id="queryZone" class="right">
+      <textarea id="queryInput" cols="30" rows="10" placeholder="?char name ?name"></textarea>
+      <div>
+        <button id="queryButton">Run query</button>
+      </div>
+      <table id="queryResults"></table>
+    </div>
   </div>
 </body>
 </html>

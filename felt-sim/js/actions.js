@@ -69,7 +69,8 @@ let startProject = {
     return {
       actor: vars.c1,
       target: vars.c1,
-      // TODO need to specify project: somehow
+      // TODO need to specify project: somehow, but can't, because its ID is only generated
+      // once the effects are run
       effects: [
         {type: 'start_project', owner: vars.c1, projectType: projectType}
       ],
