@@ -92,7 +92,9 @@ let makeProgressOnProject = {
     actor: vars.c1,
     target: vars.c1,
     project: vars.proj,
-    effects: [],
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " made a lot of progress on their " + vars.projtype + " project."
   })
 };
@@ -110,7 +112,9 @@ let workFruitlesslyOnProject = {
     actor: vars.c1,
     target: vars.c1,
     project: vars.proj,
-    effects: [],
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " tried to work on their " + vars.projtype + " project, but got nowhere."
   })
 };
@@ -129,7 +133,8 @@ let abandonProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'inactive'}
+      {type: 'update_project_state', project: vars.proj, newState: 'inactive'},
+      {type: 'increase_project_drama', project: vars.proj, amount: 2}
     ],
     text: "🎨 " + vars.n1 + " gave up on their " + vars.projtype + " project."
   })
@@ -149,7 +154,8 @@ let resumeProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'active'}
+      {type: 'update_project_state', project: vars.proj, newState: 'active'},
+      {type: 'increase_project_drama', project: vars.proj, amount: 2}
     ],
     text: "🎨 " + vars.n1 + " started working on their " + vars.projtype + " project again!"
   })
@@ -162,7 +168,9 @@ let finishProject = {
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
     '?proj "projectType" ?projtype',
-    '?proj "state" "active"'
+    '?proj "state" "active"',
+    '?proj "dramaLevel" ?d',
+    '(>= ?d 5)'
   ],
   event: (vars) => ({
     actor: vars.c1,
@@ -192,7 +200,8 @@ let showProject_loved = {
     target: vars.c2,
     project: vars.proj,
     effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2}
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who loved it ☺️"
   })
@@ -214,7 +223,9 @@ let showProject_neutral = {
     actor: vars.c1,
     target: vars.c2,
     project: vars.proj,
-    effects: [],
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 +
           ", who was kinda meh about it 😐"
   })
@@ -237,7 +248,8 @@ let showProject_hated = {
     target: vars.c2,
     project: vars.proj,
     effects: [
-      {type: 'add_attitude', charge: 'negative', source: vars.c2, target: vars.c1}
+      {type: 'add_attitude', charge: 'negative', source: vars.c2, target: vars.c1},
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who hated it 😡"
   })
@@ -268,7 +280,9 @@ let getDiscouraged = {
     actor: vars.c1,
     target: vars.c1,
     project: vars.proj,
-    effects: [],
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " considered restarting their abandoned " + vars.projtype +
           " project, but then remembered " + vars.n2 + "'s negative remarks and decided to leave it alone."
   })

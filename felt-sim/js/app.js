@@ -67,7 +67,7 @@ function parseUserQuery(userQuery) {
 
 function runUserQuery() {
   let query = parseUserQuery(queryInput.value);
-  let results = datascript.q(query.query, gameDB);
+  let results = datascript.q(query.query, gameDB).sort((a, b) => a[0] - b[0]);
 
   // remove all rows from table
   for (let i = queryResults.rows.length - 1; i >= 0; i--) {

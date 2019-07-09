@@ -28,11 +28,17 @@ function processEffect(db, effect){
       type: 'project',
       owner: effect.owner,
       projectType: effect.projectType,
-      state: 'active'
+      state: 'active',
+      dramaLevel: 0
     }]);
   }
   else if (effect.type === 'update_project_state'){
     db = datascript.db_with(db, [[':db/add', effect.project, 'state', effect.newState]]);
+  }
+  else if (effect.type === 'increase_project_drama'){
+    let oldDramaLevel = datascript.q('[:find ?d . :where [' + effect.project + ' "dramaLevel" ?d]]', db);
+    let newDramaLevel = oldDramaLevel + (effect.amount || 1);
+    db = datascript.db_with(db, [[':db/add', effect.project, 'dramaLevel', newDramaLevel]]);
   }
   /*
   else if (effect.type === 'create_entity'){
