@@ -1,0 +1,13 @@
+body {
+	background-color: powderblue;
+}
+
+canvas {
+	border: 1px solid black;
+	display: inline-block;
+}
+
+#customization {
+	background: #C0C0C0;
+	display: inline-block;
+}
