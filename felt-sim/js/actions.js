@@ -233,10 +233,50 @@ let showProject_hated = {
   })
 };
 
+let plantedTree = {
+  type: 'plantedTree',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target:vars.c1,
+    effects: [
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c1}
+    ],
+    text: "🌳 " + vars.n1 + " planted a tree " + randNth(['near their house.', 'at the park.', 'in their backyard.'])
+  })
+};
+
+let loves = {
+  type: 'loves',
+  find: '?c1 ?n1 ?c2 ?n2',
+  where: [
+    '?like "type" "attitude"',
+    '?like "charge" "positive"',
+    '?like "source" ?c1',
+    '?like "target" ?c2',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not = ?c1 ?c2)',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2}
+    ],
+    text: "💓 " + vars.n1 + " is in love with " + vars.n2+"."
+  })
+};
+
 let allActions = [
   betray, hangOutWith, seeCuteAnimal,
   startProject, makeProgressOnProject, workFruitlesslyOnProject,
   abandonProject, resumeProject, finishProject,
-  showProject_loved, showProject_neutral, showProject_hated
+  showProject_loved, showProject_neutral, showProject_hated, 
+  plantedTree,
+  loves
 ];
 allActions.forEach(preprocessAction);
