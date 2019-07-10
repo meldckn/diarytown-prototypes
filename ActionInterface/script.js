@@ -9,17 +9,11 @@ for (let action of actions) {
 	}
 }
 
-var categories = [];
+function closeCategory (category) {
+	category.open = !category.open;
+	let actionButtonDiv = category.actionButtonDiv;
 
-for (let categoryName of categoryNames) {
-	let category = {
-		name : categoryName,
-		actions : []
-	};
-	categories.push(category);
-}
-
-function closeCategory (actionButtonDiv) {
+	
 	anime({
 		targets:'.actionButton',
 		opacity:0,
@@ -40,16 +34,66 @@ function closeCategory (actionButtonDiv) {
 		translateX:-150,
 		duration: 2000
 	})
+	console.log("closed");
 	window.setTimeout(function(){
 		while (actionButtonDiv.childNodes.length) {
 		actionButtonDiv.removeChild(actionButtonDiv.lastChild);
 		}
 		actionTextDiv.innerText = "";
+
+	}, 200);
+}
+
+function closeAction(actionButton) {
+	console.log(actionButton.dataset.vertOff);
+	console.log(actionButton.dataset.horOff);
+
+	anime({
+		targets: '#'+actionButton.id,
+		translateY:0,
+		translateX:150,
+		duration: 600
+	})
+	actionButton.style.borderRadius = '20px';
+	actionButton.style.fontSize = 15;
+	anime({
+		targets:'.actionTextDiv',
+		opacity:0,
+		duration:1500
+	})
+	anime({
+		targets: '.actionTextDiv',
+		translateX:-150,
+		duration: 1500
+	})
+	window.setTimeout(function(){
+		actionTextDiv.innerText = "";
 	}, 300);
 }
 
+function getCategoryByName(name) {
+	for (let category of categories) {
+		if (category.name === name) {
+			return category;
+		}
+	}
+	console.error('no category with name '+ name);
+}
+
+let categories = [];
+
+for (let categoryName of categoryNames) {
+	let category = {
+		name : categoryName,
+		actions : [],
+		open: false,
+		htmlElement: null
+	};
+	categories.push(category);
+}
 
 let actionTextDiv = document.createElement("div");
+
 
 for (let category of categories) {
 	let categoryDiv = document.createElement("div");
@@ -67,6 +111,8 @@ for (let category of categories) {
 	actionButtonDiv.className = "actionButtonDiv";
 	categoryDiv.appendChild(actionButtonDiv);
 
+	category.actionButtonDiv = actionButtonDiv;
+
 
 	button.innerText = category.name.toUpperCase();
 	button.className = "categoryButton";
@@ -80,20 +126,28 @@ for (let category of categories) {
 
 	let isOpen = false;
 	button.onclick = function() {
-		let CCN = button.parentNode.id;
-		isOpen =!isOpen;
-		if (isOpen === true) {
+
+
+		let CurrentCategoryN = button.parentNode.id;
+
+		let category = getCategoryByName(CurrentCategoryN);
+		
+
+		
+		if (!category.open) {
 			let actionButtonDivs = document.querySelectorAll('.actionButtonDiv');
+			// is an array of HTML elements
 
-
-
-			for (let ABD of actionButtonDivs) {
-				if (ABD.parentNode.id === CCN) {
+			
+			for (let categoryy of categories) {
+				if (!categoryy.open || categoryy.name===CurrentCategoryN) {
 					continue;
 				}
-				closeCategory(ABD);
+				closeCategory(categoryy);
+
 			}
 
+			
 
 			for (let action of category.actions) {
 				let actionButton = document.createElement("button");
@@ -103,23 +157,24 @@ for (let category of categories) {
 				actionButton.className = "actionButton";
 				actionButton.id = action.name;
 
+				
 				anime({
 					targets:'.actionButton',
 					opacity:1,
-					delay: anime.stagger(100)
+					delay: anime.stagger(25, {easing: 'easeOutQuad'})
 				})
 				anime({
   					targets: '.actionButton',
   					translateX: 150,
-  					delay: anime.stagger(100) // increase delay by 100ms for each elements.
+  					delay: anime.stagger(25, {easing: 'easeOutQuad'}) // increase delay by 100ms for each elements.
 				});
+
 
 				let opened = false;
 
 				actionButton.onclick = function() {
 					opened = !opened;
 					if (opened) {
-						
 
 						actionTextDiv.className = "actionTextDiv";
 
@@ -134,9 +189,9 @@ for (let category of categories) {
 						} else {
 							relateds = "Related to";
 							for (let related of action.related) {
-
+								relateds += ", \""+related+"\"";
 							}
-							relateds += ", \""+related+"\"";
+
 						}
 
 						let otherCats = "";
@@ -164,59 +219,37 @@ for (let category of categories) {
 							targets: '#'+action.name,
 							translateY:offset,
 							translateX: secOffset,
-							duration: 1500
+							duration: 1000,
 						})
 
 						anime({
 							targets:'.actionTextDiv',
 							opacity:1,
-							delay: anime.stagger(200, {start: 750})
+							delay: anime.stagger(300, {start: 300})
 						})
 						anime({	
 							targets: '.actionTextDiv',
 							translateX: 60,
-							delay: anime.stagger(200, {start: 750}) // increase delay by 100ms for each elements.
+							delay: anime.stagger(300, {start: 300}) // increase delay by 100ms for each elements.
 						});
 
 						actionButton.style.borderRadius = '1px';
 						actionButton.style.fontSize = 20;
 					} else {
-						console.log(actionButton.dataset.vertOff);
-						console.log(actionButton.dataset.horOff);
-
-						anime({
-							targets: '#'+action.name,
-							translateY:0,
-							translateX:150,
-							duration: 1500
-						})
-						actionButton.style.borderRadius = '20px';
-						actionButton.style.fontSize = 15;
-						anime({
-							targets:'.actionTextDiv',
-							opacity:0,
-							duration:2000
-						})
-						anime({
-							targets: '.actionTextDiv',
-							translateX:-150,
-							duration: 2000
-						})
-						window.setTimeout(function(){
-							actionTextDiv.innerText = "";
-						}, 300);
+						closeAction(actionButton);
 					}	
 				}
 			}
+			category.open = !category.open;
 		} else {
 			
-			closeCategory(actionButtonDiv);
+			closeCategory(category);
 		}
+		
 	}
 }
 
 footer.appendChild(actionTextDiv);
-
 
 
 

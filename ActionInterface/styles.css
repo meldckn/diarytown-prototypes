@@ -11,6 +11,7 @@ h1 {
 	color: white;
 	font-size:50;
 	margin-top: 20;
+	border-radius: 20px;
 }
 
 p {
@@ -62,4 +63,7 @@ button:hover {
 }
 #bitBigger {
 	font-size: 23;
+}
+
+#footer {
 }
