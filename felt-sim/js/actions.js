@@ -24,11 +24,18 @@ let betray = {
 
 let hangOutWith = {
   type: 'hangOutWith',
-  find: '?c1 ?n1 ?c2 ?n2',
+  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '?a1 "type" "affection"',
+    '?a1 "source" ?c1',
+    '?a1 "target" ?c2',
+    '?a2 "type" "affection"',
+    '?a2 "source" ?c2',
+    '?a2 "target" ?c1'
+    
   ],
   event: (vars) => ({
     actor: vars.c1,
@@ -36,6 +43,8 @@ let hangOutWith = {
     effects: [
       {type: 'add_attitude', charge: 'positive', source: vars.c2, target: vars.c1},
       {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'changeAffectionLevel', affection:vars.a1, amount:1},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount:1}
     ],
     text: "🍦 " + vars.n1 + " and " + vars.n2 +
           " hung out together at the " + randNth(['boba','ice cream','pizza']) + " place."
@@ -273,24 +282,73 @@ let plantedTree = {
 
 let loves = {
   type: 'loves',
-  find: '?c1 ?n1 ?c2 ?n2',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection',
   where: [
-    '?like "type" "attitude"',
-    '?like "charge" "positive"',
-    '?like "source" ?c1',
-    '?like "target" ?c2',
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(> ?lev 2)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not = ?c1 ?c2)',
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceTarget" "nobody"'
   ],
   event: (vars) => ({
     actor: vars.c1,
     target: vars.c2,
     effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2}
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2}
     ],
     text: "💓 " + vars.n1 + " is in love with " + vars.n2+"."
   })
+};
+
+let askedOut = {
+  type: 'askedOut',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  where: [
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(> ?lev 4)',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceTarget" ?c2',
+    '?c2 "romanceTarget" ?c2romanceTarget'
+  ],
+  event: function(vars) {
+    if (vars.c2romanceTarget === vars.c1) {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'beginDating', char1:vars.c1, char2: vars.c2}
+          /*
+          {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
+          {type: 'add_attitude', charge: 'positive', source: vars.c2, target: vars.c1},
+          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
+          {type: 'changeAffectionLevel', affection:vars.affection, amount:1},
+          */
+        ],
+        text: "💞 " + vars.n1 + " is now in a relationship with " + vars.n2+"."
+      }
+    } else {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'add_attitude', charge: 'negative', source: vars.c1, target: vars.c2},
+          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
+          {type: 'changeAffectionLevel', affection:vars.affection, amount:-2}
+        ],
+        text: "💔 " + vars.n1 + " was brutally rejected by " + vars.n2+"."
+      }
+    }
+  } 
 };
 
 let getDiscouraged = {
@@ -332,6 +390,7 @@ let allActions = [
   abandonProject, resumeProject, finishProject,
   showProject_loved, showProject_neutral, showProject_hated,
   getDiscouraged, 
-  plantedTree, loves
+  plantedTree, loves,
+  askedOut
 ];
 allActions.forEach(preprocessAction);

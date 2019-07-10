@@ -130,7 +130,8 @@ function generateCharacter(db){
   return datascript.db_with(db, [{
     ':db/id': -1,
     type: 'char',
-    name: randNth(validNames)
+    name: randNth(validNames),
+    romanceTarget: "nobody"
   }]);
 }
 
@@ -146,6 +147,18 @@ function generateAttitude(db){
     target: charPair[1]
   }]);
 }
+
+function generateAffection(db, char1, char2) {
+  return createEntity(db,{
+    level:5, 
+    source:char1,
+    target:char2,
+    type:"affection",
+    realizedLove:false
+  })
+}
+
+
 
 /// INIT DB
 
@@ -163,6 +176,11 @@ for (let i = 0; i < 10; i++){
 }
 for (let i = 0; i < 20; i++){
   gameDB = generateAttitude(gameDB);
+}
+let charPairs = datascript.q('[:find ?c1 ?c2 \
+                                 :where [?c1 "type" "char"] [?c2 "type" "char"] [(not= ?c1 ?c2)]]', gameDB);
+for (let charPair of charPairs) {
+  gameDB = generateAffection(gameDB, charPair[0], charPair[1]);
 }
 
 console.log(getAllCharacterNames(gameDB));
@@ -186,6 +204,7 @@ function runRandomActionByType(db, allActions){
   let allPossibleByType = possibleActionsByType(db, allActions);
   let type = randNth(Object.keys(allPossibleByType));
   let possible = randNth(allPossibleByType[type]);
+  console.log(type);
   let event = realizeEvent(possible.action, possible.bindings);
   db = addEvent(db, event);
   console.log(event);
@@ -205,9 +224,10 @@ function pauseSim(){
 function playSim(){
   runLoopID = window.setInterval(function(){
     gameDB = runRandomActionByType(gameDB, allActions);
-  }, 1000);
+  }, 400);
   playPauseButton.innerText = 'Pause simulation';
   playPauseButton.onclick = pauseSim;
 }
+
 
 playSim();

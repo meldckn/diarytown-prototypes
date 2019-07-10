@@ -2,7 +2,7 @@
 
 // Given an action spec, preprocess it.
 function preprocessAction(action){
-  var query = '[:find ' + action.find + ' :where ';
+  var query = '[:find ' + action.find + ' :in $ % :where ';
   query += action.where.map(whereClause => '[' + whereClause + ']');
   query += ']';
   action.query = query;
@@ -51,6 +51,22 @@ effectHandlers['increase_project_drama'] = function(db, effect) {
   let oldDramaLevel = getEntity(db, effect.project).dramaLevel;
   let newDramaLevel = oldDramaLevel + (effect.amount || 1);
   return updateProperty(db, effect.project, 'dramaLevel', newDramaLevel);
+};
+
+effectHandlers['changeAffectionLevel'] = function(db, effect) {
+  let oldAffectionLevel = getEntity(db, effect.affection).level;
+  let newAffectionLevel = oldAffectionLevel + effect.amount;
+  return updateProperty(db, effect.affection, 'level', newAffectionLevel);
+};
+
+effectHandlers['realizedLove'] = function(db, effect) {
+  db = updateProperty(db, effect.affection, 'realizedLove', true);
+  return updateProperty(db, effect.romeo, 'romanceTarget', effect.juliet);
+};
+
+effectHandlers['beginDating'] = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'relationshipState', "dating");
+  return updateProperty(db, effect.char2, 'relationshipState', "dating");
 };
 
 // Add an event to the DB, run all its effects, and return an updated DB.
