@@ -10,65 +10,59 @@ function preprocessAction(action){
   return action;
 }
 
+let effectHandlers = {};
+
 // Given the DB and an effect, perform the effect and return an updated DB.
 function processEffect(db, effect){
-  if (effect.type === 'add_attitude'){
-    db = datascript.db_with(db, [{
-      ':db/id': -1,
-      type: 'attitude',
-      cause: effect.cause,
-      charge: effect.charge,
-      source: effect.source,
-      target: effect.target
-    }]);
-  }
-  else if (effect.type === 'start_project'){
-    db = datascript.db_with(db, [{
-      ':db/id': -1,
-      type: 'project',
-      owner: effect.owner,
-      projectType: effect.projectType,
-      state: 'active'
-    }]);
-  }
-  else if (effect.type === 'update_project_state'){
-    db = datascript.db_with(db, [[':db/add', effect.project, 'state', effect.newState]]);
-  }
-  /*
-  else if (effect.type === 'create_entity'){
-    // TODO assert effect.entity is an object
-    let entity = {':db/id': -1};
-    for (let prop of Object.keys(effect.entity)){
-      entity[prop] = effect.entity[prop];
-    }
-    db = datascript.db_with(db, [entity]);
-  }
-  else if (effect.type === 'update_props'){
-    // TODO assert effect.eid is a valid EID, effect.props is an object
-    for (let prop of Object.keys(effect.props)){
-      db = datascript.db_with(db, [[':db/add', effect.eid, prop, effect.props[prop]]]);
-    }
-  }
-  else if (effect.type === 'update_prop'){
-    // TODO assert effect.eid is a valid EID, effect.prop is a string, effect.val is a value
-    db = datascript.db_with(db, [[':db/add', effect.eid, effect.prop, effect.val]]);
-  }
-  */
-  else {
+  let handler = effectHandlers[effect.type];
+  if (handler) {
+    db = handler(db, effect);
+  } else {
     console.error('Unrecognized effect type: ' + effect.type);
   }
   return db;
 }
 
+effectHandlers['add_attitude'] = function(db, effect) {
+  return createEntity(db, {
+    type: 'attitude',
+    cause: effect.cause,
+    charge: effect.charge,
+    source: effect.source,
+    target: effect.target
+  });
+};
+
+effectHandlers['start_project'] = function(db, effect) {
+  return createEntity(db, {
+    type: 'project',
+    owner: effect.owner,
+    projectType: effect.projectType,
+    state: 'active',
+    dramaLevel: 0
+  });
+};
+
+effectHandlers['update_project_state'] = function(db, effect) {
+  return updateProperty(db, effect.project, 'state', effect.newState);
+};
+
+effectHandlers['increase_project_drama'] = function(db, effect) {
+  let oldDramaLevel = getEntity(db, effect.project).dramaLevel;
+  let newDramaLevel = oldDramaLevel + (effect.amount || 1);
+  return updateProperty(db, effect.project, 'dramaLevel', newDramaLevel);
+};
+
 // Add an event to the DB, run all its effects, and return an updated DB.
 function addEvent(db, event) {
   // add the actual event to the DB as an entity
-  db = datascript.db_with(db, [{
-    ':db/id': -1,
-    type: event.type,
-    actor: event.actor,
-    target: event.target
-  }]);
+  let eventEntity = {':db/id': -1};
+  for (let prop of Object.keys(event)) {
+    // add all properties of event (except effects) to DB
+    if (['effects'].indexOf(prop) !== -1) continue;
+    eventEntity[prop] = event[prop];
+  }
+  db = datascript.db_with(db, [eventEntity]);
   let eventID = newestEID(db);
   // process the event's effects
   for (let effect of event.effects){
