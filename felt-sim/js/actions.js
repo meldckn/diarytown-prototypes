@@ -69,6 +69,8 @@ let startProject = {
     return {
       actor: vars.c1,
       target: vars.c1,
+      // TODO need to specify project: somehow, but can't, because its ID is only generated
+      // once the effects are run
       effects: [
         {type: 'start_project', owner: vars.c1, projectType: projectType}
       ],
@@ -79,7 +81,7 @@ let startProject = {
 
 let makeProgressOnProject = {
   type: 'makeProgressOnProject',
-  find: '?c1 ?n1 ?projtype',
+  find: '?c1 ?n1 ?proj ?projtype',
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -89,14 +91,17 @@ let makeProgressOnProject = {
   event: (vars) => ({
     actor: vars.c1,
     target: vars.c1,
-    effects: [],
+    project: vars.proj,
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " made a lot of progress on their " + vars.projtype + " project."
   })
 };
 
 let workFruitlesslyOnProject = {
   type: 'workFruitlesslyOnProject',
-  find: '?c1 ?n1 ?projtype',
+  find: '?c1 ?n1 ?proj ?projtype',
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -106,7 +111,10 @@ let workFruitlesslyOnProject = {
   event: (vars) => ({
     actor: vars.c1,
     target: vars.c1,
-    effects: [],
+    project: vars.proj,
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " tried to work on their " + vars.projtype + " project, but got nowhere."
   })
 };
@@ -123,8 +131,10 @@ let abandonProject = {
   event: (vars) => ({
     actor: vars.c1,
     target: vars.c1,
+    project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'inactive'}
+      {type: 'update_project_state', project: vars.proj, newState: 'inactive'},
+      {type: 'increase_project_drama', project: vars.proj, amount: 2}
     ],
     text: "🎨 " + vars.n1 + " gave up on their " + vars.projtype + " project."
   })
@@ -142,8 +152,10 @@ let resumeProject = {
   event: (vars) => ({
     actor: vars.c1,
     target: vars.c1,
+    project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'active'}
+      {type: 'update_project_state', project: vars.proj, newState: 'active'},
+      {type: 'increase_project_drama', project: vars.proj, amount: 2}
     ],
     text: "🎨 " + vars.n1 + " started working on their " + vars.projtype + " project again!"
   })
@@ -156,11 +168,14 @@ let finishProject = {
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
     '?proj "projectType" ?projtype',
-    '?proj "state" "active"'
+    '?proj "state" "active"',
+    '?proj "dramaLevel" ?d',
+    '(>= ?d 5)'
   ],
   event: (vars) => ({
     actor: vars.c1,
     target: vars.c1,
+    project: vars.proj,
     effects: [
       {type: 'update_project_state', project: vars.proj, newState: 'finished'}
     ],
@@ -170,7 +185,7 @@ let finishProject = {
 
 let showProject_loved = {
   type: 'showProject_loved',
-  find: '?c1 ?n1 ?projtype ?c2 ?n2',
+  find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -182,9 +197,11 @@ let showProject_loved = {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
+    target: vars.c2,
+    project: vars.proj,
     effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2}
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who loved it ☺️"
   })
@@ -192,7 +209,7 @@ let showProject_loved = {
 
 let showProject_neutral = {
   type: 'showProject_neutral',
-  find: '?c1 ?n1 ?projtype ?c2 ?n2',
+  find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -204,8 +221,11 @@ let showProject_neutral = {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
-    effects: [],
+    target: vars.c2,
+    project: vars.proj,
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 +
           ", who was kinda meh about it 😐"
   })
@@ -213,7 +233,7 @@ let showProject_neutral = {
 
 let showProject_hated = {
   type: 'showProject_hated',
-  find: '?c1 ?n1 ?projtype ?c2 ?n2',
+  find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -225,18 +245,93 @@ let showProject_hated = {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
+    target: vars.c2,
+    project: vars.proj,
     effects: [
-      {type: 'add_attitude', charge: 'negative', source: vars.c2, target: vars.c1}
+      {type: 'add_attitude', charge: 'negative', source: vars.c2, target: vars.c1},
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who hated it 😡"
   })
 };
 
+let plantedTree = {
+  type: 'plantedTree',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target:vars.c1,
+    effects: [
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c1}
+    ],
+    text: "🌳 " + vars.n1 + " planted a tree " + randNth(['near their house.', 'at the park.', 'in their backyard.'])
+  })
+};
+
+let loves = {
+  type: 'loves',
+  find: '?c1 ?n1 ?c2 ?n2',
+  where: [
+    '?like "type" "attitude"',
+    '?like "charge" "positive"',
+    '?like "source" ?c1',
+    '?like "target" ?c2',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not = ?c1 ?c2)',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2}
+    ],
+    text: "💓 " + vars.n1 + " is in love with " + vars.n2+"."
+  })
+};
+
+let getDiscouraged = {
+  type: 'getDiscouraged',
+  find: '?c1 ?n1 ?c2 ?n2 ?e1 ?e2 ?proj ?projtype',
+  where: [
+    // ?e1: ?c1 shows ?proj to ?c2, who hates it
+    '?e1 "type" "showProject_hated"',
+    '?e1 "actor" ?c1',
+    '?e1 "project" ?proj',
+    '?e1 "target" ?c2',
+    // ?e2: ?c1 abandons ?proj
+    '?e2 "type" "abandonProject"',
+    '?e2 "actor" ?c1',
+    '?e2 "project" ?proj',
+    // ?proj is currently inactive; ?e1 happens before ?e2
+    '?proj "state" "inactive"',
+    '(< ?e1 ?e2)',
+    // extra information for display purposes
+    '?proj "projectType" ?projtype',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    project: vars.proj,
+    effects: [
+      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+    ],
+    text: "🎨 " + vars.n1 + " considered restarting their abandoned " + vars.projtype +
+          " project, but then remembered " + vars.n2 + "'s negative remarks and decided to leave it alone."
+  })
+}
+
 let allActions = [
   betray, hangOutWith, seeCuteAnimal,
   startProject, makeProgressOnProject, workFruitlesslyOnProject,
   abandonProject, resumeProject, finishProject,
-  showProject_loved, showProject_neutral, showProject_hated
+  showProject_loved, showProject_neutral, showProject_hated,
+  getDiscouraged, 
+  plantedTree, loves
 ];
 allActions.forEach(preprocessAction);

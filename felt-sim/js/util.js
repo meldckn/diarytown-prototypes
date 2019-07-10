@@ -5,6 +5,12 @@ function randNth(items){
   return items[Math.floor(Math.random()*items.length)];
 }
 
+// Given a list of items that may contain duplicates,
+// return an updated copy of the list without any duplicates.
+function distinct(items){
+  return items.filter((val, idx) => items.indexOf(val) === idx);
+}
+
 // Given the DB, return the EID of the most recently added entity.
 function newestEID(db){
   // FIXME there is probably a better way to do this
