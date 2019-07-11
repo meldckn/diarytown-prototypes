@@ -105,6 +105,11 @@ function getAllCharacterNames(db) {
   return datascript.q('[:find ?n :where [?c "type" "char"] [?c "name" ?n]]', db).map(vars => vars[0]);
 }
 
+function getAllCharacterPairs(db) {
+  return datascript.q('[:find ?c1 ?c2 \
+                        :where [?c1 "type" "char"] [?c2 "type" "char"] [(not= ?c1 ?c2)]]', db);
+}
+
 let allNames = [
   'Aaron', 'Adam', 'Alex', 'Alice', 'Ann',
   'Bella', 'Ben', 'Beth',
@@ -124,41 +129,37 @@ let allNames = [
   'Victor', 'Vincent'
 ];
 
-function generateCharacter(db){
+function generateCharacter(db) {
   let takenNames = getAllCharacterNames(db);
   let validNames = allNames.filter((n) => takenNames.indexOf(n) === -1);
-  return datascript.db_with(db, [{
-    ':db/id': -1,
+  return createEntity(db, {
     type: 'char',
     name: randNth(validNames),
-    romanceTarget: "nobody"
-  }]);
+    romanceTarget: 'nobody',
+    romanceState: 'single'
+  });
 }
 
-function generateAttitude(db){
-  let charPairs = datascript.q('[:find ?c1 ?c2 \
-                                 :where [?c1 "type" "char"] [?c2 "type" "char"] [(not= ?c1 ?c2)]]', db);
+function generateAttitude(db) {
+  let charPairs = getAllCharacterPairs(db);
   let charPair = randNth(charPairs);
-  return datascript.db_with(db, [{
-    ':db/id': -1,
+  return createEntity(db, {
     type: 'attitude',
     charge: randNth(['positive', 'negative']),
     source: charPair[0],
     target: charPair[1]
-  }]);
+  });
 }
 
 function generateAffection(db, char1, char2) {
-  return createEntity(db,{
-    level:5, 
-    source:char1,
-    target:char2,
-    type:"affection",
-    realizedLove:false
-  })
+  return createEntity(db, {
+    level: 5,
+    source: char1,
+    target: char2,
+    type: 'affection',
+    realizedLove: false
+  });
 }
-
-
 
 /// INIT DB
 
@@ -177,9 +178,7 @@ for (let i = 0; i < 10; i++){
 for (let i = 0; i < 20; i++){
   gameDB = generateAttitude(gameDB);
 }
-let charPairs = datascript.q('[:find ?c1 ?c2 \
-                                 :where [?c1 "type" "char"] [?c2 "type" "char"] [(not= ?c1 ?c2)]]', gameDB);
-for (let charPair of charPairs) {
+for (let charPair of getAllCharacterPairs(gameDB)) {
   gameDB = generateAffection(gameDB, charPair[0], charPair[1]);
 }
 
@@ -224,10 +223,9 @@ function pauseSim(){
 function playSim(){
   runLoopID = window.setInterval(function(){
     gameDB = runRandomActionByType(gameDB, allActions);
-  }, 400);
+  }, 1000);
   playPauseButton.innerText = 'Pause simulation';
   playPauseButton.onclick = pauseSim;
 }
-
 
 playSim();

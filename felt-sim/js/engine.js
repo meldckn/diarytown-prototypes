@@ -2,7 +2,7 @@
 
 // Given an action spec, preprocess it.
 function preprocessAction(action){
-  var query = '[:find ' + action.find + ' :in $ % :where ';
+  var query = '[:find ' + action.find + ' :where ';
   query += action.where.map(whereClause => '[' + whereClause + ']');
   query += ']';
   action.query = query;
@@ -22,52 +22,6 @@ function processEffect(db, effect){
   }
   return db;
 }
-
-effectHandlers['add_attitude'] = function(db, effect) {
-  return createEntity(db, {
-    type: 'attitude',
-    cause: effect.cause,
-    charge: effect.charge,
-    source: effect.source,
-    target: effect.target
-  });
-};
-
-effectHandlers['start_project'] = function(db, effect) {
-  return createEntity(db, {
-    type: 'project',
-    owner: effect.owner,
-    projectType: effect.projectType,
-    state: 'active',
-    dramaLevel: 0
-  });
-};
-
-effectHandlers['update_project_state'] = function(db, effect) {
-  return updateProperty(db, effect.project, 'state', effect.newState);
-};
-
-effectHandlers['increase_project_drama'] = function(db, effect) {
-  let oldDramaLevel = getEntity(db, effect.project).dramaLevel;
-  let newDramaLevel = oldDramaLevel + (effect.amount || 1);
-  return updateProperty(db, effect.project, 'dramaLevel', newDramaLevel);
-};
-
-effectHandlers['changeAffectionLevel'] = function(db, effect) {
-  let oldAffectionLevel = getEntity(db, effect.affection).level;
-  let newAffectionLevel = oldAffectionLevel + effect.amount;
-  return updateProperty(db, effect.affection, 'level', newAffectionLevel);
-};
-
-effectHandlers['realizedLove'] = function(db, effect) {
-  db = updateProperty(db, effect.affection, 'realizedLove', true);
-  return updateProperty(db, effect.romeo, 'romanceTarget', effect.juliet);
-};
-
-effectHandlers['beginDating'] = function(db, effect) {
-  db = updateProperty(db, effect.char1, 'relationshipState', "dating");
-  return updateProperty(db, effect.char2, 'relationshipState', "dating");
-};
 
 // Add an event to the DB, run all its effects, and return an updated DB.
 function addEvent(db, event) {
@@ -128,3 +82,5 @@ function possibleActionsByType(db, allActions){
   }
   return possibleByType;
 }
+
+let actionLibrary = {};

@@ -1,6 +1,6 @@
 /// ACTION DEFINITIONS
 
-let betray = {
+actionLibrary.betray = {
   type: 'betray',
   find: '?c1 ?n1 ?c2 ?n2',
   where: [
@@ -16,13 +16,13 @@ let betray = {
     actor: vars.c1,
     target: vars.c2,
     effects: [
-      {type: 'add_attitude', charge: 'negative', source: vars.c2, target: vars.c1}
+      {type: 'addAttitude', charge: 'negative', source: vars.c2, target: vars.c1}
     ],
     text: "🔪 Out of nowhere, " + vars.n2 + " betrayed " + vars.n1 + "!"
   })
 };
 
-let hangOutWith = {
+actionLibrary.hangOutWith = {
   type: 'hangOutWith',
   find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
   where: [
@@ -41,8 +41,8 @@ let hangOutWith = {
     actor: vars.c1,
     target: vars.c2,
     effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c2, target: vars.c1},
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'addAttitude', charge: 'positive', source: vars.c2, target: vars.c1},
+      {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
       {type: 'changeAffectionLevel', affection:vars.a1, amount:1},
       {type: 'changeAffectionLevel', affection:vars.a2, amount:1}
     ],
@@ -51,7 +51,7 @@ let hangOutWith = {
   })
 };
 
-let seeCuteAnimal = {
+actionLibrary.seeCuteAnimal = {
   type: 'seeCuteAnimal',
   find: '?c1 ?n1',
   where: [
@@ -67,7 +67,7 @@ let seeCuteAnimal = {
 
 let allProjectTypes = ['art','craft','poetry','programming','research','writing'];
 
-let startProject = {
+actionLibrary.startProject = {
   type: 'startProject',
   find: '?c1 ?n1',
   where: [
@@ -81,14 +81,14 @@ let startProject = {
       // TODO need to specify project: somehow, but can't, because its ID is only generated
       // once the effects are run
       effects: [
-        {type: 'start_project', owner: vars.c1, projectType: projectType}
+        {type: 'startProject', owner: vars.c1, projectType: projectType}
       ],
       text: "🎨 " + vars.n1 + " started a new " + projectType + " project!"
     };
   }
 };
 
-let makeProgressOnProject = {
+actionLibrary.makeProgressOnProject = {
   type: 'makeProgressOnProject',
   find: '?c1 ?n1 ?proj ?projtype',
   where: [
@@ -102,13 +102,13 @@ let makeProgressOnProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " made a lot of progress on their " + vars.projtype + " project."
   })
 };
 
-let workFruitlesslyOnProject = {
+actionLibrary.workFruitlesslyOnProject = {
   type: 'workFruitlesslyOnProject',
   find: '?c1 ?n1 ?proj ?projtype',
   where: [
@@ -122,13 +122,13 @@ let workFruitlesslyOnProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " tried to work on their " + vars.projtype + " project, but got nowhere."
   })
 };
 
-let abandonProject = {
+actionLibrary.abandonProject = {
   type: 'abandonProject',
   find: '?c1 ?n1 ?proj ?projtype',
   where: [
@@ -142,14 +142,14 @@ let abandonProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'inactive'},
-      {type: 'increase_project_drama', project: vars.proj, amount: 2}
+      {type: 'updateProjectState', project: vars.proj, newState: 'inactive'},
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 2}
     ],
     text: "🎨 " + vars.n1 + " gave up on their " + vars.projtype + " project."
   })
 };
 
-let resumeProject = {
+actionLibrary.resumeProject = {
   type: 'resumeProject',
   find: '?c1 ?n1 ?proj ?projtype',
   where: [
@@ -163,14 +163,14 @@ let resumeProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'active'},
-      {type: 'increase_project_drama', project: vars.proj, amount: 2}
+      {type: 'updateProjectState', project: vars.proj, newState: 'active'},
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 2}
     ],
     text: "🎨 " + vars.n1 + " started working on their " + vars.projtype + " project again!"
   })
 };
 
-let finishProject = {
+actionLibrary.finishProject = {
   type: 'finishProject',
   find: '?c1 ?n1 ?proj ?projtype',
   where: [
@@ -186,13 +186,13 @@ let finishProject = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'update_project_state', project: vars.proj, newState: 'finished'}
+      {type: 'updateProjectState', project: vars.proj, newState: 'finished'}
     ],
     text: "🎨 " + vars.n1 + " finished their " + vars.projtype + " project!"
   })
 };
 
-let showProject_loved = {
+actionLibrary.showProject_loved = {
   type: 'showProject_loved',
   find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
   where: [
@@ -209,14 +209,14 @@ let showProject_loved = {
     target: vars.c2,
     project: vars.proj,
     effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
-      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+      {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who loved it ☺️"
   })
 };
 
-let showProject_neutral = {
+actionLibrary.showProject_neutral = {
   type: 'showProject_neutral',
   find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
   where: [
@@ -233,14 +233,14 @@ let showProject_neutral = {
     target: vars.c2,
     project: vars.proj,
     effects: [
-      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 +
           ", who was kinda meh about it 😐"
   })
 };
 
-let showProject_hated = {
+actionLibrary.showProject_hated = {
   type: 'showProject_hated',
   find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
   where: [
@@ -257,101 +257,14 @@ let showProject_hated = {
     target: vars.c2,
     project: vars.proj,
     effects: [
-      {type: 'add_attitude', charge: 'negative', source: vars.c2, target: vars.c1},
-      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+      {type: 'addAttitude', charge: 'negative', source: vars.c2, target: vars.c1},
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who hated it 😡"
   })
 };
 
-let plantedTree = {
-  type: 'plantedTree',
-  find: '?c1 ?n1',
-  where: [
-    '?c1 "name" ?n1'
-  ],
-  event: (vars) => ({
-    actor: vars.c1,
-    target:vars.c1,
-    effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c1}
-    ],
-    text: "🌳 " + vars.n1 + " planted a tree " + randNth(['near their house.', 'at the park.', 'in their backyard.'])
-  })
-};
-
-let loves = {
-  type: 'loves',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection',
-  where: [
-    '?affection "type" "affection"',
-    '?affection "source" ?c1',
-    '?affection "target" ?c2',
-    '?affection "level" ?lev',
-    '(> ?lev 2)',
-    '?c1 "name" ?n1',
-    '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)',
-    '?c1 "romanceTarget" "nobody"'
-  ],
-  event: (vars) => ({
-    actor: vars.c1,
-    target: vars.c2,
-    effects: [
-      {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
-      {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2}
-    ],
-    text: "💓 " + vars.n1 + " is in love with " + vars.n2+"."
-  })
-};
-
-let askedOut = {
-  type: 'askedOut',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
-  where: [
-    '?affection "type" "affection"',
-    '?affection "source" ?c1',
-    '?affection "target" ?c2',
-    '?affection "level" ?lev',
-    '(> ?lev 4)',
-    '?c1 "name" ?n1',
-    '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)',
-    '?c1 "romanceTarget" ?c2',
-    '?c2 "romanceTarget" ?c2romanceTarget'
-  ],
-  event: function(vars) {
-    if (vars.c2romanceTarget === vars.c1) {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'beginDating', char1:vars.c1, char2: vars.c2}
-          /*
-          {type: 'add_attitude', charge: 'positive', source: vars.c1, target: vars.c2},
-          {type: 'add_attitude', charge: 'positive', source: vars.c2, target: vars.c1},
-          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
-          {type: 'changeAffectionLevel', affection:vars.affection, amount:1},
-          */
-        ],
-        text: "💞 " + vars.n1 + " is now in a relationship with " + vars.n2+"."
-      }
-    } else {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'add_attitude', charge: 'negative', source: vars.c1, target: vars.c2},
-          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
-          {type: 'changeAffectionLevel', affection:vars.affection, amount:-2}
-        ],
-        text: "💔 " + vars.n1 + " was brutally rejected by " + vars.n2+"."
-      }
-    }
-  } 
-};
-
-let getDiscouraged = {
+actionLibrary.getDiscouraged = {
   type: 'getDiscouraged',
   find: '?c1 ?n1 ?c2 ?n2 ?e1 ?e2 ?proj ?projtype',
   where: [
@@ -377,20 +290,98 @@ let getDiscouraged = {
     target: vars.c1,
     project: vars.proj,
     effects: [
-      {type: 'increase_project_drama', project: vars.proj, amount: 1}
+      {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " considered restarting their abandoned " + vars.projtype +
           " project, but then remembered " + vars.n2 + "'s negative remarks and decided to leave it alone."
   })
 }
 
-let allActions = [
-  betray, hangOutWith, seeCuteAnimal,
-  startProject, makeProgressOnProject, workFruitlesslyOnProject,
-  abandonProject, resumeProject, finishProject,
-  showProject_loved, showProject_neutral, showProject_hated,
-  getDiscouraged, 
-  plantedTree, loves,
-  askedOut
-];
+actionLibrary.plantTree = {
+  type: 'plantTree',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target:vars.c1,
+    effects: [
+      {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c1}
+    ],
+    text: "🌳 " + vars.n1 + " planted a tree " + randNth(['near their house.', 'at the park.', 'in their backyard.'])
+  })
+};
+
+actionLibrary.realizeLove = {
+  type: 'realizeLove',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection',
+  where: [
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(> ?lev 2)',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceTarget" "nobody"'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
+      {type: 'realizeLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2}
+    ],
+    text: "💓 " + vars.n1 + " is in love with " + vars.n2+"."
+  })
+};
+
+actionLibrary.askOut = {
+  type: 'askOut',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  where: [
+    '?c1 "romanceTarget" ?c2',
+    '?c2 "romanceTarget" ?c2romanceTarget',
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(> ?lev 4)',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)'
+  ],
+  event: function(vars) {
+    if (vars.c2romanceTarget === vars.c1) {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'beginDating', char1:vars.c1, char2: vars.c2}
+          /*
+          {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
+          {type: 'addAttitude', charge: 'positive', source: vars.c2, target: vars.c1},
+          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
+          {type: 'changeAffectionLevel', affection:vars.affection, amount:1},
+          */
+        ],
+        text: "💞 " + vars.n1 + " is now in a relationship with " + vars.n2+"."
+      }
+    } else {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'addAttitude', charge: 'negative', source: vars.c1, target: vars.c2},
+          {type: 'changeAffectionLevel', affection:vars.affection, amount:-2}
+        ],
+        text: "💔 " + vars.n1 + " was brutally rejected by " + vars.n2+"."
+      }
+    }
+  } 
+};
+
+let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
