@@ -393,7 +393,7 @@ actionLibrary.getPet = {
        effects: [
        {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
        ],
-      text: "🐶"+ vars.n1 + " got a new pet "
+      text: "🐶 "+ vars.n1 + " got a new pet "
   })
 };
 
@@ -701,7 +701,7 @@ actionLibrary.stormed = {
        effects: [
        {type: 'changeAttitudeTowardSelf', amount: 0, target: vars.c1}
        ],
-      text: "🌩 It stormed "
+      text: "🌩 It stormed. "
   })
 };
 
