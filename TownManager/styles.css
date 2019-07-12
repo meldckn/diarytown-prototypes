@@ -1,0 +1,104 @@
+body {
+	
+	background-color: black; /* This is a number from 0-255 */
+	font-family:"Press Start 2P";
+	
+	text-align: center;
+}
+#main{
+	padding:0;
+	margin:0;
+	text-align:center;
+}
+br {
+	font-size:10;
+}
+h1 {
+	color: white;
+	font-size:100;
+	margin-top: 170;
+	border-radius: 20px;
+	margin-bottom:0;
+}
+
+p {
+	color: white;
+	font-size:15;
+}
+#interns{
+	font-size:9;
+}
+button {
+	background-color: black;
+	padding: 15px 15px;
+	border-radius: 0px;
+	color: white;
+	font-family: "Press Start 2P";
+	border: 1px solid white;
+	margin-bottom: 1rem;
+	font-size: 36;
+
+}
+button:hover {
+	background-color: white;
+	padding: 15px 15px;
+	border-radius: 0px;
+	color: black;
+	font-family: "Press Start 2P";
+	border: 1px solid black;
+
+}
+#startMenuButtons{
+	text-align:center;
+	padding:70px 0;
+}
+#options {
+	font-size:11;
+}
+#about{
+	font-size:11;
+}
+.startMenu {
+	opacity:1;
+}
+.map {
+	
+}
+img {
+	border: 1px solid white;
+	z-index:-1;
+}
+
+/*
+.actionButtonDiv {
+	margin-left:0rem;
+	width: 80%;
+
+}
+.actionButton {
+	margin-right: 0.8rem;
+	opacity:0;
+	font-size:15;
+	border: 1px solid #99FEB4;
+	color: #99FEB4;
+}
+.actionButton:hover {
+	background-color: #99FEB4;
+	color: black;
+}
+
+:focus {
+	outline: none;
+}
+
+.actionTextDiv {
+	color: white;
+	opacity: 0;
+}
+#bitBigger {
+	font-size: 23;
+}
+
+#footer {
+}
+*/
