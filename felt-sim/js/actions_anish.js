@@ -383,9 +383,7 @@ actionLibrary.exercise = {
 	event: (vars) => ({
 		actor: vars.c1,
     	target: vars.c1,
-   		 effects: [
-   		 {type: 'changePopularity', amount: 1, target: vars.c1}
-   		 {type: 'changeAffectionLevel', amount:1. target:vars.c1}
+   		 effects: [   		 {type: 'changeAffectionLevel', amount:1, target:vars.c1}
    		 ],
     	text: "💪 "+vars.n1 + " exercised. "
 	})
