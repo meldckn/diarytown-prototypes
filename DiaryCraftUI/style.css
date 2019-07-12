@@ -188,5 +188,10 @@ nav ul a {
 	padding-top: 1em;
 }
 
-
+.dropSpace {
+  width: 95px;
+  height: 70px;
+  padding: 5px;
+  border: 1px solid #aaaaaa;
+}
 

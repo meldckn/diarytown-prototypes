@@ -6,12 +6,12 @@
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<title>Diarycraft UI</title>	
  	<link rel="stylesheet" type="text/css" href="style.css">
-
+ 	<script src = "script.js" defer></script>
 
  </head>
 
  <body>
- 	<img draggable="true">
+ 
 
 
  	<header id="header"><p>DiaryCraft</p></header>
@@ -22,11 +22,23 @@
  			<div class ="flexitem">
 
  				<h1>Words</h1>
-
+ 				<img id="drag1" class = "animal"src="cat.jpg" draggable="true" ondragstart="drag(event)" width="95" height="64">
+ 				<img id="drag2" class = "animal" src="puppy-dog.jpg" draggable="true" ondragstart="drag(event)" width="95" height="64">
+ 				
  			</div>
+
+ 			<p><button onclick="clickCounter()" type="button">Buttoncounter</button></p>
+			<div id="result"></div>
+
+	
  			<div class = "flexitem">
  				<h1>Collection</h1>
- 			</div>								
+ 			</div>	
+
+ 			<div id="div1" class="dropSpace" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+ 			<div id="div2" class="dropSpace" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+										
  		</main>
 
  		<nav id="left" class="column">
