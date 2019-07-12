@@ -383,5 +383,602 @@ actionLibrary.askOut = {
   } 
 };
 
+actionLibrary.getPet = {
+  type: 'getPet',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🐶"+ vars.n1 + " got a new pet "
+  })
+};
+
+actionLibrary.upstagedMyEnemy = {
+  type: 'upstagedMyEnemy',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "😤 "+ vars.n1 + " upstaged their enemy. "
+  })
+};
+
+actionLibrary.wasUpstagedMyEnemy = {
+  type: 'wasUpstagedMyEnemy',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+       ],
+      text: "😤 " + vars.n1 + " was upstaged by their enemy. "
+  })
+};
+
+actionLibrary.didWellOnTest = {
+  type: 'didWellOnTest',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "💯 "+vars.n1 + " did well on a test. "
+  })
+};
+
+actionLibrary.didPoorlyOnTest = {
+  type: 'didPoorlyOnTest',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+       ],
+      text: "☹️ "+vars.n1 + " did poorly on a test. "
+  })
+};
+
+actionLibrary.gotTheJob = {
+  type: 'gotTheJob',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "💼 "+vars.n1 + " got a job. "
+  })
+};
+
+actionLibrary.didNotGetTheJob = {
+  type: 'didNotGetTheJob',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+       ],
+      text: "🚫💼 "+vars.n1 + " did not get a job. "
+  })
+};
+
+actionLibrary.hadAJobInterview = {
+  type: 'hadAJobInterview',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {}
+       ],
+      text: "💼 "+vars.n1 + " had an interview. "
+  })
+};
+
+actionLibrary.firedFromJob = {
+  type: 'firedFromJob',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+       ],
+      text: "🔥 "+vars.n1 + " was fired from their job. "
+  })
+};
+
+actionLibrary.lostWeight = {
+  type: 'lostWeight',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🥗 "+vars.n1 + " lost weight. "
+  })
+};
+
+actionLibrary.danced = {
+  type: 'danced',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "💃 "+vars.n1 + " danced. "
+  })
+};
+
+actionLibrary.feltHappy = {
+  type: 'feltHappy',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "😃 "+vars.n1 + " felt happy. "
+  })
+};
+
+actionLibrary.feltSad = {
+  type: 'feltSad',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+       ],
+      text: "😢 "+vars.n1 + " felt sad. "
+  })
+};
+
+actionLibrary.gotDrunk = {
+  type: 'gotDrunk',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: randNth([-1, 1]), target: vars.c1}
+       ],
+      text: "🍷 "+vars.n1 + " got drunk. "
+  })
+};
+
+actionLibrary.meditated = {
+  type: 'meditated',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🧘 "+vars.n1 + " meditated. "
+  })
+};
+
+actionLibrary.didChores = {
+  type: 'didChores',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🏠 "+vars.n1 + " did chores. "
+  })
+};
+
+actionLibrary.daydreamed = {
+  type: 'daydreamed',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 0, target: vars.c1}
+       ],
+      text: "💭 "+vars.n1 + " daydreamed. "
+  })
+};
+
+actionLibrary.movedHouses = {
+  type: 'movedHouses',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🏠 "+vars.n1 + " moved houses. "
+  })
+};
+
+actionLibrary.readBook = {
+  type: 'readBook',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "📖 "+vars.n1 + " read a book. "
+  })
+};
+
+actionLibrary.lookedAtArt = {
+  type: 'lookedAtArt',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🖼 "+vars.n1 + " looked at art. "
+  })
+};
+
+actionLibrary.studied = {
+  type: 'studied',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "📖 "+vars.n1 + " studied. "
+  })
+};
+
+actionLibrary.tookAWalk = {
+  type: 'tookAWalk',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🚶 "+vars.n1 + " took a walk. "
+  })
+};
+
+actionLibrary.stormed = {
+  type: 'stormed',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 0, target: vars.c1}
+       ],
+      text: "🌩 It stormed "
+  })
+};
+
+actionLibrary.waitedInTraffic = {
+  type: 'waitedInTraffic',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+       ],
+      text: "🚦 "+vars.n1 + " waited in traffic. "
+  })
+};
+
+actionLibrary.goSwimming = {
+  type: 'goSwimming',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target:vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "🏊 " + vars.n1 + " went swimming. " 
+  })
+};
+
+actionLibrary.goDriving = {
+	type: 'goDriving',
+	find: '?c1 ?n1',
+	where: [
+		'?c1 "name" ?n1'
+	],
+	event: (vars) => ({
+		target: vars.c1,
+		effects: [
+			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+		],
+		text: "🚗 " + vars.n1 + " went on a drive. "
+	})
+}; 
+
+actionLibrary.goRunning = {
+	type: 'goRunning',
+	find: '?c1 ?n1',
+	where: [
+		'?c1 "name" ?n1'
+	],
+	event: (vars) => ({
+		target: vars.c1,
+		effects: [
+			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+		],
+		text: "🏃 " + vars.n1 + " went on a run. "
+	})
+};
+
+actionLibrary.goOnDateWith = {
+  type: 'goOnDateWith',
+  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+  where: [
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?a1 "type" "affection"',
+    '?a1 "source" ?c1',
+    '?a1 "target" ?c2',
+    '?a2 "type" "affection"',
+    '?a2 "source" ?c2',
+    '?a2 "target" ?c1'
+    
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth(-1, 1, 2)},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth(-1, 1, 2)}
+    ],
+    text: "😘 " + vars.n1 + " and " + vars.n2 +
+          " went on a date at " + randNth(['the boba shop.','the movies.','italian restaurant.'])
+  })
+};
+
+actionLibrary.goOutWith = {
+  type: 'goOutWith',
+  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+  where: [
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?a1 "type" "affection"',
+    '?a1 "source" ?c1',
+    '?a1 "target" ?c2',
+    '?a2 "type" "affection"',
+    '?a2 "source" ?c2',
+    '?a2 "target" ?c1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: +1},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: +1}
+    ],
+    text: "🤪 " + vars.n1 + randNth([' ate out ',' went on a picnic ', 
+	    	' went hiking ', ' went camping ', ' went to the zoo ', ' shopped ', ' went on vacation ' ]) + "with " + vars.n2 + '.'
+ })
+};
+
+actionLibrary.goOnDateWith = {
+  type: 'goOnDateWith',
+  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+  where: [
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?a1 "type" "affection"',
+    '?a1 "source" ?c1',
+    '?a1 "target" ?c2',
+    '?a2 "type" "affection"',
+    '?a2 "source" ?c2',
+    '?a2 "target" ?c1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth(-1, 1, 2)},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth(-1, 1, 2)},
+    ],
+    text: "😘 " + vars.n1 + " went on a date with " + vars.n2 + '.'
+ })
+};
+
+actionLibrary.wentToSchool = {
+  type: 'wentToSchool',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [],
+    text: "🏫 " + vars.n1 + " went to school. " 
+  })
+};
+
+
+actionLibrary.pickedFlower = {
+  type: 'pickedFlower',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [],
+    text: "🌺 " + vars.n1 + " picked a flower. " 
+  })
+};
+
+actionLibrary.didNothing = {
+	type: 'didNothing',
+	find: '?c1 ?n1',
+	where: [
+		'?c1 "name" ?n1'
+	],
+	event: (vars) => ({
+		target: vars.c1,
+		effects: [
+			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
+		],
+		text: "😒 " + vars.n1 + " was unproductive. "
+	})
+};
+
+actionLibrary.gotSick = {
+	type: 'gotSick',
+	find: '?c1 ?n1',
+	where: [
+		'?c1 "name" ?n1'
+	],
+	event: (vars) => ({
+		target: vars.c1,
+		effects: [
+			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
+		],
+		text: "🤢 " + vars.n1 + " got sick. "
+	})
+};
+
+actionLibrary.madeAnEnemy = {
+  type: 'madeAnEnemy',
+  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+  where: [
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?a1 "type" "affection"',
+    '?a1 "source" ?c1',
+    '?a1 "target" ?c2',
+    '?a2 "type" "affection"',
+    '?a2 "source" ?c2',
+    '?a2 "target" ?c1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: -1},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: -1}
+    ],
+    text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies. "
+  })
+};
+
+actionLibrary.wentToWork = {
+	type: 'wentToWork',
+	find: '?c1 ?n1',
+	where: [
+		'?c1 "name" ?n1'
+	],
+	event: (vars) => ({
+		target: vars.c1,
+		effects: [
+			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: +1}
+		],
+		text: "👔 " + vars.n1 + " went to work. "
+	})
+};
+
+actionLibrary.wentToClass = {
+	type: 'wentToClass',
+	find: '?c1 ?n1',
+	where: [
+		'?c1 "name" ?n1'
+	],
+	event: (vars) => ({
+		target: vars.c1,
+		effects: [
+			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: +1}
+		],
+		text: "📝 " + vars.n1 + " went to a class. "
+	})
+};
+
+actionLibrary.getIntoFight = {
+  type: 'getIntoFight',
+  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+  where: [
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)',
+    '?a1 "type" "affection"',
+    '?a1 "source" ?c1',
+    '?a1 "target" ?c2',
+    '?a2 "type" "affection"',
+    '?a2 "source" ?c2',
+    '?a2 "target" ?c1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c2,
+    effects: [
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: -1},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: -1}
+    ],
+    text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight. "
+};
+
+
+
 let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
