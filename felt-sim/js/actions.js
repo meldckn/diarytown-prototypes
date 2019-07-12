@@ -976,10 +976,8 @@ actionLibrary.getIntoFight = {
     text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight. "
  })
 };
-
-
-<<<<<<< HEAD
-actionLibrary.wentToDoctor_good= {
+ 
+actionLibrary.wentToDoctor_good = {
   type: 'wentToDoctor_good',
   find: '?c1 ?n1',
   where: [
@@ -1155,8 +1153,6 @@ actionLibrary.bingeWatchedTV_bad = {
   })
 };
 
-
-=======
 actionLibrary.chattedWithAStranger = {
   type: 'chattedWithAStranger',
   find: '?c1 ?n1',
@@ -1172,6 +1168,5 @@ actionLibrary.chattedWithAStranger = {
   })
 };
 
->>>>>>> 1c9320e838780034cbfe66e809b3185859f35278
 let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
