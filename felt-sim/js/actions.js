@@ -488,9 +488,7 @@ actionLibrary.hadAJobInterview = {
   event: (vars) => ({
     actor: vars.c1,
       target: vars.c1,
-       effects: [
-       {}
-       ],
+        effects: [],
       text: "💼 "+vars.n1 + " had an interview. "
   })
 };
