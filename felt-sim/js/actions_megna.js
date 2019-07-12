@@ -90,6 +90,8 @@ actionLibrary.goOutWith = {
     effects: [
       {type: 'changeAffectionLevel', affection:vars.a1, amount: +1},
       {type: 'changeAffectionLevel', affection:vars.a2, amount: +1}
+       {type: 'changePopularity', target: vars.c1, amount: +1}
+       {type: 'changePopularity', target: vars.c1, amount: +1}
     ],
     text: "🤪 " + vars.n1 + randNth([' ate out ',' went on a picnic ', 
 	    	' went hiking ', ' went camping ', ' went to the zoo ', ' shopped ', ' went on vacation ' ]) + "with " + vars.n2 + '.'
@@ -255,5 +257,181 @@ actionLibrary.getIntoFight = {
       {type: 'changeAffectionLevel', affection:vars.a2, amount: -1}
     ],
     text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight. "
+  })
+};
+
+actionLibrary.wentToDoctor_good= {
+  type: 'wentToDoctor_good',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
+    ],
+    text: "🏥 " + vars.n1 + "'s doctor appointment went well! "
+  })
+};
+
+actionLibrary.wentToDoctor_neutral= {
+  type: 'wentToDoctor_neutral',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [],
+    text: "🏥 " + vars.n1 + "'s doctor appointment went normal. "
+  })
+};
+
+
+actionLibrary.wentToDoctor_bad= {
+  type: 'wentToDoctor_bad',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
+    ],
+    text: "🏥 " + vars.n1 + "'s doctor appointment went bad. "
+  })
+};
+
+actionLibrary.surfedInternet_good= {
+  type: 'surfedInternet_good',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
+    ],
+    text: "💻 " + vars.n1 + " had fun surfing the internet! "
+  })
+};
+
+actionLibrary.surfedInternet_neutral= {
+  type: 'surfedInternet_neutral',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [],
+    text: "💻 " + vars.n1 + " felt meh after surfing the internet. "
+  })
+};
+
+
+actionLibrary.surfedInternet_bad = {
+  type: 'surfedInternet_bad',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
+    ],
+    text: "💻 " + vars.n1 + " felt bad after spending time on the internet. "
+  })
+};
+
+actionLibrary.playedVideoGames_good= {
+  type: 'playedVideoGames_good',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
+    ],
+    text: "🎮 " + vars.n1 + " had fun playing video games! "
+  })
+};
+
+actionLibrary.playedVideoGames_neutral= {
+  type: 'playedVideoGames_neutral',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [],
+    text: "🎮 " + vars.n1 + " felt meh after playing video games. "
+  })
+};
+
+
+actionLibrary.playedVideoGames_bad = {
+  type: 'playedVideoGames_bad',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
+    ],
+    text: "🎮 " + vars.n1 + " felt bad after playing video games. "
+  })
+};
+
+actionLibrary.bingeWatchedTV_good= {
+  type: 'bingeWatchedTV_good',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
+    ],
+    text: "📺 " + vars.n1 + " had fun binge-watching TV! "
+  })
+};
+
+actionLibrary.bingeWatchedTV_neutral= {
+  type: 'bingeWatchedTV_neutral',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [],
+    text: "📺 " + vars.n1 + " felt meh after binge-watching TV. "
+  })
+};
+
+
+actionLibrary.bingeWatchedTV_bad = {
+  type: 'bingeWatchedTV_bad',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
+    ],
+    text: "📺 " + vars.n1 + " felt bad after binge-watching TV. "
   })
 };
