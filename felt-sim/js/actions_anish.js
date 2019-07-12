@@ -333,3 +333,75 @@ actionLibrary.waitedInTraffic = {
     	text: "🚦 "+vars.n1 + " waited in traffic. "
 	})
 };
+
+actionLibrary.chattedWithAStranger = {
+	type: 'chattedWithAStranger',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changePopularity', amount: 1, target: vars.c1}
+   		 ],
+    	text: "👥 "+vars.n1 + " chatted with a stranger. "
+	})
+};
+
+actionLibrary.wentToAParty = {
+	type: 'wentToAParty',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changePopularity', amount: 1, target: vars.c1}
+   		 ],
+    	text: "🎉 "+vars.n1 + " went to a party. "
+	})
+};
+
+actionLibrary.wentToASportsGame = {
+	type: 'wentToASportsGame',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changePopularity', amount: 1, target: vars.c1}
+   		 ],
+    	text: "🏀 "+vars.n1 + " went to a sports game. "
+	})
+};
+
+actionLibrary.exercise = {
+	type: 'exercise',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changePopularity', amount: 1, target: vars.c1}
+   		 {type: 'changeAffectionLevel', amount:1. target:vars.c1}
+   		 ],
+    	text: "💪 "+vars.n1 + " exercised. "
+	})
+};
+
+actionLibrary.wentToTheGym = {
+	type: 'wentToTheGym',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changePopularity', amount: 1, target: vars.c1}
+   		 {type: 'changeAffectionLevel', amount:1. target:vars.c1}
+   		 ],
+    	text: "🏋 "+vars.n1 + " went to the gym. "
+	})
+};
