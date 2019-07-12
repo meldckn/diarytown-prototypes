@@ -23,36 +23,6 @@ function processEffect(db, effect){
   return db;
 }
 
-effectHandlers['add_attitude'] = function(db, effect) {
-  return createEntity(db, {
-    type: 'attitude',
-    cause: effect.cause,
-    charge: effect.charge,
-    source: effect.source,
-    target: effect.target
-  });
-};
-
-effectHandlers['start_project'] = function(db, effect) {
-  return createEntity(db, {
-    type: 'project',
-    owner: effect.owner,
-    projectType: effect.projectType,
-    state: 'active',
-    dramaLevel: 0
-  });
-};
-
-effectHandlers['update_project_state'] = function(db, effect) {
-  return updateProperty(db, effect.project, 'state', effect.newState);
-};
-
-effectHandlers['increase_project_drama'] = function(db, effect) {
-  let oldDramaLevel = getEntity(db, effect.project).dramaLevel;
-  let newDramaLevel = oldDramaLevel + (effect.amount || 1);
-  return updateProperty(db, effect.project, 'dramaLevel', newDramaLevel);
-};
-
 // Add an event to the DB, run all its effects, and return an updated DB.
 function addEvent(db, event) {
   // add the actual event to the DB as an entity
@@ -112,3 +82,5 @@ function possibleActionsByType(db, allActions){
   }
   return possibleByType;
 }
+
+let actionLibrary = {};
