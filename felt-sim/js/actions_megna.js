@@ -255,4 +255,5 @@ actionLibrary.getIntoFight = {
       {type: 'changeAffectionLevel', affection:vars.a2, amount: -1}
     ],
     text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight. "
+  })
 };
