@@ -980,5 +980,20 @@ actionLibrary.getIntoFight = {
 };
 
 
+actionLibrary.chattedWithAStranger = {
+  type: 'chattedWithAStranger',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changePopularity', target: vars.c1, amount: +1}
+    ],
+    text: "👥 " + vars.n1 + " chatted with a stranger. "
+  })
+};
+
 let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
