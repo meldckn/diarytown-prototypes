@@ -403,3 +403,31 @@ actionLibrary.wentToTheGym = {
     	text: "🏋 "+vars.n1 + " went to the gym. "
 	})
 };
+
+actionLibrary.acceptedIntoProgram = {
+	type: 'acceptedIntoProgram',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+   		 ],
+    	text: "🏆 "+vars.n1 + " was accepted into a program. "
+	})
+};
+
+actionLibrary.rejectedFromProgram = {
+	type: 'rejectedFromProgram',
+	find: '?c1 ?n1',
+	where: ['?c1 "name" ?n1'],
+	event: (vars) => ({
+		actor: vars.c1,
+    	target: vars.c1,
+   		 effects: [
+   		 {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+   		 ],
+    	text: "😔 "+vars.n1 + " was rejected from a program. "
+	})
+};
