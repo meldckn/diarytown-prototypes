@@ -765,9 +765,9 @@ actionLibrary.exercise = {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
+    target: vars.c1,
        effects: [        
-        {type: 'changeAffectionLevel', target:vars.c1, amount:1}
+        {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
        ],
       text: "💪 " + vars.n1 + " exercised. "
   })
@@ -781,8 +781,7 @@ actionLibrary.wentToTheGym = {
     actor: vars.c1,
       target: vars.c1,
        effects: [
-    
-       {type: 'changeAffectionLevel', amount:1, target:vars.c1}
+       {type: 'changeAttitudeTowardSelf', amount:1, target:vars.c1}
        ],
       text: "🏋 "+vars.n1 + " went to the gym. "
   })
@@ -987,7 +986,9 @@ actionLibrary.madeAnEnemy = {
     target: vars.c2,
     effects: [
       {type: 'changeAffectionLevel', affection:vars.a1, amount: -1},
-      {type: 'changeAffectionLevel', affection:vars.a2, amount: -1}
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: -1},
+      {type: 'changePopularity', target: vars.c1, amount: -1},
+      {type: 'changePopularity', target: vars.c2, amount: -1}
     ],
     text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies. "
   })
@@ -1100,6 +1101,7 @@ actionLibrary.surfedInternet_good= {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
@@ -1115,6 +1117,7 @@ actionLibrary.surfedInternet_neutral= {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [],
     text: "💻 " + vars.n1 + " felt meh after surfing the internet. "
   })
@@ -1129,6 +1132,7 @@ actionLibrary.surfedInternet_bad = {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
@@ -1144,6 +1148,7 @@ actionLibrary.playedVideoGames_good= {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
@@ -1159,6 +1164,7 @@ actionLibrary.playedVideoGames_neutral= {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [],
     text: "🎮 " + vars.n1 + " felt meh after playing video games. "
   })
@@ -1173,6 +1179,7 @@ actionLibrary.playedVideoGames_bad = {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
@@ -1188,6 +1195,7 @@ actionLibrary.bingeWatchedTV_good= {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
@@ -1203,6 +1211,7 @@ actionLibrary.bingeWatchedTV_neutral= {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [],
     text: "📺 " + vars.n1 + " felt meh after binge-watching TV. "
   })
@@ -1217,6 +1226,7 @@ actionLibrary.bingeWatchedTV_bad = {
   ],
   event: (vars) => ({
     actor: vars.c1,
+    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
