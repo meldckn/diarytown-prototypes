@@ -878,7 +878,9 @@ actionLibrary.goOutWith = {
     target: vars.c2,
     effects: [
       {type: 'changeAffectionLevel', affection:vars.a1, amount: +1},
-      {type: 'changeAffectionLevel', affection:vars.a2, amount: +1}
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: +1},
+      {type: 'changePopularity', affection: vars.a1, amount: +1},
+      {type: 'changePopularity', affection: vars.a2, amount: +1},
     ],
     text: "🤪 " + vars.n1 + randNth([' ate out ',' went on a picnic ', 
 	    	' went hiking ', ' went camping ', ' went to the zoo ', ' shopped ', ' went on vacation ' ]) + "with " + vars.n2 + '.'
