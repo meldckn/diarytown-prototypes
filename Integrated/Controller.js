@@ -12,6 +12,8 @@ class Controller {
 	constructor () {
 		
 		// Initialize and display start menu
+		// Eventually, should check if the current user has already made a town
+		// (by checking if one exists in localStorage, for example)
 		this.startMenu = new Menu("start");
 		this.startMenu.display();
 		//$('body').click(_ => startMenu.hide());
