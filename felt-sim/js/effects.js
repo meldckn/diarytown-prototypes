@@ -50,8 +50,8 @@ effectHandlers.changeAttitudeTowardSelf = function(db, effect) {
   return updateProperty(db, effect.target, 'attitudeTowardSelf', newAttitude);
 };
 
-effectHandlers.changePopularity = function(db, effect){
+/*effectHandlers.changePopularity = function(db, effect){
   let oldPopularity = getEntity(db, effect.target).popularity || 0;
   let newPopularity = oldPopularity + effect.amount;
   return updateProperty (db, effect.target, 'popularity' , newPopularity);
-};
+};*/
