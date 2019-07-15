@@ -8,14 +8,34 @@ startMenu.className = "startMenu";
 
 map.style.display = 'none';
 
-let buildings = ["assets/fireRed2.png", "assets/fireRed3.png", "assets/fireRed4.png",
-			  	 "assets/fireRed5.png", "assets/fireRed6.png", "assets/fireRed7.png"];
-
+let buildings = ["assets/fireRed2Edited.png", "assets/fireRed3Edited.png", "assets/fireRed4Edited.png",
+			  	 "assets/fireRed5Edited.png", "assets/fireRed6Edited.png", "assets/fireRed7Edited.png"];
 let xyCanvasCoords = [
+	[105, 40, 100, 70],
+	[105, 115, 100, 70],
+	[105, 190, 100, 70],				// Top Left (Left Of Pathway)
+	[255, 40, 100, 70],
+	[255, 115, 100, 70],
+	[255, 190, 100, 70],				// Top Left (Right Of Pathway)
+	[395, 40, 100, 70],
+	[395, 115, 100, 70],
+	[395, 190, 100, 70],				// Top Middle (Left Of Pathway)
+	[500, 40, 100, 70],
+	[605, 40, 100, 70],
+	[710, 40, 100, 70],
+	[815, 40, 100, 70],					// Top Middle (Above Pathway)
+	[635, 190, 100, 70],
+	[740, 190, 100, 70],
+	[845, 190, 100, 70],				// Top Middle (Below Pathway)
+	[920, 40, 100, 70],
+	[920, 115, 100, 70],				// Top Right (Right Of Pathway)
+];
+
+/*let xyCanvasCoords = [
 	[80, 40, 130, 215],
 	[255, 40, 240, 215],
 	[925, 40, 190, 195]
-];
+];*/
 
 let canvases = [];
 let ctxs = [];
@@ -31,14 +51,28 @@ for (let i = 0; i < xyCanvasCoords.length; i++) {
 	canvases[i].height = xyCanvasCoords[i][3];
 }
 
+function shuffle(a, b) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+        [b[i], b[j]] = [b[j], b[i]];
+    }
+    return [a, b];
+}
+
+let buildingsOnSpawn = 7;
 function draw() {
-	for (let i = 0; i < canvases.length; i++) {
+	for (let i = 0; i < buildingsOnSpawn; i++) {
+		let randCanvasesAndCtxs = shuffle(canvases, ctxs);
+		//let randCanvas = Math.floor(Math.random()*canvases.length);
 		let randBuildingImg = new Image();
 		randBuildingImg.src = buildings[Math.floor(Math.random()*buildings.length)];
 		randBuildingImg.onload = function() {
-			randX = Math.random() * (canvases[i].width - randBuildingImg.width);
-			randY = Math.random() * (canvases[i].height - randBuildingImg.height);
-			ctxs[i].drawImage(randBuildingImg, randX, randY);
+			//randX = Math.random() * (canvases[randCanvas].width - randBuildingImg.width);
+			//randY = Math.random() * (canvases[randCanvas].height - randBuildingImg.height);
+			let x = randCanvasesAndCtxs[0][i].width / 2 - randBuildingImg.width / 2;
+			let y = randCanvasesAndCtxs[0][i].height / 2 - randBuildingImg.height / 2;
+			randCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y);
 		}
 	}
 }
