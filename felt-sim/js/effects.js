@@ -49,6 +49,21 @@ effectHandlers.propose = function(db, effect) {
   return updateProperty(db, effect.char2, 'romanceState', "proposed");
 };
 
+effectHandlers.marry = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'romanceState', 'married');
+  return updateProperty(db, effect.char2, 'romanceState', "married");
+};
+
+effectHandlers.haveKids = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'romanceState', 'haveKids');
+  return updateProperty(db, effect.char2, 'romanceState', 'haveKids');
+};
+
+effectHandlers.breakUp = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'romanceState', 'single');
+  return updateProperty(db, effect.char2, 'romanceState', 'single');
+};
+
 effectHandlers.changeAttitudeTowardSelf = function(db, effect) {
   let oldAttitude = getEntity(db, effect.target).attitudeTowardSelf || 0;
   let newAttitude = oldAttitude + effect.amount;

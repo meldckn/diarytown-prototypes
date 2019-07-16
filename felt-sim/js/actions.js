@@ -400,18 +400,12 @@ actionLibrary.propose = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === dating) {
       return {
         actor: vars.c1,
         target: vars.c2,
         effects: [
           {type: 'propose', char1:vars.c1, char2: vars.c2}
-          /*
-          {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
-          {type: 'addAttitude', charge: 'positive', source: vars.c2, target: vars.c1},
-          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
-          {type: 'changeAffectionLevel', affection:vars.affection, amount:1},
-          */
         ],
         text: "💞 " + vars.n1 + " has proposed to  " + vars.n2+"."
       }
@@ -446,12 +440,12 @@ actionLibrary.married = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === proposed) {
       return {
         actor: vars.c1,
         target: vars.c2,
         effects: [
-          {type: 'propose', char1:vars.c1, char2: vars.c2}
+          {type: 'marry', char1:vars.c1, char2: vars.c2}
           
         ],
         text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
@@ -476,15 +470,45 @@ actionLibrary.haveKids = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === married) {
       return {
         actor: vars.c1,
         target: vars.c2,
         effects: [
-          {type: 'propose', char1:vars.c1, char2: vars.c2}
+          {type: 'haveKids', char1:vars.c1, char2: vars.c2}
           
         ],
         text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid."
+      }
+    } 
+  }
+};
+
+actionLibrary.breakUp = {
+  type: 'breakUp',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  where: [
+    '?c1 "romanceTarget" ?c2',
+    '?c2 "romanceTarget" ?c2romanceTarget',
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(< ?lev 5)',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)'
+  ],
+  event: function(vars) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === married) {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'breakUp', char1:vars.c1, char2: vars.c2}
+          
+        ],
+        text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up."
       }
     } 
   }
