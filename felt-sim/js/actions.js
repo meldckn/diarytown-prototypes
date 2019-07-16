@@ -1842,7 +1842,7 @@ actionLibrary.skipping = {
     actor: vars.c1,
       target: vars.c1,
        effects: [],
-      text: "🚶 " + vars.c1 + " was " + randNth("skipping.", "power walking.")
+      text: "🚶 " + vars.n1 + " was " + randNth("skipping.", "power walking.")
   })
 };
 
