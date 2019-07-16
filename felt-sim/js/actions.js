@@ -1571,6 +1571,21 @@ actionLibrary.workedWithSomeone = {
   })
 };
 
+actionLibrary.playedInFountain = {
+  type: 'playedInFountain',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "⛲ " + vars.n1 + " played in a fountain. "
+  })
+};
+
 actionLibrary.makeAWishInFountain = {
   type: 'makeAWishInFountain',
   find: '?c1 ?n1',
@@ -1640,7 +1655,7 @@ actionLibrary.waitedForBus = {
   event: (vars) => ({
     target: vars.c1,
     effects: [
-      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 0}
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
     ],
     text: "🚌 " + vars.n1 + " waited for the bus. "
   })
