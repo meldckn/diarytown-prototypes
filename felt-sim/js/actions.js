@@ -1761,7 +1761,7 @@ actionLibrary.cold = {
 };
 
 actionLibrary.windy = {
-  type: 'windy'
+  type: 'windy',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
