@@ -1736,5 +1736,138 @@ actionLibrary.madeSnowAngels = {
   })
 };
 
+actionLibrary.hot = {
+  type: 'hot',
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "☀️ It was hot. "
+  })
+};
+
+actionLibrary.cold = {
+  type: 'cold'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "❄️ It was cold. "
+  })
+};
+
+actionLibrary.windy = {
+  type: 'windy'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "💨 It was windy. "
+  })
+};
+
+actionLibrary.snowed = {
+  type: 'windy'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "🌨️ It snowed. "
+  })
+};
+
+
+actionLibrary.hailed = {
+  type: 'hailed'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "🌨️ It hailed. "
+  })
+};
+
+actionLibrary.freezing = {
+  type: 'freezing'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "❄️ It was freezing. "
+  })
+};
+
+actionLibrary.cloudy = {
+  type: 'cloudy'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "☁️ It was cloudy. "
+  })
+};
+
+actionLibrary.rainy = {
+  type: 'rainy'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "☔ It was rainy. "
+  })
+};
+
+actionLibrary.rainy = {
+  type: 'rainy'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "☔ It was rainy. "
+  })
+};
+
+actionLibrary.skipping = {
+  type: 'skipping'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "🚶 " + vars.c1 + " was skipping."
+  })
+};
+
+actionLibrary.skipping = {
+  type: 'skipping'
+  find: '?c1 ?n1',
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [],
+      text: "🚶 " + vars.c1 + " was " + randNth("skipping.", "power walking.")
+  })
+};
+
 let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
