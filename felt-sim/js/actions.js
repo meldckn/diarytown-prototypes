@@ -400,12 +400,12 @@ actionLibrary.propose = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === dating) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'dating') {
       return {
         actor: vars.c1,
         target: vars.c2,
         effects: [
-          {type: 'propose', char1:vars.c1, char2: vars.c2}
+          {type: 'engaged', char1:vars.c1, char2: vars.c2}
         ],
         text: "💞 " + vars.n1 + " has proposed to  " + vars.n2+"."
       }
@@ -440,7 +440,7 @@ actionLibrary.married = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === proposed) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'proposed') {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -470,7 +470,7 @@ actionLibrary.haveKids = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === married) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'married') {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -500,7 +500,7 @@ actionLibrary.breakUp = {
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === married) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === ('dating' || 'engaged')) {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -514,6 +514,65 @@ actionLibrary.breakUp = {
   }
 };
 
+actionLibrary.cheated = {
+  type: 'cheated',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  where: [
+    '?c1 "romanceTarget" ?c2',
+    '?c2 "romanceTarget" ?c2romanceTarget',
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(< ?lev 5)',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)'
+  ],
+  event: function(vars) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === ('married' || 'dating'|| 'engaged')) {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'breakUp', char1:vars.c1, char2: vars.c2}
+          
+        ],
+        text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
+      }
+    } 
+  }
+};
+
+actionLibrary.divorce = {
+  type: 'divorced',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  where: [
+    '?c1 "romanceTarget" ?c2',
+    '?c2 "romanceTarget" ?c2romanceTarget',
+    '?affection "type" "affection"',
+    '?affection "source" ?c1',
+    '?affection "target" ?c2',
+    '?affection "level" ?lev',
+    '(< ?lev 10)',
+    '?c1 "name" ?n1',
+    '?c2 "name" ?n2',
+    '(not= ?c1 ?c2)'
+  ],
+  event: function(vars) {
+    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'married') {
+      return {
+        actor: vars.c1,
+        target: vars.c2,
+        effects: [
+          {type: 'divorce', char1:vars.c1, char2: vars.c2}
+          
+        ],
+        text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
+      }
+    } 
+  }
+};
 actionLibrary.getPet = {
   type: 'getPet',
   find: '?c1 ?n1',

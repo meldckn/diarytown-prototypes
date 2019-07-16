@@ -45,8 +45,8 @@ effectHandlers.beginDating = function(db, effect) {
 };
 
 effectHandlers.propose = function(db, effect) {
-  db = updateProperty(db, effect.char1, 'romanceState', 'proposed');
-  return updateProperty(db, effect.char2, 'romanceState', "proposed");
+  db = updateProperty(db, effect.char1, 'romanceState', 'engaged');
+  return updateProperty(db, effect.char2, 'romanceState', 'engaged');
 };
 
 effectHandlers.marry = function(db, effect) {
@@ -59,7 +59,17 @@ effectHandlers.haveKids = function(db, effect) {
   return updateProperty(db, effect.char2, 'romanceState', 'haveKids');
 };
 
+effectHandlers.marry = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'romanceState', 'married');
+  return updateProperty(db, effect.char2, 'romanceState', "married");
+};
+
 effectHandlers.breakUp = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'romanceState', 'single');
+  return updateProperty(db, effect.char2, 'romanceState', 'single');
+};
+
+effectHandlers.divorce= function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'single');
   return updateProperty(db, effect.char2, 'romanceState', 'single');
 };
