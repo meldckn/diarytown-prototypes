@@ -1571,7 +1571,80 @@ actionLibrary.workedWithSomeone = {
   })
 };
 
+actionLibrary.makeAWishInFountain = {
+  type: 'makeAWishInFountain',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "⛲ " + vars.n1 + " made a wish in a fountain. "
+  })
+};
 
+actionLibrary.gotInAFight = {
+  type: 'gotInAFight',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
+    ],
+    text: "⚔️ " + vars.n1 + " got in a fight. "
+  })
+};
+
+actionLibrary.playedCatch = {
+  type: 'playedCatch',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "🎾 " + vars.n1 + " played catch. "
+  })
+};
+
+actionLibrary.staredAtPhone = {
+  type: 'staredAtPhone',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 0}
+    ],
+    text: "📱 " + vars.n1 + " stared at their phone. "
+  })
+};
+
+actionLibrary.waitedForBus = {
+  type: 'staredAtPhone',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 0}
+    ],
+    text: "🚌 " + vars.n1 + " waited for the bus. "
+  })
+};
 
 let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
