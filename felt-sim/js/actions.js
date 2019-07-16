@@ -1773,7 +1773,7 @@ actionLibrary.windy = {
 };
 
 actionLibrary.snowed = {
-  type: 'windy'
+  type: 'snowed',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
@@ -1786,7 +1786,7 @@ actionLibrary.snowed = {
 
 
 actionLibrary.hailed = {
-  type: 'hailed'
+  type: 'hailed',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
@@ -1798,7 +1798,7 @@ actionLibrary.hailed = {
 };
 
 actionLibrary.freezing = {
-  type: 'freezing'
+  type: 'freezing',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
@@ -1810,7 +1810,7 @@ actionLibrary.freezing = {
 };
 
 actionLibrary.cloudy = {
-  type: 'cloudy'
+  type: 'cloudy',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
@@ -1822,7 +1822,7 @@ actionLibrary.cloudy = {
 };
 
 actionLibrary.rainy = {
-  type: 'rainy'
+  type: 'rainy',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
@@ -1833,32 +1833,9 @@ actionLibrary.rainy = {
   })
 };
 
-actionLibrary.rainy = {
-  type: 'rainy'
-  find: '?c1 ?n1',
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "☔ It was rainy. "
-  })
-};
 
 actionLibrary.skipping = {
-  type: 'skipping'
-  find: '?c1 ?n1',
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "🚶 " + vars.c1 + " was skipping."
-  })
-};
-
-actionLibrary.skipping = {
-  type: 'skipping'
+  type: 'skipping',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
