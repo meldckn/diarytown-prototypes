@@ -9,6 +9,7 @@ body {
 	padding:0;
 	margin:0;
 	text-align:center;
+	image-rendering: pixelated;
 }
 br {
 	font-size:10;
@@ -51,6 +52,7 @@ button:hover {
 #startMenuButtons{
 	text-align:center;
 	padding:70px 0;
+	z-index:4;
 }
 #options {
 	font-size:11;
@@ -60,45 +62,32 @@ button:hover {
 }
 .startMenu {
 	opacity:1;
+	z-index:5;
 }
 .map {
-	
+	top:-2vh;
+	position:absolute;
+	z-index:-2;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
 }
 img {
+
 	border: 1px solid white;
 	z-index:-1;
 }
 
-/*
-.actionButtonDiv {
-	margin-left:0rem;
-	width: 80%;
-
+.drawingBoard {
+	z-index:5;
+	top:8vh;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	position:absolute;
+	width:1200;
+	height:800;
+	border: 1px solid blue;
 }
-.actionButton {
-	margin-right: 0.8rem;
-	opacity:0;
-	font-size:15;
-	border: 1px solid #99FEB4;
-	color: #99FEB4;
-}
-.actionButton:hover {
-	background-color: #99FEB4;
-	color: black;
-}
-
-:focus {
-	outline: none;
-}
-
-.actionTextDiv {
-	color: white;
-	opacity: 0;
-}
-#bitBigger {
-	font-size: 23;
-}
-
-#footer {
-}
-*/

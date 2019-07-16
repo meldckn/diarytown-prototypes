@@ -77,6 +77,7 @@ function draw() {
 	}
 }
 
+
 /*function onAllImagesLoaded(imgPaths, callback) {
 	let loadedImages = [];
 	for (let imgPath of imgPaths) {
@@ -91,6 +92,7 @@ function draw() {
 	}
 }
 
+// Akhil, did you want to keep these two functions? I'll delete them if they're not necessary anymore.
 function draw(buildings) {
 	for (let i = 0; i < canvases.length; i++) {
 		let buildingWidths = buildings.map(b => b.width);
@@ -102,11 +104,55 @@ function draw(buildings) {
 	}
 }*/
 
+let mainCharacterAnimationAddresses = ["assets/frame1Edited.png", "assets/frame2Edited.png", 
+"assets/frame3Edited.png", "assets/frame4Edited.png", "assets/frame5Edited.png", 
+"assets/frame6Edited.png", "assets/frame7Edited.png", "assets/frame8Edited.png",
+"assets/frame9Edited.png", "assets/frame10Edited.png", "assets/frame11Edited.png",
+"assets/frame12Edited.png"];
+
+let drawingBoard = document.createElement("canvas");
+drawingBoard.className = "drawingBoard";
+main.appendChild(drawingBoard);
+drawingBoard.style.display = 'none';
+
+
+function drawHero() {
+	let tempFrame = new Image();
+	tempFrame.src = mainCharacterAnimationAddresses[1];
+	drawingBoard.getContext("2d").drawImage(tempFrame, 50, 50);
+}
+
+
+window.setInterval(function(event) {
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let startSwitch = false;
 startButton.onclick = function() {
 	startSwitch = true;
 	console.log('gothere');
 	
+	//transitions out all of the title screen 
 	anime({
 		targets:'.startMenu',
 		opacity:0,
@@ -118,30 +164,35 @@ startButton.onclick = function() {
 		duration: 1000
 	})
 	
+	//gets rid of title screen
 	window.setTimeout(function(){
 		startMenu.style.display= 'none';
 	}, 500)
 
-	let canvas = document.createElement("canvas");
-	main.appendChild(canvas);
-
+	
+	//transitions in the town map
 	window.setTimeout(function(){
 		map.style.display = 'block'
+		drawingBoard.style.display= 'block'
 		map.style.opactiy = 0;
 		anime({
 			targets:'.map',
 			opacity:1,
-			delay:200
+			delay:200			
 		})
+	
 		anime({
 			targets:'.map',
-			translateY: 100,
+			translateY: 98,
 			duration:1000
 		})
+		
 	},500)
-	draw();
-}
 
-if (startSwitch) {
-	
+	//draws buildings
+	draw();
+	console.log("character");
+	drawHero();
+
+
 }
