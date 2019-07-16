@@ -44,6 +44,11 @@ effectHandlers.beginDating = function(db, effect) {
   return updateProperty(db, effect.char2, 'romanceState', "dating");
 };
 
+effectHandlers.propose = function(db, effect) {
+  db = updateProperty(db, effect.char1, 'romanceState', 'proposed');
+  return updateProperty(db, effect.char2, 'romanceState', "proposed");
+};
+
 effectHandlers.changeAttitudeTowardSelf = function(db, effect) {
   let oldAttitude = getEntity(db, effect.target).attitudeTowardSelf || 0;
   let newAttitude = oldAttitude + effect.amount;
