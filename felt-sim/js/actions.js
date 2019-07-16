@@ -1749,7 +1749,7 @@ actionLibrary.hot = {
 };
 
 actionLibrary.cold = {
-  type: 'cold'
+  type: 'cold',
   find: '?c1 ?n1',
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
