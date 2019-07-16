@@ -1661,5 +1661,80 @@ actionLibrary.waitedForBus = {
   })
 };
 
+actionLibrary.skateboard = {
+  type: 'skateboard',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: " " + vars.n1 + " went skateboarding. "
+  })
+};
+
+actionLibrary.walkedPet = {
+  type: 'walkedPet',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "🐶 " + vars.n1 + " walked their pet. "
+  })
+};
+
+actionLibrary.wentToPark = {
+  type: 'wentToPark',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "🏞️ " + vars.n1 + " went to the park. "
+  })
+};
+
+actionLibrary.laidOnGrass = {
+  type: 'laidOnGrass',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "🌿 " + vars.n1 + " laid on grass. "
+  })
+};
+
+actionLibrary.madeSnowAngels = {
+  type: 'madeSnowAngels',
+  find: '?c1 ?n1',
+  where: [
+    '?c1 "name" ?n1'
+  ],
+  event: (vars) => ({
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
+    ],
+    text: "🌨️ " + vars.n1 + " made snow angels. "
+  })
+};
+
 let allActions = Object.values(actionLibrary);
 allActions.forEach(preprocessAction);
