@@ -394,13 +394,17 @@ actionLibrary.propose = {
     '?affection "source" ?c1',
     '?affection "target" ?c2',
     '?affection "level" ?lev',
+    '?aff2 "type" "affection"',
+    '?aff2 "source" ?c2',
+    '?aff2 "target" ?c1',
+    '?aff2 "level" ?c2Affection',
     '(> ?lev 10)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
     '(not= ?c1 ?c2)'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'dating') {
+    if (vars.c2Affection > 10) {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -426,10 +430,10 @@ actionLibrary.propose = {
 // not sure how to check if proposed
 actionLibrary.married = {
   type: 'marry',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection',
   where: [
     '?c1 "romanceTarget" ?c2',
-    '?c2 "romanceTarget" ?c2romanceTarget',
+    '?c2 "romanceTarget" ?c1',
     '?affection "type" "affection"',
     '?affection "source" ?c1',
     '?affection "target" ?c2',
@@ -437,20 +441,20 @@ actionLibrary.married = {
     '(> ?lev 15)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceState" "proposed"',
+    '?c2 "romanceState" "proposed"'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'proposed') {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'marry', char1:vars.c1, char2: vars.c2}
-          
-        ],
-        text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
-      }
-    } 
+    return {
+      actor: vars.c1,
+      target: vars.c2,
+      effects: [
+        {type: 'marry', char1:vars.c1, char2: vars.c2}
+        
+      ],
+      text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
+    }
   }
 };
 
