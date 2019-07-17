@@ -31,11 +31,6 @@ let xyCanvasCoords = [
 	[920, 115, 100, 70],				// Top Right (Right Of Pathway)
 ];
 
-/*let xyCanvasCoords = [
-	[80, 40, 130, 215],
-	[255, 40, 240, 215],
-	[925, 40, 190, 195]
-];*/
 
 let canvases = [];
 let ctxs = [];
@@ -64,12 +59,9 @@ let buildingsOnSpawn = 7;
 function draw() {
 	for (let i = 0; i < buildingsOnSpawn; i++) {
 		let randCanvasesAndCtxs = shuffle(canvases, ctxs);
-		//let randCanvas = Math.floor(Math.random()*canvases.length);
 		let randBuildingImg = new Image();
 		randBuildingImg.src = buildings[Math.floor(Math.random()*buildings.length)];
 		randBuildingImg.onload = function() {
-			//randX = Math.random() * (canvases[randCanvas].width - randBuildingImg.width);
-			//randY = Math.random() * (canvases[randCanvas].height - randBuildingImg.height);
 			let x = randCanvasesAndCtxs[0][i].width / 2 - randBuildingImg.width / 2;
 			let y = randCanvasesAndCtxs[0][i].height / 2 - randBuildingImg.height / 2;
 			randCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y);
@@ -77,38 +69,27 @@ function draw() {
 	}
 }
 
+//start of character animating thing
 
-/*function onAllImagesLoaded(imgPaths, callback) {
-	let loadedImages = [];
-	for (let imgPath of imgPaths) {
-		let img = new Image();
-		img.src = imgPath;
-		img.onload = function() {
-			loadedImages.push(img);
-			if (loadedImages.length >= imgPaths.length) {
-				callback(loadedImages);
-			}
-		}
-	}
-}
-
-// Akhil, did you want to keep these two functions? I'll delete them if they're not necessary anymore.
-function draw(buildings) {
-	for (let i = 0; i < canvases.length; i++) {
-		let buildingWidths = buildings.map(b => b.width);
-		let buildingsThatFit = buildings.filter(img => img.width <= canvases[i].width);
-		let buildingImg = buildingsThatFit[Math.floor(Math.random()*buildingsThatFit.length)];
-		randX = Math.random() * (canvases[i].width - buildingImg.width);
-		randY = Math.random() * (canvases[i].height - buildingImg.height);
-		ctxs[i].drawImage(buildingImg, randX, randY);
-	}
-}*/
-
+//front1-2-3, left1-2-3, right 1-2-3, back1-2-3
 let mainCharacterAnimationAddresses = ["assets/frame1Edited.png", "assets/frame2Edited.png", 
 "assets/frame3Edited.png", "assets/frame4Edited.png", "assets/frame5Edited.png", 
 "assets/frame6Edited.png", "assets/frame7Edited.png", "assets/frame8Edited.png",
 "assets/frame9Edited.png", "assets/frame10Edited.png", "assets/frame11Edited.png",
 "assets/frame12Edited.png"];
+
+
+
+let mainCharacterAnimations = [];
+for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
+	let tempFrame = new Image();
+	tempFrame.src = mainCharacterAnimationAddresses[i];
+	mainCharacterAnimations.push(tempFrame);
+}
+
+for (let eachFrame of mainCharacterAnimations) {
+	//eachFrame.style.imageRendering = "pixelated";
+}
 
 let drawingBoard = document.createElement("canvas");
 drawingBoard.className = "drawingBoard";
@@ -116,11 +97,14 @@ main.appendChild(drawingBoard);
 drawingBoard.style.display = 'none';
 
 
+
+
 function drawHero() {
-	let tempFrame = new Image();
-	tempFrame.src = mainCharacterAnimationAddresses[1];
-	drawingBoard.getContext("2d").drawImage(tempFrame, 50, 50);
-}
+	drawingBoard.imageSmoothingEnabled = false;
+	drawingBoard.getContext("2d").drawImage(mainCharacterAnimations[0], 50, 50, 25, 35);
+	console.log(mainCharacterAnimations[0].width+" "+mainCharacterAnimations[0].height);
+	
+}	
 
 
 window.setInterval(function(event) {
@@ -183,7 +167,7 @@ startButton.onclick = function() {
 	
 		anime({
 			targets:'.map',
-			translateY: 98,
+			translateY: 93,
 			duration:1000
 		})
 		
