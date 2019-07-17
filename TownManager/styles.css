@@ -77,6 +77,7 @@ img {
 
 	border: 1px solid white;
 	z-index:-1;
+	image-rendering: pixelated;
 }
 
 .drawingBoard {
@@ -90,4 +91,5 @@ img {
 	width:1200;
 	height:800;
 	border: 1px solid blue;
+	image-rendering: pixelated;	
 }
