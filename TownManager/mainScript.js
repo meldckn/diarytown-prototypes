@@ -1,13 +1,35 @@
+//initializing HTML elements for use in JS file
 let startButton = document.getElementById('start');
 let optionsButton = document.getElementById('options');
 let aboutButton = document.getElementById('about');
 let startMenu = document.getElementById('startMenu');
+let optionsMenu = document.getElementById('optionsMenu');
+let backButton = document.getElementById('backButton');
 let map = document.getElementById('map');
+let aboutMenu = document.getElementById('aboutMenu');
+let thirdBackButton = document.getElementById("thirdBackButton");
+let thirdBackButtonContainer = document.getElementById("thirdBackButtonContainer");
+let slider = document.getElementById('myRange');
+let music = document.getElementById('music');
+
+//assigning classNames
 map.className = "map";
+thirdBackButtonContainer.className = "thirdBackButtonContainer";
+thirdBackButton.className = "thirdBackButton";
 startMenu.className = "startMenu";
+optionsMenu.className = "optionsMenu";
+aboutMenu.className = "aboutMenu";
 
+//hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
+optionsMenu.style.display = 'none';
+aboutMenu.style.display = 'none';
+thirdBackButtonContainer.style.display = 'none';
 
+
+//Akhil's Building management code below:
+
+//storage of image location addresses for the building files used
 let buildings = ["assets/fireRed2Edited.png", "assets/fireRed3Edited.png", "assets/fireRed4Edited.png",
 			  	 "assets/fireRed5Edited.png", "assets/fireRed6Edited.png", "assets/fireRed7Edited.png"];
 let xyCanvasCoords = [
@@ -30,7 +52,6 @@ let xyCanvasCoords = [
 	[920, 40, 100, 70],
 	[920, 115, 100, 70],				// Top Right (Right Of Pathway)
 ];
-
 
 let canvases = [];
 let ctxs = [];
@@ -69,8 +90,16 @@ function draw() {
 	}
 }
 
+
+
+
+
+
+//Daniel's code below:
+
 //start of character animating thing
 
+//storage of image location addresses for the main character frames
 //front1-2-3, left1-2-3, right 1-2-3, back1-2-3
 let mainCharacterAnimationAddresses = ["assets/frame1Edited.png", "assets/frame2Edited.png", 
 "assets/frame3Edited.png", "assets/frame4Edited.png", "assets/frame5Edited.png", 
@@ -79,7 +108,7 @@ let mainCharacterAnimationAddresses = ["assets/frame1Edited.png", "assets/frame2
 "assets/frame12Edited.png"];
 
 
-
+//initializes the animation array that contains an Image element for each Hero movement frame
 let mainCharacterAnimations = [];
 for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
 	let tempFrame = new Image();
@@ -87,84 +116,406 @@ for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
 	mainCharacterAnimations.push(tempFrame);
 }
 
-for (let eachFrame of mainCharacterAnimations) {
-	//eachFrame.style.imageRendering = "pixelated";
+function turnOffMusic() {
+	if (document.getElementById("musicToggle").checked) {
+		music.muted = true;
+	}
+	if (!(document.getElementById("musicToggle").checked)) {
+		music.muted = false;
+	}
 }
 
-let drawingBoard = document.createElement("canvas");
-drawingBoard.className = "drawingBoard";
-main.appendChild(drawingBoard);
-drawingBoard.style.display = 'none';
-
-
-
-
+//initializes Hero
+let hero = document.createElement('div');
 function drawHero() {
-	drawingBoard.imageSmoothingEnabled = false;
-	drawingBoard.getContext("2d").drawImage(mainCharacterAnimations[0], 50, 50, 25, 35);
-	console.log(mainCharacterAnimations[0].width+" "+mainCharacterAnimations[0].height);
-	
-}	
+	hero.className = "hero";
+	hero.appendChild(mainCharacterAnimations[1]);
+	map.appendChild(hero);
+}
 
+//collision detection function, goes through every possible x value and defines y value boundaries
+function onThePath(x, y) {
+	//Currently set for 1640 x 975 display
+	if (x<244) {
+		return false;
+	} 
+	if (x>1374){
+		return false;
+	}
+	if (y>689) {
+		return false;
+	}
+	if (y<45) {
+		return false;
+	}
+	if ((x>=244 && x<303) && (y<416 || y>461)) {
+		return false;		
+	}
+	if ((x>=303 && x<334) && (y<237 || y>461)) {
+		return false;
+	}
+	if ((x>=334 && x<361) && (y<299 || y>461)) {
+		return false;
+	}
+	if ((x>=361 && x<374) && (y<299 || y>478)) {
+		return false;
+	}
+	if ((x>=374 && x <415) && (y<299 || ((y>319 && y<437)||(y>478)))) {
+		return false;
+	}
+	if ((x>=415 && x<424) && ((y>319 && y<437)||(y>478))) {
+		return false;
+	}
+	if ((x>=424 && x<438) && ((y<299 || (y>319 && y<437)||(y>478)))) {
+		return false;
+	}
+	if ((x>=438 && x<450) && (y<299 ||((y>319 && y<437)||(y>689)))) {
+		return false;
+	}
+	if ((x>=450 && x<492) && (y<299 || ((y>319 && y<437) || y>478))) {
+		return false;
+	}
+	if ((x>=492 && x<503) && (y<237 || ((y>319 && y<437) || y>478))) {
+		return false;
+	}
+	if ((x>=503 && x<542) && (y<299 || ((y>319 && y<437) || y>478))) {
+		return false;
+	}
+	if ((x>=542 && x<581) && (y<299 || y>478)) {
+		return false;
+	}
+	if ((x>=581 && x<614) && (y<237 || y>478)) {
+		return false;
+	}
+	if ((x>=614 && x<702) && (y<237 || ((y>281 && y<453) || y>478))) {
+		return false;
+	}
+	if ((x>=702 && x<791) && (((y<94) || (y>139 && y<237)) || ((y>281 && y<453) || y>617))) {
+		return false;
+	}
+	if ((x>=791 && x<793) && (y<94 || ((y>281 && y<453) || y>617))) {
+		return false;
+	}
+	if ((x>=793 && x<803) && ((y<94||(y>281 && y<453)) || ((y>499 && y<595)||y>617))) {
+		return false;
+	}
+	if ((x>=803 && x<854) && ((((y<94)||(y>139 && y<237)) || ((y>281 && y<453)||(y>499 && y<595))) || y>617)) {
+		return false;
+	}
+	if ((x>=854 && x<868) && ((((y<94 || (y>139 && y<237)) || (y>499 && y<595))) || y>617)) {
+		return false;
+	}
+	if ((x>=868 && x<1094) && ((((y<94)||(y>139 && y<237)) || ((y>281 && y<453)||(y>499 && y<595))) || y>617)) {
+		return false;
+	}
+	if ((x>=1094 && x<1140) && ((y<237||(y>281 && y<453)) || ((y>499 && y<595)|| y>617))) {
+		return false;
+	}
+	if ((x>=1140 && x<1213) && ((y<216||(y>281 && y<453)) || ((y>499 && y<595)|| y>617))) {
+		return false;
+	}
+	if ((x>=1213 && x<=1374) && (y<216 || y>261)) {
+		return false;
+	}
+	return true;
+}
 
-window.setInterval(function(event) {
+//changes the image appended to the Hero div based on which step/frame he's on
+function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
+	//walking up
+	if (input === 'w') {
+		//left step
+		if (wCounter%40 === 1) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[9]);
+		}
+		//neutral step
+		if (wCounter%20 === 0) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[10]);
+		}
+		//right step
+		if (wCounter%40 === 3) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[11]);
+		}
+	}
+	//walking left
+	if (input === 'a') {
+		//left step
+		if (aCounter%40 === 1) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[3]);
+		}
+		//neutral step
+		if (aCounter%20 === 0) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[4]);
+		}
+		//right step
+		if (aCounter%40 === 3) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[5]);
+		}
+	}
+	//walking down
+	if (input === 's') {
+		//left step
+		if (sCounter%40 === 1) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[0]);
+		}
+		//neutral step
+		if (sCounter%20 === 0) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[1]);
+		}
+		//right step
+		if (sCounter%40 === 3) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[2]);
+		}
+	}
+	//walking right
+	if (input === 'd') {
+		//left step
+		if (dCounter%40 === 1) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[6]);
+		}
+		//neutral step
+		if (dCounter%20 === 0) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[7]);
+		}
+		//right step
+		if (dCounter%40 === 3) {
+			hero.removeChild(hero.childNodes[0]);
+			hero.appendChild(mainCharacterAnimations[8]);
+		}
+	}
+}
 
-})
+//ABOUT BUTTON:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let startSwitch = false;
-startButton.onclick = function() {
-	startSwitch = true;
-	console.log('gothere');
-	
-	//transitions out all of the title screen 
+aboutButton.onclick = function() {
 	anime({
 		targets:'.startMenu',
 		opacity:0,
 		delay:200	
 	})
+	//bounces the startMenu down to disappear
 	anime({
 		targets:'.startMenu',
-		translateY:-100,
+		translateX: 75,
+		duration: 1000
+	})
+	
+	//gets rid of title screen
+	window.setTimeout(function(){
+		startMenu.style.display = 'none';
+	}, 500)
+	window.setTimeout(function(){
+		aboutMenu.style.display = 'block'
+		aboutMenu.style.opactiy = 0;
+		//fades in the aboutMenu
+		anime({
+			targets:'.aboutMenu',
+			opacity:1,
+			delay:200			
+		})
+		//bounces the aboutMenu down to appear
+		anime({
+			targets:'.aboutMenu',
+			translateX: -75,
+			duration:1000
+		})
+		
+	},500)
+
+	//Back to Start menu from About Menu
+	secondBackButton.onclick = function() {
+		anime({
+			targets:'.aboutMenu',
+			opacity:0,
+			delay:200	
+		})
+		//bounces the aboutMenu left to disappear
+		anime({
+			targets:'.aboutMenu',
+			translateX:0,
+			duration: 1000
+		})
+		//gets rid of About Menu screen
+		window.setTimeout(function(){
+			aboutMenu.style.display = 'none';
+		}, 500)
+
+		//transition in the Start Menu
+		window.setTimeout(function(){
+			startMenu.style.display = 'block'
+			//drawingBoard.style.display= 'block'
+			startMenu.style.opactiy = 0;
+			//fades in the StartMenu
+			anime({
+				targets:'.startMenu',
+				opacity:1,
+				delay:200			
+			})
+			//bounces the StartMenu back right to appear
+			anime({
+				targets:'.startMenu',
+				translateX: 0,
+				duration:1000
+			})
+			
+		},500)
+	}
+}
+
+
+
+//OPTIONS BUTTON:
+
+optionsButton.onclick = function() {
+	anime({
+		targets:'.startMenu',
+		opacity:0,
+		delay:200	
+	})
+	//bounces the startMenu left to disappear
+	anime({
+		targets:'.startMenu',
+		translateX:-75,
+		duration: 1000
+	})
+	
+	//gets rid of title screen
+	window.setTimeout(function(){
+		startMenu.style.display = 'none';
+	}, 500)
+
+	//transition in the Options Menu
+	window.setTimeout(function(){
+		optionsMenu.style.display = 'block'
+		//drawingBoard.style.display= 'block'
+		optionsMenu.style.opactiy = 0;
+		//fades in the optionsMenu
+		anime({
+			targets:'.optionsMenu',
+			opacity:1,
+			delay:200			
+		})
+		//bounces the optionsMenu down to appear
+		anime({
+			targets:'.optionsMenu',
+			translateX: 75,
+			duration:1000
+		})
+		
+	},500)
+
+	//Back to start Menu from Options Menu
+	backButton.onclick = function() {
+		anime({
+			targets:'.optionsMenu',
+			opacity:0,
+			delay:200	
+		})
+		//bounces the optionsMenu left to disappear
+		anime({
+			targets:'.optionsMenu',
+			translateX:0,
+			duration: 1000
+		})
+		//gets rid of options Menu screen
+		window.setTimeout(function(){
+			optionsMenu.style.display = 'none';
+		}, 500)
+
+		//transition in the Start Menu
+		window.setTimeout(function(){
+			startMenu.style.display = 'block'
+			//drawingBoard.style.display= 'block'
+			startMenu.style.opactiy = 0;
+			//fades in the StartMenu
+			anime({
+				targets:'.startMenu',
+				opacity:1,
+				delay:200			
+			})
+			//bounces the StartMenu back right to appear
+			anime({
+				targets:'.startMenu',
+				translateX: 0,
+				duration:1000
+			})
+			
+		},500)
+	}
+}
+
+
+//START BUTTON:
+
+//Tracks keyup and keydown events
+let currentKeys = {};
+window.onkeydown = function(event) {
+	if (!currentKeys[event.key]) {
+		currentKeys = {};
+		currentKeys[event.key] = true;
+	} 
+};
+window.onkeyup=function(event) {
+	delete currentKeys[event.key];
+};
+//sets starting position of Hero
+let currentX = 570;
+let currentY = 400;
+//global variable for length of each Hero stride
+let moveBy = slider.value/100;
+
+slider.oninput = function() {
+	moveBy = this.value/100;
+}
+
+let alreadyDrawn = false;
+//start button main method
+startButton.onclick = function() {
+	//transitions out all of the title screen
+
+	//fades out the StartMenu 
+	anime({
+		targets:'.startMenu',
+		opacity:0,
+		delay:200	
+	})
+	//bounces the startMenu down to disappear
+	anime({
+		targets:'.startMenu',
+		translateY:-75,
 		duration: 1000
 	})
 	
 	//gets rid of title screen
 	window.setTimeout(function(){
 		startMenu.style.display= 'none';
+		thirdBackButtonContainer.style.display = 'block';
 	}, 500)
 
 	
 	//transitions in the town map
 	window.setTimeout(function(){
 		map.style.display = 'block'
-		drawingBoard.style.display= 'block'
+		//drawingBoard.style.display= 'block'
 		map.style.opactiy = 0;
+		//fades in the map
 		anime({
 			targets:'.map',
 			opacity:1,
 			delay:200			
 		})
-	
+		//bounces the map down to appear
 		anime({
 			targets:'.map',
 			translateY: 93,
@@ -173,10 +524,107 @@ startButton.onclick = function() {
 		
 	},500)
 
-	//draws buildings
-	draw();
-	console.log("character");
-	drawHero();
+	if (!alreadyDrawn) {
+		//draws buildings
+		draw();
+		//draws hero
+		drawHero();	
+		alreadyDrawn = true;
+	}
 
+	//movement of Hero via W-A-S-D keys
+	let wCounter = 2;
+	let aCounter = 2;
+	let sCounter = 2;
+	let dCounter = 2;
+	var refresh = window.setInterval(function(event) {
+		//do not change below
+		let stepSpeed = 1;
+
+		//upon W pressed
+		if (currentKeys['w'] || currentKeys['W']) {
+			if (onThePath(currentX, currentY-moveBy)) {
+				currentY-=moveBy;
+				hero.style.top = currentY;
+			}
+			animationChange('w', (wCounter), (aCounter), (sCounter), (dCounter));
+			//console.log(currentX+ " "+ currentY);
+			wCounter+=stepSpeed;
+		}
+		//upon A pressed
+		if (currentKeys['a']|| currentKeys['A']) {
+			if (onThePath(currentX-moveBy, currentY)) {
+				currentX-=moveBy;
+				hero.style.left = currentX;
+			}
+			animationChange('a', (wCounter), (aCounter), (sCounter), (dCounter));
+			//console.log(currentX+ " "+ currentY);
+			aCounter+=stepSpeed;
+		}
+		//upon S pressed
+		if (currentKeys['s'] || currentKeys['S']) {
+			if (onThePath(currentX, currentY+moveBy)) {
+				currentY+=moveBy;
+				hero.style.top = currentY;
+			}
+			animationChange('s', (wCounter), (aCounter), (sCounter), (dCounter));
+			//console.log(currentX+ " "+ currentY);
+			sCounter+=stepSpeed;
+		}
+		//upon D pressed
+		if (currentKeys['d'] || currentKeys['D']) {
+			if (onThePath(currentX+moveBy, currentY)) {
+				currentX+=moveBy;
+				hero.style.left = currentX;
+			}
+			animationChange('d', (wCounter), (aCounter), (sCounter), (dCounter));
+			//console.log(currentX+ " "+ currentY);
+			dCounter+=stepSpeed;
+		}
+
+	}, 1)
+
+	//Back to start Menu from Map
+	thirdBackButton.onclick = function() {
+
+		anime({
+			targets:'.map',
+			opacity:0,
+			delay:200	
+		})
+		//bounces the optionsMenu left to disappear
+		anime({
+			targets:'.map',
+			translateY:0,
+			duration: 1000
+		})
+		//gets rid of options Menu screen
+		window.setTimeout(function(){
+			map.style.display = 'none';
+			thirdBackButtonContainer.style.display = 'none';
+
+		}, 500)
+
+		//transition in the Start Menu
+		window.setTimeout(function(){
+			startMenu.style.display = 'block'
+			//drawingBoard.style.display= 'block'
+			startMenu.style.opactiy = 0;
+			//fades in the StartMenu
+			anime({
+				targets:'.startMenu',
+				opacity:1,
+				delay:200			
+			})
+			//bounces the StartMenu back right to appear
+			anime({
+				targets:'.startMenu',
+				translateY: 0,
+				duration:1000
+			})
+		},500)
+		clearInterval(refresh);
+
+	}
 
 }

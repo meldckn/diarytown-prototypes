@@ -11,6 +11,9 @@ body {
 	text-align:center;
 	image-rendering: pixelated;
 }
+audio {
+	display:none;
+}
 br {
 	font-size:10;
 }
@@ -54,19 +57,236 @@ button:hover {
 	padding:70px 0;
 	z-index:4;
 }
+#optionsNAbout {
+	display:inline-block;
+	text-align:center;
+	position:relative;
+}
 #options {
 	font-size:11;
+	margin-left:0px;
 }
 #about{
 	font-size:11;
+	margin-right:15px;
 }
 .startMenu {
+	width:75%;
 	opacity:1;
 	z-index:5;
+	margin-left:auto;
+	margin-right:auto;
 }
+
+.optionsMenu {
+	text-align:center;
+	position:relative;
+	border:5px solid white;
+	margin-top:170;
+	width:350;
+	height:600px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.aboutMenu {
+	text-indent:40px;
+	padding:40px;
+	text-align:justify;
+	position:relative;
+	border:5px solid white;
+	margin-top:170;
+	margin-left:auto;
+	margin-right:auto;
+	width:700;
+	height:600px;
+}
+#description {
+	font-size:15;
+	line-height:25px;
+}
+#secondBackButtonContainer {
+	text-align:center;
+	position:relative;
+}
+#secondBackButton {
+	font-size:10;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* for the options menu toggles*/
+/* The switch - the box around the slider */
+#firstSwitch {
+	text-align:center;
+	position: relative;
+
+}
+#secondSwitch {
+	text-align:center;
+	position: relative;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch2 {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch2 input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius:5px;
+  opacity:0.8;
+  border:1px solid white;
+}
+
+.slider:hover {
+	opacity:1;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: black;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius:5px;
+
+}
+
+input:checked + .slider {
+  background-color: #333333;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* for the options menu slider */
+
+#thirdSlider {
+	text-align:center;
+	position:relative;
+}
+
+.slidecontainer {
+  text-align:center;
+}
+
+/* The slider itself */
+
+.mover {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none; /* Full-width */
+  height: 28px; /* Specified height */
+  border-radius:5px;
+  padding:4px;
+  background: white; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.8; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  position:relative;
+}
+
+/* Mouse-over effects */
+.mover:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.mover::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 23px; /* Slider handle height */
+  border-radius:5px;
+  background: black; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  
+}
+
+.mover::-moz-range-thumb {
+  width: 50px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius:5px;
+  background: white; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+#backButtonContainer {
+	text-align:center;
+	position:relative;
+}
+#backButton {
+	font-size:10;
+}
+
+
+
+
+
+
 .map {
 	top:-2vh;
-	position:absolute;
+	position:relative;
 	z-index:-2;
 	left:0;
 	right:0;
@@ -74,10 +294,14 @@ button:hover {
 	margin-right:auto;
 }
 img {
-
-	border: 1px solid white;
+	position:relative;
+	width:25px;
+	height:35px;
 	z-index:-1;
 	image-rendering: pixelated;
+}
+#background{
+	border:1px solid white;
 }
 
 .drawingBoard {
@@ -92,4 +316,26 @@ img {
 	height:800;
 	border: 1px solid blue;
 	image-rendering: pixelated;	
+}
+
+.hero {
+	z-index: 100;
+	position:absolute;
+	image-rendering:pixelated;
+	width:25px;
+	height:35px;
+	border:1px solid yellow;
+
+	left:570;
+	top:400;
+	
+}
+#thirdBackButtonContainer {
+	text-align:center;
+	position:absolute;
+	padding-left:20px;
+	
+}
+#thirdBackButton {
+	font-size:10;
 }

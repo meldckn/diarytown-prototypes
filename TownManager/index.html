@@ -6,11 +6,16 @@
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
 		<script src = "anime.min.js"> </script>
 		<script type = "text/javascript" src = "mainScript.js" defer> </script>
+		<audio id = "music" controls autoplay loop>
+		  <source src="assets/backgroundMusic.mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+		</audio>
 
 	</head>
 	<body>
 		<div id = "main"> 
 			
+			<!-- Start menu; first thing the user sees -->
 			<div id = startMenu>
 				<h1> DIARYTOWN </h1>
 				<p> Melanie Dickinson, Max Kreminski </p>
@@ -18,22 +23,78 @@
 				<br> </br>
 			
 				<div id = "startMenuButtons">
-					<button id = "start"> Start</button>
+					<button id = "start">Start</button>
 					<br> </br>
-					<button id = "options"> Options</button>
-					<button id = "about"> About</button>
+					<div id = "optionsNAbout">
+						<button id = "options">Options</button>
+						<button id = "about">About</button>
+					</div>
 				</div>
 			</div>
 			<div id = "map">
 				<!--canvas id="canvas" style="border:1px solid red; position:absolute;"></canvas-->
-				<img src="assets/testCity1Edited.png" alt="HTML5 Icon" style="width:1200;height:800;">
+				<img id = "background" src="assets/testCity1Edited.png" alt="HTML5 Icon" style="width:1200;height:800;">
+				<br></br>
+				
+			</div>
+			<div id = "thirdBackButtonContainer"> 
+					<button id = "thirdBackButton">Back</button>
 			</div>
 
+
+			<!-- Options menu; shows up after the user clicks on the Options button -->
+			<div id = "optionsMenu">
+				<br></br>
+				<p> Options Menu</p>
+				<br></br>
+				
+				<div id = "differentOptions">
+					<div id = firstSwitch> 
+						<p id = "interns">Toggle Volume<br></br>On/Off </p>
+						<label class="switch">
+						  <input type="checkbox" id = "musicToggle" onclick="turnOffMusic()">
+						  <span class="slider"></span>
+						</label>
+					</div>
+
+					<br> </br>
+					<br></br>
+					<div id = "secondSwitch">
+						<p id = "interns">Gender Toggle<br></br>Male/Female </p>	
+						<label class="switch2">
+						  <input type="checkbox">
+						  <span class="slider"></span>
+						</label>
+					</div>
+
+					<br></br>
+					<br></br>
+					<div id = "thirdSlider">
+						<p id = "interns">Character Speed<br></br>Slow/Fast </p>
+						<div class="slidecontainer">
+						  <input type="range" min="1" max="100" value="50" class="mover" id="myRange">
+						</div>
+					</div>
+					<br></br>
+					<br></br>
+					<div id = "backButtonContainer">
+						<button id = "backButton">Back</button>
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<!-- About menu; shows up after the user clicks on the about button -->
+			<div id = "aboutMenu">
+				<p id = "description">Diarytown involves the player crafting daily diary entries from a symbolic action library. <br></br>The entries are then used as input to a town simulation which imaginatively enacts and extrapolates on the events and people described in the diary entries. <br></br>This is part of an ongoing research project to explore how personalized interactive media could better engage a user’s unique experiences, values, attitudes, sense of self, or cultural context through play, enabling new kinds of experiences, and facilitating creative, empowering self-reflection and self-understanding.<br></br>Designed using Javascript, CSS, and HTML.<br></br>UCSC: Expressive Intelligence Studio 2019
+				</p>
+				<br></br>
+				<div id = "secondBackButtonContainer">
+					<button id = "secondBackButton">Back</button>
+				</div>
+			</div>
 		</div>
-
-
-		<div id = makeNew> </div>
-
-		
 	</body>
 </html>
