@@ -704,8 +704,6 @@ startButton.onclick = function() {
 	},500)
 
 	if (!alreadyDrawn) {
-		//draws buildings
-		draw();
 		//draws hero
 		drawHero();	
 		//draws buildings
