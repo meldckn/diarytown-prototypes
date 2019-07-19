@@ -1,16 +1,16 @@
 /*
  * Controller
  * 
- * The main Diarytown class, which starts, stops, and passes messages 
+ * The main Controller module/object, which starts, stops, and passes messages 
  * between all other modules depending on game logic and user input
  * 
- * Should be treated as a singleton, though not currently enforced
+ * Not a class, just an object, because we only ever need one of them
+ * and we don't need private variables/functions.
  */
 
-class Controller { 
+let Controller = { 
 
-	constructor () {
-		
+	init () {
 
 		// Initialize and display start menu
 		// Menu constructor takes a menu type and an object of buttons mapped to click event functions
@@ -28,9 +28,10 @@ class Controller {
 
 		this.town = new Town();
 
-		//startNewTown();
+		//this.startNewTown();
+		
 
-	}
+	},
 
 	startNewTown () {
 		
@@ -55,22 +56,17 @@ class Controller {
 		},500)
 		draw();*/
 
-	}
+	},
 
 	openOptions () {
-		console.log("In openOptions()");
-	}
+		console.log("Open options menu");
+	},
 
 	openAbout () {
-		console.log("In openAbout()");
+		console.log("Open about screen");
 	}
 
-}
+};
 
-// Create a new Controller after DOM has loaded (via the defer HTML attribute)
-let controller = new Controller();
-console.log(this);
-document.body.addEventListener("click", function() {
-	console.log(this);
-});
-
+// Initialize after DOM has loaded (via the defer HTML attribute)
+Controller.init();

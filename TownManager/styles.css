@@ -304,20 +304,6 @@ img {
 	border:1px solid white;
 }
 
-.drawingBoard {
-	z-index:5;
-	top:8vh;
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
-	position:absolute;
-	width:1200;
-	height:800;
-	border: 1px solid blue;
-	image-rendering: pixelated;	
-}
-
 .hero {
 	z-index: 100;
 	position:absolute;
@@ -338,4 +324,31 @@ img {
 }
 #thirdBackButton {
 	font-size:10;
+}
+
+
+/*akhil's code below:;
+/* The switch - the box around the slider */
+
+
+h2 {
+	color: white;
+	position: relative;
+	display: inline-block;
+}
+
+.switchTemp {
+  position: absolute;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switchTemp input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }

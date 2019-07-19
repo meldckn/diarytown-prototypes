@@ -334,7 +334,7 @@ actionLibrary.realizeLove = {
       {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
       {type: 'realizeLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2}
     ],
-    text: "💓 " + vars.n1 + " is in love with " + vars.n2+"."
+    text: "💓 " + vars.n1 + " is in love with " + vars.n2 + "."
   })
 };
 
@@ -383,7 +383,6 @@ actionLibrary.askOut = {
   } 
 };
 
-//not sure how to check if they are currently dating
 actionLibrary.propose = {
   type: 'propose',
   find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
@@ -394,18 +393,23 @@ actionLibrary.propose = {
     '?affection "source" ?c1',
     '?affection "target" ?c2',
     '?affection "level" ?lev',
+    '?aff2 "type" "affection"',
+    '?aff2 "source" ?c2',
+    '?aff2 "target" ?c1',
+    '?aff2 "level" ?c2Affection',
     '(> ?lev 10)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceState" "dating"',
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'dating') {
+    if (vars.c2Affection > 10) {
       return {
         actor: vars.c1,
         target: vars.c2,
         effects: [
-          {type: 'engaged', char1:vars.c1, char2: vars.c2}
+          {type: 'propose', char1:vars.c1, char2: vars.c2}
         ],
         text: "💞 " + vars.n1 + " has proposed to  " + vars.n2+"."
       }
@@ -423,13 +427,12 @@ actionLibrary.propose = {
   }
 };
 
-// not sure how to check if proposed
 actionLibrary.married = {
   type: 'marry',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+  find: '?c1 ?n1 ?c2 ?n2 ?affection',
   where: [
     '?c1 "romanceTarget" ?c2',
-    '?c2 "romanceTarget" ?c2romanceTarget',
+    '?c2 "romanceTarget" ?c1',
     '?affection "type" "affection"',
     '?affection "source" ?c1',
     '?affection "target" ?c2',
@@ -437,20 +440,19 @@ actionLibrary.married = {
     '(> ?lev 15)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceState" "engaged"',
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'proposed') {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'marry', char1:vars.c1, char2: vars.c2}
-          
-        ],
-        text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
-      }
-    } 
+    return {
+      actor: vars.c1,
+      target: vars.c2,
+      effects: [
+        {type: 'marry', char1:vars.c1, char2: vars.c2}
+        
+      ],
+      text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
+    }
   }
 };
 
@@ -467,10 +469,11 @@ actionLibrary.haveKids = {
     '(> ?lev 20)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceState" "married"',
+    '?c2 "romanceState" "married"',
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'married') {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -481,8 +484,7 @@ actionLibrary.haveKids = {
         text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid."
       }
     } 
-  }
-};
+  };
 
 actionLibrary.breakUp = {
   type: 'breakUp',
@@ -497,10 +499,11 @@ actionLibrary.breakUp = {
     '(< ?lev 5)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '(or [?c1 "romanceState" "dating"]\
+     [?c1 "romanceState" "engaged"])'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === ('dating' || 'engaged')) {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -511,8 +514,8 @@ actionLibrary.breakUp = {
         text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up."
       }
     } 
-  }
-};
+  };
+
 
 actionLibrary.cheated = {
   type: 'cheated',
@@ -527,10 +530,13 @@ actionLibrary.cheated = {
     '(< ?lev 5)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '(or [?c1 "romanceState" "dating"]\
+         [?c1 "romanceState" "engaged"]\
+         [?c1 "romanceState" "married"])'
+
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === ('married' || 'dating'|| 'engaged')) {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -541,8 +547,7 @@ actionLibrary.cheated = {
         text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
       }
     } 
-  }
-};
+  };
 
 actionLibrary.divorce = {
   type: 'divorced',
@@ -557,10 +562,11 @@ actionLibrary.divorce = {
     '(< ?lev 10)',
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)'
+    '(not= ?c1 ?c2)',
+    '?c1 "romanceState" "married"',
+    '?c2 "romanceState" "married"'
   ],
   event: function(vars) {
-    if (vars.c2romanceState === vars.c1.romanceState && vars.c2romanceState === 'married') {
       return {
         actor: vars.c1,
         target: vars.c2,
@@ -568,11 +574,11 @@ actionLibrary.divorce = {
           {type: 'divorce', char1:vars.c1, char2: vars.c2}
           
         ],
-        text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
+        text: "💔 " + vars.n1 + " and  " + vars.n2+" have divorced due to cheating."
       }
     } 
-  }
-};
+  };
+
 actionLibrary.getPet = {
   type: 'getPet',
   find: '?c1 ?n1',
@@ -583,7 +589,7 @@ actionLibrary.getPet = {
        effects: [
        {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
        ],
-      text: "🐶 "+ vars.n1 + " got a new pet "
+      text: "🐶 "+ vars.n1 + " got a new pet. "
   })
 };
 
@@ -763,7 +769,7 @@ actionLibrary.gotDrunk = {
        effects: [
        {type: 'changeAttitudeTowardSelf', amount: randNth([-1, 1]), target: vars.c1}
        ],
-      text: "🍷 "+vars.n1 + " got drunk. "
+      text: "🍷 "+ vars.n1 + " got drunk. "
   })
 };
 
@@ -861,7 +867,7 @@ actionLibrary.studied = {
        effects: [
        {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
        ],
-      text: "📖 "+vars.n1 + " studied. "
+      text: "📖 "+ vars.n1 + " studied. "
   })
 };
 
@@ -1041,8 +1047,8 @@ actionLibrary.goOnDateWith = {
     actor: vars.c1,
     target: vars.c2,
     effects: [
-      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth(-1, 1, 2)},
-      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth(-1, 1, 2)}
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth([-1, 1, 2])},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth([-1, 1, 2])}
     ],
     text: "😘 " + vars.n1 + " and " + vars.n2 +
           " went on a date at " + randNth(['the boba shop.','the movies.','italian restaurant.'])
@@ -1069,8 +1075,8 @@ actionLibrary.goOutWith = {
     effects: [
       {type: 'changeAffectionLevel', affection:vars.a1, amount: +1},
       {type: 'changeAffectionLevel', affection:vars.a2, amount: +1},
-      {type: 'changePopularity', affection: vars.a1, amount: +1},
-      {type: 'changePopularity', affection: vars.a2, amount: +1},
+      {type: 'changePopularity', target: vars.c1, amount: +1},
+      {type: 'changePopularity', target: vars.c2, amount: +1},
     ],
     text: "🤪 " + vars.n1 + randNth([' ate out ',' went on a picnic ', 
 	    	' went hiking ', ' went camping ', ' went to the zoo ', ' shopped ', ' went on vacation ' ]) + "with " + vars.n2 + '.'
@@ -1095,8 +1101,8 @@ actionLibrary.goOnDateWith = {
     actor: vars.c1,
     target: vars.c2,
     effects: [
-      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth(-1, 1, 2)},
-      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth(-1, 1, 2)},
+      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth([-1, 1, 2])},
+      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth([-1, 1, 2])},
     ],
     text: "😘 " + vars.n1 + " went on a date with " + vars.n2 + '.'
  })
@@ -1842,7 +1848,7 @@ actionLibrary.skipping = {
     actor: vars.c1,
       target: vars.c1,
        effects: [],
-      text: "🚶 " + vars.n1 + " was " + randNth("skipping.", "power walking.")
+      text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
   })
 };
 
