@@ -11,7 +11,7 @@
 	<body>
 		<div id = "main"> 
 			
-			<div id = startMenu>
+			<div id = "startMenu">
 				<h1> DIARYTOWN </h1>
 				<p> Melanie Dickinson, Max Kreminski </p>
 				<p id = "interns"> Akhil Vemuri, Daniel Man, Megna Anand, Anish Kashyap </p>
@@ -25,10 +25,16 @@
 				</div>
 			</div>
 			<div id = "map">
-				<!--canvas id="canvas" style="border:1px solid red; position:absolute;"></canvas-->
 				<img src="assets/testCity1Edited.png" alt="HTML5 Icon" style="width:1200;height:800;">
 			</div>
 
+			<div id = "canvasBorders">
+				<h2>Toggle Canvas Borders</h2>
+				<label class="switch">
+	  				<input type="checkbox" id="checkbox" onclick="toggleCanvasBorders()">
+	  				<span class="slider round"></span>
+				</label>
+			</div>
 		</div>
 
 
