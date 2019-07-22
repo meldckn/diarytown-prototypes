@@ -352,3 +352,13 @@ h2 {
   width: 0;
   height: 0;
 }
+
+#canvasBorders {
+	position:absolute;
+	width:50px;
+	left:1500px;
+	top:200px;
+	text-align:center;
+	height:10px;
+	font-size:10px;
+}
