@@ -2,10 +2,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Document</title>
-		<link rel="stylesheet" href="styles.css">
+
+		<!-- Styles and Fonts --> 
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
-		<script src = "anime.min.js"> </script>
+    	<link rel="stylesheet" href="diarycraft/lib/jquery-ui.min.css">
+    	<link rel="stylesheet" href="diarycraft/style.css">
+    	<link rel="stylesheet" href="styles.css">
+
+		<!-- Libraries --> 
+		<script type="text/javascript" src="anime.min.js"> </script>
+		<script type="text/javascript" src="diarycraft/lib/jquery-3.0.0.min.js"></script>
+   		<script type="text/javascript" src="diarycraft/lib/jquery-ui.min.js"></script>
+    	<script type="text/javascript" src="diarycraft/lib/lokijs.js"></script>
+
+    	<!-- JS --> 
+	    <script type="text/javascript" src="diarycraft/actions.js"></script> 
+    	<script type="text/javascript" src="diarycraft/DataWrangler.js"></script> 
+    	<script type="text/javascript" src="diarycraft/Display.js"></script>     
+    	<script type="text/javascript" src="diarycraft/Controller.js"></script>
 		<script type = "text/javascript" src = "mainScript.js" defer> </script>
+
 		<audio id = "music" controls autoplay loop>
 		  <source src="assets/backgroundMusic.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
@@ -48,6 +64,19 @@
 
 			<div id = "diaryEditor">
 				<h1> Diary Editor Page</h1>
+				<div id = "main-container">
+    		    	<div class="diary-page page-left">
+    		    	    <div class="phrase-container"></div>    
+    		    	</div>
+			
+    		    	<div class="diary-page page-right">
+    		    	    <div id="diary" class="sortable">
+    		    	        <div id="date-container"><button id="dateline"></button></div>
+    		    	    </div>
+    		    	</div>
+    			</div>
+    		</div>
+
 			</div>
 
 			<div id = "canvasBorders">
@@ -111,6 +140,7 @@
 					<button id = "secondBackButton">Back</button>
 				</div>
 			</div>
+
 		</div>
 	</body>
 </html>
