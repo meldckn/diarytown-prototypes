@@ -10,6 +10,7 @@ body {
 	margin:0;
 	text-align:center;
 	image-rendering: pixelated;
+	position:relative;
 }
 audio {
 	display:none;
@@ -292,6 +293,7 @@ input:checked + .slider:before {
 	right:0;
 	margin-left:auto;
 	margin-right:auto;
+	width:1200;
 }
 img {
 	position:relative;
@@ -312,7 +314,7 @@ img {
 	height:35px;
 	border:1px solid yellow;
 
-	left:570;
+	left:367;
 	top:400;
 	
 }
@@ -351,4 +353,26 @@ h2 {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+#canvasBorders {
+	position:absolute;
+	width:50px;
+	left:1600;
+	top:200px;
+	text-align:center;
+	height:10px;
+	font-size:10px;
+}
+
+
+#writeNewDiaryContainer {
+	text-align:center;
+	position:relative;
+	padding-left:20px;
+	
+}
+#writeNewDiary {
+	z-index:500;
+	font-size:10;
 }

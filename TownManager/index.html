@@ -2,10 +2,24 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Document</title>
-		<link rel="stylesheet" href="styles.css">
+
+		<!-- Styles and Fonts --> 
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
-		<script src = "anime.min.js"> </script>
+    	<link rel="stylesheet" href="diary/lib/jquery-ui.min.css">
+    	<link rel="stylesheet" href="diary/style.css">
+    	<link rel="stylesheet" href="styles.css">
+
+		<!-- Libraries --> 
+		<script type="text/javascript" src="anime.min.js"> </script>
+		<script type="text/javascript" src="diary/lib/jquery-3.0.0.min.js"></script>
+   		<script type="text/javascript" src="diary/lib/jquery-ui.min.js"></script>
+    	<script type="text/javascript" src="diary/lib/lokijs.js"></script>
+
+    	<!-- JS --> 
+	    <script type="text/javascript" src="diary/actions.js"></script>
+    	<script type="text/javascript" src="diary/Diary.js"></script>
 		<script type = "text/javascript" src = "mainScript.js" defer> </script>
+
 		<audio id = "music" controls autoplay loop>
 		  <source src="assets/backgroundMusic.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
@@ -31,14 +45,36 @@
 					</div>
 				</div>
 			</div>
+
+			<!--THE TOWN MAP-->
 			<div id = "map">
 				<!--canvas id="canvas" style="border:1px solid red; position:absolute;"></canvas-->
 				<img id = "background" src="assets/testCity1Edited.png" alt="HTML5 Icon" style="width:1200;height:800;">
 				<br></br>
-				
+				<div id = "writeNewDiaryContainer"> 
+					<button id = "writeNewDiary">Make New Diary!</button>
+				</div>				
 			</div>
+
 			<div id = "thirdBackButtonContainer"> 
-					<button id = "thirdBackButton">Back</button>
+				<button id = "thirdBackButton">Back</button>
+			</div>
+
+			<div id = "diaryEditor">
+				<h1> Diary Editor Page</h1>
+				<div id = "main-container">
+    		    	<div class="diary-page page-left">
+    		    	    <div class="phrase-container"></div>    
+    		    	</div>
+			
+    		    	<div class="diary-page page-right">
+    		    	    <div id="diary" class="sortable">
+    		    	        <div id="date-container"><button id="dateline"></button></div>
+    		    	    </div>
+    		    	</div>
+    			</div>
+    		</div>
+
 			</div>
 
 			<div id = "canvasBorders">
@@ -102,6 +138,7 @@
 					<button id = "secondBackButton">Back</button>
 				</div>
 			</div>
+
 		</div>
 	</body>
 </html>
