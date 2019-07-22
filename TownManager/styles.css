@@ -10,6 +10,7 @@ body {
 	margin:0;
 	text-align:center;
 	image-rendering: pixelated;
+	position:relative;
 }
 audio {
 	display:none;
@@ -357,9 +358,21 @@ h2 {
 #canvasBorders {
 	position:absolute;
 	width:50px;
-	left:1500px;
+	left:1600;
 	top:200px;
 	text-align:center;
 	height:10px;
 	font-size:10px;
+}
+
+
+#writeNewDiaryContainer {
+	text-align:center;
+	position:relative;
+	padding-left:20px;
+	
+}
+#writeNewDiary {
+	z-index:500;
+	font-size:10;
 }

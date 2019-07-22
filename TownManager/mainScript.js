@@ -11,6 +11,8 @@ let thirdBackButton = document.getElementById("thirdBackButton");
 let thirdBackButtonContainer = document.getElementById("thirdBackButtonContainer");
 let slider = document.getElementById('myRange');
 let music = document.getElementById('music');
+let writeNewDiary = document.getElementById('writeNewDiary');
+let diaryEditor = document.getElementById('diaryEditor');
 
 //assigning classNames
 map.className = "map";
@@ -19,12 +21,15 @@ thirdBackButton.className = "thirdBackButton";
 startMenu.className = "startMenu";
 optionsMenu.className = "optionsMenu";
 aboutMenu.className = "aboutMenu";
+writeNewDiary.className = "writeNewDiary";
+diaryEditor.className = "diaryEditor";
 
 //hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
 optionsMenu.style.display = 'none';
 aboutMenu.style.display = 'none';
 thirdBackButtonContainer.style.display = 'none';
+diaryEditor.style.display = 'none';
 
 
 //Akhil's Building management code below:
@@ -698,7 +703,7 @@ startButton.onclick = function() {
 		//bounces the map down to appear
 		anime({
 			targets:'.map',
-			translateY: 77,
+			translateY: 75,
 			duration:1000
 		})
 		
@@ -776,13 +781,13 @@ startButton.onclick = function() {
 			opacity:0,
 			delay:200	
 		})
-		//bounces the optionsMenu left to disappear
+		//bounces the map left to disappear
 		anime({
 			targets:'.map',
 			translateY:0,
 			duration: 1000
 		})
-		//gets rid of options Menu screen
+		//gets rid of map screen
 		window.setTimeout(function(){
 			map.style.display = 'none';
 			thirdBackButtonContainer.style.display = 'none';
@@ -809,4 +814,51 @@ startButton.onclick = function() {
 		clearInterval(refresh);
 
 	}
+
+	//brings in the diaryEditor page and transitions out the Map
+	writeNewDiary.onclick = function() {
+		anime({
+			targets:'.map',
+			opacity:0,
+			delay:200	
+		})
+		//bounces the optionsMenu left to disappear
+		anime({
+			targets:'.map',
+			translateY:0,
+			duration: 1000
+		})
+		//gets rid of options Menu screen
+		window.setTimeout(function(){
+			map.style.display = 'none';
+		}, 500)
+
+		//transition in the diary Editor
+		window.setTimeout(function(){
+			diaryEditor.style.display = 'block'
+			diaryEditor.style.opactiy = 0;
+			//fades in the diary Editor
+			anime({
+				targets:'.diaryEditor',
+				opacity:1,
+				delay:200			
+			})
+			//bounces the diary Editor in to appear
+			anime({
+				targets:'.diaryEditor',
+				translateY: 75,
+				duration:1000
+			})
+		},500)
+
+
+		runDiaryEditor();
+		clearInterval(refresh);
+
+	}
+}
+
+//contains the code to be run when the MakeNewDiary button is pressed
+function runDiaryEditor() {
+
 }
