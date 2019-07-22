@@ -132,12 +132,12 @@ body {			background-color: var(--bkgd); }
 	font-size: small;
 }
 
-button {
+button#main-container {
 	border: none;
 	outline: none; /* Prevent weird blue highlight for buttons */
 	opacity: 1;
 }
-button:hover {
+button#main-container:hover {
 	cursor: pointer;
 	opacity: .5;
 }
