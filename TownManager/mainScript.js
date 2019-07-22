@@ -47,7 +47,14 @@ let buildingCanvasCoords = [
 	[930, 110, 125, 80],
 	// Bottom Left
 	[95, 520, 125, 80],
-	[95, 630, 125, 80],
+	[95, 635, 125, 80],
+	[320, 485, 145, 165],
+	// Center
+	[452, 275, 190, 206],
+	// Middle Right
+	[700, 321, 335, 160],
+	// Bottom Right
+	[685, 520, 120, 102]
 ];
 let flowerCanvasCoords = [
 	// Top Left
@@ -67,21 +74,21 @@ let flowerCanvasCoords = [
 	[1050, 40], [1050, 70], [1050, 210],
 	[1080, 40], [1080, 70], [1080, 210],
 	// Bottom Left
-	[100, 603], [130, 603], [160, 603], [190, 603],
-	[100, 713], [130, 713], [160, 713], [190, 713],
-	[280, 683], [310, 683], [340, 683], [370, 683],
-	[400, 683], [430, 683], [460, 683], [490, 683],
-	[280, 713], [310, 713], [340, 713], [370, 713],
-	[400, 713], [430, 713], [460, 713], [490, 713],
-	// Bottom Middle and Right
-	[520, 683], [550, 683],
-	[520, 713], [550, 713], [580, 713], [610, 713],
-	[640, 713], [670, 713], [700, 713], [730, 713],
-	[850, 683], [880, 683], [910, 683], [940, 683],
-	[970, 683], [1000, 683], [1030, 683],
-	[760, 713], [790, 713], [820, 713], [850, 713],
-	[880, 713], [910, 713], [940, 713], [970, 713],
-	[1000, 713], [1030, 713],
+	[100, 605], [130, 605], [160, 605], [190, 605],
+	[100, 720], [130, 720], [160, 720], [190, 720],
+	[305, 660], [335, 660], [365, 660], [395, 660], [425, 660], [455, 660],
+	[305, 690], [335, 690], [365, 690], [395, 690], [425, 690], [455, 690],
+	[305, 720], [335, 720], [365, 720], [395, 720], [425, 720], [455, 720],
+	// Bottom Middle
+	[485, 660], [515, 660], [545, 660], [575, 660], [605, 660], [635, 660],
+	[665, 660], [695, 660], [725, 660], [755, 660], [785, 660], [815, 660],
+	[845, 660], [875, 660], [905, 660], [935, 660], [965, 660], [995, 660],
+	[485, 690], [515, 690], [545, 690], [575, 690], [605, 690], [635, 690],
+	[665, 690], [695, 690], [725, 690], [755, 690], [785, 690], [815, 690],
+	[845, 690], [875, 690], [905, 690], [935, 690], [965, 690], [995, 690],
+	[485, 720], [515, 720], [545, 720], [575, 720], [605, 720], [635, 720],
+	[665, 720], [695, 720], [725, 720], [755, 720], [785, 720], [815, 720],
+	[845, 720], [875, 720], [905, 720], [935, 720], [965, 720], [995, 720],
 ];
 let treeCanvasCoords = [
 	// Top Left
@@ -90,9 +97,11 @@ let treeCanvasCoords = [
 	[575, 55], [760, 55], [760, 165],
 	// Top Right
 	[1060, 145], [1060, 85],
-	// Bottom Middle
-	[577, 645], [620, 645], [663, 645], 
-	[706, 645], [749, 645], [792, 645],
+	// Bottom Right
+	[625, 555], [808, 555], [851, 555],
+	[894, 555], [937, 555], [980, 555],
+	[625, 515], [808, 515], [851, 515],
+	[894, 515], [937, 515], [980, 515]
 ];
 
 
@@ -111,9 +120,10 @@ function shuffle(a, b) {
 
 //BUILDINGS
 let buildings = ["assets/fireRed2Edited.png", "assets/fireRed3Edited.png", "assets/fireRed4Edited.png",
-			  	 "assets/fireRed5Edited.png", "assets/fireRed6Edited.png", "assets/fireRed7Edited.png",
-			  	 /*"assets/fireRed10Edited.png", "assets/fireRed11Edited.png", "assets/fireRed14Edited.png", 
-			  	 "assets/fireRed16Edited.png"*/];
+			  	 "assets/fireRed5Edited.png", "assets/fireRed7Edited.png"];
+let specialBuildings = ["assets/fireRed10Edited.png", "assets/fireRed11Edited.png", "assets/fireRed14Edited.png", 
+						"assets/rubySaph1Edited.png"];
+
 let buildingCanvases = [];
 let buildingCtxs = [];
 for (let i = 0; i < buildingCanvasCoords.length; i++) {
@@ -129,16 +139,30 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 }
 
 
-let buildingsOnSpawn = 100;
+let buildingsOnSpawn = 17;
 let buildingScale = 1.25;
 function drawBuildings() {
 	for (let i = 0; i < buildingsOnSpawn; i++) {
 		let randCanvasesAndCtxs = shuffle(buildingCanvases, buildingCtxs);
 		let randBuildingImg = new Image();
-		randBuildingImg.src = buildings[Math.floor(Math.random()*buildings.length)];
+		randBuildingImg.src = buildings[Math.floor(Math.random()*buildings.length)];		
 		randBuildingImg.onload = function() {
 			let x = randCanvasesAndCtxs[0][i].width / 2 - (randBuildingImg.width*buildingScale) / 2;
 			let y = randCanvasesAndCtxs[0][i].height / 2 - (randBuildingImg.height*buildingScale) / 2;
+
+			if (randCanvasesAndCtxs[0][i].width === 190 && randCanvasesAndCtxs[0][i].height === 206) {
+				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+				randBuildingImg.src = specialBuildings[0];
+			} else if (randCanvasesAndCtxs[0][i].width === 145 && randCanvasesAndCtxs[0][i].height === 165) {
+				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+				randBuildingImg.src = specialBuildings[1];
+			} else if (randCanvasesAndCtxs[0][i].width === 335 && randCanvasesAndCtxs[0][i].height === 160) {
+				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+				randBuildingImg.src = specialBuildings[2];
+			} else if (randCanvasesAndCtxs[0][i].width === 120 && randCanvasesAndCtxs[0][i].height === 102) {
+				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+				randBuildingImg.src = specialBuildings[3];
+			}
 			randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
 			randCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y, 
 												randBuildingImg.width*buildingScale, randBuildingImg.height*buildingScale);
@@ -151,6 +175,11 @@ function drawBuildings() {
 
 //FLOWERS
 let flowers = ["assets/flower1Edited.png", "assets/flower2Edited.png", "assets/flower3Edited.png"];
+let flowerImages = [];
+for (let i = 0; i < flowers.length; i++) {
+	flowerImages[i] = new Image();
+	flowerImages[i].src = flowers[i];
+}
 
 let flowerCanvases = [];
 let flowerCtxs = [];
@@ -169,47 +198,43 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 
 
 let flowerScale = 0.181;
-let flowersOnSpawn = 100;
+let flowersOnSpawn = 125;
 let flowerImg;
+let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
 function drawFlowers() {
-	for (let i = 0; i < flowersOnSpawn; i++) {
-		let randCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
-		flowerImg = new Image();
-		flowerImg.src = flowers[0];
-		flowerImg.onload = function() {
-			let x = randCanvasesAndCtxs[0][i].width / 2 - (flowerImg.width*flowerScale) / 2;
-			let y = randCanvasesAndCtxs[0][i].height / 2 - (flowerImg.height*flowerScale) / 2;
-			randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
-			randCanvasesAndCtxs[1][i].drawImage(flowerImg, x, y, 
-												flowerImg.width*flowerScale, flowerImg.height*flowerScale);
-			//requestAnimationFrame(step);
-		}
-	}
+	flowerImg = flowerImages[0];
+	//flowerImg.onload = function() {
+		window.requestAnimationFrame(step);
+	//}
 }
 
-/*let animationDuration = 300;
-let timePerFrame = animationDuration / flowers.length;
-let timeWhenLastUpdate;
-let timeFromLastUpdate;
-let frameNumber = 0;
-function step(startTime) {
-	if (!timeWhenLastUpdate) {
-		timeWhenLastUpdate = startTime;
+let frameCounter = 0;
+let frameCount = 0;
+const maxWaitForFrames = 40;
+function step() {
+	frameCount++;
+	if (frameCount < maxWaitForFrames) {
+		window.requestAnimationFrame(step);
+		return;
 	}
-	timeFromLastUpdate = startTime - timeWhenLastUpdate;
+	frameCount = 0;
 
-	if (timeFromLastUpdate > timePerFrame) {
-		flowerImg.src = flowers[frameNumber];
-		timeWhenLastUpdate = startTime;
-
-    	if (frameNumber >= flowers.length) {
-    		frameNumber = 0;
-    	} else {
-    		frameNumber++;
-    	}        
+	flowerImg = flowerImages[frameCounter];
+	frameCounter++;
+	if (frameCounter >= flowers.length) {
+		frameCounter = 0;
 	}
-	requestAnimationFrame(step);
-}*/
+
+	for (i = 0; i < flowersOnSpawn; i++) {
+		let x = flowerRandCanvasesAndCtxs[0][i].width / 2 - (flowerImg.width*flowerScale) / 2;
+		let y = flowerRandCanvasesAndCtxs[0][i].height / 2 - (flowerImg.height*flowerScale) / 2;
+		flowerRandCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
+		flowerRandCanvasesAndCtxs[1][i].clearRect(0, 0, flowerRandCanvasesAndCtxs[0][i].width, flowerRandCanvasesAndCtxs[0][i].height);
+		flowerRandCanvasesAndCtxs[1][i].drawImage(flowerImg, x, y, 
+												  flowerImg.width*flowerScale, flowerImg.height*flowerScale);
+	}
+	window.requestAnimationFrame(step);
+}
 
 
 
@@ -231,7 +256,7 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 }
 
 let treeScale = 0.175;
-let treesOnSpawn = 100;
+let treesOnSpawn = 21;
 function drawTrees() {
 	for (let i = 0; i < treesOnSpawn; i++) {
 		let randCanvasesAndCtxs = shuffle(treeCanvases, treeCtxs);
