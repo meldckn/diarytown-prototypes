@@ -315,10 +315,11 @@ function drawHero() {
 //collision detection function, goes through every possible x value and defines y value boundaries
 function onThePath(x, y) {
 	//Currently set for 1640 x 975 display
-	if (x<244) {
+	let offShift = 203;
+	if (x<244-offShift) {
 		return false;
 	} 
-	if (x>1374){
+	if (x>1374-offShift){
 		return false;
 	}
 	if (y>689) {
@@ -327,73 +328,73 @@ function onThePath(x, y) {
 	if (y<45) {
 		return false;
 	}
-	if ((x>=244 && x<303) && (y<416 || y>461)) {
+	if ((x>=244-offShift && x<303-offShift) && (y<416 || y>461)) {
 		return false;		
 	}
-	if ((x>=303 && x<334) && (y<237 || y>461)) {
+	if ((x>=303-offShift && x<334-offShift) && (y<237 || y>461)) {
 		return false;
 	}
-	if ((x>=334 && x<361) && (y<299 || y>461)) {
+	if ((x>=334-offShift && x<361-offShift) && (y<299 || y>461)) {
 		return false;
 	}
-	if ((x>=361 && x<374) && (y<299 || y>478)) {
+	if ((x>=361-offShift && x<374-offShift) && (y<299 || y>478)) {
 		return false;
 	}
-	if ((x>=374 && x <415) && (y<299 || ((y>319 && y<437)||(y>478)))) {
+	if ((x>=374-offShift && x <415-offShift) && (y<299 || ((y>319 && y<437)||(y>478)))) {
 		return false;
 	}
-	if ((x>=415 && x<424) && ((y>319 && y<437)||(y>478))) {
+	if ((x>=415-offShift && x<424-offShift) && ((y>319 && y<437)||(y>478))) {
 		return false;
 	}
-	if ((x>=424 && x<438) && ((y<299 || (y>319 && y<437)||(y>478)))) {
+	if ((x>=424-offShift && x<438-offShift) && ((y<299 || (y>319 && y<437)||(y>478)))) {
 		return false;
 	}
-	if ((x>=438 && x<450) && (y<299 ||((y>319 && y<437)||(y>689)))) {
+	if ((x>=438-offShift && x<450-offShift) && (y<299 ||((y>319 && y<437)||(y>689)))) {
 		return false;
 	}
-	if ((x>=450 && x<492) && (y<299 || ((y>319 && y<437) || y>478))) {
+	if ((x>=450-offShift && x<492-offShift) && (y<299 || ((y>319 && y<437) || y>478))) {
 		return false;
 	}
-	if ((x>=492 && x<503) && (y<237 || ((y>319 && y<437) || y>478))) {
+	if ((x>=492-offShift && x<503-offShift) && (y<237 || ((y>319 && y<437) || y>478))) {
 		return false;
 	}
-	if ((x>=503 && x<542) && (y<299 || ((y>319 && y<437) || y>478))) {
+	if ((x>=503-offShift && x<542-offShift) && (y<299 || ((y>319 && y<437) || y>478))) {
 		return false;
 	}
-	if ((x>=542 && x<581) && (y<299 || y>478)) {
+	if ((x>=542-offShift && x<581-offShift) && (y<299 || y>478)) {
 		return false;
 	}
-	if ((x>=581 && x<614) && (y<237 || y>478)) {
+	if ((x>=581-offShift && x<614-offShift) && (y<237 || y>478)) {
 		return false;
 	}
-	if ((x>=614 && x<702) && (y<237 || ((y>281 && y<453) || y>478))) {
+	if ((x>=614-offShift && x<702-offShift) && (y<237 || ((y>281 && y<453) || y>478))) {
 		return false;
 	}
-	if ((x>=702 && x<791) && (((y<94) || (y>139 && y<237)) || ((y>281 && y<453) || y>617))) {
+	if ((x>=702-offShift && x<791-offShift) && (((y<94) || (y>139 && y<237)) || ((y>281 && y<453) || y>617))) {
 		return false;
 	}
-	if ((x>=791 && x<793) && (y<94 || ((y>281 && y<453) || y>617))) {
+	if ((x>=791-offShift && x<793-offShift) && (y<94 || ((y>281 && y<453) || y>617))) {
 		return false;
 	}
-	if ((x>=793 && x<803) && ((y<94||(y>281 && y<453)) || ((y>499 && y<595)||y>617))) {
+	if ((x>=793-offShift && x<803-offShift) && ((y<94||(y>281 && y<453)) || ((y>499 && y<595)||y>617))) {
 		return false;
 	}
-	if ((x>=803 && x<854) && ((((y<94)||(y>139 && y<237)) || ((y>281 && y<453)||(y>499 && y<595))) || y>617)) {
+	if ((x>=803-offShift && x<854-offShift) && ((((y<94)||(y>139 && y<237)) || ((y>281 && y<453)||(y>499 && y<595))) || y>617)) {
 		return false;
 	}
-	if ((x>=854 && x<868) && ((((y<94 || (y>139 && y<237)) || (y>499 && y<595))) || y>617)) {
+	if ((x>=854-offShift && x<868-offShift) && ((((y<94 || (y>139 && y<237)) || (y>499 && y<595))) || y>617)) {
 		return false;
 	}
-	if ((x>=868 && x<1094) && ((((y<94)||(y>139 && y<237)) || ((y>281 && y<453)||(y>499 && y<595))) || y>617)) {
+	if ((x>=868-offShift && x<1094-offShift) && ((((y<94)||(y>139 && y<237)) || ((y>281 && y<453)||(y>499 && y<595))) || y>617)) {
 		return false;
 	}
-	if ((x>=1094 && x<1140) && ((y<237||(y>281 && y<453)) || ((y>499 && y<595)|| y>617))) {
+	if ((x>=1094-offShift && x<1140-offShift) && ((y<237||(y>281 && y<453)) || ((y>499 && y<595)|| y>617))) {
 		return false;
 	}
-	if ((x>=1140 && x<1213) && ((y<216||(y>281 && y<453)) || ((y>499 && y<595)|| y>617))) {
+	if ((x>=1140-offShift && x<1213-offShift) && ((y<216||(y>281 && y<453)) || ((y>499 && y<595)|| y>617))) {
 		return false;
 	}
-	if ((x>=1213 && x<=1374) && (y<216 || y>261)) {
+	if ((x>=1213-offShift && x<=1374-offShift) && (y<216 || y>261)) {
 		return false;
 	}
 	return true;
@@ -650,7 +651,7 @@ window.onkeyup=function(event) {
 	delete currentKeys[event.key];
 };
 //sets starting position of Hero
-let currentX = 570;
+let currentX = 367;
 let currentY = 400;
 //global variable for length of each Hero stride
 let moveBy = slider.value/100;

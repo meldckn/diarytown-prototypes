@@ -292,6 +292,7 @@ input:checked + .slider:before {
 	right:0;
 	margin-left:auto;
 	margin-right:auto;
+	width:1200;
 }
 img {
 	position:relative;
@@ -312,7 +313,7 @@ img {
 	height:35px;
 	border:1px solid yellow;
 
-	left:570;
+	left:367;
 	top:400;
 	
 }
