@@ -46,10 +46,15 @@ body {			background-color: var(--bkgd); }
 	padding: 50px;
 	display: flex;
 	flex-wrap: wrap;
-	max-width: 30vw;
-	height: 50vh;
+	max-width: 40vw;
+	height: 90vh;
 	border-style: solid;
 	border-width: 1px;
+}
+
+h2 {
+	height: top
+	size: large;
 }
 
 /* Diagonal stacked paper effect */
@@ -63,10 +68,12 @@ body {			background-color: var(--bkgd); }
 .page-left {
 	margin-right: 0px;
 	border-top-right-radius: 100px 30px;
+	height: inherit;
 }
 .page-right {
 	margin-left: 0px;
 	border-top-left-radius: 100px 30px;
+	height: inherit;
 }
 
 #diary > #date-container {
@@ -98,13 +105,51 @@ body {			background-color: var(--bkgd); }
 	flex: 1;
 }
 
+.all-tab-content{
+	height: inherit;
+}
+
 .phrase-container {
 	display: inline-block;
 	/*align-self: flex-end;*/ /* stick to the bottom of the screen */
 	/*margin-bottom: 20px;*/
 	overflow: auto;
-	height: inherit;
+	height: 80%;
 	/*margin-right: 40px;*/
+}
+
+* {box-sizing: border-box}
+
+/* Style the tab */
+div.tab button {
+  overflow: hidden;
+  border: none;
+  background-color: #f1f1f1;
+  font-family: sans-serif;
+  font-size: xx-small;
+  color: black;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: none; 
+  border-top: none;
 }
 
 /* Force the scrollbar to appear, even on macOS */
@@ -122,6 +167,12 @@ body {			background-color: var(--bkgd); }
     border-radius: 8px;
     border: 2px solid white; /* should match background, can't be transparent */
     background-color: rgba(0, 0, 0, .5);
+}
+
+.tabcontent::-webkit-scrollbar:vertical {
+    width: 11px;
+    overflow: auto;
+    height: inherit;
 }
 
 .phrase {

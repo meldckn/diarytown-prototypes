@@ -242,11 +242,11 @@ let flowerScale = 0.181;
 let flowersOnSpawn = 71;
 let flowerImg;
 let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
+
 function drawFlowers() {
 	flowerImg = flowersEdited[0];
 	window.requestAnimationFrame(step);
 }
-
 
 let frameCounter = 0;
 let frameCount = 0;
@@ -802,10 +802,7 @@ startButton.onclick = function() {
 	},500)
 
 	changeGender();
-	/*if (redoSwitch) {
-		drawHero();
-	}
-	*/
+
 	if (!alreadyDrawn) {
 		//draws hero
 		drawHero();	
@@ -959,5 +956,36 @@ startButton.onclick = function() {
 
 //contains the code to be run when the MakeNewDiary button is pressed
 function runDiaryEditor() {
+//document.getElementById("defaultOpen").click();
 
 }
+
+function openCategory(categoryName) {
+	console.log(document.getElementById(categoryName).style.display === "none", document.getElementById(categoryName).style.display === "none");
+	
+	if( getComputedStyle(document.getElementById(categoryName), null).display === "none" )
+	{		
+		// var i, tabcontent, tablinks;
+		// tabcontent = document.getElementsByClassName("tabcontent");
+		// for (i = 0; i < tabcontent.length; i++) {
+		// 	tabcontent[i].style.display = "none";
+		// }
+
+		// tablinks = document.getElementsByClassName("tablinks");
+		// for (i = 0; i < tablinks.length; i++) {
+		// 	tablinks[i].className = tablinks[i].className.replace(" active", "");
+		// }
+		
+		document.getElementById(categoryName).style.display = "block";
+		//document.getElementById(categoryName).className += " active";
+	}
+
+	else
+	{
+		document.getElementById(categoryName).style.display = "none";
+		//document.getElementById(categoryName).className += " active";
+	}
+}
+
+
+

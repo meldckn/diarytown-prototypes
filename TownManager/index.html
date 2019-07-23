@@ -75,10 +75,30 @@
 			</div>
 
 			<div id = "diaryEditor">
-				<h1> Diary Editor Page</h1>
+				<h2> Diary Editor Page</h2>
 				<div id = "main-container">
     		    	<div class="diary-page page-left">
-    		    	    <div class="phrase-container"></div>    
+    		    		<div class="tab">
+  							<button class="tablinks" onclick="openCategory('Actions-Events')" id="defaultOpen">Actions and Events</button>
+  							<button class="tablinks" onclick="openCategory('Connectors')">Connectors</button>
+  							<button class="tablinks" onclick="openCategory('Modifiers')">Modifiers</button> 
+  						</div> 
+  						<div class="all-tab-content">
+  							<div id="search-bar"></div>
+							<div id="Actions-Events" class="tabcontent">
+								<div id="nested-tabs"></div>
+  								<div id="actions-events-phrases" class="phrase-container"></div>
+							</div>
+							<div id="Connectors" class="tabcontent">
+								<span onclick="this.parentElement.style.display='none'"></span> 
+								<div class="phrase-container"></div> 
+							</div>
+
+							<div id="Modifiers" class="tabcontent">
+								<span onclick="this.parentElement.style.display='none'"></span> 
+								<div class="phrase-container"></div> 
+							</div> 
+						</div> 
     		    	</div>
 			
     		    	<div class="diary-page page-right">
