@@ -36,7 +36,8 @@ diaryEditor.style.display = 'none';
 
 //CANVAS COORDS
 let extraCharacterCanvasCoords = [
-	[927, 415, 107, 65]
+	[160, 263, 50, 55],
+	[927, 417, 107, 63]
 ];
 
 let buildingCanvasCoords = [
@@ -128,20 +129,15 @@ function shuffle(a, b) {
 
 
 // EXTRA CHARACTERS
-let extraCharacterImages = ["assets/frame2Edited.png"];
-let extraCharacters = [];
-for (let i = 0; i < extraCharacterImages.length; i++) {
-	let img = new Image();
-	img.src = extraCharacterImages[i];
-	extraCharacters.push(img);
-}
+let extraCharacterImages = [document.getElementById("character1"), document.getElementById("character2")];
 
+let extraCharactersOnSpawn = 2;
 function drawCharacters() {
-	for (let i = 0; i < extraCharacters.length; i++) {
+	for (let i = 0; i < extraCharactersOnSpawn; i++) {
 		let characters = document.createElement('div');
 		characters.id = "extraCharacter" + (i+1);
 		characters.className = "characters";
-		characters.appendChild(extraCharacters[i]);
+		characters.appendChild(extraCharacterImages[i]);
 		map.appendChild(characters);
 
 		let leftMin = extraCharacterCanvasCoords[i][0];
@@ -151,7 +147,7 @@ function drawCharacters() {
 
 		characters.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
 		characters.style.top = Math.floor(Math.random()*(topMax - topMin) + topMin);
-		
+
 		// Debugging
 		let c = document.createElement("canvas");
 		let ctx = c.getContext("2d");
@@ -169,10 +165,6 @@ function drawCharacters() {
 
 
 //BUILDINGS
-/*let buildings = ["assets/fireRed2Edited.png", "assets/fireRed3Edited.png", "assets/fireRed4Edited.png",
-			  	 "assets/fireRed5Edited.png", "assets/fireRed7Edited.png"];
-let specialBuildings = ["assets/fireRed10Edited.png", "assets/fireRed11Edited.png", "assets/fireRed14Edited.png", 
-						"assets/rubySaph1Edited.png"];*/
 let buildings = [document.getElementById("building1"), document.getElementById("building2"), document.getElementById("building3"),
 				 document.getElementById("building4"), document.getElementById("building5")];
 let specialBuildings = [document.getElementById("specialBuilding1"), document.getElementById("specialBuilding2"),
@@ -286,6 +278,7 @@ function step() {
 
 
 
+
 //TREES
 let treeCanvases = [];
 let treeCtxs = [];
@@ -314,6 +307,9 @@ function drawTrees() {
 		randCanvasesAndCtxs[1][i].drawImage(treeImg, x, y, treeImg.width*treeScale, treeImg.height*treeScale);
 	}
 }
+
+
+
 
 // TOGGLE CANVAS BORDERS
 function toggleCanvasBorders() {

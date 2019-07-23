@@ -319,7 +319,7 @@ img {
 	
 }
 .characters {
-	z-index: 100;
+	z-index: 99;
 	position:absolute;
 	image-rendering:pixelated;
 	width:25px;
