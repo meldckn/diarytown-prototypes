@@ -206,13 +206,13 @@ let flowerScale = 0.181;
 let flowersOnSpawn = 125;
 let flowerImg;
 let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
-function drawFlowers() {
+/*function drawFlowers() {
 	flowerImg = flowerImages[0];
 	//flowerImg.onload = function() {
 		window.requestAnimationFrame(step);
 	//}
 }
-
+*/
 let frameCounter = 0;
 let frameCount = 0;
 const maxWaitForFrames = 40;
@@ -740,7 +740,7 @@ startButton.onclick = function() {
 		//draws buildings
 		drawBuildings();
 		//draws flowers
-		drawFlowers();
+		//drawFlowers();
 		//draws trees
 		drawTrees();
 		alreadyDrawn = true;
