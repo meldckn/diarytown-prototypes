@@ -806,17 +806,14 @@ startButton.onclick = function() {
 	},500)
 
 	changeGender();
-	/*if (redoSwitch) {
-		drawHero();
-	}
-	*/
+
 	if (!alreadyDrawn) {
 		//draws hero
 		drawHero();	
 		//draws buildings
 		drawBuildings();
 		//draws flowers
-		//drawFlowers();
+		drawFlowers();
 		//draws trees
 		drawTrees();
 		//drawCharacters
