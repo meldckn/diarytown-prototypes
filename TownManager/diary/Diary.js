@@ -96,7 +96,7 @@ var Diary = ( function() {
 
 	    	elements.push(element);
 		});
-		$('.phrase-container').append(elements);
+		$('#actions-events-phrases').append(elements);
 	}
 
 	function addPhraseToDiary ( actionObj, textIndex ) {
