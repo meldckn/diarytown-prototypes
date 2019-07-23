@@ -66,9 +66,12 @@ var Diary = ( function() {
 	}
 
 	function initDisplay (actionLibrary) {
-
+		var d = new Date();
+		var month = d.getMonth() + 1;
+		var day = d.getDate();
+		var year = d.getFullYear();
 		displayPhrases (actionLibrary);
-		addDateLine ("Tuesday, Feb. 26, 2019");
+		addDateLine (month + "/" + day + "/" + year);
 
     }
 
