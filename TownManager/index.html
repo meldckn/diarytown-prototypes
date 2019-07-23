@@ -48,7 +48,19 @@
 
 			<!--THE TOWN MAP-->
 			<div id = "map">
-				<!--canvas id="canvas" style="border:1px solid red; position:absolute;"></canvas-->
+				<img id="tree" src="assets/tree.png" style="display:none"/>
+				<img id="flower1" src="assets/flower1Edited.png" style="display:none"/>
+				<img id="flower2" src="assets/flower2Edited.png" style="display:none"/>
+				<img id="flower3" src="assets/flower3Edited.png" style="display:none"/>
+				<img id="building1" src="assets/fireRed2Edited.png" style="display:none"/>
+				<img id="building2" src="assets/fireRed3Edited.png" style="display:none"/>
+				<img id="building3" src="assets/fireRed4Edited.png" style="display:none"/>
+				<img id="building4" src="assets/fireRed5Edited.png" style="display:none"/>
+				<img id="building5" src="assets/fireRed7Edited.png" style="display:none"/>
+				<img id="specialBuilding1" src="assets/fireRed10Edited.png" style="display:none"/>
+				<img id="specialBuilding2" src="assets/fireRed11Edited.png" style="display:none"/>
+				<img id="specialBuilding3" src="assets/fireRed14Edited.png" style="display:none"/>
+				<img id="specialBuilding4" src="assets/rubySaph1Edited.png" style="display:none"/>
 				<img id = "background" src="assets/testCity1Edited.png" alt="HTML5 Icon" style="width:1200;height:800;">
 				<br></br>
 				<div id = "writeNewDiaryContainer"> 
@@ -123,9 +135,9 @@
 					<br> </br>
 					<br></br>
 					<div id = "secondSwitch">
-						<p id = "interns">Gender Toggle<br></br>Male/Female </p>	
+						<p id = "interns">Character Design<br></br>Short Hair/Long Hair</p>	
 						<label class="switch2">
-						  <input type="checkbox">
+						  <input type="checkbox" id = "genderToggle" onclick = "changeGender()">
 						  <span class="slider"></span>
 						</label>
 					</div>

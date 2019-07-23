@@ -35,6 +35,10 @@ diaryEditor.style.display = 'none';
 //Akhil's Building management code below:
 
 //CANVAS COORDS
+let extraCharacterCanvasCoords = [
+	[927, 415, 107, 65]
+];
+
 let buildingCanvasCoords = [
 	// Top Left
 	[80, 70, 125, 80],
@@ -84,7 +88,7 @@ let flowerCanvasCoords = [
 	[305, 660], [335, 660], [365, 660], [395, 660], [425, 660], [455, 660],
 	[305, 690], [335, 690], [365, 690], [395, 690], [425, 690], [455, 690],
 	[305, 720], [335, 720], [365, 720], [395, 720], [425, 720], [455, 720],
-	// Bottom Middle
+	/* Bottom Middle (Lags the Game)
 	[485, 660], [515, 660], [545, 660], [575, 660], [605, 660], [635, 660],
 	[665, 660], [695, 660], [725, 660], [755, 660], [785, 660], [815, 660],
 	[845, 660], [875, 660], [905, 660], [935, 660], [965, 660], [995, 660],
@@ -93,7 +97,7 @@ let flowerCanvasCoords = [
 	[845, 690], [875, 690], [905, 690], [935, 690], [965, 690], [995, 690],
 	[485, 720], [515, 720], [545, 720], [575, 720], [605, 720], [635, 720],
 	[665, 720], [695, 720], [725, 720], [755, 720], [785, 720], [815, 720],
-	[845, 720], [875, 720], [905, 720], [935, 720], [965, 720], [995, 720],
+	[845, 720], [875, 720], [905, 720], [935, 720], [965, 720], [995, 720],*/
 ];
 let treeCanvasCoords = [
 	// Top Left
@@ -123,11 +127,56 @@ function shuffle(a, b) {
 
 
 
+// EXTRA CHARACTERS
+let extraCharacterImages = ["assets/frame2Edited.png"];
+let extraCharacters = [];
+for (let i = 0; i < extraCharacterImages.length; i++) {
+	let img = new Image();
+	img.src = extraCharacterImages[i];
+	extraCharacters.push(img);
+}
+
+function drawCharacters() {
+	for (let i = 0; i < extraCharacters.length; i++) {
+		let characters = document.createElement('div');
+		characters.id = "extraCharacter" + (i+1);
+		characters.className = "characters";
+		characters.appendChild(extraCharacters[i]);
+		map.appendChild(characters);
+
+		let leftMin = extraCharacterCanvasCoords[i][0];
+		let leftMax = extraCharacterCanvasCoords[i][0] + extraCharacterCanvasCoords[i][2] - 25;
+		let topMin = extraCharacterCanvasCoords[i][1];
+		let topMax = extraCharacterCanvasCoords[i][1] + extraCharacterCanvasCoords[i][3] - 35;
+
+		characters.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
+		characters.style.top = Math.floor(Math.random()*(topMax - topMin) + topMin);
+		
+		// Debugging
+		let c = document.createElement("canvas");
+		let ctx = c.getContext("2d");
+		map.insertBefore(c, map.firstChild);
+		c.style.position = "absolute";
+		c.style.border = "1px solid yellow";
+		c.style.marginLeft = extraCharacterCanvasCoords[i][0] + "px";
+		c.style.marginTop = extraCharacterCanvasCoords[i][1] + "px";
+		c.width = extraCharacterCanvasCoords[i][2];
+		c.height = extraCharacterCanvasCoords[i][3];
+	}
+}
+
+
+
+
 //BUILDINGS
-let buildings = ["assets/fireRed2Edited.png", "assets/fireRed3Edited.png", "assets/fireRed4Edited.png",
+/*let buildings = ["assets/fireRed2Edited.png", "assets/fireRed3Edited.png", "assets/fireRed4Edited.png",
 			  	 "assets/fireRed5Edited.png", "assets/fireRed7Edited.png"];
 let specialBuildings = ["assets/fireRed10Edited.png", "assets/fireRed11Edited.png", "assets/fireRed14Edited.png", 
-						"assets/rubySaph1Edited.png"];
+						"assets/rubySaph1Edited.png"];*/
+let buildings = [document.getElementById("building1"), document.getElementById("building2"), document.getElementById("building3"),
+				 document.getElementById("building4"), document.getElementById("building5")];
+let specialBuildings = [document.getElementById("specialBuilding1"), document.getElementById("specialBuilding2"),
+						document.getElementById("specialBuilding3"), document.getElementById("specialBuilding4")];
 
 let buildingCanvases = [];
 let buildingCtxs = [];
@@ -146,32 +195,32 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 
 let buildingsOnSpawn = 17;
 let buildingScale = 1.25;
+let buildingCounter = 0;
 function drawBuildings() {
+	let randCanvasesAndCtxs = shuffle(buildingCanvases, buildingCtxs);
 	for (let i = 0; i < buildingsOnSpawn; i++) {
-		let randCanvasesAndCtxs = shuffle(buildingCanvases, buildingCtxs);
-		let randBuildingImg = new Image();
-		randBuildingImg.src = buildings[Math.floor(Math.random()*buildings.length)];		
-		randBuildingImg.onload = function() {
-			let x = randCanvasesAndCtxs[0][i].width / 2 - (randBuildingImg.width*buildingScale) / 2;
-			let y = randCanvasesAndCtxs[0][i].height / 2 - (randBuildingImg.height*buildingScale) / 2;
+		let randBuildingImg = buildings[Math.floor(Math.random()*buildings.length)];
 
-			if (randCanvasesAndCtxs[0][i].width === 190 && randCanvasesAndCtxs[0][i].height === 206) {
-				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
-				randBuildingImg.src = specialBuildings[0];
-			} else if (randCanvasesAndCtxs[0][i].width === 145 && randCanvasesAndCtxs[0][i].height === 165) {
-				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
-				randBuildingImg.src = specialBuildings[1];
-			} else if (randCanvasesAndCtxs[0][i].width === 335 && randCanvasesAndCtxs[0][i].height === 160) {
-				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
-				randBuildingImg.src = specialBuildings[2];
-			} else if (randCanvasesAndCtxs[0][i].width === 120 && randCanvasesAndCtxs[0][i].height === 102) {
-				randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
-				randBuildingImg.src = specialBuildings[3];
-			}
-			randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
-			randCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y, 
-												randBuildingImg.width*buildingScale, randBuildingImg.height*buildingScale);
+		if (randCanvasesAndCtxs[0][i].width === 190 && randCanvasesAndCtxs[0][i].height === 206) {
+			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			randBuildingImg = specialBuildings[0];
+		} else if (randCanvasesAndCtxs[0][i].width === 145 && randCanvasesAndCtxs[0][i].height === 165) {
+			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			randBuildingImg = specialBuildings[1];
+		} else if (randCanvasesAndCtxs[0][i].width === 335 && randCanvasesAndCtxs[0][i].height === 160) {
+			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			randBuildingImg = specialBuildings[2];
+		} else if (randCanvasesAndCtxs[0][i].width === 120 && randCanvasesAndCtxs[0][i].height === 102) {
+			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			randBuildingImg = specialBuildings[3];
 		}
+
+		let x = randCanvasesAndCtxs[0][i].width / 2 - (randBuildingImg.width*buildingScale) / 2;
+		let y = randCanvasesAndCtxs[0][i].height / 2 - (randBuildingImg.height*buildingScale) / 2;
+
+		randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
+		randCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y, 
+											randBuildingImg.width*buildingScale, randBuildingImg.height*buildingScale);
 	}
 }
 
@@ -179,15 +228,11 @@ function drawBuildings() {
 
 
 //FLOWERS
-let flowers = ["assets/flower1Edited.png", "assets/flower2Edited.png", "assets/flower3Edited.png"];
-let flowerImages = [];
-for (let i = 0; i < flowers.length; i++) {
-	flowerImages[i] = new Image();
-	flowerImages[i].src = flowers[i];
-}
+let flowersEdited = [document.getElementById("flower1"), document.getElementById("flower2"), document.getElementById("flower3")]
 
 let flowerCanvases = [];
 let flowerCtxs = [];
+
 for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCanvases[i] = document.createElement("canvas");
 	flowerCtxs[i] = flowerCanvases[i].getContext("2d");
@@ -201,21 +246,19 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCanvases[i].height = 25;
 }
 
-
 let flowerScale = 0.181;
-let flowersOnSpawn = 125;
+let flowersOnSpawn = 71;
 let flowerImg;
 let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
+
 function drawFlowers() {
-	flowerImg = flowerImages[0];
-	//flowerImg.onload = function() {
-		window.requestAnimationFrame(step);
-	//}
+	flowerImg = flowersEdited[0];
+	window.requestAnimationFrame(step);
 }
 
 let frameCounter = 0;
 let frameCount = 0;
-const maxWaitForFrames = 40;
+const maxWaitForFrames = 25;
 function step() {
 	frameCount++;
 	if (frameCount < maxWaitForFrames) {
@@ -224,9 +267,9 @@ function step() {
 	}
 	frameCount = 0;
 
-	flowerImg = flowerImages[frameCounter];
+	flowerImg = flowersEdited[frameCounter];
 	frameCounter++;
-	if (frameCounter >= flowers.length) {
+	if (frameCounter >= flowersEdited.length) {
 		frameCounter = 0;
 	}
 
@@ -240,7 +283,6 @@ function step() {
 	}
 	window.requestAnimationFrame(step);
 }
-
 
 
 
@@ -263,17 +305,13 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 let treeScale = 0.175;
 let treesOnSpawn = 21;
 function drawTrees() {
+	let randCanvasesAndCtxs = shuffle(treeCanvases, treeCtxs);
 	for (let i = 0; i < treesOnSpawn; i++) {
-		let randCanvasesAndCtxs = shuffle(treeCanvases, treeCtxs);
-		let treeImg = new Image();
-		treeImg.src = "assets/tree.png";
-		treeImg.onload = function() {
-			let x = randCanvasesAndCtxs[0][i].width / 2 - (treeImg.width*treeScale) / 2;
-			let y = randCanvasesAndCtxs[0][i].height - (treeImg.height*treeScale);
-			randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
-			randCanvasesAndCtxs[1][i].drawImage(treeImg, x, y, 
-												treeImg.width*treeScale, treeImg.height*treeScale);
-		}
+		let treeImg = document.getElementById("tree");
+		let x = randCanvasesAndCtxs[0][i].width / 2 - (treeImg.width*treeScale) / 2;
+		let y = randCanvasesAndCtxs[0][i].height - (treeImg.height*treeScale);
+		randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
+		randCanvasesAndCtxs[1][i].drawImage(treeImg, x, y, treeImg.width*treeScale, treeImg.height*treeScale);
 	}
 }
 
@@ -304,6 +342,7 @@ function toggleCanvasBorders() {
 
 
 
+
 //Daniel's code below:
 
 //start of character animating thing
@@ -316,14 +355,44 @@ let mainCharacterAnimationAddresses = ["assets/frame1Edited.png", "assets/frame2
 "assets/frame9Edited.png", "assets/frame10Edited.png", "assets/frame11Edited.png",
 "assets/frame12Edited.png"];
 
+let mainCharacteressAnimationAddresses = ["assets/female1Edited.png", "assets/female2Edited.png", "assets/female3Edited.png",
+"assets/female4Edited.png","assets/female5Edited.png","assets/female6Edited.png","assets/female7Edited.png","assets/female8Edited.png",
+"assets/female9Edited.png","assets/female10Edited.png","assets/female11Edited.png","assets/female12Edited.png",];
+
 
 //initializes the animation array that contains an Image element for each Hero movement frame
 let mainCharacterAnimations = [];
-for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
-	let tempFrame = new Image();
-	tempFrame.src = mainCharacterAnimationAddresses[i];
-	mainCharacterAnimations.push(tempFrame);
+
+let characterGender = true;
+function initFrames(gender) {
+	mainCharacterAnimations = [];
+	if (gender === true) {
+		for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
+			let tempFrame = new Image();
+			tempFrame.src = mainCharacterAnimationAddresses[i];
+			mainCharacterAnimations.push(tempFrame);
+		}
+	} else {
+		for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
+			let tempFrame = new Image();
+			tempFrame.src = mainCharacteressAnimationAddresses[i];
+			mainCharacterAnimations.push(tempFrame);
+		}
+	}
+	console.log("got here");
 }
+
+let redoSwitch = false;
+function changeGender() {
+	if (document.getElementById("genderToggle").checked) {
+		initFrames(false);
+	}
+	if (!(document.getElementById("genderToggle").checked)) {
+		initFrames(true);
+	}
+	redoSwitch = true;
+}
+
 
 function turnOffMusic() {
 	if (document.getElementById("musicToggle").checked) {
@@ -340,6 +409,8 @@ function drawHero() {
 	hero.className = "hero";
 	hero.appendChild(mainCharacterAnimations[1]);
 	map.appendChild(hero);
+	hero.style.left = 367;
+	hero.style.top = 400;
 }
 
 //collision detection function, goes through every possible x value and defines y value boundaries
@@ -734,6 +805,8 @@ startButton.onclick = function() {
 		
 	},500)
 
+	changeGender();
+
 	if (!alreadyDrawn) {
 		//draws hero
 		drawHero();	
@@ -743,6 +816,8 @@ startButton.onclick = function() {
 		drawFlowers();
 		//draws trees
 		drawTrees();
+		//drawCharacters
+		drawCharacters();
 		alreadyDrawn = true;
 	}
 

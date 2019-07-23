@@ -312,12 +312,19 @@ img {
 	image-rendering:pixelated;
 	width:25px;
 	height:35px;
-	border:1px solid yellow;
-
 	left:367;
 	top:400;
 	
 }
+.characters {
+	z-index: 100;
+	position:absolute;
+	image-rendering:pixelated;
+	width:25px;
+	height:35px;
+	border:1px solid yellow;
+}
+
 #thirdBackButtonContainer {
 	text-align:center;
 	position:absolute;

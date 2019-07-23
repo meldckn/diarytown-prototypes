@@ -96,14 +96,18 @@ var Diary = ( function() {
 
 	    	elements.push(element);
 		});
-		$('#actions-events-phrases').append(elements);
+		$('.phrase-container').append(elements);
 	}
 
 	function addPhraseToDiary ( actionObj, textIndex ) {
-		var element = $('<div class="diary-phrase">' + actionObj["text"][textIndex] + '</div>')
+		var element = $('<div class="diary-phrase close">' + actionObj["text"][textIndex] + '</div>')
+		console.log(element);
+		element[0].addEventListener("click", function() {
+  	console.log("closebutton clicked");
+    this.style.display = "none";
+  });
 		$('#diary').append(element);
-	}
-
+}
 
  	return { // Public functions: 
  		init : init,
@@ -114,3 +118,4 @@ var Diary = ( function() {
 
 /* Initialize Controller when document is fully loaded */
 $(document).ready(function () { Diary.init(); });
+
