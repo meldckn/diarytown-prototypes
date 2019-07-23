@@ -188,6 +188,7 @@ for (let i = 0; i < flowers.length; i++) {
 
 let flowerCanvases = [];
 let flowerCtxs = [];
+
 for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCanvases[i] = document.createElement("canvas");
 	flowerCtxs[i] = flowerCanvases[i].getContext("2d");
@@ -201,7 +202,6 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCanvases[i].height = 25;
 }
 
-
 let flowerScale = 0.181;
 let flowersOnSpawn = 125;
 let flowerImg;
@@ -212,6 +212,7 @@ function drawFlowers() {
 		window.requestAnimationFrame(step);
 	//}
 }
+
 
 let frameCounter = 0;
 let frameCount = 0;
@@ -240,7 +241,6 @@ function step() {
 	}
 	window.requestAnimationFrame(step);
 }
-
 
 
 
@@ -316,14 +316,44 @@ let mainCharacterAnimationAddresses = ["assets/frame1Edited.png", "assets/frame2
 "assets/frame9Edited.png", "assets/frame10Edited.png", "assets/frame11Edited.png",
 "assets/frame12Edited.png"];
 
+let mainCharacteressAnimationAddresses = ["assets/female1Edited.png", "assets/female2Edited.png", "assets/female3Edited.png",
+"assets/female4Edited.png","assets/female5Edited.png","assets/female6Edited.png","assets/female7Edited.png","assets/female8Edited.png",
+"assets/female9Edited.png","assets/female10Edited.png","assets/female11Edited.png","assets/female12Edited.png",];
+
 
 //initializes the animation array that contains an Image element for each Hero movement frame
 let mainCharacterAnimations = [];
-for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
-	let tempFrame = new Image();
-	tempFrame.src = mainCharacterAnimationAddresses[i];
-	mainCharacterAnimations.push(tempFrame);
+
+let characterGender = true;
+function initFrames(gender) {
+	mainCharacterAnimations = [];
+	if (gender === true) {
+		for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
+			let tempFrame = new Image();
+			tempFrame.src = mainCharacterAnimationAddresses[i];
+			mainCharacterAnimations.push(tempFrame);
+		}
+	} else {
+		for (let i = 0; i<mainCharacterAnimationAddresses.length; i++) {
+			let tempFrame = new Image();
+			tempFrame.src = mainCharacteressAnimationAddresses[i];
+			mainCharacterAnimations.push(tempFrame);
+		}
+	}
+	console.log("got here");
 }
+
+let redoSwitch = false;
+function changeGender() {
+	if (document.getElementById("genderToggle").checked) {
+		initFrames(false);
+	}
+	if (!(document.getElementById("genderToggle").checked)) {
+		initFrames(true);
+	}
+	redoSwitch = true;
+}
+
 
 function turnOffMusic() {
 	if (document.getElementById("musicToggle").checked) {
@@ -340,6 +370,8 @@ function drawHero() {
 	hero.className = "hero";
 	hero.appendChild(mainCharacterAnimations[1]);
 	map.appendChild(hero);
+	hero.style.left = 367;
+	hero.style.top = 400;
 }
 
 //collision detection function, goes through every possible x value and defines y value boundaries
@@ -734,6 +766,11 @@ startButton.onclick = function() {
 		
 	},500)
 
+	changeGender();
+	/*if (redoSwitch) {
+		drawHero();
+	}
+	*/
 	if (!alreadyDrawn) {
 		//draws hero
 		drawHero();	
