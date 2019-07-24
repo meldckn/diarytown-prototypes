@@ -317,7 +317,7 @@ img {
 	
 }
 .characters {
-	z-index: 99;
+	z-index: 6;
 	position:absolute;
 	image-rendering:pixelated;
 }
