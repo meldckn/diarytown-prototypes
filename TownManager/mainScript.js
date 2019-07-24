@@ -180,7 +180,7 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	buildingCanvases[i].style.position = "absolute";
 	buildingCanvases[i].style.marginLeft = buildingCanvasCoords[i][0] + "px";
 	buildingCanvases[i].style.marginTop = buildingCanvasCoords[i][1] + "px";
-	buildingCanvases[i].style.zIndex = 6;
+	buildingCanvases[i].style.zIndex = 3;
 	buildingCanvases[i].width = buildingCanvasCoords[i][2];
 	buildingCanvases[i].height = buildingCanvasCoords[i][3];
 }
@@ -197,15 +197,19 @@ function drawBuildings() {
 		if (randCanvasesAndCtxs[0][i].width === 190 && randCanvasesAndCtxs[0][i].height === 206) {
 			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[0];
+			randCanvasesAndCtxs[0][i].style.zIndex = 6;
 		} else if (randCanvasesAndCtxs[0][i].width === 145 && randCanvasesAndCtxs[0][i].height === 165) {
 			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[1];
+			randCanvasesAndCtxs[0][i].style.zIndex=8;
 		} else if (randCanvasesAndCtxs[0][i].width === 335 && randCanvasesAndCtxs[0][i].height === 160) {
 			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[2];
+			randCanvasesAndCtxs[0][i].style.zIndex = 6;
 		} else if (randCanvasesAndCtxs[0][i].width === 120 && randCanvasesAndCtxs[0][i].height === 102) {
 			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[3];
+			randCanvasesAndCtxs[0][i].style.zIndex = 6;
 		}
 
 		let x = randCanvasesAndCtxs[0][i].width / 2 - (randBuildingImg.width*buildingScale) / 2;
@@ -235,7 +239,7 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCanvases[i].style.imageRendering = "pixelated";
 	flowerCanvases[i].style.marginLeft = flowerCanvasCoords[i][0] + "px";
 	flowerCanvases[i].style.marginTop = flowerCanvasCoords[i][1] + "px";
-	flowerCanvases[i].style.zIndex = 6;
+	flowerCanvases[i].style.zIndex = 3;
 	flowerCanvases[i].width = 25;
 	flowerCanvases[i].height = 25;
 }
@@ -576,6 +580,20 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 	}
 }
 
+function checkZ(x, y) {
+	if (y<=281) {
+		hero.style.zIndex = 5;
+	}
+	if (y>281 && y<=484) {
+		hero.style.zIndex = 7;
+	}
+	if (y>484 && y<=572) {
+		hero.style.zIndex = 5;
+	}
+	if (y>572) {
+		hero.style.zIndex = 7;
+	}
+}
 
 
 
@@ -836,7 +854,7 @@ startButton.onclick = function() {
 				hero.style.top = currentY;
 			}
 			animationChange('w', (wCounter), (aCounter), (sCounter), (dCounter));
-			//console.log(currentX+ " "+ currentY);
+			console.log(currentX+ " "+ currentY);
 			wCounter+=stepSpeed;
 		}
 		//upon A pressed
@@ -846,7 +864,7 @@ startButton.onclick = function() {
 				hero.style.left = currentX;
 			}
 			animationChange('a', (wCounter), (aCounter), (sCounter), (dCounter));
-			//console.log(currentX+ " "+ currentY);
+			console.log(currentX+ " "+ currentY);
 			aCounter+=stepSpeed;
 		}
 		//upon S pressed
@@ -856,7 +874,7 @@ startButton.onclick = function() {
 				hero.style.top = currentY;
 			}
 			animationChange('s', (wCounter), (aCounter), (sCounter), (dCounter));
-			//console.log(currentX+ " "+ currentY);
+			console.log(currentX+ " "+ currentY);
 			sCounter+=stepSpeed;
 		}
 		//upon D pressed
@@ -866,9 +884,10 @@ startButton.onclick = function() {
 				hero.style.left = currentX;
 			}
 			animationChange('d', (wCounter), (aCounter), (sCounter), (dCounter));
-			//console.log(currentX+ " "+ currentY);
+			console.log(currentX+ " "+ currentY);
 			dCounter+=stepSpeed;
 		}
+		checkZ(currentX, currentY);
 
 	}, 1)
 

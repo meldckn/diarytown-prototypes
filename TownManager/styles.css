@@ -307,7 +307,7 @@ img {
 }
 
 .hero {
-	z-index: 100;
+	z-index: 7;
 	position:absolute;
 	image-rendering:pixelated;
 	width:25px;
