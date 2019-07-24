@@ -320,9 +320,11 @@ img {
 	z-index: 99;
 	position:absolute;
 	image-rendering:pixelated;
-	width:25px;
-	height:35px;
-	border:1px solid yellow;
+}
+.characters img {
+	width:26.5px;
+	height:35.3px;
+	/*border:1px solid yellow;*/
 }
 
 #thirdBackButtonContainer {

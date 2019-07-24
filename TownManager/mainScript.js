@@ -37,7 +37,9 @@ diaryEditor.style.display = 'none';
 //CANVAS COORDS
 let extraCharacterCanvasCoords = [
 	[160, 263, 50, 55],
-	[927, 417, 107, 63]
+	[328, 263, 51, 55],
+	[927, 417, 107, 63],
+	[470, 515, 30, 135]
 ];
 
 let buildingCanvasCoords = [
@@ -125,30 +127,51 @@ function shuffle(a, b) {
     return [a, b];
 }
 
+function singleShuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
 
 
 
 // EXTRA CHARACTERS
-let extraCharacterImages = [document.getElementById("character1"), document.getElementById("character2")];
+let extraCharacterImages = [document.getElementById("character1"), document.getElementById("character2"),
+							document.getElementById("character3"), document.getElementById("character4")];
 
-let extraCharactersOnSpawn = 2;
+let extraCharactersOnSpawn = 3;
 function drawCharacters() {
+	let randCharacterImgs = singleShuffle(extraCharacterImages);
+	let randCharacterCoords = singleShuffle(extraCharacterCanvasCoords);
 	for (let i = 0; i < extraCharactersOnSpawn; i++) {
 		let characters = document.createElement('div');
 		characters.id = "extraCharacter" + (i+1);
 		characters.className = "characters";
-		characters.appendChild(extraCharacterImages[i]);
+		randCharacterImgs[i].style.display = "block";
+		characters.appendChild(randCharacterImgs[i]);
 		map.appendChild(characters);
 
-		let leftMin = extraCharacterCanvasCoords[i][0];
-		let leftMax = extraCharacterCanvasCoords[i][0] + extraCharacterCanvasCoords[i][2] - 25;
-		let topMin = extraCharacterCanvasCoords[i][1];
-		let topMax = extraCharacterCanvasCoords[i][1] + extraCharacterCanvasCoords[i][3] - 35;
+		let leftMin = randCharacterCoords[i][0];
+		let leftMax = randCharacterCoords[i][0] + randCharacterCoords[i][2] - 26.5;
+		let topMin = randCharacterCoords[i][1];
+		let topMax = randCharacterCoords[i][1] + randCharacterCoords[i][3] - 35.3;
+
+		// Edit to Extra Female Character
+		if (randCharacterImgs[i] === document.getElementById("character4")) {
+			leftMax = randCharacterCoords[i][0] + randCharacterCoords[i][2] - 30;
+			topMax = randCharacterCoords[i][1] + randCharacterCoords[i][3] - 40;
+			randCharacterImgs[i].style.width = 30;
+			randCharacterImgs[i].style.height = 40;
+			console.log(randCharacterImgs[i].width + " " + randCharacterImgs[i].height);
+		}
 
 		characters.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
 		characters.style.top = Math.floor(Math.random()*(topMax - topMin) + topMin);
 
-		// Debugging
+		/* Visualizing
 		let c = document.createElement("canvas");
 		let ctx = c.getContext("2d");
 		map.insertBefore(c, map.firstChild);
@@ -157,7 +180,7 @@ function drawCharacters() {
 		c.style.marginLeft = extraCharacterCanvasCoords[i][0] + "px";
 		c.style.marginTop = extraCharacterCanvasCoords[i][1] + "px";
 		c.width = extraCharacterCanvasCoords[i][2];
-		c.height = extraCharacterCanvasCoords[i][3];
+		c.height = extraCharacterCanvasCoords[i][3];*/
 	}
 }
 
@@ -252,7 +275,7 @@ function drawFlowers() {
 
 let frameCounter = 0;
 let frameCount = 0;
-const maxWaitForFrames = 25;
+const maxWaitForFrames = 30;
 function step() {
 	frameCount++;
 	if (frameCount < maxWaitForFrames) {
