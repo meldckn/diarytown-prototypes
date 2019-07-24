@@ -39,7 +39,8 @@ let extraCharacterCanvasCoords = [
 	[160, 263, 50, 55],
 	[328, 263, 51, 55],
 	[927, 417, 107, 63],
-	[470, 515, 30, 135]
+	[470, 515, 30, 135],
+	[1030, 660, 45, 76]
 ];
 
 let buildingCanvasCoords = [
@@ -65,8 +66,11 @@ let buildingCanvasCoords = [
 	[452, 275, 190, 206],
 	// Middle Right
 	[700, 321, 335, 160],
+	// Bottom Middle
+	[525, 660, 125, 80],
+	[765, 660, 125, 80],
 	// Bottom Right
-	[685, 520, 120, 102]
+	[685, 520, 120, 102],
 ];
 let flowerCanvasCoords = [
 	// Top Left
@@ -91,16 +95,13 @@ let flowerCanvasCoords = [
 	[305, 660], [335, 660], [365, 660], [395, 660], [425, 660], [455, 660],
 	[305, 690], [335, 690], [365, 690], [395, 690], [425, 690], [455, 690],
 	[305, 720], [335, 720], [365, 720], [395, 720], [425, 720], [455, 720],
-	/* Bottom Middle (Lags the Game)
-	[485, 660], [515, 660], [545, 660], [575, 660], [605, 660], [635, 660],
-	[665, 660], [695, 660], [725, 660], [755, 660], [785, 660], [815, 660],
-	[845, 660], [875, 660], [905, 660], [935, 660], [965, 660], [995, 660],
-	[485, 690], [515, 690], [545, 690], [575, 690], [605, 690], [635, 690],
-	[665, 690], [695, 690], [725, 690], [755, 690], [785, 690], [815, 690],
-	[845, 690], [875, 690], [905, 690], [935, 690], [965, 690], [995, 690],
-	[485, 720], [515, 720], [545, 720], [575, 720], [605, 720], [635, 720],
-	[665, 720], [695, 720], [725, 720], [755, 720], [785, 720], [815, 720],
-	[845, 720], [875, 720], [905, 720], [935, 720], [965, 720], [995, 720],*/
+	//Bottom Middle
+	[485, 660], [665, 660], [695, 660], [725, 660],
+	[905, 660], [935, 660], [965, 660], [995, 660],
+	[485, 690], [665, 690], [695, 690], [725, 690],
+	[905, 690], [935, 690], [965, 690], [995, 690],
+	[485, 720], [665, 720], [695, 720], [725, 720],
+	[905, 720], [935, 720], [965, 720], [995, 720]
 ];
 let treeCanvasCoords = [
 	// Top Left
@@ -140,9 +141,10 @@ function singleShuffle(a) {
 
 // EXTRA CHARACTERS
 let extraCharacterImages = [document.getElementById("character1"), document.getElementById("character2"),
-							document.getElementById("character3"), document.getElementById("character4")];
+							document.getElementById("character3"), document.getElementById("character4"),
+							document.getElementById("character5")];
 
-let extraCharactersOnSpawn = 3;
+let extraCharactersOnSpawn = 4;
 function drawCharacters() {
 	let randCharacterImgs = singleShuffle(extraCharacterImages);
 	let randCharacterCoords = singleShuffle(extraCharacterCanvasCoords);
@@ -159,13 +161,13 @@ function drawCharacters() {
 		let topMin = randCharacterCoords[i][1];
 		let topMax = randCharacterCoords[i][1] + randCharacterCoords[i][3] - 35.3;
 
-		// Edit to Extra Female Character
-		if (randCharacterImgs[i] === document.getElementById("character4")) {
+		// An edit to the extra female characters
+		if (randCharacterImgs[i] === document.getElementById("character4") ||
+			randCharacterImgs[i] === document.getElementById("character5")) {
 			leftMax = randCharacterCoords[i][0] + randCharacterCoords[i][2] - 30;
 			topMax = randCharacterCoords[i][1] + randCharacterCoords[i][3] - 40;
 			randCharacterImgs[i].style.width = 30;
 			randCharacterImgs[i].style.height = 40;
-			console.log(randCharacterImgs[i].width + " " + randCharacterImgs[i].height);
 		}
 
 		characters.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
@@ -209,7 +211,7 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 }
 
 
-let buildingsOnSpawn = 17;
+let buildingsOnSpawn = 19;
 let buildingScale = 1.25;
 let buildingCounter = 0;
 function drawBuildings() {
@@ -268,7 +270,7 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 }
 
 let flowerScale = 0.181;
-let flowersOnSpawn = 71;
+let flowersOnSpawn = 95;
 let flowerImg;
 let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
 
@@ -877,7 +879,7 @@ startButton.onclick = function() {
 				hero.style.top = currentY;
 			}
 			animationChange('w', (wCounter), (aCounter), (sCounter), (dCounter));
-			console.log(currentX+ " "+ currentY);
+			//console.log(currentX+ " "+ currentY);
 			wCounter+=stepSpeed;
 		}
 		//upon A pressed
@@ -887,7 +889,7 @@ startButton.onclick = function() {
 				hero.style.left = currentX;
 			}
 			animationChange('a', (wCounter), (aCounter), (sCounter), (dCounter));
-			console.log(currentX+ " "+ currentY);
+			//console.log(currentX+ " "+ currentY);
 			aCounter+=stepSpeed;
 		}
 		//upon S pressed
@@ -897,7 +899,7 @@ startButton.onclick = function() {
 				hero.style.top = currentY;
 			}
 			animationChange('s', (wCounter), (aCounter), (sCounter), (dCounter));
-			console.log(currentX+ " "+ currentY);
+			//console.log(currentX+ " "+ currentY);
 			sCounter+=stepSpeed;
 		}
 		//upon D pressed
@@ -907,7 +909,7 @@ startButton.onclick = function() {
 				hero.style.left = currentX;
 			}
 			animationChange('d', (wCounter), (aCounter), (sCounter), (dCounter));
-			console.log(currentX+ " "+ currentY);
+			//console.log(currentX+ " "+ currentY);
 			dCounter+=stepSpeed;
 		}
 		checkZ(currentX, currentY);
