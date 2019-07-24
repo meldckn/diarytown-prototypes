@@ -180,6 +180,7 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	buildingCanvases[i].style.position = "absolute";
 	buildingCanvases[i].style.marginLeft = buildingCanvasCoords[i][0] + "px";
 	buildingCanvases[i].style.marginTop = buildingCanvasCoords[i][1] + "px";
+	buildingCanvases[i].style.zIndex = 6;
 	buildingCanvases[i].width = buildingCanvasCoords[i][2];
 	buildingCanvases[i].height = buildingCanvasCoords[i][3];
 }
@@ -234,6 +235,7 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCanvases[i].style.imageRendering = "pixelated";
 	flowerCanvases[i].style.marginLeft = flowerCanvasCoords[i][0] + "px";
 	flowerCanvases[i].style.marginTop = flowerCanvasCoords[i][1] + "px";
+	flowerCanvases[i].style.zIndex = 6;
 	flowerCanvases[i].width = 25;
 	flowerCanvases[i].height = 25;
 }
@@ -291,6 +293,7 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 	treeCanvases[i].style.imageRendering = "pixelated";
 	treeCanvases[i].style.marginLeft = treeCanvasCoords[i][0] + "px";
 	treeCanvases[i].style.marginTop = treeCanvasCoords[i][1] + "px";
+	treeCanvases[i].style.zIndex = 6;
 	treeCanvases[i].width = 55;
 	treeCanvases[i].height = 65;
 }
