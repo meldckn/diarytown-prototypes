@@ -307,7 +307,7 @@ img {
 }
 
 .hero {
-	z-index: 100;
+	z-index: 7;
 	position:absolute;
 	image-rendering:pixelated;
 	width:25px;
@@ -384,4 +384,8 @@ h2 {
 #writeNewDiary {
 	z-index:500;
 	font-size:10;
+}
+.submitEntry{
+	width: 500px;
+	height:100px;
 }
