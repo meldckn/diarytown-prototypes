@@ -26,7 +26,7 @@ var Diary = ( function() {
 	// Adds a given phrase/action/event to the diary entry
 	function addToDiary (phrase) {
 
-		var actionObj = getActionByName(phrase);
+		var actionObj = getActionById(phrase);
 
 		addPhraseToDiary (actionObj, 0);
 	}
@@ -47,7 +47,7 @@ var Diary = ( function() {
 
 		// Add a bunch of action documents to the actions collection
 		// (One document = one action)
-		actions_db.insert(actions);
+		actions_db.insert(phrases);
 
 	}
 
@@ -56,8 +56,8 @@ var Diary = ( function() {
 		return actions_db.chain().simplesort("category").data();
 	}
 
-	function getActionByName (name) {
-		return actions_db.findOne({name: name});
+	function getActionById (id) {
+		return actions_db.findOne({id: id});
 	}
 
 	// Doesn't work - max call stack size exceeded
@@ -89,7 +89,7 @@ var Diary = ( function() {
 		actionLibrary.forEach( function(action) {
 	    	var element = $('<button ' + 
 	    			'class="phrase '+ action["category"] + '" ' +
-	    			'id="'+ action["name"] + '" ' +
+	    			'id="'+ action["id"] + '" ' +
 	    			'onclick="Diary.addToDiary(this.id)"' + '>' +
 	    				action["text"][0] + 
 	    		'</button>');
@@ -101,13 +101,14 @@ var Diary = ( function() {
 
 	function addPhraseToDiary ( actionObj, textIndex ) {
 		var element = $('<div class="diary-phrase close">' + actionObj["text"][textIndex] + '</div>')
-		console.log(element);
+		
 		element[0].addEventListener("click", function() {
-  	console.log("closebutton clicked");
-    this.style.display = "none";
-  });
+  			console.log("closebutton clicked");
+    		this.style.display = "none";
+  		});
+		
 		$('#diary').append(element);
-}
+	}
 
  	return { // Public functions: 
  		init : init,
