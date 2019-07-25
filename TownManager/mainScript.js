@@ -368,11 +368,6 @@ function toggleCanvasBorders() {
 	}
 }
 
-
-
-
-//Daniel's code below:
-
 //start of character animating thing
 
 //storage of image location addresses for the main character frames
@@ -391,7 +386,10 @@ let mainCharacteressAnimationAddresses = ["assets/female1Edited.png", "assets/fe
 //initializes the animation array that contains an Image element for each Hero movement frame
 let mainCharacterAnimations = [];
 
+//True=Short Hair; False=Long Hair
 let characterGender = true;
+//Based on the gender parameter, initializes the MainCharacterAnimations array with 12 Image frames of 
+//the long hair character sprite or 12 of the short hair character.
 function initFrames(gender) {
 	mainCharacterAnimations = [];
 	if (gender === true) {
@@ -407,10 +405,9 @@ function initFrames(gender) {
 			mainCharacterAnimations.push(tempFrame);
 		}
 	}
-	console.log("got here");
 }
 
-let redoSwitch = false;
+//calls the InitFrames function if the Options Menu's Gender Toggle has been clicked
 function changeGender() {
 	if (document.getElementById("genderToggle").checked) {
 		initFrames(false);
@@ -418,10 +415,9 @@ function changeGender() {
 	if (!(document.getElementById("genderToggle").checked)) {
 		initFrames(true);
 	}
-	redoSwitch = true;
 }
 
-
+//mutes the audio HTML element if the Options Menu's Music Toggle has been clicked
 function turnOffMusic() {
 	if (document.getElementById("musicToggle").checked) {
 		music.muted = true;
@@ -431,7 +427,7 @@ function turnOffMusic() {
 	}
 }
 
-//initializes Hero
+//initializes Hero, and assigns starting position of Hero div
 let hero = document.createElement('div');
 function drawHero() {
 	hero.className = "hero";
@@ -613,6 +609,8 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 	}
 }
 
+//changes the Hero's z-index based on 2D y-value on Map; places Hero sprite in front of
+//or behind the buildings - basic 3D effect
 function checkZ(x, y) {
 	if (y<=281) {
 		hero.style.zIndex = 5;
@@ -855,8 +853,11 @@ startButton.onclick = function() {
 		
 	},500)
 
+	//accounts for a possible pressing of the GenderToggle button in the options menu
 	changeGender();
 
+	//checks if this is the first time the Start button was pressed; if not, retains the original
+	//map, with the same buildings and Hero positions.
 	if (!alreadyDrawn) {
 		//draws hero
 		drawHero();
@@ -1004,8 +1005,8 @@ startButton.onclick = function() {
 			})
 		},500)
 
-
 		runDiaryEditor();
+		//stops the setInterval function
 		clearInterval(refresh);
 
 	}
