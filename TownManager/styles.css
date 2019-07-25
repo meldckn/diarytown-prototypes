@@ -316,6 +316,13 @@ img {
 	top:400;
 	
 }
+
+#emoji {
+	font-size:25;
+	position:absolute;
+	bottom:10;
+}
+
 .characters {
 	z-index: 6;
 	position:absolute;

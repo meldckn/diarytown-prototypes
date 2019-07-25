@@ -441,6 +441,14 @@ function drawHero() {
 	hero.style.top = 400;
 }
 
+let emoji = document.createElement('p');
+function drawEmoji() {
+	emoji.id = "emoji";
+	hero.appendChild(emoji);
+	emoji.innerText = "😈";
+	//emoji.innerText = "🎒";
+}
+
 //collision detection function, goes through every possible x value and defines y value boundaries
 function onThePath(x, y) {
 	//Currently set for 1640 x 975 display
@@ -536,17 +544,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (wCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[9]);
+			hero.insertBefore(mainCharacterAnimations[9], hero.firstChild);
 		}
 		//neutral step
 		if (wCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[10]);
+			hero.insertBefore(mainCharacterAnimations[10], hero.firstChild);
 		}
 		//right step
 		if (wCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[11]);
+			hero.insertBefore(mainCharacterAnimations[11], hero.firstChild);
 		}
 	}
 	//walking left
@@ -554,17 +562,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (aCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[3]);
+			hero.insertBefore(mainCharacterAnimations[3], hero.firstChild);
 		}
 		//neutral step
 		if (aCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[4]);
+			hero.insertBefore(mainCharacterAnimations[4], hero.firstChild);
 		}
 		//right step
 		if (aCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[5]);
+			hero.insertBefore(mainCharacterAnimations[5], hero.firstChild);
 		}
 	}
 	//walking down
@@ -572,17 +580,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (sCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[0]);
+			hero.insertBefore(mainCharacterAnimations[0], hero.firstChild);
 		}
 		//neutral step
 		if (sCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[1]);
+			hero.insertBefore(mainCharacterAnimations[1], hero.firstChild);
 		}
 		//right step
 		if (sCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[2]);
+			hero.insertBefore(mainCharacterAnimations[2], hero.firstChild);
 		}
 	}
 	//walking right
@@ -590,17 +598,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (dCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[6]);
+			hero.insertBefore(mainCharacterAnimations[6], hero.firstChild);
 		}
 		//neutral step
 		if (dCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[7]);
+			hero.insertBefore(mainCharacterAnimations[7], hero.firstChild);
 		}
 		//right step
 		if (dCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[8]);
+			hero.insertBefore(mainCharacterAnimations[8], hero.firstChild);
 		}
 	}
 }
@@ -851,14 +859,16 @@ startButton.onclick = function() {
 
 	if (!alreadyDrawn) {
 		//draws hero
-		drawHero();	
+		drawHero();
+		//draws emojis above hero
+		drawEmoji();
 		//draws buildings
 		drawBuildings();
 		//draws flowers
 		drawFlowers();
 		//draws trees
 		drawTrees();
-		//drawCharacters
+		//draw extra characters
 		drawCharacters();
 		alreadyDrawn = true;
 	}
