@@ -252,15 +252,15 @@ function drawBuildings() {
 let fountainsEdited = [document.getElementById("fountain1"), document.getElementById("fountain2"),
 					   document.getElementById("fountain3"), document.getElementById("fountain4"),
 					   document.getElementById("fountain5")];
-let fountainScale = 1.5;
+let fountainScale = 1.25;
 
 let fountainCanvas = document.createElement("canvas");
 let fountainCtx = fountainCanvas.getContext("2d");
 map.insertBefore(fountainCanvas, map.firstChild);
 fountainCanvas.style.position = "absolute";
 fountainCanvas.style.imageRendering = "pixelated";
-fountainCanvas.style.marginLeft = 235 + "px";
-fountainCanvas.style.marginTop = 370 + "px";
+fountainCanvas.style.marginLeft = 240 + "px";
+fountainCanvas.style.marginTop = 375 + "px";
 fountainCanvas.style.zIndex = 3;
 fountainCanvas.width = 50*fountainScale;
 fountainCanvas.height = 50*fountainScale;
