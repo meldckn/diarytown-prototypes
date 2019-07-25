@@ -612,7 +612,10 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 //changes the Hero's z-index based on 2D y-value on Map; places Hero sprite in front of
 //or behind the buildings - basic 3D effect
 function checkZ(x, y) {
-	if (y<=281) {
+	if (y<=132) {
+		hero.style.zIndex = 7;
+	}
+	if (y<=281 && y>132) {
 		hero.style.zIndex = 5;
 	}
 	if (y>281 && y<=484) {
