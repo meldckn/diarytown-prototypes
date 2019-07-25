@@ -201,7 +201,6 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	buildingCanvases[i] = document.createElement("canvas");
 	buildingCtxs[i] = buildingCanvases[i].getContext("2d");
 	map.insertBefore(buildingCanvases[i], map.firstChild);
-	buildingCanvases[i].style.border = "1px solid red";
 	buildingCanvases[i].style.position = "absolute";
 	buildingCanvases[i].style.marginLeft = buildingCanvasCoords[i][0] + "px";
 	buildingCanvases[i].style.marginTop = buildingCanvasCoords[i][1] + "px";
@@ -260,7 +259,6 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCtxs[i] = flowerCanvases[i].getContext("2d");
 	map.insertBefore(flowerCanvases[i], map.firstChild);
 	flowerCanvases[i].style.position = "absolute";
-	flowerCanvases[i].style.border = "1px solid purple";
 	flowerCanvases[i].style.imageRendering = "pixelated";
 	flowerCanvases[i].style.marginLeft = flowerCanvasCoords[i][0] + "px";
 	flowerCanvases[i].style.marginTop = flowerCanvasCoords[i][1] + "px";
@@ -318,7 +316,6 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 	treeCtxs[i] = treeCanvases[i].getContext("2d");
 	map.insertBefore(treeCanvases[i], map.firstChild);
 	treeCanvases[i].style.position = "absolute";
-	treeCanvases[i].style.border = "1px solid green";
 	treeCanvases[i].style.imageRendering = "pixelated";
 	treeCanvases[i].style.marginLeft = treeCanvasCoords[i][0] + "px";
 	treeCanvases[i].style.marginTop = treeCanvasCoords[i][1] + "px";
@@ -347,16 +344,6 @@ function drawTrees() {
 function toggleCanvasBorders() {
 	if (document.getElementById("checkbox").checked) {
 		for (let i = 0; i < buildingCanvases.length; i++) {
-			buildingCanvases[i].style.border = "none";
-		}
-		for (let i = 0; i < flowerCanvases.length; i++) {
-			flowerCanvases[i].style.border = "none";
-		}
-		for (let i = 0; i < treeCanvases.length; i++) {
-			treeCanvases[i].style.border = "none";
-		}
-	} else if (!(document.getElementById("checkbox").checked)) {
-		for (let i = 0; i < buildingCanvases.length; i++) {
 			buildingCanvases[i].style.border = "1px solid red";
 		}
 		for (let i = 0; i < flowerCanvases.length; i++) {
@@ -364,6 +351,16 @@ function toggleCanvasBorders() {
 		}
 		for (let i = 0; i < treeCanvases.length; i++) {
 			treeCanvases[i].style.border = "1px solid green";
+		}
+	} else if (!(document.getElementById("checkbox").checked)) {
+		for (let i = 0; i < buildingCanvases.length; i++) {
+			buildingCanvases[i].style.border = "none";
+		}
+		for (let i = 0; i < flowerCanvases.length; i++) {
+			flowerCanvases[i].style.border = "none";
+		}
+		for (let i = 0; i < treeCanvases.length; i++) {
+			treeCanvases[i].style.border = "none";
 		}
 	}
 }
