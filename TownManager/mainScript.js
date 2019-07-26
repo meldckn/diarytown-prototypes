@@ -1069,7 +1069,6 @@ startButton.onclick = function() {
 
 		runDiaryEditor();
 		//stops the setInterval function
-		clearInterval(refresh);
 
 		fourthBackButton.onclick = function() {
 
