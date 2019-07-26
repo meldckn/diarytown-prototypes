@@ -5,6 +5,7 @@
 
 		<!-- Styles and Fonts --> 
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Nova+Round&display=swap" rel="stylesheet">
     	<link rel="stylesheet" href="diary/lib/jquery-ui.min.css">
     	<link rel="stylesheet" href="diary/style.css">
     	<link rel="stylesheet" href="styles.css">
@@ -86,24 +87,28 @@
 				<div id = "main-container">
     		    	<div class="diary-page page-left">
     		    		<div class="tab">
-  							<button class="tablinks" onclick="openCategory('Actions-Events')" id="defaultOpen">Actions and Events</button>
+  							<button class="tablinks" onclick="openCategory('Actions-Events')">Actions and Events</button>
   							<button class="tablinks" onclick="openCategory('Connectors')">Connectors</button>
   							<button class="tablinks" onclick="openCategory('Modifiers')">Modifiers</button> 
   						</div> 
   						<div class="all-tab-content">
   							<div id="search-bar"></div>
 							<div id="Actions-Events" class="tabcontent">
-								<div id="nested-tabs"></div>
+								<div class="nested-tabs">
+									<button class="tablinks" onclick="openCategory('Self')">Self</button>
+  									<button class="tablinks" onclick="openCategory('Social')">Social</button>
+  									<button class="tablinks" onclick="openCategory('Movement')">Movement</button> 
+  									<button class="tablinks" onclick="openCategory('External')">External</button>
+  									<button class="tablinks" onclick="openCategory('Work')">Work</button>  
+								</div>
   								<div id="actions-events-phrases" class="phrase-container"></div>
 							</div>
 							<div id="Connectors" class="tabcontent">
 								<span onclick="this.parentElement.style.display='none'"></span> 
-								<div class="phrase-container"></div> 
 							</div>
 
 							<div id="Modifiers" class="tabcontent">
 								<span onclick="this.parentElement.style.display='none'"></span> 
-								<div class="phrase-container"></div> 
 							</div> 
 						</div> 
     		    	</div>
