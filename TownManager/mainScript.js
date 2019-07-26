@@ -13,6 +13,7 @@ let slider = document.getElementById('myRange');
 let music = document.getElementById('music');
 let writeNewDiary = document.getElementById('writeNewDiary');
 let diaryEditor = document.getElementById('diaryEditor');
+let fourthBackButton = document.getElementById('fourthBackButton');
 
 //assigning classNames
 map.className = "map";
@@ -23,6 +24,7 @@ optionsMenu.className = "optionsMenu";
 aboutMenu.className = "aboutMenu";
 writeNewDiary.className = "writeNewDiary";
 diaryEditor.className = "diaryEditor";
+fourthBackButton.className = "fourthBackButton";
 
 //hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
@@ -30,6 +32,7 @@ optionsMenu.style.display = 'none';
 aboutMenu.style.display = 'none';
 thirdBackButtonContainer.style.display = 'none';
 diaryEditor.style.display = 'none';
+fourthBackButton.style.display = 'none';
 
 
 //Akhil's Building management code below:
@@ -38,9 +41,9 @@ diaryEditor.style.display = 'none';
 let extraCharacterCanvasCoords = [
 	[160, 263, 50, 55],
 	[328, 263, 51, 55],
-	[927, 417, 107, 63],
+	[927, 417, 190, 63],
 	[470, 515, 30, 135],
-	[1030, 660, 45, 76]
+	[1040, 540, 75, 160]
 ];
 
 let buildingCanvasCoords = [
@@ -201,7 +204,6 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	buildingCanvases[i] = document.createElement("canvas");
 	buildingCtxs[i] = buildingCanvases[i].getContext("2d");
 	map.insertBefore(buildingCanvases[i], map.firstChild);
-	buildingCanvases[i].style.border = "1px solid red";
 	buildingCanvases[i].style.position = "absolute";
 	buildingCanvases[i].style.marginLeft = buildingCanvasCoords[i][0] + "px";
 	buildingCanvases[i].style.marginTop = buildingCanvasCoords[i][1] + "px";
@@ -249,6 +251,59 @@ function drawBuildings() {
 
 
 
+//FOUNTAIN
+let fountainsEdited = [document.getElementById("fountain1"), document.getElementById("fountain2"),
+					   document.getElementById("fountain3"), document.getElementById("fountain4"),
+					   document.getElementById("fountain5")];
+let fountainScale = 1.25;
+
+let fountainCanvas = document.createElement("canvas");
+let fountainCtx = fountainCanvas.getContext("2d");
+map.insertBefore(fountainCanvas, map.firstChild);
+fountainCanvas.style.position = "absolute";
+fountainCanvas.style.imageRendering = "pixelated";
+fountainCanvas.style.marginLeft = 240 + "px";
+fountainCanvas.style.marginTop = 375 + "px";
+fountainCanvas.style.zIndex = 3;
+fountainCanvas.width = 50*fountainScale;
+fountainCanvas.height = 50*fountainScale;
+
+let fountainImg;
+function drawFountain() {
+	fountainImg = fountainsEdited[0];
+	window.requestAnimationFrame(fountainStep);
+}
+
+let fountainFrameCounter = 0;
+let fountainFrameCount = 0;
+const maxWaitForFountainFrames = 9;
+function fountainStep() {
+	fountainFrameCount++;
+	if (fountainFrameCount < maxWaitForFountainFrames) {
+		window.requestAnimationFrame(fountainStep);
+		return;
+	}
+	fountainFrameCount = 0;
+
+	fountainImg = fountainsEdited[fountainFrameCounter];
+	fountainFrameCounter++;
+	if (fountainFrameCounter >= fountainsEdited.length) {
+		fountainFrameCounter = 0;
+	}
+
+	let x = fountainCanvas.width / 2 - (fountainImg.width*fountainScale) / 2;
+	let y = fountainCanvas.height / 2 - (fountainImg.height*fountainScale) / 2;
+	fountainCtx.imageSmoothingEnabled = false;
+	fountainCtx.clearRect(0, 0, fountainCanvas.width, fountainCanvas.height);
+	fountainCtx.drawImage(fountainImg, x, y, 
+						  fountainImg.width*fountainScale, fountainImg.height*fountainScale);
+
+	window.requestAnimationFrame(fountainStep);
+}
+
+
+
+
 //FLOWERS
 let flowersEdited = [document.getElementById("flower1"), document.getElementById("flower2"), document.getElementById("flower3")]
 
@@ -260,7 +315,6 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCtxs[i] = flowerCanvases[i].getContext("2d");
 	map.insertBefore(flowerCanvases[i], map.firstChild);
 	flowerCanvases[i].style.position = "absolute";
-	flowerCanvases[i].style.border = "1px solid purple";
 	flowerCanvases[i].style.imageRendering = "pixelated";
 	flowerCanvases[i].style.marginLeft = flowerCanvasCoords[i][0] + "px";
 	flowerCanvases[i].style.marginTop = flowerCanvasCoords[i][1] + "px";
@@ -276,24 +330,24 @@ let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
 
 function drawFlowers() {
 	flowerImg = flowersEdited[0];
-	window.requestAnimationFrame(step);
+	window.requestAnimationFrame(flowerStep);
 }
 
-let frameCounter = 0;
-let frameCount = 0;
-const maxWaitForFrames = 30;
-function step() {
-	frameCount++;
-	if (frameCount < maxWaitForFrames) {
-		window.requestAnimationFrame(step);
+let flowerFrameCounter = 0;
+let flowerFrameCount = 0;
+const maxWaitForFlowerFrames = 33;
+function flowerStep() {
+	flowerFrameCount++;
+	if (flowerFrameCount < maxWaitForFlowerFrames) {
+		window.requestAnimationFrame(flowerStep);
 		return;
 	}
-	frameCount = 0;
+	flowerFrameCount = 0;
 
-	flowerImg = flowersEdited[frameCounter];
-	frameCounter++;
-	if (frameCounter >= flowersEdited.length) {
-		frameCounter = 0;
+	flowerImg = flowersEdited[flowerFrameCounter];
+	flowerFrameCounter++;
+	if (flowerFrameCounter >= flowersEdited.length) {
+		flowerFrameCounter = 0;
 	}
 
 	for (i = 0; i < flowersOnSpawn; i++) {
@@ -304,7 +358,7 @@ function step() {
 		flowerRandCanvasesAndCtxs[1][i].drawImage(flowerImg, x, y, 
 												  flowerImg.width*flowerScale, flowerImg.height*flowerScale);
 	}
-	window.requestAnimationFrame(step);
+	window.requestAnimationFrame(flowerStep);
 }
 
 
@@ -318,7 +372,6 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 	treeCtxs[i] = treeCanvases[i].getContext("2d");
 	map.insertBefore(treeCanvases[i], map.firstChild);
 	treeCanvases[i].style.position = "absolute";
-	treeCanvases[i].style.border = "1px solid green";
 	treeCanvases[i].style.imageRendering = "pixelated";
 	treeCanvases[i].style.marginLeft = treeCanvasCoords[i][0] + "px";
 	treeCanvases[i].style.marginTop = treeCanvasCoords[i][1] + "px";
@@ -347,16 +400,6 @@ function drawTrees() {
 function toggleCanvasBorders() {
 	if (document.getElementById("checkbox").checked) {
 		for (let i = 0; i < buildingCanvases.length; i++) {
-			buildingCanvases[i].style.border = "none";
-		}
-		for (let i = 0; i < flowerCanvases.length; i++) {
-			flowerCanvases[i].style.border = "none";
-		}
-		for (let i = 0; i < treeCanvases.length; i++) {
-			treeCanvases[i].style.border = "none";
-		}
-	} else if (!(document.getElementById("checkbox").checked)) {
-		for (let i = 0; i < buildingCanvases.length; i++) {
 			buildingCanvases[i].style.border = "1px solid red";
 		}
 		for (let i = 0; i < flowerCanvases.length; i++) {
@@ -365,6 +408,18 @@ function toggleCanvasBorders() {
 		for (let i = 0; i < treeCanvases.length; i++) {
 			treeCanvases[i].style.border = "1px solid green";
 		}
+		fountainCanvas.style.border = "1px solid blue";
+	} else if (!(document.getElementById("checkbox").checked)) {
+		for (let i = 0; i < buildingCanvases.length; i++) {
+			buildingCanvases[i].style.border = "none";
+		}
+		for (let i = 0; i < flowerCanvases.length; i++) {
+			flowerCanvases[i].style.border = "none";
+		}
+		for (let i = 0; i < treeCanvases.length; i++) {
+			treeCanvases[i].style.border = "none";
+		}
+		fountainCanvas.style.border = "none";
 	}
 }
 
@@ -435,6 +490,14 @@ function drawHero() {
 	map.appendChild(hero);
 	hero.style.left = 367;
 	hero.style.top = 400;
+}
+
+let emoji = document.createElement('p');
+function drawEmoji() {
+	emoji.id = "emoji";
+	hero.appendChild(emoji);
+	emoji.innerText = "😈";
+	//emoji.innerText = "🎒";
 }
 
 //collision detection function, goes through every possible x value and defines y value boundaries
@@ -532,17 +595,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (wCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[9]);
+			hero.insertBefore(mainCharacterAnimations[9], hero.firstChild);
 		}
 		//neutral step
 		if (wCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[10]);
+			hero.insertBefore(mainCharacterAnimations[10], hero.firstChild);
 		}
 		//right step
 		if (wCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[11]);
+			hero.insertBefore(mainCharacterAnimations[11], hero.firstChild);
 		}
 	}
 	//walking left
@@ -550,17 +613,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (aCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[3]);
+			hero.insertBefore(mainCharacterAnimations[3], hero.firstChild);
 		}
 		//neutral step
 		if (aCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[4]);
+			hero.insertBefore(mainCharacterAnimations[4], hero.firstChild);
 		}
 		//right step
 		if (aCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[5]);
+			hero.insertBefore(mainCharacterAnimations[5], hero.firstChild);
 		}
 	}
 	//walking down
@@ -568,17 +631,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (sCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[0]);
+			hero.insertBefore(mainCharacterAnimations[0], hero.firstChild);
 		}
 		//neutral step
 		if (sCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[1]);
+			hero.insertBefore(mainCharacterAnimations[1], hero.firstChild);
 		}
 		//right step
 		if (sCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[2]);
+			hero.insertBefore(mainCharacterAnimations[2], hero.firstChild);
 		}
 	}
 	//walking right
@@ -586,17 +649,17 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 		//left step
 		if (dCounter%40 === 1) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[6]);
+			hero.insertBefore(mainCharacterAnimations[6], hero.firstChild);
 		}
 		//neutral step
 		if (dCounter%20 === 0) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[7]);
+			hero.insertBefore(mainCharacterAnimations[7], hero.firstChild);
 		}
 		//right step
 		if (dCounter%40 === 3) {
 			hero.removeChild(hero.childNodes[0]);
-			hero.appendChild(mainCharacterAnimations[8]);
+			hero.insertBefore(mainCharacterAnimations[8], hero.firstChild);
 		}
 	}
 }
@@ -604,7 +667,10 @@ function animationChange(input, wCounter, aCounter, sCounter, dCounter) {
 //changes the Hero's z-index based on 2D y-value on Map; places Hero sprite in front of
 //or behind the buildings - basic 3D effect
 function checkZ(x, y) {
-	if (y<=281) {
+	if (y<=132) {
+		hero.style.zIndex = 7;
+	}
+	if (y<=281 && y>132) {
 		hero.style.zIndex = 5;
 	}
 	if (y>281 && y<=484) {
@@ -852,14 +918,18 @@ startButton.onclick = function() {
 	//map, with the same buildings and Hero positions.
 	if (!alreadyDrawn) {
 		//draws hero
-		drawHero();	
+		drawHero();
+		//draws emojis above hero
+		drawEmoji();
 		//draws buildings
 		drawBuildings();
 		//draws flowers
 		drawFlowers();
+		//draws fountain
+		drawFountain();
 		//draws trees
 		drawTrees();
-		//drawCharacters
+		//draw extra characters
 		drawCharacters();
 		alreadyDrawn = true;
 	}
@@ -975,6 +1045,8 @@ startButton.onclick = function() {
 		//gets rid of options Menu screen
 		window.setTimeout(function(){
 			map.style.display = 'none';
+			thirdBackButton.style.display = 'none';
+			fourthBackButton.style.display = 'block';
 		}, 500)
 
 		//transition in the diary Editor
@@ -997,7 +1069,47 @@ startButton.onclick = function() {
 
 		runDiaryEditor();
 		//stops the setInterval function
-		clearInterval(refresh);
+
+		fourthBackButton.onclick = function() {
+
+			anime({
+				targets:'.diaryEditor',
+				opacity:0,
+				delay:200	
+			})
+			//bounces the map left to disappear
+			anime({
+				targets:'.diaryEditor',
+				translateY:0,
+				duration: 1000
+			})
+			//gets rid of map screen
+			window.setTimeout(function(){
+				diaryEditor.style.display = 'none';
+				fourthBackButton.style.display = 'none';
+
+			}, 500)
+
+			//transition in the Start Menu
+			window.setTimeout(function(){
+				map.style.display = 'block'
+				map.style.opactiy = 0;
+				thirdBackButton.style.display = 'block';
+				//fades in the StartMenu
+				anime({
+					targets:'.map',
+					opacity:1,
+					delay:200			
+				})
+				//bounces the StartMenu back right to appear
+				anime({
+					targets:'.map',
+					translateY: 75,
+					duration:1000
+				})
+			},500)
+
+		}
 
 	}
 }

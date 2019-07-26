@@ -316,6 +316,15 @@ img {
 	top:400;
 	
 }
+
+#emoji {
+	font-size:25;
+	position:relative;
+	/*right:30;
+	bottom:60;*/
+	bottom:90;
+}
+
 .characters {
 	z-index: 6;
 	position:absolute;
@@ -386,3 +395,12 @@ h2 {
 	font-size:10;
 }
 
+#fourthBackButtonContainer {
+	text-align:center;
+	position:absolute;
+	padding-left:20px;
+	
+}
+#fourthBackButton {
+	font-size:10;
+}
