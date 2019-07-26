@@ -209,39 +209,50 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	buildingCanvases[i].height = buildingCanvasCoords[i][3];
 }
 
+let copyOfBuildingCanvases = [];
+let copyOfBuildingCtxs = [];
+for (let i = 0; i < buildingCanvases.length; i++) {
+	copyOfBuildingCanvases[i] = buildingCanvases[i];
+	copyOfBuildingCtxs[i] = buildingCtxs[i];
+}
+
 
 let buildingsOnSpawn = 19;
 let buildingScale = 1.25;
 let buildingCounter = 0;
+let buildingRandCanvasesAndCtxs = shuffle(buildingCanvases, buildingCtxs);
 function drawBuildings() {
-	let randCanvasesAndCtxs = shuffle(buildingCanvases, buildingCtxs);
 	for (let i = 0; i < buildingsOnSpawn; i++) {
 		let randBuildingImg = buildings[Math.floor(Math.random()*buildings.length)];
 
-		if (randCanvasesAndCtxs[0][i].width === 190 && randCanvasesAndCtxs[0][i].height === 206) {
-			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+		if (buildingRandCanvasesAndCtxs[0][i].width === 190 && buildingRandCanvasesAndCtxs[0][i].height === 206) {
+			buildingRandCanvasesAndCtxs[1][i].clearRect(0, 0, buildingRandCanvasesAndCtxs[0][i].width,
+														buildingRandCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[0];
-			randCanvasesAndCtxs[0][i].style.zIndex = 6;
-		} else if (randCanvasesAndCtxs[0][i].width === 145 && randCanvasesAndCtxs[0][i].height === 165) {
-			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			buildingRandCanvasesAndCtxs[0][i].style.zIndex = 6;
+		} else if (buildingRandCanvasesAndCtxs[0][i].width === 145 && buildingRandCanvasesAndCtxs[0][i].height === 165) {
+			buildingRandCanvasesAndCtxs[1][i].clearRect(0, 0, buildingRandCanvasesAndCtxs[0][i].width,
+														buildingRandCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[1];
-			randCanvasesAndCtxs[0][i].style.zIndex=8;
-		} else if (randCanvasesAndCtxs[0][i].width === 335 && randCanvasesAndCtxs[0][i].height === 160) {
-			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			buildingRandCanvasesAndCtxs[0][i].style.zIndex=8;
+		} else if (buildingRandCanvasesAndCtxs[0][i].width === 335 && buildingRandCanvasesAndCtxs[0][i].height === 160) {
+			buildingRandCanvasesAndCtxs[1][i].clearRect(0, 0, buildingRandCanvasesAndCtxs[0][i].width,
+														buildingRandCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[2];
-			randCanvasesAndCtxs[0][i].style.zIndex = 6;
-		} else if (randCanvasesAndCtxs[0][i].width === 120 && randCanvasesAndCtxs[0][i].height === 102) {
-			randCanvasesAndCtxs[1][i].clearRect(0, 0, randCanvasesAndCtxs[0][i].width, randCanvasesAndCtxs[0][i].height);
+			buildingRandCanvasesAndCtxs[0][i].style.zIndex = 6;
+		} else if (buildingRandCanvasesAndCtxs[0][i].width === 120 && buildingRandCanvasesAndCtxs[0][i].height === 102) {
+			buildingRandCanvasesAndCtxs[1][i].clearRect(0, 0, buildingRandCanvasesAndCtxs[0][i].width,
+														buildingRandCanvasesAndCtxs[0][i].height);
 			randBuildingImg = specialBuildings[3];
-			randCanvasesAndCtxs[0][i].style.zIndex = 6;
+			buildingRandCanvasesAndCtxs[0][i].style.zIndex = 6;
 		}
 
-		let x = randCanvasesAndCtxs[0][i].width / 2 - (randBuildingImg.width*buildingScale) / 2;
-		let y = randCanvasesAndCtxs[0][i].height / 2 - (randBuildingImg.height*buildingScale) / 2;
+		let x = buildingRandCanvasesAndCtxs[0][i].width / 2 - (randBuildingImg.width*buildingScale) / 2;
+		let y = buildingRandCanvasesAndCtxs[0][i].height / 2 - (randBuildingImg.height*buildingScale) / 2;
 
-		randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
-		randCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y, 
-											randBuildingImg.width*buildingScale, randBuildingImg.height*buildingScale);
+		buildingRandCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
+		buildingRandCanvasesAndCtxs[1][i].drawImage(randBuildingImg, x, y, 
+													randBuildingImg.width*buildingScale, randBuildingImg.height*buildingScale);
 	}
 }
 
@@ -379,14 +390,14 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 
 let treeScale = 0.175;
 let treesOnSpawn = 21;
+let treeRandCanvasesAndCtxs = shuffle(treeCanvases, treeCtxs);
 function drawTrees() {
-	let randCanvasesAndCtxs = shuffle(treeCanvases, treeCtxs);
 	for (let i = 0; i < treesOnSpawn; i++) {
 		let treeImg = document.getElementById("tree");
-		let x = randCanvasesAndCtxs[0][i].width / 2 - (treeImg.width*treeScale) / 2;
-		let y = randCanvasesAndCtxs[0][i].height - (treeImg.height*treeScale);
-		randCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
-		randCanvasesAndCtxs[1][i].drawImage(treeImg, x, y, treeImg.width*treeScale, treeImg.height*treeScale);
+		let x = treeRandCanvasesAndCtxs[0][i].width / 2 - (treeImg.width*treeScale) / 2;
+		let y = treeRandCanvasesAndCtxs[0][i].height - (treeImg.height*treeScale);
+		treeRandCanvasesAndCtxs[1][i].imageSmoothingEnabled = false;
+		treeRandCanvasesAndCtxs[1][i].drawImage(treeImg, x, y, treeImg.width*treeScale, treeImg.height*treeScale);
 	}
 }
 
@@ -419,6 +430,216 @@ function toggleCanvasBorders() {
 		fountainCanvas.style.border = "none";
 	}
 }
+
+
+
+
+
+
+// TOWN CUSTOMIZATION
+let canvasCleared = [];
+for (let i = 0; i < buildingCanvasCoords.length; i++) {
+	canvasCleared[i] = false;
+}
+
+function deleteItem() {
+	window.onclick = function(e) {
+		let mouseEvent = window.event || e;
+		let mouseX = mouseEvent.pageX;
+		let mouseY = mouseEvent.pageY;
+
+		const mapDistortionX = 120;
+		const mapDistortionY = 70;
+
+		console.log(mouseX-mapDistortionX);
+		console.log(mouseY-mapDistortionY);
+
+		for (let i = 0; i < buildingCanvasCoords.length; i++) {
+			let x = buildingCanvasCoords[i][0];
+			let y = buildingCanvasCoords[i][1];
+			let width = buildingCanvasCoords[i][2];
+			let height = buildingCanvasCoords[i][3];
+			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height)) {
+				copyOfBuildingCtxs[i].clearRect(0, 0, copyOfBuildingCanvases[i].width,
+										  		copyOfBuildingCanvases[i].height);
+				canvasCleared[i] = true;
+				console.log("Hit the building canvas");
+				break;
+			}
+		}
+	}
+}
+
+function addBuilding1() {
+	window.onclick = function(e) {
+		let mouseEvent = window.event || e;
+		let mouseX = mouseEvent.pageX;
+		let mouseY = mouseEvent.pageY;
+
+		const mapDistortionX = 120;
+		const mapDistortionY = 70;
+
+		console.log(mouseX-mapDistortionX);
+		console.log(mouseY-mapDistortionY);
+
+		for (let i = 0; i < buildingCanvasCoords.length; i++) {
+			let x = buildingCanvasCoords[i][0];
+			let y = buildingCanvasCoords[i][1];
+			let width = buildingCanvasCoords[i][2];
+			let height = buildingCanvasCoords[i][3];
+			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && canvasCleared[i]) {
+				let newX = copyOfBuildingCanvases[i].width / 2 - (buildings[0].width*buildingScale) / 2;
+				let newY = copyOfBuildingCanvases[i].height / 2 - (buildings[0].height*buildingScale) / 2;
+
+				copyOfBuildingCtxs[i].imageSmoothingEnabled = false;
+				copyOfBuildingCtxs[i].drawImage(buildings[0], newX, newY, 
+										  		buildings[0].width*buildingScale, buildings[0].height*buildingScale);
+				canvasCleared[i] = false;
+				console.log("Hit the building canvas");
+				break;
+			}
+		}
+	}
+}
+
+function addBuilding2() {
+	window.onclick = function(e) {
+		let mouseEvent = window.event || e;
+		let mouseX = mouseEvent.pageX;
+		let mouseY = mouseEvent.pageY;
+
+		const mapDistortionX = 120;
+		const mapDistortionY = 70;
+
+		console.log(mouseX-mapDistortionX);
+		console.log(mouseY-mapDistortionY);
+
+		for (let i = 0; i < buildingCanvasCoords.length; i++) {
+			let x = buildingCanvasCoords[i][0];
+			let y = buildingCanvasCoords[i][1];
+			let width = buildingCanvasCoords[i][2];
+			let height = buildingCanvasCoords[i][3];
+			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && canvasCleared[i]) {
+				let newX = copyOfBuildingCanvases[i].width / 2 - (buildings[1].width*buildingScale) / 2;
+				let newY = copyOfBuildingCanvases[i].height / 2 - (buildings[1].height*buildingScale) / 2;
+
+				copyOfBuildingCtxs[i].imageSmoothingEnabled = false;
+				copyOfBuildingCtxs[i].drawImage(buildings[1], newX, newY, 
+										  		buildings[1].width*buildingScale, buildings[1].height*buildingScale);
+				canvasCleared[i] = false;
+				console.log("Hit the building canvas");
+				break;
+			}
+		}
+	}
+}
+
+function addBuilding3() {
+	window.onclick = function(e) {
+		let mouseEvent = window.event || e;
+		let mouseX = mouseEvent.pageX;
+		let mouseY = mouseEvent.pageY;
+
+		const mapDistortionX = 120;
+		const mapDistortionY = 70;
+
+		console.log(mouseX-mapDistortionX);
+		console.log(mouseY-mapDistortionY);
+
+		for (let i = 0; i < buildingCanvasCoords.length; i++) {
+			let x = buildingCanvasCoords[i][0];
+			let y = buildingCanvasCoords[i][1];
+			let width = buildingCanvasCoords[i][2];
+			let height = buildingCanvasCoords[i][3];
+			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && canvasCleared[i]) {
+				let newX = copyOfBuildingCanvases[i].width / 2 - (buildings[2].width*buildingScale) / 2;
+				let newY = copyOfBuildingCanvases[i].height / 2 - (buildings[2].height*buildingScale) / 2;
+
+				copyOfBuildingCtxs[i].imageSmoothingEnabled = false;
+				copyOfBuildingCtxs[i].drawImage(buildings[2], newX, newY, 
+										  		buildings[2].width*buildingScale, buildings[2].height*buildingScale);
+				canvasCleared[i] = false;
+				console.log("Hit the building canvas");
+				break;
+			}
+		}
+	}
+}
+
+function addBuilding4() {
+	window.onclick = function(e) {
+		let mouseEvent = window.event || e;
+		let mouseX = mouseEvent.pageX;
+		let mouseY = mouseEvent.pageY;
+
+		const mapDistortionX = 120;
+		const mapDistortionY = 70;
+
+		console.log(mouseX-mapDistortionX);
+		console.log(mouseY-mapDistortionY);
+
+		for (let i = 0; i < buildingCanvasCoords.length; i++) {
+			let x = buildingCanvasCoords[i][0];
+			let y = buildingCanvasCoords[i][1];
+			let width = buildingCanvasCoords[i][2];
+			let height = buildingCanvasCoords[i][3];
+			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && canvasCleared[i]) {
+				let newX = copyOfBuildingCanvases[i].width / 2 - (buildings[3].width*buildingScale) / 2;
+				let newY = copyOfBuildingCanvases[i].height / 2 - (buildings[3].height*buildingScale) / 2;
+
+				copyOfBuildingCtxs[i].imageSmoothingEnabled = false;
+				copyOfBuildingCtxs[i].drawImage(buildings[3], newX, newY, 
+										  		buildings[3].width*buildingScale, buildings[3].height*buildingScale);
+				canvasCleared[i] = false;
+				console.log("Hit the building canvas");
+				break;
+			}
+		}
+	}
+}
+
+function addBuilding5() {
+	window.onclick = function(e) {
+		let mouseEvent = window.event || e;
+		let mouseX = mouseEvent.pageX;
+		let mouseY = mouseEvent.pageY;
+
+		const mapDistortionX = 120;
+		const mapDistortionY = 70;
+
+		console.log(mouseX-mapDistortionX);
+		console.log(mouseY-mapDistortionY);
+
+		for (let i = 0; i < buildingCanvasCoords.length; i++) {
+			let x = buildingCanvasCoords[i][0];
+			let y = buildingCanvasCoords[i][1];
+			let width = buildingCanvasCoords[i][2];
+			let height = buildingCanvasCoords[i][3];
+			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && canvasCleared[i]) {
+				let newX = copyOfBuildingCanvases[i].width / 2 - (buildings[4].width*buildingScale) / 2;
+				let newY = copyOfBuildingCanvases[i].height / 2 - (buildings[4].height*buildingScale) / 2;
+
+				copyOfBuildingCtxs[i].imageSmoothingEnabled = false;
+				copyOfBuildingCtxs[i].drawImage(buildings[4], newX, newY, 
+										  		buildings[4].width*buildingScale, buildings[4].height*buildingScale);
+				canvasCleared[i] = false;
+				console.log("Hit the building canvas");
+				break;
+			}
+		}
+	}
+}
+
+
+
+
+
 
 //start of character animating thing
 
