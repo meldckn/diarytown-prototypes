@@ -319,8 +319,10 @@ img {
 
 #emoji {
 	font-size:25;
-	position:absolute;
-	bottom:10;
+	position:relative;
+	/*right:30;
+	bottom:60;*/
+	bottom:90;
 }
 
 .characters {

@@ -38,9 +38,9 @@ diaryEditor.style.display = 'none';
 let extraCharacterCanvasCoords = [
 	[160, 263, 50, 55],
 	[328, 263, 51, 55],
-	[927, 417, 107, 63],
+	[927, 417, 190, 63],
 	[470, 515, 30, 135],
-	[1030, 660, 45, 76]
+	[1040, 540, 75, 160]
 ];
 
 let buildingCanvasCoords = [
@@ -201,7 +201,6 @@ for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	buildingCanvases[i] = document.createElement("canvas");
 	buildingCtxs[i] = buildingCanvases[i].getContext("2d");
 	map.insertBefore(buildingCanvases[i], map.firstChild);
-	buildingCanvases[i].style.border = "1px solid red";
 	buildingCanvases[i].style.position = "absolute";
 	buildingCanvases[i].style.marginLeft = buildingCanvasCoords[i][0] + "px";
 	buildingCanvases[i].style.marginTop = buildingCanvasCoords[i][1] + "px";
@@ -249,6 +248,59 @@ function drawBuildings() {
 
 
 
+//FOUNTAIN
+let fountainsEdited = [document.getElementById("fountain1"), document.getElementById("fountain2"),
+					   document.getElementById("fountain3"), document.getElementById("fountain4"),
+					   document.getElementById("fountain5")];
+let fountainScale = 1.25;
+
+let fountainCanvas = document.createElement("canvas");
+let fountainCtx = fountainCanvas.getContext("2d");
+map.insertBefore(fountainCanvas, map.firstChild);
+fountainCanvas.style.position = "absolute";
+fountainCanvas.style.imageRendering = "pixelated";
+fountainCanvas.style.marginLeft = 240 + "px";
+fountainCanvas.style.marginTop = 375 + "px";
+fountainCanvas.style.zIndex = 3;
+fountainCanvas.width = 50*fountainScale;
+fountainCanvas.height = 50*fountainScale;
+
+let fountainImg;
+function drawFountain() {
+	fountainImg = fountainsEdited[0];
+	window.requestAnimationFrame(fountainStep);
+}
+
+let fountainFrameCounter = 0;
+let fountainFrameCount = 0;
+const maxWaitForFountainFrames = 9;
+function fountainStep() {
+	fountainFrameCount++;
+	if (fountainFrameCount < maxWaitForFountainFrames) {
+		window.requestAnimationFrame(fountainStep);
+		return;
+	}
+	fountainFrameCount = 0;
+
+	fountainImg = fountainsEdited[fountainFrameCounter];
+	fountainFrameCounter++;
+	if (fountainFrameCounter >= fountainsEdited.length) {
+		fountainFrameCounter = 0;
+	}
+
+	let x = fountainCanvas.width / 2 - (fountainImg.width*fountainScale) / 2;
+	let y = fountainCanvas.height / 2 - (fountainImg.height*fountainScale) / 2;
+	fountainCtx.imageSmoothingEnabled = false;
+	fountainCtx.clearRect(0, 0, fountainCanvas.width, fountainCanvas.height);
+	fountainCtx.drawImage(fountainImg, x, y, 
+						  fountainImg.width*fountainScale, fountainImg.height*fountainScale);
+
+	window.requestAnimationFrame(fountainStep);
+}
+
+
+
+
 //FLOWERS
 let flowersEdited = [document.getElementById("flower1"), document.getElementById("flower2"), document.getElementById("flower3")]
 
@@ -260,7 +312,6 @@ for (let i = 0; i < flowerCanvasCoords.length; i++) {
 	flowerCtxs[i] = flowerCanvases[i].getContext("2d");
 	map.insertBefore(flowerCanvases[i], map.firstChild);
 	flowerCanvases[i].style.position = "absolute";
-	flowerCanvases[i].style.border = "1px solid purple";
 	flowerCanvases[i].style.imageRendering = "pixelated";
 	flowerCanvases[i].style.marginLeft = flowerCanvasCoords[i][0] + "px";
 	flowerCanvases[i].style.marginTop = flowerCanvasCoords[i][1] + "px";
@@ -276,24 +327,24 @@ let flowerRandCanvasesAndCtxs = shuffle(flowerCanvases, flowerCtxs);
 
 function drawFlowers() {
 	flowerImg = flowersEdited[0];
-	window.requestAnimationFrame(step);
+	window.requestAnimationFrame(flowerStep);
 }
 
-let frameCounter = 0;
-let frameCount = 0;
-const maxWaitForFrames = 30;
-function step() {
-	frameCount++;
-	if (frameCount < maxWaitForFrames) {
-		window.requestAnimationFrame(step);
+let flowerFrameCounter = 0;
+let flowerFrameCount = 0;
+const maxWaitForFlowerFrames = 33;
+function flowerStep() {
+	flowerFrameCount++;
+	if (flowerFrameCount < maxWaitForFlowerFrames) {
+		window.requestAnimationFrame(flowerStep);
 		return;
 	}
-	frameCount = 0;
+	flowerFrameCount = 0;
 
-	flowerImg = flowersEdited[frameCounter];
-	frameCounter++;
-	if (frameCounter >= flowersEdited.length) {
-		frameCounter = 0;
+	flowerImg = flowersEdited[flowerFrameCounter];
+	flowerFrameCounter++;
+	if (flowerFrameCounter >= flowersEdited.length) {
+		flowerFrameCounter = 0;
 	}
 
 	for (i = 0; i < flowersOnSpawn; i++) {
@@ -304,7 +355,7 @@ function step() {
 		flowerRandCanvasesAndCtxs[1][i].drawImage(flowerImg, x, y, 
 												  flowerImg.width*flowerScale, flowerImg.height*flowerScale);
 	}
-	window.requestAnimationFrame(step);
+	window.requestAnimationFrame(flowerStep);
 }
 
 
@@ -318,7 +369,6 @@ for (let i = 0; i < treeCanvasCoords.length; i++) {
 	treeCtxs[i] = treeCanvases[i].getContext("2d");
 	map.insertBefore(treeCanvases[i], map.firstChild);
 	treeCanvases[i].style.position = "absolute";
-	treeCanvases[i].style.border = "1px solid green";
 	treeCanvases[i].style.imageRendering = "pixelated";
 	treeCanvases[i].style.marginLeft = treeCanvasCoords[i][0] + "px";
 	treeCanvases[i].style.marginTop = treeCanvasCoords[i][1] + "px";
@@ -347,16 +397,6 @@ function drawTrees() {
 function toggleCanvasBorders() {
 	if (document.getElementById("checkbox").checked) {
 		for (let i = 0; i < buildingCanvases.length; i++) {
-			buildingCanvases[i].style.border = "none";
-		}
-		for (let i = 0; i < flowerCanvases.length; i++) {
-			flowerCanvases[i].style.border = "none";
-		}
-		for (let i = 0; i < treeCanvases.length; i++) {
-			treeCanvases[i].style.border = "none";
-		}
-	} else if (!(document.getElementById("checkbox").checked)) {
-		for (let i = 0; i < buildingCanvases.length; i++) {
 			buildingCanvases[i].style.border = "1px solid red";
 		}
 		for (let i = 0; i < flowerCanvases.length; i++) {
@@ -365,6 +405,18 @@ function toggleCanvasBorders() {
 		for (let i = 0; i < treeCanvases.length; i++) {
 			treeCanvases[i].style.border = "1px solid green";
 		}
+		fountainCanvas.style.border = "1px solid blue";
+	} else if (!(document.getElementById("checkbox").checked)) {
+		for (let i = 0; i < buildingCanvases.length; i++) {
+			buildingCanvases[i].style.border = "none";
+		}
+		for (let i = 0; i < flowerCanvases.length; i++) {
+			flowerCanvases[i].style.border = "none";
+		}
+		for (let i = 0; i < treeCanvases.length; i++) {
+			treeCanvases[i].style.border = "none";
+		}
+		fountainCanvas.style.border = "none";
 	}
 }
 
@@ -870,6 +922,8 @@ startButton.onclick = function() {
 		drawBuildings();
 		//draws flowers
 		drawFlowers();
+		//draws fountain
+		drawFountain();
 		//draws trees
 		drawTrees();
 		//draw extra characters
