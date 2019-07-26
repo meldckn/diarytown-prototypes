@@ -13,6 +13,7 @@ let slider = document.getElementById('myRange');
 let music = document.getElementById('music');
 let writeNewDiary = document.getElementById('writeNewDiary');
 let diaryEditor = document.getElementById('diaryEditor');
+let fourthBackButton = document.getElementById('fourthBackButton');
 
 //assigning classNames
 map.className = "map";
@@ -23,6 +24,7 @@ optionsMenu.className = "optionsMenu";
 aboutMenu.className = "aboutMenu";
 writeNewDiary.className = "writeNewDiary";
 diaryEditor.className = "diaryEditor";
+fourthBackButton.className = "fourthBackButton";
 
 //hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
@@ -30,6 +32,7 @@ optionsMenu.style.display = 'none';
 aboutMenu.style.display = 'none';
 thirdBackButtonContainer.style.display = 'none';
 diaryEditor.style.display = 'none';
+fourthBackButton.style.display = 'none';
 
 
 //Akhil's Building management code below:
@@ -1263,6 +1266,8 @@ startButton.onclick = function() {
 		//gets rid of options Menu screen
 		window.setTimeout(function(){
 			map.style.display = 'none';
+			thirdBackButton.style.display = 'none';
+			fourthBackButton.style.display = 'block';
 		}, 500)
 
 		//transition in the diary Editor
@@ -1285,7 +1290,47 @@ startButton.onclick = function() {
 
 		runDiaryEditor();
 		//stops the setInterval function
-		clearInterval(refresh);
+
+		fourthBackButton.onclick = function() {
+
+			anime({
+				targets:'.diaryEditor',
+				opacity:0,
+				delay:200	
+			})
+			//bounces the map left to disappear
+			anime({
+				targets:'.diaryEditor',
+				translateY:0,
+				duration: 1000
+			})
+			//gets rid of map screen
+			window.setTimeout(function(){
+				diaryEditor.style.display = 'none';
+				fourthBackButton.style.display = 'none';
+
+			}, 500)
+
+			//transition in the Start Menu
+			window.setTimeout(function(){
+				map.style.display = 'block'
+				map.style.opactiy = 0;
+				thirdBackButton.style.display = 'block';
+				//fades in the StartMenu
+				anime({
+					targets:'.map',
+					opacity:1,
+					delay:200			
+				})
+				//bounces the StartMenu back right to appear
+				anime({
+					targets:'.map',
+					translateY: 75,
+					duration:1000
+				})
+			},500)
+
+		}
 
 	}
 }
@@ -1299,27 +1344,14 @@ function runDiaryEditor() {
 function openCategory(categoryName) {
 	console.log(document.getElementById(categoryName).style.display === "none", document.getElementById(categoryName).style.display === "none");
 	
-	if( getComputedStyle(document.getElementById(categoryName), null).display === "none" )
+	if( getComputedStyle(document.getElementById(categoryName), null).display === "block" )
 	{		
-		// var i, tabcontent, tablinks;
-		// tabcontent = document.getElementsByClassName("tabcontent");
-		// for (i = 0; i < tabcontent.length; i++) {
-		// 	tabcontent[i].style.display = "none";
-		// }
-
-		// tablinks = document.getElementsByClassName("tablinks");
-		// for (i = 0; i < tablinks.length; i++) {
-		// 	tablinks[i].className = tablinks[i].className.replace(" active", "");
-		// }
-		
-		document.getElementById(categoryName).style.display = "block";
-		//document.getElementById(categoryName).className += " active";
+		document.getElementById(categoryName).style.display = "none";
 	}
 
 	else
 	{
-		document.getElementById(categoryName).style.display = "none";
-		//document.getElementById(categoryName).className += " active";
+		document.getElementById(categoryName).style.display = "block";
 	}
 }
 
