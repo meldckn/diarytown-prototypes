@@ -444,15 +444,17 @@ let canvasCleared = [];
 for (let i = 0; i < buildingCanvasCoords.length; i++) {
 	canvasCleared[i] = false;
 }
+let background = document.getElementById('background');
 
 function deleteItem() {
 	window.onclick = function(e) {
 		let mouseEvent = window.event || e;
-		let mouseX = mouseEvent.pageX;
-		let mouseY = mouseEvent.pageY;
+		let mouseX = mouseEvent.clientX;
+		let mouseY = mouseEvent.clientY;
+		let position = background.getBoundingClientRect();
 
-		const mapDistortionX = 120;
-		const mapDistortionY = 70;
+		let mapDistortionX = position.left;
+		let mapDistortionY = position.top;
 
 		console.log(mouseX-mapDistortionX);
 		console.log(mouseY-mapDistortionY);
@@ -477,11 +479,12 @@ function deleteItem() {
 function addBuilding1() {
 	window.onclick = function(e) {
 		let mouseEvent = window.event || e;
-		let mouseX = mouseEvent.pageX;
-		let mouseY = mouseEvent.pageY;
+		let mouseX = mouseEvent.clientX;
+		let mouseY = mouseEvent.clientY;
+		let position = background.getBoundingClientRect();
 
-		const mapDistortionX = 120;
-		const mapDistortionY = 70;
+		let mapDistortionX = position.left;
+		let mapDistortionY = position.top;
 
 		console.log(mouseX-mapDistortionX);
 		console.log(mouseY-mapDistortionY);
@@ -510,11 +513,12 @@ function addBuilding1() {
 function addBuilding2() {
 	window.onclick = function(e) {
 		let mouseEvent = window.event || e;
-		let mouseX = mouseEvent.pageX;
-		let mouseY = mouseEvent.pageY;
+		let mouseX = mouseEvent.clientX;
+		let mouseY = mouseEvent.clientY;
+		let position = background.getBoundingClientRect();
 
-		const mapDistortionX = 120;
-		const mapDistortionY = 70;
+		let mapDistortionX = position.left;
+		let mapDistortionY = position.top;
 
 		console.log(mouseX-mapDistortionX);
 		console.log(mouseY-mapDistortionY);
@@ -543,11 +547,12 @@ function addBuilding2() {
 function addBuilding3() {
 	window.onclick = function(e) {
 		let mouseEvent = window.event || e;
-		let mouseX = mouseEvent.pageX;
-		let mouseY = mouseEvent.pageY;
+		let mouseX = mouseEvent.clientX;
+		let mouseY = mouseEvent.clientY;
+		let position = background.getBoundingClientRect();
 
-		const mapDistortionX = 120;
-		const mapDistortionY = 70;
+		let mapDistortionX = position.left;
+		let mapDistortionY = position.top;
 
 		console.log(mouseX-mapDistortionX);
 		console.log(mouseY-mapDistortionY);
@@ -576,11 +581,12 @@ function addBuilding3() {
 function addBuilding4() {
 	window.onclick = function(e) {
 		let mouseEvent = window.event || e;
-		let mouseX = mouseEvent.pageX;
-		let mouseY = mouseEvent.pageY;
+		let mouseX = mouseEvent.clientX;
+		let mouseY = mouseEvent.clientY;
+		let position = background.getBoundingClientRect();
 
-		const mapDistortionX = 120;
-		const mapDistortionY = 70;
+		let mapDistortionX = position.left;
+		let mapDistortionY = position.top;
 
 		console.log(mouseX-mapDistortionX);
 		console.log(mouseY-mapDistortionY);
@@ -609,11 +615,12 @@ function addBuilding4() {
 function addBuilding5() {
 	window.onclick = function(e) {
 		let mouseEvent = window.event || e;
-		let mouseX = mouseEvent.pageX;
-		let mouseY = mouseEvent.pageY;
+		let mouseX = mouseEvent.clientX;
+		let mouseY = mouseEvent.clientY;
+		let position = background.getBoundingClientRect();
 
-		const mapDistortionX = 120;
-		const mapDistortionY = 70;
+		let mapDistortionX = position.left;
+		let mapDistortionY = position.top;
 
 		console.log(mouseX-mapDistortionX);
 		console.log(mouseY-mapDistortionY);
