@@ -62,9 +62,28 @@ var Diary = ( function() {
 		return actions_db.findOne({id: id});
 	}
 
+	// Return an array of phrases whose 'text' property contains an 
+	// exact match of the given text parameter (can't be a substring)
 	function getActionByText (text) {
-		return actions_db.find({ 'text' : { '$contains' : text} });
+		return actions_db.find({ 'text' : { '$contains' : text }});
 	}
+
+	// Return an array of phrase objects whose 'text' property (an array of strings)
+	// contains the substring given by the parameter, text
+	function getActionBySubstring (text) {
+
+		// Where query - filters data by given boolean function
+		return actions_db.where( function(phrase) {
+
+			// Construct a new array of alt text strings for this phrase, 
+			// filtered by whether or not it contains the text parameter as a substring
+			let filtered = phrase["text"].filter(s => s.includes(text));
+
+			// If there is anything in this phrase's filtered array, return true
+			return filtered.length ? true : false; 
+		});
+	}
+
 
 	// Doesn't work - max call stack size exceeded
 	function printActions () {
@@ -119,7 +138,8 @@ var Diary = ( function() {
  	return { // Public functions: 
  		init : init,
  		addToDiary : addToDiary,
- 		getActionByText : getActionByText
+ 		getActionByText : getActionByText,
+ 		getActionBySubstring : getActionBySubstring
  	}
 
 	function submitEntry() {
