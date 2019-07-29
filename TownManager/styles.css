@@ -60,7 +60,6 @@ button:hover {
 }
 #optionsNAbout {
 	display:inline-block;
-	text-align:center;
 	position:relative;
 }
 #options {
@@ -69,7 +68,7 @@ button:hover {
 }
 #about{
 	font-size:11;
-	margin-right:15px;
+	margin-right:16px;
 }
 .startMenu {
 	width:75%;

@@ -14,6 +14,8 @@ let music = document.getElementById('music');
 let writeNewDiary = document.getElementById('writeNewDiary');
 let diaryEditor = document.getElementById('diaryEditor');
 let fourthBackButton = document.getElementById('fourthBackButton');
+let creatorButtons = document.getElementById('customize');
+let writeNewDiaryContainer = document.getElementById('writeNewDiaryContainer');
 
 //assigning classNames
 map.className = "map";
@@ -25,6 +27,8 @@ aboutMenu.className = "aboutMenu";
 writeNewDiary.className = "writeNewDiary";
 diaryEditor.className = "diaryEditor";
 fourthBackButton.className = "fourthBackButton";
+creatorButtons.className = "creatorButtons";
+writeNewDiaryContainer.className = 'writeNewDiaryContainer';
 
 //hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
@@ -33,6 +37,8 @@ aboutMenu.style.display = 'none';
 thirdBackButtonContainer.style.display = 'none';
 diaryEditor.style.display = 'none';
 fourthBackButton.style.display = 'none';
+creatorButtons.style.display = 'none';
+writeNewDiaryContainer.style.display = 'none';
 
 
 //Akhil's Building management code below:
@@ -1117,13 +1123,15 @@ startButton.onclick = function() {
 	//gets rid of title screen
 	window.setTimeout(function(){
 		startMenu.style.display= 'none';
-		thirdBackButtonContainer.style.display = 'block';
 	}, 500)
 
 	
 	//transitions in the town map
 	window.setTimeout(function(){
-		map.style.display = 'block'
+		map.style.display = 'block';
+		creatorButtons.style.display = 'block';
+		thirdBackButtonContainer.style.display = 'block';
+		writeNewDiaryContainer.style.display = 'block';
 		map.style.opacity = 0;
 		//fades in the map
 		anime({
@@ -1234,6 +1242,8 @@ startButton.onclick = function() {
 		window.setTimeout(function(){
 			map.style.display = 'none';
 			thirdBackButtonContainer.style.display = 'none';
+			creatorButtons.style.display = 'none';
+			writeNewDiaryContainer.style.display = 'none';
 
 		}, 500)
 
@@ -1275,12 +1285,14 @@ startButton.onclick = function() {
 		window.setTimeout(function(){
 			map.style.display = 'none';
 			thirdBackButton.style.display = 'none';
-			fourthBackButton.style.display = 'block';
+			creatorButtons.style.display = 'none';
+			writeNewDiaryContainer.style.display = 'none';
 		}, 500)
 
 		//transition in the diary Editor
 		window.setTimeout(function(){
 			diaryEditor.style.display = 'block'
+			fourthBackButton.style.display = 'block';
 			diaryEditor.style.opactiy = 0;
 			//fades in the diary Editor
 			anime({
@@ -1324,6 +1336,8 @@ startButton.onclick = function() {
 				map.style.display = 'block'
 				map.style.opactiy = 0;
 				thirdBackButton.style.display = 'block';
+				creatorButtons.style.display = 'block';
+				writeNewDiaryContainer.style.display = 'block';
 				//fades in the StartMenu
 				anime({
 					targets:'.map',
