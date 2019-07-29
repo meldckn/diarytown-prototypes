@@ -62,6 +62,10 @@ var Diary = ( function() {
 		return actions_db.findOne({id: id});
 	}
 
+	function getActionByText (text) {
+		return actions_db.find({ 'text' : { '$contains' : text} });
+	}
+
 	// Doesn't work - max call stack size exceeded
 	function printActions () {
 		console.log(getAllActions());
@@ -114,7 +118,8 @@ var Diary = ( function() {
 
  	return { // Public functions: 
  		init : init,
- 		addToDiary : addToDiary
+ 		addToDiary : addToDiary,
+ 		getActionByText : getActionByText
  	}
 
 	function submitEntry() {
