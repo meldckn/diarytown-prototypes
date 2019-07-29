@@ -456,8 +456,8 @@ function deleteItem() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -465,16 +465,17 @@ function deleteItem() {
 			let width = buildingCanvasCoords[i][2];
 			let height = buildingCanvasCoords[i][3];
 			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
-				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height)) {
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && !canvasCleared[i]) {
 				copyOfBuildingCtxs[i].clearRect(0, 0, copyOfBuildingCanvases[i].width,
 										  		copyOfBuildingCanvases[i].height);
 				canvasCleared[i] = true;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
 	}
 }
+
 
 function addBuilding1() {
 	window.onclick = function(e) {
@@ -486,8 +487,8 @@ function addBuilding1() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -503,7 +504,7 @@ function addBuilding1() {
 				copyOfBuildingCtxs[i].drawImage(buildings[0], newX, newY, 
 										  		buildings[0].width*buildingScale, buildings[0].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -520,8 +521,8 @@ function addBuilding2() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -537,7 +538,7 @@ function addBuilding2() {
 				copyOfBuildingCtxs[i].drawImage(buildings[1], newX, newY, 
 										  		buildings[1].width*buildingScale, buildings[1].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -554,8 +555,8 @@ function addBuilding3() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -571,7 +572,7 @@ function addBuilding3() {
 				copyOfBuildingCtxs[i].drawImage(buildings[2], newX, newY, 
 										  		buildings[2].width*buildingScale, buildings[2].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -588,8 +589,8 @@ function addBuilding4() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -605,7 +606,7 @@ function addBuilding4() {
 				copyOfBuildingCtxs[i].drawImage(buildings[3], newX, newY, 
 										  		buildings[3].width*buildingScale, buildings[3].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -622,8 +623,8 @@ function addBuilding5() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -639,7 +640,7 @@ function addBuilding5() {
 				copyOfBuildingCtxs[i].drawImage(buildings[4], newX, newY, 
 										  		buildings[4].width*buildingScale, buildings[4].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
