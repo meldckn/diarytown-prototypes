@@ -48,7 +48,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji : "📺"
 	},{
 		id : "went-home",
 		text : [ "went home" ],
@@ -58,7 +59,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji : "🏠"
 	},{
 		id : "vacationed",
 		text : [ "went on a holiday", "went on a day trip", "went on vacation", "went on a vacation to #place" ] ,
@@ -68,7 +70,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji : "✈️"
 	},{
 		id : "adventured",
 		text : [ "went on a journey", "had an adventure" ] ,

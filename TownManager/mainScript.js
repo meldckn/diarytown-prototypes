@@ -127,6 +127,10 @@ let treeCanvasCoords = [
 ];
 
 
+
+
+
+
 //SHUFFLE FUNCTION
 function shuffle(a, b) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -144,6 +148,8 @@ function singleShuffle(a) {
     }
     return a;
 }
+
+
 
 
 
@@ -194,6 +200,8 @@ function drawCharacters() {
 		c.height = extraCharacterCanvasCoords[i][3];*/
 	}
 }
+
+
 
 
 
@@ -268,6 +276,8 @@ function drawBuildings() {
 
 
 
+
+
 //FOUNTAIN
 let fountainsEdited = [document.getElementById("fountain1"), document.getElementById("fountain2"),
 					   document.getElementById("fountain3"), document.getElementById("fountain4"),
@@ -317,6 +327,8 @@ function fountainStep() {
 
 	window.requestAnimationFrame(fountainStep);
 }
+
+
 
 
 
@@ -377,6 +389,8 @@ function flowerStep() {
 	}
 	window.requestAnimationFrame(flowerStep);
 }
+
+
 
 
 
@@ -658,6 +672,10 @@ function addBuilding5() {
 
 
 
+
+
+
+
 //start of character animating thing
 
 //storage of image location addresses for the main character frames
@@ -728,11 +746,17 @@ function drawHero() {
 }
 
 let emoji = document.createElement('p');
+let phraseForm = document.getElementById('phraseForm');
 function drawEmoji() {
 	emoji.id = "emoji";
 	hero.appendChild(emoji);
-	emoji.innerText = "😈";
-	//emoji.innerText = "🎒";
+	for (let i = 0; i < phrases.length; i++) {
+		for (let j = 0; j < phrases[i].text.length; j++) {
+			if (phraseForm.value === phrases[i].text[j]) {
+				emoji.innerText	= phrases[i].emoji;
+			}
+		}
+	}
 }
 
 //collision detection function, goes through every possible x value and defines y value boundaries
@@ -1157,7 +1181,7 @@ startButton.onclick = function() {
 		//draws hero
 		drawHero();
 		//draws emojis above hero
-		drawEmoji();
+		//drawEmoji();
 		//draws buildings
 		drawBuildings();
 		//draws flowers
