@@ -663,7 +663,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji:"📆"
 	},{
 		id : "took-walk",
 		text : [ "took a walk", "took a walk to nowhere in particular", "took a drive" ],
@@ -673,7 +674,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "👟";
 	},{
 		id : "cared-for",
 		text : [ "took care of someone" ],
@@ -683,7 +685,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "💗";
 	},{
 		id : "self-care",
 		text : [ "took care of myself", "did self-care" ],
@@ -703,7 +706,8 @@ var phrases = [
 		relatedPhrases : [ "guilty-pleasure", "slept-in", "self-care" ],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🤗";
 	},{
 		id : "guilty-pleasure",
 		text : [ "indulged in a guilty pleasure" ],
