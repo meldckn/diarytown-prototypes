@@ -84,7 +84,7 @@
 				<button onclick="addBuilding3()"><img style="width:85;height:60;z-index:5;" src="assets/fireRed4Edited.png"></button>
 				<button onclick="addBuilding4()"><img style="width:85;height:60;z-index:5;" src="assets/fireRed5Edited.png"></button>
 				<button onclick="addBuilding5()"><img style="width:85;height:60;z-index:5;" src="assets/fireRed7Edited.png"></button>
-				<input type="text" id="phraseForm" onchange="drawEmoji()"/>
+				<input type="text" id="phraseForm" onchange="drawEmoji()">
 			</div></center>
 			
 			<br></br>
@@ -111,7 +111,6 @@
   							<button class="tablinks" onclick="openCategory('Modifiers')">Modifiers</button> 
   						</div> 
   						<div class="all-tab-content">
-  							<div id="search-bar"></div>
 							<div id="Actions-Events" class="tabcontent">
 								<div class="nested-tabs">
 									<button class="tablinks" onclick="openCategory('Self')">Self</button>
@@ -133,10 +132,11 @@
     		    	</div>
 			
     		    	<div class="diary-page page-right">
-    		    	    
-    		    	    	<div id="diary" class="sortable"><button type="submit">Submit Entry</button>
-    		    	       		 <div id="date-container"><button id="dateline"></button></div>
-
+    		    		<div id="search-bar">
+    		    			<input type="text" id="searchInput" onkeyup="search()" placeholder="Search for an action...">
+    		    		</div>
+    		    	    <div id="diary" class="sortable"><button type="submit">Submit Entry</button>
+    		    	    	<div id="date-container"><button id="dateline"></button></div>
     		    	    </div>
     		    	</div>
     			</div>
