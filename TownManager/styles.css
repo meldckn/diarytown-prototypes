@@ -82,7 +82,7 @@ button:hover {
 	text-align:center;
 	position:relative;
 	border:5px solid white;
-	margin-top:170;
+	margin-top:3%;
 	width:350;
 	height:600px;
 	margin-left:auto;
@@ -94,11 +94,11 @@ button:hover {
 	text-align:justify;
 	position:relative;
 	border:5px solid white;
-	margin-top:170;
+	margin-top:0%;
 	margin-left:auto;
 	margin-right:auto;
 	width:700;
-	height:600px;
+	height:810px;
 }
 #description {
 	font-size:15;
