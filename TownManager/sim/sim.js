@@ -97,44 +97,22 @@ for (let charPair of getAllCharacterPairs(gameDB)) {
 
 /// TIE IT ALL TOGETHER
 
-let simActionHandlers = [];
-
-function handleSimAction(simAction) {
-  for (let handler of simActionHandlers) {
-    handler(simAction);
-  }
-}
-
-// Commit an action with full bindings to the DB as an event, returing an updated DB.
-function runActionWithBindings(db, action, bindings) {
-  console.log('Running action of type: ' + action.type + '\nwith bindings: ' + JSON.stringify(bindings));
-  let event = realizeEvent(action, bindings);
-  console.log(event);
-  db = addEvent(db, event);
-  handleSimAction({action: action, bindings: bindings, event: event}); // FIXME impure, should be elsewhere
-  return db;
-}
-
-// Given the DB and a list of action specs, pick a random possible action and perform it,
-// returning an updated DB.
-function runRandomAction(db, allActions){
+// Given the DB and a list of action specs, return a random possible action with bindings.
+function getRandomAction(db, allActions){
   let allPossible = possibleActions(db, allActions);
-  let possible = randNth(allPossible);
-  return runActionWithBindings(db, possible.action, possible.bindings);
+  return randNth(allPossible);
 }
 
 // Like `runRandomAction`, but assigns an equal selection weight to all valid action types.
-function runRandomActionByType(db, allActions){
+function getRandomActionByType(db, allActions){
   let allPossibleByType = possibleActionsByType(db, allActions);
   let type = randNth(Object.keys(allPossibleByType));
-  let possible = randNth(allPossibleByType[type]);
-  return runActionWithBindings(db, possible.action, possible.bindings);
+  return randNth(allPossibleByType[type]);
 }
 
 // Given the DB, an action, and a set of partial bindings for this action,
-// find a valid variant of the action with the given partial bindings and perform it,
-// returning an updated DB.
-function runActionWithPartialBindings(db, action, partialBindings) {
+// return a full set of compatible bindings for the action.
+function getFullBindings(db, action, partialBindings) {
   let boundLvars = Object.keys(partialBindings);
   let unboundLvars = action.lvars.filter(l => boundLvars.indexOf(l) === -1);
   let query = '[:find ' + unboundLvars.map(l => '?' + l).join(' ');
@@ -155,7 +133,17 @@ function runActionWithPartialBindings(db, action, partialBindings) {
   for (let i = 0; i < unboundLvars.length; i++) {
     bindings[unboundLvars[i]] = result[i];
   }
-  return runActionWithBindings(db, action, bindings);
+  return bindings;
+}
+
+/// set up handler infrastructure
+
+let simActionHandlers = [];
+
+function handleSimAction(simAction) {
+  for (let handler of simActionHandlers) {
+    handler(simAction);
+  }
 }
 
 /// return Sim singleton object
@@ -166,15 +154,26 @@ return {
   getDB: function() {
     return gameDB;
   },
+  // Perform the specified action with the specified bindings.
   runActionWithBindings: function(action, bindings) {
-    gameDB = runActionWithBindings(gameDB, action, bindings);
+    console.log('Running action of type: ' + action.type + '\nwith bindings: ' + JSON.stringify(bindings));
+    let event = realizeEvent(action, bindings);
+    console.log(event);
+    gameDB = addEvent(gameDB, event);
+    handleSimAction({action: action, bindings: bindings, event: event});
   },
+  // Perform a variant of the specified action with the specified partial bindings.
   runActionWithPartialBindings: function(action, partialBindings) {
-    gameDB = runActionWithPartialBindings(gameDB, action, partialBindings);
+    let bindings = getFullBindings(gameDB, action, partialBindings);
+    this.runActionWithBindings(action, bindings);
   },
-  runRandomActionByType: function() {
-    gameDB = runRandomActionByType(gameDB, allActions);
+  // Perform a random possible action.
+  runRandomAction: function() {
+    let possible = getRandomActionByType(gameDB, allActions);
+    this.runActionWithBindings(possible.action, possible.bindings);
   },
+  // Register an action handler function to be called whenever a simulation action is performed.
+  // The action handler will receive a single argument: an object with properties {action, bindings, event}.
   registerActionHandler: function(handler) {
     simActionHandlers.push(handler);
   }
