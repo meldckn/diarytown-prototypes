@@ -14,6 +14,8 @@ let music = document.getElementById('music');
 let writeNewDiary = document.getElementById('writeNewDiary');
 let diaryEditor = document.getElementById('diaryEditor');
 let fourthBackButton = document.getElementById('fourthBackButton');
+let creatorButtons = document.getElementById('customize');
+let writeNewDiaryContainer = document.getElementById('writeNewDiaryContainer');
 
 //assigning classNames
 map.className = "map";
@@ -25,6 +27,8 @@ aboutMenu.className = "aboutMenu";
 writeNewDiary.className = "writeNewDiary";
 diaryEditor.className = "diaryEditor";
 fourthBackButton.className = "fourthBackButton";
+creatorButtons.className = "creatorButtons";
+writeNewDiaryContainer.className = 'writeNewDiaryContainer';
 
 //hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
@@ -33,6 +37,8 @@ aboutMenu.style.display = 'none';
 thirdBackButtonContainer.style.display = 'none';
 diaryEditor.style.display = 'none';
 fourthBackButton.style.display = 'none';
+creatorButtons.style.display = 'none';
+writeNewDiaryContainer.style.display = 'none';
 
 
 //Akhil's Building management code below:
@@ -121,6 +127,10 @@ let treeCanvasCoords = [
 ];
 
 
+
+
+
+
 //SHUFFLE FUNCTION
 function shuffle(a, b) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -138,6 +148,8 @@ function singleShuffle(a) {
     }
     return a;
 }
+
+
 
 
 
@@ -188,6 +200,8 @@ function drawCharacters() {
 		c.height = extraCharacterCanvasCoords[i][3];*/
 	}
 }
+
+
 
 
 
@@ -262,6 +276,8 @@ function drawBuildings() {
 
 
 
+
+
 //FOUNTAIN
 let fountainsEdited = [document.getElementById("fountain1"), document.getElementById("fountain2"),
 					   document.getElementById("fountain3"), document.getElementById("fountain4"),
@@ -311,6 +327,8 @@ function fountainStep() {
 
 	window.requestAnimationFrame(fountainStep);
 }
+
+
 
 
 
@@ -371,6 +389,8 @@ function flowerStep() {
 	}
 	window.requestAnimationFrame(flowerStep);
 }
+
+
 
 
 
@@ -456,8 +476,8 @@ function deleteItem() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -465,16 +485,17 @@ function deleteItem() {
 			let width = buildingCanvasCoords[i][2];
 			let height = buildingCanvasCoords[i][3];
 			if ((mouseX-mapDistortionX > x && mouseX-mapDistortionX < x+width) 
-				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height)) {
+				&& (mouseY-mapDistortionY > y && mouseY-mapDistortionY < y+height) && !canvasCleared[i]) {
 				copyOfBuildingCtxs[i].clearRect(0, 0, copyOfBuildingCanvases[i].width,
 										  		copyOfBuildingCanvases[i].height);
 				canvasCleared[i] = true;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
 	}
 }
+
 
 function addBuilding1() {
 	window.onclick = function(e) {
@@ -486,8 +507,8 @@ function addBuilding1() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -503,7 +524,7 @@ function addBuilding1() {
 				copyOfBuildingCtxs[i].drawImage(buildings[0], newX, newY, 
 										  		buildings[0].width*buildingScale, buildings[0].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -520,8 +541,8 @@ function addBuilding2() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -537,7 +558,7 @@ function addBuilding2() {
 				copyOfBuildingCtxs[i].drawImage(buildings[1], newX, newY, 
 										  		buildings[1].width*buildingScale, buildings[1].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -554,8 +575,8 @@ function addBuilding3() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -571,7 +592,7 @@ function addBuilding3() {
 				copyOfBuildingCtxs[i].drawImage(buildings[2], newX, newY, 
 										  		buildings[2].width*buildingScale, buildings[2].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -588,8 +609,8 @@ function addBuilding4() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -605,7 +626,7 @@ function addBuilding4() {
 				copyOfBuildingCtxs[i].drawImage(buildings[3], newX, newY, 
 										  		buildings[3].width*buildingScale, buildings[3].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
@@ -622,8 +643,8 @@ function addBuilding5() {
 		let mapDistortionX = position.left;
 		let mapDistortionY = position.top;
 
-		console.log(mouseX-mapDistortionX);
-		console.log(mouseY-mapDistortionY);
+		//console.log(mouseX-mapDistortionX);
+		//console.log(mouseY-mapDistortionY);
 
 		for (let i = 0; i < buildingCanvasCoords.length; i++) {
 			let x = buildingCanvasCoords[i][0];
@@ -639,12 +660,16 @@ function addBuilding5() {
 				copyOfBuildingCtxs[i].drawImage(buildings[4], newX, newY, 
 										  		buildings[4].width*buildingScale, buildings[4].height*buildingScale);
 				canvasCleared[i] = false;
-				console.log("Hit the building canvas");
+				//console.log("Hit the building canvas");
 				break;
 			}
 		}
 	}
 }
+
+
+
+
 
 
 
@@ -721,11 +746,17 @@ function drawHero() {
 }
 
 let emoji = document.createElement('p');
+let phraseForm = document.getElementById('phraseForm');
 function drawEmoji() {
 	emoji.id = "emoji";
 	hero.appendChild(emoji);
-	emoji.innerText = "😈";
-	//emoji.innerText = "🎒";
+	for (let i = 0; i < phrases.length; i++) {
+		for (let j = 0; j < phrases[i].text.length; j++) {
+			if (phraseForm.value === phrases[i].text[j]) {
+				emoji.innerText	= phrases[i].emoji;
+			}
+		}
+	}
 }
 
 //collision detection function, goes through every possible x value and defines y value boundaries
@@ -1116,13 +1147,15 @@ startButton.onclick = function() {
 	//gets rid of title screen
 	window.setTimeout(function(){
 		startMenu.style.display= 'none';
-		thirdBackButtonContainer.style.display = 'block';
 	}, 500)
 
 	
 	//transitions in the town map
 	window.setTimeout(function(){
-		map.style.display = 'block'
+		map.style.display = 'block';
+		creatorButtons.style.display = 'block';
+		thirdBackButtonContainer.style.display = 'block';
+		writeNewDiaryContainer.style.display = 'block';
 		map.style.opacity = 0;
 		//fades in the map
 		anime({
@@ -1148,7 +1181,7 @@ startButton.onclick = function() {
 		//draws hero
 		drawHero();
 		//draws emojis above hero
-		drawEmoji();
+		//drawEmoji();
 		//draws buildings
 		drawBuildings();
 		//draws flowers
@@ -1233,6 +1266,8 @@ startButton.onclick = function() {
 		window.setTimeout(function(){
 			map.style.display = 'none';
 			thirdBackButtonContainer.style.display = 'none';
+			creatorButtons.style.display = 'none';
+			writeNewDiaryContainer.style.display = 'none';
 
 		}, 500)
 
@@ -1274,12 +1309,14 @@ startButton.onclick = function() {
 		window.setTimeout(function(){
 			map.style.display = 'none';
 			thirdBackButton.style.display = 'none';
-			fourthBackButton.style.display = 'block';
+			creatorButtons.style.display = 'none';
+			writeNewDiaryContainer.style.display = 'none';
 		}, 500)
 
 		//transition in the diary Editor
 		window.setTimeout(function(){
 			diaryEditor.style.display = 'block'
+			fourthBackButton.style.display = 'block';
 			diaryEditor.style.opactiy = 0;
 			//fades in the diary Editor
 			anime({
@@ -1323,6 +1360,8 @@ startButton.onclick = function() {
 				map.style.display = 'block'
 				map.style.opactiy = 0;
 				thirdBackButton.style.display = 'block';
+				creatorButtons.style.display = 'block';
+				writeNewDiaryContainer.style.display = 'block';
 				//fades in the StartMenu
 				anime({
 					targets:'.map',

@@ -60,7 +60,6 @@ button:hover {
 }
 #optionsNAbout {
 	display:inline-block;
-	text-align:center;
 	position:relative;
 }
 #options {
@@ -69,7 +68,7 @@ button:hover {
 }
 #about{
 	font-size:11;
-	margin-right:15px;
+	margin-right:16px;
 }
 .startMenu {
 	width:75%;
@@ -83,7 +82,7 @@ button:hover {
 	text-align:center;
 	position:relative;
 	border:5px solid white;
-	margin-top:170;
+	margin-top:3%;
 	width:350;
 	height:600px;
 	margin-left:auto;
@@ -95,11 +94,11 @@ button:hover {
 	text-align:justify;
 	position:relative;
 	border:5px solid white;
-	margin-top:170;
+	margin-top:0%;
 	margin-left:auto;
 	margin-right:auto;
 	width:700;
-	height:600px;
+	height:810px;
 }
 #description {
 	font-size:15;
@@ -320,8 +319,6 @@ img {
 #emoji {
 	font-size:25;
 	position:relative;
-	/*right:30;
-	bottom:60;*/
 	bottom:90;
 }
 
