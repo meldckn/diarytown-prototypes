@@ -19,8 +19,9 @@ var Diary = ( function() {
 		initDisplay( getAllActions() );
 
 		// Use JQueryUI to make the diary entry divs sortable (via drag-and-drop)
-		$( ".sortable" ).sortable();
-
+		//$( ".sortable" ).sortable();
+		document.getElementById("submit").onclick = function () {submitEntry()};
+		position = 0;
 	}
 
 	// Adds a given phrase/action/event to the diary entry
@@ -31,9 +32,10 @@ var Diary = ( function() {
 		addPhraseToDiary (actionObj, 0);
 	}
 
+	var position;
 	var db;
 	var actions_db;
-
+	var currentDiaryEntry = [];
 	function initActionsData () {
         // Make Lokijs database (with name of file to persist data to)
 		db = new loki('db.json');
@@ -99,12 +101,12 @@ var Diary = ( function() {
 		$('.phrase-container').append(elements);
 	}
 
+	
 	function addPhraseToDiary ( actionObj, textIndex ) {
-		var element = $('<div class="diary-phrase close">' + actionObj["text"][textIndex] + '</div>')
-		
+		var element = $('<div class="diary-phrase close" id = '+actionObj["id"] + '>' + actionObj["text"][textIndex] + '</div>')
 		element[0].addEventListener("click", function() {
-  			console.log("closebutton clicked");
-    		this.style.display = "none";
+			this.remove();
+
   		});
 		
 		$('#diary').append(element);
@@ -115,8 +117,24 @@ var Diary = ( function() {
  		addToDiary : addToDiary
  	}
 
+	function submitEntry() {
+ 		console.log ("entry submitted!");
+ 		let diaryEntry = [];
+ 		var phraseNodes = document.getElementById("diary").querySelectorAll(".diary-phrase");
+ 		phraseNodes.forEach(function(element){
+			diaryEntry.push(element.id);
+		});
+		console.log(diaryEntry);
+		document.getElementById ("fourthBackButton").click();
+		
+
+ 	}
+
+
 })(); // IIFE invoked here
 
 /* Initialize Controller when document is fully loaded */
 $(document).ready(function () { Diary.init(); });
 
+
+ 	
