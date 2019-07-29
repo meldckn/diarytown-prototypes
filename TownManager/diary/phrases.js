@@ -675,7 +675,7 @@ var phrases = [
 		beforeContext : "",
 		afterContext : "",
 		flippable : false,
-		emoji: "👟";
+		emoji: "👟"
 	},{
 		id : "cared-for",
 		text : [ "took care of someone" ],
@@ -686,7 +686,7 @@ var phrases = [
 		beforeContext : "",
 		afterContext : "",
 		flippable : false,
-		emoji: "💗";
+		emoji: "💗"
 	},{
 		id : "self-care",
 		text : [ "took care of myself", "did self-care" ],
@@ -707,7 +707,7 @@ var phrases = [
 		beforeContext : "",
 		afterContext : "",
 		flippable : false,
-		emoji: "🤗";
+		emoji: "😃"
 	},{
 		id : "guilty-pleasure",
 		text : [ "indulged in a guilty pleasure" ],
@@ -717,7 +717,8 @@ var phrases = [
 		relatedPhrases : [ "treated-self" ],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji:"😀"
 	},{
 		id : "cooked",
 		text : [ "cooked", "cooked something yummy" ],
@@ -727,7 +728,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "👨‍🍳"
 	},{
 		id : "people-visited",
 		text : [ "had people over", "had someone over" ],
@@ -767,7 +769,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🤝"
 	},{
 		id : "didnt-want-to",
 		text : [ "did something I didn't want to" ],
@@ -777,7 +780,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "👎"
 	},{
 		id : "had-trouble",
 		text : [ "did something I had a lot of trouble doing" ],
@@ -787,7 +791,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😔"
 	},{
 		id : "did-something-i-love",
 		text : [ "did something I love" ],
@@ -797,7 +802,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😍"
 	},{
 		id : "did-something-i-regret",
 		text : [ "did something I regret" ],
@@ -807,7 +813,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😞"
 	},{
 		id : "did-something-weird",
 		text : [ "did something weird", "did something unusual", "did something uncharacteristic" ],
@@ -817,7 +824,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "👾"
 	},{
 		id : "reassured",
 		text : [ "reassured someone", "comforted someone" ],
@@ -827,7 +835,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🧸"
 	},{
 		id : "started-conversation",
 		text : [ "struck up a conversation with someone", "started a conversation with someone" ],
@@ -837,7 +846,8 @@ var phrases = [
 		relatedPhrases : [ "met-someone" ],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🗪"
 	},{
 		id : "gave-presentation",
 		text : [ "gave a presentation", "gave a speech", "spoke in public", "spoke to an audience" ],
@@ -847,7 +857,8 @@ var phrases = [
 		relatedPhrases : [ "performed" ],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "💬"
 	},{
 		id : "performed",
 		text : [ "performed in front of an audience" ] ,
@@ -857,7 +868,8 @@ var phrases = [
 		relatedPhrases : [ "gave-presentation" ],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🎭"
 	},{
 		id : "started-job",
 		text : [ "started a new job" ],
@@ -867,7 +879,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "💼"
 	},{
 		id : "got-job",
 		text : [ "got a new job" ] ,
@@ -877,7 +890,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "💼"
 	},{
 		id : "traffic",
 		text : [ "was stuck in traffic", "got stuck in traffic" ],
@@ -887,7 +901,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🚦"
 	},{
 		id : "waited",
 		text : [ "waited for something" ],
@@ -897,7 +912,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "⏲️"
 	},{
 		id : "dreamed",
 		text : [ "had a #adj dream" ],
@@ -907,7 +923,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "💤"
 	},{
 		id : "shared",
 		text : [ "shared a personal thing with someone" ],
@@ -917,7 +934,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "👐"
 	},{
 		id : "saw-talk",
 		text : [ "saw a talk", "saw a #adj talk", "heard a talk", "heard a #adj talk" ],
@@ -927,7 +945,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🗣️"
 	},{
 		id : "led",
 		text : [ "led a thing", "led a team", "led a group", "led a meeting" ],
@@ -937,7 +956,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🙋‍♂️"
 	},{
 		id : "then",
 		text : [ "then" ],
@@ -1107,7 +1127,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🤗"
 	},{
 		id : "angry-with-me",
 		text : [ "someone got angry with me", "someone got upset with me" ],
@@ -1117,7 +1138,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😡"
 	},{
 		id : "someone-did-something-cool",
 		text : [ "someone did something cool" ],
@@ -1127,7 +1149,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😎"
 	},{
 		id : "someone-bothered",
 		text : [ "someone bothered me", "someone got on my nerves", "someone annoyed me" ],
@@ -1137,7 +1160,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😑"
 	},{
 		id : "someone-was-jerk",
 		text : [ "someone was a jerk to me", "someone was bitchy at me", "someone yelled at me", "someone got angry at me" ],
@@ -1147,7 +1171,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "😠"
 	},{
 		id : "power-outage",
 		text : [ "there was a power outage somewhere" ],
@@ -1157,7 +1182,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🔌"
 	},{
 		id : "storm",
 		text : [ "it stormed", "there was a storm" ],
@@ -1167,7 +1193,8 @@ var phrases = [
 		relatedPhrases : [],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🌩️"
 	},{
 		id : "was-introduced",
 		text : [ "someone introduced me to someone" ],
@@ -1177,7 +1204,8 @@ var phrases = [
 		relatedPhrases : [ "met-someone", "introduced" ],
 		beforeContext : "",
 		afterContext : "",
-		flippable : false
+		flippable : false,
+		emoji: "🤝"
 	},{
 		id : "which made me",
 		text : [ "which made me #adj" ],
