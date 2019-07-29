@@ -1404,15 +1404,33 @@ function openCategory(categoryName) {
 function search() {
 	let actionsEventsPhrases = document.getElementById("actions-events-phrases");
 	let input, textValue;
+	let similarTextValues = [];
 
 	input = document.getElementById("searchInput");
 
-	for (let i = 0; i < actionsEventsPhrases.children.length; i++) {
+	/*for (let i = 0; i < actionsEventsPhrases.children.length; i++) {
 		textValue = actionsEventsPhrases.children[i].innerText;
 		if (textValue.toUpperCase().indexOf(input.value.toUpperCase()) > -1) {
 			actionsEventsPhrases.children[i].style.display = "";
 		} else {
 			actionsEventsPhrases.children[i].style.display = "none";
+		}
+	}*/
+
+	for (let i = 0; i < actionsEventsPhrases.children.length; i++) {
+		let phraseCount = phrases.indexOf(actionsEventsPhrases.children[i].innerText);
+		console.log(phraseCount);
+		
+		for (let j = 0; j < phrases[phraseCount].text.length; j++) {
+			textValue = actionsEventsPhrases.children[i].innerText;
+			similarTextValues[j] = phrases[phraseCount].text[j];
+
+			if (textValue.toUpperCase().indexOf(input.value.toUpperCase()) > -1 || 
+				similarTextValues[j].toUpperCase().indexOf(input.value.toUpperCase()) > -1) {
+				actionsEventsPhrases.children[i].style.display = "";
+			} else {
+				actionsEventsPhrases.children[i].style.display = "none";
+			}
 		}
 	}
 }

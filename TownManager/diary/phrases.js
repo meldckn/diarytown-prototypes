@@ -289,7 +289,7 @@ var phrases = [
 		beforeContext : "",
 		afterContext : "",
 		flippable : false,
-		emoji : "😄"
+		emoji : "👨‍🎓"
 	},{
 		id : "exercised",
 		text : [ "exercised", "worked out" ],
@@ -300,7 +300,7 @@ var phrases = [
 		beforeContext : "",
 		afterContext : "",
 		flippable : false,
-		emoji : "👨‍🎓"
+		emoji : "💪"
 	},{
 		id : "feeling-excited",
 		text : [ "feeling excited for something coming up" ] ,
