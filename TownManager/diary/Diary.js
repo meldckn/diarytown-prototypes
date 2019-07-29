@@ -126,7 +126,7 @@ var Diary = ( function() {
 		});
 		console.log(diaryEntry);
 		document.getElementById ("fourthBackButton").click();
-		
+
 
  	}
 
@@ -134,7 +134,9 @@ var Diary = ( function() {
 })(); // IIFE invoked here
 
 /* Initialize Controller when document is fully loaded */
-$(document).ready(function () { Diary.init(); });
+window.onload = function(){
+	Diary.init();
 
+}
 
  	

@@ -1388,7 +1388,7 @@ function runDiaryEditor() {
 }
 
 function openCategory(categoryName) {
-	console.log(document.getElementById(categoryName).style.display === "none", document.getElementById(categoryName).style.display === "none");
+	//console.log(document.getElementById(categoryName).style.display === "none", document.getElementById(categoryName).style.display === "none");
 	
 	if( getComputedStyle(document.getElementById(categoryName), null).display === "block" )
 	{		
