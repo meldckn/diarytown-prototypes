@@ -97,16 +97,30 @@ for (let charPair of getAllCharacterPairs(gameDB)) {
 
 /// TIE IT ALL TOGETHER
 
+let simActionHandlers = [];
+
+function handleSimAction(simAction) {
+  for (let handler of simActionHandlers) {
+    handler(simAction);
+  }
+}
+
+// Commit an action with full bindings to the DB as an event, returing an updated DB.
+function runActionWithBindings(db, action, bindings) {
+  console.log('Running action of type: ' + action.type + '\nwith bindings: ' + JSON.stringify(bindings));
+  let event = realizeEvent(action, bindings);
+  console.log(event);
+  db = addEvent(db, event);
+  handleSimAction({action: action, bindings: bindings, event: event}); // FIXME impure, should be elsewhere
+  return db;
+}
+
 // Given the DB and a list of action specs, pick a random possible action and perform it,
 // returning an updated DB.
 function runRandomAction(db, allActions){
   let allPossible = possibleActions(db, allActions);
   let possible = randNth(allPossible);
-  let event = realizeEvent(possible.action, possible.bindings);
-  db = addEvent(db, event);
-  console.log(event);
-  log.innerText = event.text + '\n' + log.innerText;
-  return db;
+  return runActionWithBindings(db, possible.action, possible.bindings);
 }
 
 // Like `runRandomAction`, but assigns an equal selection weight to all valid action types.
@@ -114,12 +128,34 @@ function runRandomActionByType(db, allActions){
   let allPossibleByType = possibleActionsByType(db, allActions);
   let type = randNth(Object.keys(allPossibleByType));
   let possible = randNth(allPossibleByType[type]);
-  console.log(type);
-  let event = realizeEvent(possible.action, possible.bindings);
-  db = addEvent(db, event);
-  console.log(event);
-  log.innerText = event.text + '\n' + log.innerText;
-  return db;
+  return runActionWithBindings(db, possible.action, possible.bindings);
+}
+
+// Given the DB, an action, and a set of partial bindings for this action,
+// find a valid variant of the action with the given partial bindings and perform it,
+// returning an updated DB.
+function runActionWithPartialBindings(db, action, partialBindings) {
+  let boundLvars = Object.keys(partialBindings);
+  let unboundLvars = action.lvars.filter(l => boundLvars.indexOf(l) === -1);
+  let query = '[:find ' + unboundLvars.map(l => '?' + l).join(' ');
+  query += ' :in $ ' + boundLvars.map(l => '?' + l).join(' ');
+  query += ' ' + action.query.substring(action.query.indexOf(':where'));
+  let results = datascript.q(query, db, ...Object.values(partialBindings));
+  if (results.length < 1) {
+    let err = Error('No realizable variant of action with partial bindings!');
+    err.action = action;
+    err.partialBindings = partialBindings;
+    err.boundLvars = boundLvars;
+    err.unboundLvars = unboundLvars;
+    err.query = query;
+    throw err;
+  }
+  let result = results[0];
+  let bindings = Object.assign({}, partialBindings);
+  for (let i = 0; i < unboundLvars.length; i++) {
+    bindings[unboundLvars[i]] = result[i];
+  }
+  return runActionWithBindings(db, action, bindings);
 }
 
 /// return Sim singleton object
@@ -130,12 +166,17 @@ return {
   getDB: function() {
     return gameDB;
   },
-  runActionWithBindings: function(actionWithBindings) {
-    let event = realizeEvent(actionWithBindings.action, actionWithBindings.bindings);
-    gameDB = addEvent(gameDB, event);
+  runActionWithBindings: function(action, bindings) {
+    gameDB = runActionWithBindings(gameDB, action, bindings);
+  },
+  runActionWithPartialBindings: function(action, partialBindings) {
+    gameDB = runActionWithPartialBindings(gameDB, action, partialBindings);
   },
   runRandomActionByType: function() {
     gameDB = runRandomActionByType(gameDB, allActions);
+  },
+  registerActionHandler: function(handler) {
+    simActionHandlers.push(handler);
   }
   //runSiftingPatterns: function() {}
 }
