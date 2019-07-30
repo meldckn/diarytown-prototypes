@@ -11,6 +11,7 @@ body {
 	text-align:center;
 	image-rendering: pixelated;
 	position:relative;
+	outline:none;
 }
 audio {
 	display:none;
@@ -357,6 +358,15 @@ h2 {
 	margin-top:5px;
 }
 
+h3{
+	font-size:15;
+	margin-left:20px;
+	text-align:left;
+	color:black;
+	position:relative;
+	display:inline-block;
+}
+
 .switchTemp {
   position: absolute;
   display: inline-block;
@@ -408,4 +418,99 @@ h2 {
 }
 #fourthBackButton {
 	font-size:10;
+}
+
+div.scrollmenu {
+  background-color: #000000;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+
+#searchInput {
+	font-size:20;
+	background-color:black;
+	color:white;
+	border-radius:10px;
+	border:1px solid white;
+	padding-top:15px;
+	padding-bottom:15px;
+	padding-left:25px;
+	padding-right:25px;
+	width:100%;
+	font-family: "Press Start 2P";
+	letter-spacing:1px;
+	word-spacing:0em;
+	margin-bottom:15px;
+
+}
+#searchInput:focus {
+	background-color:black;
+	color:white;
+	border:1px solid white;
+	outline:none;
+
+}
+
+.diary-page {
+	text-align:left;
+	height:90%;
+	width:90%;
+
+}
+.page-left {
+}
+#submit {
+	font-size:15px;
+	position:relative;
+	text-align:left;
+}
+#diary {
+	text-align:left;
+	height:70%;
+}
+#dateline {
+	outline:none;
+	background-color:black;
+	color:white;
+	font-size:12;
+}
+#dateline:hover {
+	background-color:white;
+	color:black;
+}
+
+#actions-events-phrases{
+	height:90%;
+	width:100%;
+	padding-right:25px;
+}
+.nested-tabs {
+	width:100%;
+	margin-bottom:15px;
+}
+#diary::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+#diary::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+#diary::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+#diary::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
 }

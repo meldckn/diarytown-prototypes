@@ -78,7 +78,6 @@ h2 {
 	width: 100%;
 }
 #diary {
-	display: flex;
 	flex-wrap: wrap;
 	margin-top: auto;
 	margin-bottom: auto;

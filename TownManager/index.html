@@ -104,6 +104,12 @@
 			<!-- Diary Editor menu-->
 			<div id = "diaryEditor">
 				<h2> Diary Editor Page</h2>
+				<div class="scrollmenu">
+  <a href="#Day0">Day 0</a>
+  <a href="#Day1">Day 1</a>
+  <a href="#Day2">Day 2</a>
+  <a href="#Day3">Day 3</a>
+</div>
 				<div id = "main-container">
     		    	<div class="diary-page page-left">
     		    		<div class="tab">
@@ -134,10 +140,14 @@
 			
     		    	<div class="diary-page page-right">
     		    		<div id="search-bar">
-    		    			<input type="text" id="searchInput" onkeyup="search()" placeholder="Search for an action...">
+    		    			<h3>Search for an Action by Name: </h3>
+    		    			<input type="text" id="searchInput" onkeyup="search()" placeholder="Type here...">
     		    		</div>
-    		    	    <div id="diary" class="sortable"><button id ="submit">Submit Entry</button>
-    		    	    	<div id="date-container"><button id="dateline"></button></div>
+    		    	    <div id="diary" class="sortable">
+    		    	    	<button id ="submit">Submit Entry</button>
+    		    	    	<div id="date-container">
+    		    	    		<button id="dateline"></button>
+    		    	    	</div>
     		    	    </div>
     		    	</div>
     			</div>
