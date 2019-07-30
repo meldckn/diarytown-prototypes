@@ -35,7 +35,7 @@ function addEvent(db, event) {
   db = datascript.db_with(db, [eventEntity]);
   let eventID = newestEID(db);
   // process the event's effects
-  for (let effect of event.effects){
+  for (let effect of event.effects || []){
     effect.cause = eventID;
     db = processEffect(db, effect);
   }

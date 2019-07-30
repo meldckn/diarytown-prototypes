@@ -97,20 +97,6 @@ for (let charPair of getAllCharacterPairs(gameDB)) {
 
 /// TIE IT ALL TOGETHER
 
-function retrieveAction(actionOrName) {
-  if (typeof actionOrName === 'string') {
-    let action = actionLibrary[actionOrName];
-    if (!action) throw Error('No action with name: ' + actionOrName);
-    return action;
-  } else if (typeof actionOrName === 'object') {
-    return actionOrName;
-  } else {
-    let err = Error('Not an action or action name!');
-    err.actionOrName = actionOrName;
-    throw err;
-  }
-}
-
 // Given the DB and a list of action specs, return a random possible action with bindings.
 function getRandomAction(db, allActions){
   let allPossible = possibleActions(db, allActions);
@@ -122,34 +108,6 @@ function getRandomActionByType(db, allActions){
   let allPossibleByType = possibleActionsByType(db, allActions);
   let type = randNth(Object.keys(allPossibleByType));
   return randNth(allPossibleByType[type]);
-}
-
-// Given the DB, an action, and a set of partial bindings for this action,
-// return a full set of compatible bindings for the action.
-function getFullBindings(db, action, partialBindings) {
-  let boundLvars = Object.keys(partialBindings);
-  let unboundLvars = action.lvars.filter(l => boundLvars.indexOf(l) === -1);
-  let query = '[:find ' + unboundLvars.map(l => '?' + l).join(' ');
-  query += ' :in $ ' + boundLvars.map(l => '?' + l).join(' ');
-  query += ' ' + action.query.substring(action.query.indexOf(':where'));
-  let results = datascript.q(query, db, ...Object.values(partialBindings));
-  if (results.length < 1) {
-    // TODO this is maybe the point at which we have to synthetically induce state changes
-    // that force the other preconds to be true?
-    console.warn('No valid variant of action with partial bindings!', {
-      action: action,
-      partialBindings: partialBindings,
-      boundLvars: boundLvars,
-      unboundLvars: unboundLvars,
-      query: query
-    });
-  }
-  let result = results[0] || [];
-  let bindings = Object.assign({}, partialBindings);
-  for (let i = 0; i < unboundLvars.length; i++) {
-    bindings[unboundLvars[i]] = result[i];
-  }
-  return bindings;
 }
 
 /// set up handler infrastructure
@@ -181,14 +139,15 @@ function parseSiftingPatternClause(line) {
 
 function parseSiftingPattern(lines) {
   let clauses = lines.map(parseSiftingPatternClause);
-  let allLvars = [];
+  let lvars = [];
   for (let clause of clauses) {
-    allLvars = allLvars.concat(clause.lvars);
+    lvars = lvars.concat(clause.lvars);
   }
-  let findPart = allLvars.map(lvar => '?' + lvar).join(' ');
+  lvars = distinct(lvars);
+  let findPart = lvars.map(lvar => '?' + lvar).join(' ');
   let wherePart = clauses.map(clause => clause.clauseStr).join();
   let query = '[:find ' + findPart + ' :where ' + wherePart + ']';
-  return {lvars: allLvars, clauses: clauses, query: query, findPart: findPart, wherePart: wherePart};
+  return {lvars: lvars, clauses: clauses, query: query, findPart: findPart, wherePart: wherePart};
 }
 
 let siftingPatternLibrary = {};
@@ -249,15 +208,6 @@ return {
     gameDB = addEvent(gameDB, event);
     handleSimEvent(event);
   },
-  /*
-  // Perform a variant of the specified action with the specified partial bindings.
-  // We were originally going to use this to run diary actions as Felt actions,
-  // but for now, we're going to treat diary actions as a separate kind of thing.
-  runActionWithPartialBindings: function(action, partialBindings) {
-    let bindings = getFullBindings(gameDB, action, partialBindings);
-    this.runActionWithBindings(action, bindings);
-  },
-  */
   // Perform a random possible action.
   runRandomAction: function() {
     let possible = getRandomActionByType(gameDB, allActions);
