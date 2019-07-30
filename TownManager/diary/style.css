@@ -133,18 +133,7 @@ div.tab button {
   font-size: 8;
 }
 
-div.nested-tabs button {
-  overflow: hidden;
-  outline: none;
-  cursor: pointer;
-  transition: 0.3s;
-  background-color: black;
-  color: white;
-  font-family: "Press Start 2P";
-  border: 1px solid white;
-  margin-bottom: 1rem;
-  font-size: 8;
-}
+
 
 /* Change background color of buttons on hover */
 .tab button:hover {
@@ -155,6 +144,8 @@ div.nested-tabs button {
   font-family: "Press Start 2P";
   border: 1px solid black;
 }
+
+
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #ccc;
