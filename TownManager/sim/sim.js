@@ -2,15 +2,9 @@
 /// datascript
 /// util
 /// engine
-/// {actions,effects}
-/// sim
+/// {sim,actions,effects,siftpatterns}
 
 window.Sim = (function(){
-
-/// PREPROCESS ALL ACTIONS
-
-let allActions = Object.values(actionLibrary);
-allActions.forEach(preprocessAction);
 
 /// GENERATION FUNCTIONS
 
@@ -110,74 +104,107 @@ function getRandomActionByType(db, allActions){
   return randNth(allPossibleByType[type]);
 }
 
-// Given the DB, an action, and a set of partial bindings for this action,
-// return a full set of compatible bindings for the action.
-function getFullBindings(db, action, partialBindings) {
-  let boundLvars = Object.keys(partialBindings);
-  let unboundLvars = action.lvars.filter(l => boundLvars.indexOf(l) === -1);
-  let query = '[:find ' + unboundLvars.map(l => '?' + l).join(' ');
-  query += ' :in $ ' + boundLvars.map(l => '?' + l).join(' ');
-  query += ' ' + action.query.substring(action.query.indexOf(':where'));
-  let results = datascript.q(query, db, ...Object.values(partialBindings));
-  if (results.length < 1) {
-    let err = Error('No realizable variant of action with partial bindings!');
-    err.action = action;
-    err.partialBindings = partialBindings;
-    err.boundLvars = boundLvars;
-    err.unboundLvars = unboundLvars;
-    err.query = query;
-    throw err;
-  }
-  let result = results[0];
-  let bindings = Object.assign({}, partialBindings);
-  for (let i = 0; i < unboundLvars.length; i++) {
-    bindings[unboundLvars[i]] = result[i];
-  }
-  return bindings;
-}
-
 /// set up handler infrastructure
 
-let simActionHandlers = [];
+let simEventHandlers = [];
 
-function handleSimAction(simAction) {
-  for (let handler of simActionHandlers) {
-    handler(simAction);
+function handleSimEvent(simEvent) {
+  for (let handler of simEventHandlers) {
+    handler(simEvent);
   }
+}
+
+/// set up sifting pattern infrastructure
+
+let nuggetsAlreadyFound = [];
+
+function runSiftingPatterns() {
+  let allNuggets = [];
+  for (let pattern of Object.values(siftingPatternLibrary)) {
+    let results = datascript.q(pattern.query, gameDB);
+    for (let result of results) {
+      let nuggetStr = pattern.name + '|' + result.join('|');
+      if (nuggetsAlreadyFound.indexOf(nuggetStr) > -1) continue;
+      let vars = {};
+      for (let i = 0; i < pattern.lvars.length; i++) {
+        vars[pattern.lvars[i]] = result[i];
+      }
+      allNuggets.push({pattern: pattern, vars: vars});
+      nuggetsAlreadyFound.push(nuggetStr);
+    }
+  }
+  return allNuggets;
 }
 
 /// return Sim singleton object
 
 return {
-  actionLibrary: actionLibrary,
-  //schema: schema,
+  // Return the current simulation state as a DataScript DB.
   getDB: function() {
     return gameDB;
   },
+  // Set the player character's name within the simulation.
+  setPlayerName: function(playerName) {
+    gameDB = updateProperty(gameDB, 1, 'name', playerName);
+  },
+  // Perform a player-entered diary action.
+  runDiaryAction: function(actionName, actionText) {
+    console.log('Running diary action of type: ' + actionName);
+    let event = {type: 'event', isDiaryEvent: true, eventType: actionName, text: actionText, actor: 1, target: 1};
+    console.log(event);
+    gameDB = addEvent(gameDB, event);
+    handleSimEvent(event);
+  },
   // Perform the specified action with the specified bindings.
   runActionWithBindings: function(action, bindings) {
-    console.log('Running action of type: ' + action.type + '\nwith bindings: ' + JSON.stringify(bindings));
+    console.log('Running action named: ' + action.name + '\nwith bindings: ' + JSON.stringify(bindings));
     let event = realizeEvent(action, bindings);
     console.log(event);
     gameDB = addEvent(gameDB, event);
-    handleSimAction({action: action, bindings: bindings, event: event});
-  },
-  // Perform a variant of the specified action with the specified partial bindings.
-  runActionWithPartialBindings: function(action, partialBindings) {
-    let bindings = getFullBindings(gameDB, action, partialBindings);
-    this.runActionWithBindings(action, bindings);
+    handleSimEvent(event);
   },
   // Perform a random possible action.
   runRandomAction: function() {
+    let allActions = Object.values(actionLibrary);
     let possible = getRandomActionByType(gameDB, allActions);
     this.runActionWithBindings(possible.action, possible.bindings);
   },
-  // Register an action handler function to be called whenever a simulation action is performed.
-  // The action handler will receive a single argument: an object with properties {action, bindings, event}.
-  registerActionHandler: function(handler) {
-    simActionHandlers.push(handler);
-  }
-  //runSiftingPatterns: function() {}
+  // Register an event handler function to be called whenever a simulation event takes place.
+  // The event handler will receive the event that was just performed as an argument.
+  registerEventHandler: function(handler) {
+    simEventHandlers.push(handler);
+  },
+  // Run all registered sifting patterns over the database. Return all new nuggets that are found.
+  runSiftingPatterns: runSiftingPatterns
 }
 
 })();
+
+/*
+/// EXAMPLE USAGE (in a separate file)
+
+// To make a new diary entry...
+Sim.runDiaryAction('seeCuteAnimal', 'Today I saw a cute animal.');
+
+// To write a function that'll be called whenever a new event happens...
+Sim.registerEventHandler(function(event) {
+  // Use this information to do animations, etc.
+  // For instance, use the value of event.actor to find the corresponding character sprite
+  // and put an appropriate emoji over their head.
+  // Can check event.isDiaryEvent to determine whether this event was player-entered or autonomous.
+
+  // To perform story sifting every time a new event takes place...
+  let newNuggets = Sim.runSiftingPatterns();
+  // Now you can do stuff with newNuggets, e.g. adding decorative buildings to the town
+  // based on the story pattern that was just recognized.
+  // For instance, to check if the first nugget is an instance of the "sawThreeAnimals" pattern...
+  if (nuggets[0] && nuggets[0].pattern.name === 'sawThreeAnimals') {
+    // ...your code here...
+  }
+});
+
+// To make the simulation run actions autonomously...
+window.setInterval(function(){
+  Sim.runRandomAction();
+}, 1000 * 10); // one action every 10 seconds
+*/
