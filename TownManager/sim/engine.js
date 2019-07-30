@@ -4,13 +4,32 @@ function findLvars(s) {
   return s.match(/\?[a-zA-Z_][a-zA-Z0-9_]*/g).map(lvar => lvar.substring(1));
 }
 
+// Given part of a sifting pattern, return it, wrapping it in quotes if necessary.
+function quotewrapIfNeeded(part) {
+  if (part[0] === '?') return part;
+  if (['true','false','nil'].indexOf(part) > -1) return part;
+  if (!Number.isNaN(parseFloat(part))) return part;
+  if (part.length >= 2 && part[0] === '"' && part[part.length - 1] === '"') return part;
+  return '"' + part + '"';
+}
+
 function parseSiftingPatternClause(line) {
   line = line.trim();
-  let lvars = findLvars(line);
+  let lvars = distinct(findLvars(line));
   let parts = line.split(/\s+/);
   let clauseStr = line;
-  if (['(or', '(not', '(not-join'].indexOf(parts[0]) === -1) { // TODO also check if it's a rule name
-    clauseStr = '[' + clauseStr + ']';
+  if (line[0] === '(') {
+    // handle complex clause
+    // can be `(or ...)`, `(not ...)`, `(not-join ...)`, `(pred arg*)`, `(rule arg*)`, `(function arg*) result`
+    if (['(or', '(not', '(not-join'].indexOf(parts[0]) === -1) { // TODO also check if it's a rule name
+      clauseStr = '[' + line + ']';
+    }
+  } else {
+    // handle simple clause: `eid attr? value?`
+    if (parts.length < 1 || parts.length > 3) {
+      console.warn('Invalid query line: ' + line);
+    }
+    clauseStr = '[' + parts.map(quotewrapIfNeeded).join(' ') + ']';
   }
   return {clauseStr: clauseStr, lvars: lvars, original: line};
 }
