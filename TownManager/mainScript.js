@@ -648,7 +648,7 @@ Sim.registerEventHandler(function(event) {
 	} else {
 		let autoEmoji = event.text.split(/\s+/)[0];
 		emojiQueue.push(autoEmoji);
-		diaryEvents.innerText += (event.text.split(/\s+/).slice(1).join(" ") + "\n\n");
+		diaryEvents.innerHTML += (event.text.split(/\s+/).slice(1).join(" ") + "<br></br>");
 	}
 
 	// To perform story sifting every time a new event takes place...
@@ -672,9 +672,8 @@ Sim.registerEventHandler(function(event) {
 			let topMin = tempCanvasCoord[0][1];
 			let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
 
-			rockClass.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
-			rockClass.style.top = Math.floor(Math.random()*(topMax - topMin) + topMin);
-			console.log("Workload increased by 1.\nTotal Workload: " + emojiCounter);
+			rockClass.style.left = (leftMin + leftMax) / 2;
+			rockClass.style.top = topMin + (54*emojiCounter);
 		}
 	}
 });
