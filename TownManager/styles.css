@@ -333,6 +333,11 @@ img {
 	height:35.3px;
 	/*border:1px solid yellow;*/
 }
+.rockClass {
+	z-index: 6;
+	position:absolute;
+	image-rendering:pixelated;
+}
 
 #thirdBackButtonContainer {
 	text-align:center;

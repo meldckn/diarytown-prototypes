@@ -138,6 +138,7 @@ var Diary = ( function() {
  	return { // Public functions: 
  		init : init,
  		addToDiary : addToDiary,
+ 		getActionById : getActionById,
  		getActionByText : getActionByText,
  		getActionBySubstring : getActionBySubstring
  	}

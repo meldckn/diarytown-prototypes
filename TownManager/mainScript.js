@@ -44,6 +44,10 @@ writeNewDiaryContainer.style.display = 'none';
 //Akhil's Building management code below:
 
 //CANVAS COORDS
+let tempCanvasCoord = [
+	[1040, 300, 75, 400]
+];
+
 let extraCharacterCanvasCoords = [
 	[160, 263, 50, 55],
 	[328, 263, 51, 55],
@@ -188,7 +192,7 @@ function drawCharacters() {
 		characters.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
 		characters.style.top = Math.floor(Math.random()*(topMax - topMin) + topMin);
 
-		/* Visualizing
+		/*Visualizing
 		let c = document.createElement("canvas");
 		let ctx = c.getContext("2d");
 		map.insertBefore(c, map.firstChild);
@@ -672,6 +676,68 @@ function addBuilding5() {
 
 
 
+// Diary events and sifting patterns
+let emoji = document.createElement('p');
+let emojiQueue = [];
+let emojiCounter = 0;
+let diaryEvents = document.getElementById('diaryEvents');
+Sim.registerEventHandler(function(event) {
+	drawEmoji();
+	if (event.isDiaryEvent) {
+		emojiQueue.push(Diary.getActionById(event.eventType).emoji);
+		diaryEvents.innerHTML += (event.text + "<br></br>");
+	} else {
+		let autoEmoji = event.text.split(/\s+/)[0];
+		emojiQueue.push(autoEmoji);
+		diaryEvents.innerText += (event.text.split(/\s+/).slice(1).join(" ") + "\n\n");
+	}
+
+	// To perform story sifting every time a new event takes place...
+	let newNuggets = Sim.runSiftingPatterns();
+	for (let nugget of newNuggets) {
+		if (nugget.pattern.name === 'workloadIncrease') {
+			emojiCounter++;
+
+			let rockClass = document.createElement('div');
+			let rockImg = document.createElement('img');
+			rockImg.src = "assets/rock.png";
+			rockImg.style.display = "block";
+			rockImg.style.width = 75;
+			rockImg.style.height = 49;
+			rockClass.className = "rockClass";
+			map.appendChild(rockClass);
+			rockClass.appendChild(rockImg);
+
+			let leftMin = tempCanvasCoord[0][0];
+			let leftMax = tempCanvasCoord[0][0] + tempCanvasCoord[0][2] - 75;
+			let topMin = tempCanvasCoord[0][1];
+			let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
+
+			rockClass.style.left = Math.floor(Math.random()*(leftMax - leftMin) + leftMin);
+			rockClass.style.top = Math.floor(Math.random()*(topMax - topMin) + topMin);
+			console.log("Workload increased by 1.\nTotal Workload: " + emojiCounter);
+		}
+	}
+});
+window.setInterval(function(event) {
+	if (emojiQueue.length === 0) {
+		emoji.innerText = "";
+		return;
+	}
+	emoji.innerText = emojiQueue[0];
+	emojiQueue.shift();
+}, 1000 * 2.5);
+function drawEmoji() {
+	emoji.id = "emoji";
+	hero.appendChild(emoji);
+}
+window.setInterval(function(){
+	Sim.runRandomAction();
+}, 1000 * 5);
+
+
+
+
 
 
 
@@ -745,36 +811,6 @@ function drawHero() {
 	hero.style.top = 400;
 }
 
-Sim.registerEventHandler(function(event) {
-	drawEmoji([event.eventType]);
-});
-
-let emoji = document.createElement('p');
-function timer(ms) {
- return new Promise(res => setTimeout(res, ms));
-}
-async function drawEmoji(diaryEntry) {
-	emoji.id = "emoji";
-	hero.appendChild(emoji);
-
-	let diaryCounter = 0;
-	for (let i = 0; i < phrases.length; i++) {
-		if (diaryEntry[diaryCounter] === phrases[i].id) {
-			console.log(phrases[i].emoji);
-			emoji.innerText = phrases[i].emoji;
-			diaryCounter++;
-			i = 0;
-			if (diaryCounter > diaryEntry.length) {
-				break;
-			}
-			await timer(5000);
-		}
-	}
-}
-
-window.setInterval(function(){
-	Sim.runRandomAction();
-}, 1000 * 10);
 
 
 //collision detection function, goes through every possible x value and defines y value boundaries
