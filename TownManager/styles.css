@@ -55,6 +55,15 @@ button:hover {
 	border: 1px solid black;
 
 }
+
+.subtab button:hover{
+	background-color: black;
+	padding: 15px 15px;
+	border-radius: 0px;
+	color: white;
+	font-family: "Press Start 2P";
+	
+}
 #startMenuButtons{
 	text-align:center;
 	padding:70px 0;
@@ -491,6 +500,7 @@ div.scrollmenu a:hover {
 #dateline:hover {
 	background-color:white;
 	color:black;
+	transition:0.3s;
 }
 
 #actions-events-phrases{
@@ -498,10 +508,31 @@ div.scrollmenu a:hover {
 	width:100%;
 	padding-right:25px;
 }
-.nested-tabs {
-	width:100%;
-	margin-bottom:15px;
+button.subtabs {
+
+	background-color: white;
+    padding: 15px 15px;
+    border-radius: 0px;
+    color: black;
+    font-family: "Press Start 2P";
+    border: 1px solid black;
+    font-size: 8;
+    transition: 0.3s;
 }
+
+button:hover {
+	background-color: black;
+	padding: 15px 15px;
+	border-radius: 0px;
+	color: white;
+	font-family: "Press Start 2P";
+	border: 1px solid black;
+
+}
+
+
+
+
 #diary::-webkit-scrollbar {
     -webkit-appearance: none;
 }
