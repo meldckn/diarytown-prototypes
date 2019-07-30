@@ -156,6 +156,11 @@ var Diary = ( function() {
  	}
 
 
+ 	var day0 = [];
+ 	var day1 = [];
+ 	var day2 = [];
+ 	var day3 = [];
+
 })(); // IIFE invoked here
 
 /* Initialize Controller when document is fully loaded */
