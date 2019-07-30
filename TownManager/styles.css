@@ -11,6 +11,7 @@ body {
 	text-align:center;
 	image-rendering: pixelated;
 	position:relative;
+	outline:none;
 }
 audio {
 	display:none;
@@ -356,6 +357,14 @@ h2 {
 	display: inline-block;
 	margin-top:5px;
 }
+h3{
+	font-size:15;
+	margin-left:20px;
+	text-align:left;
+	color:black;
+	position:relative;
+	display:inline-block;
+}
 
 .switchTemp {
   position: absolute;
@@ -410,6 +419,7 @@ h2 {
 	font-size:10;
 }
 
+<<<<<<< HEAD
 div.scrollmenu {
   background-color: #000000;
   overflow: auto;
@@ -426,4 +436,65 @@ div.scrollmenu a {
 
 div.scrollmenu a:hover {
   background-color: #777;
+=======
+#searchInput {
+	font-size:20;
+	background-color:black;
+	color:white;
+	border-radius:10px;
+	border:1px solid white;
+	padding-top:15px;
+	padding-bottom:15px;
+	padding-left:25px;
+	padding-right:25px;
+	width:100%;
+	font-family: "Press Start 2P";
+	letter-spacing:1px;
+	word-spacing:0em;
+
+}
+#searchInput:focus {
+	background-color:black;
+	color:white;
+	border:1px solid white;
+	outline:none;
+
+}
+
+.diary-page {
+	text-align:left;
+	height:90%;
+	width:90%;
+
+}
+.page-left {
+}
+#submit {
+	font-size:15px;
+	position:relative;
+	text-align:left;
+}
+#diary {
+	text-align:left;
+}
+#dateline {
+	outline:none;
+	background-color:black;
+	color:white;
+	font-size:12;
+}
+#dateline:hover {
+	background-color:white;
+	color:black;
+}
+
+#actions-events-phrases{
+	height:90%;
+	width:100%;
+	padding-right:25px;
+}
+.nested-tabs {
+	width:100%;
+	margin-bottom:15px;
+>>>>>>> 7c565c44678df98186630da7134f1e7a792c8a31
 }
