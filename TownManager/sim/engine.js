@@ -23,8 +23,6 @@ function parseSiftingPatternClause(line) {
     // can be `(or ...)`, `(not ...)`, `(not-join ...)`, `(pred arg*)`, `(rule arg*)`, `(function arg*) result`
     if (['(or', '(not', '(not-join'].indexOf(parts[0]) > -1) {
       // don't export lvars from `or`, `not`, `not-join` clauses
-      // FIXME maybe more complicated logic is needed for `or` clauses specifically,
-      // since they might introduce new positive lvars that don't appear elsewhere in the pattern?
       lvars = [];
     } else {
       // TODO also need to run this branch if the head of the clause is a rule name
