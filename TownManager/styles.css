@@ -500,6 +500,7 @@ div.scrollmenu a:hover {
 #dateline:hover {
 	background-color:white;
 	color:black;
+	transition:0.3s;
 }
 
 #actions-events-phrases{
@@ -516,6 +517,7 @@ button.subtabs {
     font-family: "Press Start 2P";
     border: 1px solid black;
     font-size: 8;
+    transition: 0.3s;
 }
 
 button:hover {
