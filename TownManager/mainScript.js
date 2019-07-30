@@ -745,12 +745,14 @@ function drawHero() {
 	hero.style.top = 400;
 }
 
+Sim.registerEventHandler(function(event) {
+	drawEmoji([event.eventType]);
+});
+
+let emoji = document.createElement('p');
 function timer(ms) {
  return new Promise(res => setTimeout(res, ms));
 }
-
-let emoji = document.createElement('p');
-//let phraseForm = document.getElementById('phraseForm');
 async function drawEmoji(diaryEntry) {
 	emoji.id = "emoji";
 	hero.appendChild(emoji);
@@ -769,6 +771,11 @@ async function drawEmoji(diaryEntry) {
 		}
 	}
 }
+
+window.setInterval(function(){
+	Sim.runRandomAction();
+}, 1000 * 10);
+
 
 //collision detection function, goes through every possible x value and defines y value boundaries
 function onThePath(x, y) {

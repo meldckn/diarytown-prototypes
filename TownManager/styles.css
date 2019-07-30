@@ -12,6 +12,7 @@ body {
 	image-rendering: pixelated;
 	position:relative;
 	outline:none;
+	width:100%;
 }
 audio {
 	display:none;
@@ -93,22 +94,23 @@ button:hover {
 	position:relative;
 	border:5px solid white;
 	margin-top:3%;
-	width:350;
-	height:600px;
+	width:20%;
+	height:auto;
 	margin-left:auto;
 	margin-right:auto;
 }
 .aboutMenu {
+	margin-top:30px;
 	text-indent:40px;
 	padding:40px;
+	margin-top:3%;
 	text-align:justify;
 	position:relative;
 	border:5px solid white;
-	margin-top:0%;
 	margin-left:auto;
 	margin-right:auto;
-	width:700;
-	height:810px;
+	width:40%;
+	height:auto;
 }
 #description {
 	font-size:15;
