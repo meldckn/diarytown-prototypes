@@ -7,11 +7,6 @@
 
 window.Sim = (function(){
 
-/// PREPROCESS ALL ACTIONS
-
-let allActions = Object.values(actionLibrary);
-allActions.forEach(preprocessAction);
-
 /// GENERATION FUNCTIONS
 
 function getAllCharacterNames(db) {
@@ -122,45 +117,6 @@ function handleSimEvent(simEvent) {
 
 /// set up sifting pattern infrastructure
 
-function findLvars(s) {
-  return s.match(/\?[a-zA-Z_][a-zA-Z0-9_]*/g).map(lvar => lvar.substring(1));
-}
-
-function parseSiftingPatternClause(line) {
-  line = line.trim();
-  let lvars = findLvars(line);
-  let parts = line.split(/\s+/);
-  let clauseStr = line;
-  if (['(or', '(not', '(not-join'].indexOf(parts[0]) === -1) { // TODO also check if it's a rule name
-    clauseStr = '[' + clauseStr + ']';
-  }
-  return {clauseStr: clauseStr, lvars: lvars, original: line};
-}
-
-function parseSiftingPattern(lines) {
-  let clauses = lines.map(parseSiftingPatternClause);
-  let lvars = [];
-  for (let clause of clauses) {
-    lvars = lvars.concat(clause.lvars);
-  }
-  lvars = distinct(lvars);
-  let findPart = lvars.map(lvar => '?' + lvar).join(' ');
-  let wherePart = clauses.map(clause => clause.clauseStr).join();
-  let query = '[:find ' + findPart + ' :where ' + wherePart + ']';
-  return {lvars: lvars, clauses: clauses, query: query, findPart: findPart, wherePart: wherePart};
-}
-
-let siftingPatternLibrary = {};
-
-function registerSiftingPattern(name, patternLines) {
-  if (siftingPatternLibrary[name]) {
-    throw Error('A sifting pattern with name ' + name + ' has already been registered!');
-  }
-  let pattern = parseSiftingPattern(patternLines);
-  pattern.name = name;
-  siftingPatternLibrary[name] = pattern;
-}
-
 let nuggetsAlreadyFound = [];
 
 function runSiftingPatterns() {
@@ -202,7 +158,7 @@ return {
   },
   // Perform the specified action with the specified bindings.
   runActionWithBindings: function(action, bindings) {
-    console.log('Running action of type: ' + action.type + '\nwith bindings: ' + JSON.stringify(bindings));
+    console.log('Running action named: ' + action.name + '\nwith bindings: ' + JSON.stringify(bindings));
     let event = realizeEvent(action, bindings);
     console.log(event);
     gameDB = addEvent(gameDB, event);
@@ -210,6 +166,7 @@ return {
   },
   // Perform a random possible action.
   runRandomAction: function() {
+    let allActions = Object.values(actionLibrary);
     let possible = getRandomActionByType(gameDB, allActions);
     this.runActionWithBindings(possible.action, possible.bindings);
   },

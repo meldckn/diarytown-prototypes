@@ -1,8 +1,6 @@
 /// ACTION DEFINITIONS
 
-actionLibrary.betray = {
-  type: 'betray',
-  find: '?c1 ?n1 ?c2 ?n2',
+registerAction('betray', {
   where: [
     '?dislike "type" "attitude"',
     '?dislike "charge" "negative"',
@@ -20,11 +18,9 @@ actionLibrary.betray = {
     ],
     text: "🔪 Out of nowhere, " + vars.n2 + " betrayed " + vars.n1 + "!"
   })
-};
+});
 
-actionLibrary.hangOutWith = {
-  type: 'hangOutWith',
-  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+registerAction('hangOutWith', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -49,11 +45,9 @@ actionLibrary.hangOutWith = {
     text: "🍦 " + vars.n1 + " and " + vars.n2 +
           " hung out together at the " + randNth(['boba','ice cream','pizza']) + " place."
   })
-};
+});
 
-actionLibrary.seeCuteAnimal = {
-  type: 'seeCuteAnimal',
-  find: '?c1 ?n1',
+registerAction('seeCuteAnimal', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -63,13 +57,11 @@ actionLibrary.seeCuteAnimal = {
     effects: [],
     text: "🐶 " + vars.n1 + " saw a cute " + randNth(['dog','cat','snake']) + "."
   })
-};
+});
 
 let allProjectTypes = ['art','craft','poetry','programming','research','writing'];
 
-actionLibrary.startProject = {
-  type: 'startProject',
-  find: '?c1 ?n1',
+registerAction('startProject', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -86,11 +78,9 @@ actionLibrary.startProject = {
       text: "🎨 " + vars.n1 + " started a new " + projectType + " project!"
     };
   }
-};
+});
 
-actionLibrary.makeProgressOnProject = {
-  type: 'makeProgressOnProject',
-  find: '?c1 ?n1 ?proj ?projtype',
+registerAction('makeProgressOnProject', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -106,11 +96,9 @@ actionLibrary.makeProgressOnProject = {
     ],
     text: "🎨 " + vars.n1 + " made a lot of progress on their " + vars.projtype + " project."
   })
-};
+});
 
-actionLibrary.workFruitlesslyOnProject = {
-  type: 'workFruitlesslyOnProject',
-  find: '?c1 ?n1 ?proj ?projtype',
+registerAction('workFruitlesslyOnProject', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -126,11 +114,9 @@ actionLibrary.workFruitlesslyOnProject = {
     ],
     text: "🎨 " + vars.n1 + " tried to work on their " + vars.projtype + " project, but got nowhere."
   })
-};
+});
 
-actionLibrary.abandonProject = {
-  type: 'abandonProject',
-  find: '?c1 ?n1 ?proj ?projtype',
+registerAction('abandonProject', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -147,11 +133,9 @@ actionLibrary.abandonProject = {
     ],
     text: "🎨 " + vars.n1 + " gave up on their " + vars.projtype + " project."
   })
-};
+});
 
-actionLibrary.resumeProject = {
-  type: 'resumeProject',
-  find: '?c1 ?n1 ?proj ?projtype',
+registerAction('resumeProject', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -168,11 +152,9 @@ actionLibrary.resumeProject = {
     ],
     text: "🎨 " + vars.n1 + " started working on their " + vars.projtype + " project again!"
   })
-};
+});
 
-actionLibrary.finishProject = {
-  type: 'finishProject',
-  find: '?c1 ?n1 ?proj ?projtype',
+registerAction('finishProject', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -190,11 +172,9 @@ actionLibrary.finishProject = {
     ],
     text: "🎨 " + vars.n1 + " finished their " + vars.projtype + " project!"
   })
-};
+});
 
-actionLibrary.showProject_loved = {
-  type: 'showProject_loved',
-  find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
+registerAction('showProject_loved', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -214,11 +194,9 @@ actionLibrary.showProject_loved = {
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who loved it ☺️"
   })
-};
+});
 
-actionLibrary.showProject_neutral = {
-  type: 'showProject_neutral',
-  find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
+registerAction('showProject_neutral', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -238,11 +216,9 @@ actionLibrary.showProject_neutral = {
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 +
           ", who was kinda meh about it 😐"
   })
-};
+});
 
-actionLibrary.showProject_hated = {
-  type: 'showProject_hated',
-  find: '?c1 ?n1 ?proj ?projtype ?c2 ?n2',
+registerAction('showProject_hated', {
   where: [
     '?c1 "name" ?n1',
     '?proj "owner" ?c1',
@@ -262,19 +238,17 @@ actionLibrary.showProject_hated = {
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who hated it 😡"
   })
-};
+});
 
-actionLibrary.getDiscouraged = {
-  type: 'getDiscouraged',
-  find: '?c1 ?n1 ?c2 ?n2 ?e1 ?e2 ?proj ?projtype',
+registerAction('getDiscouraged', {
   where: [
     // ?e1: ?c1 shows ?proj to ?c2, who hates it
-    '?e1 "type" "showProject_hated"',
+    '?e1 "eventType" "showProject_hated"',
     '?e1 "actor" ?c1',
     '?e1 "project" ?proj',
     '?e1 "target" ?c2',
     // ?e2: ?c1 abandons ?proj
-    '?e2 "type" "abandonProject"',
+    '?e2 "eventType" "abandonProject"',
     '?e2 "actor" ?c1',
     '?e2 "project" ?proj',
     // ?proj is currently inactive; ?e1 happens before ?e2
@@ -295,11 +269,9 @@ actionLibrary.getDiscouraged = {
     text: "🎨 " + vars.n1 + " considered restarting their abandoned " + vars.projtype +
           " project, but then remembered " + vars.n2 + "'s negative remarks and decided to leave it alone."
   })
-}
+});
 
-actionLibrary.plantTree = {
-  type: 'plantTree',
-  find: '?c1 ?n1',
+registerAction('plantTree', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -309,13 +281,12 @@ actionLibrary.plantTree = {
     effects: [
       {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c1}
     ],
-    text: "🌳 " + vars.n1 + " planted a tree " + randNth(['near their house.', 'at the park.', 'in their backyard.'])
+    text: "🌳 " + vars.n1 + " planted a tree " +
+          randNth(['near their house.', 'at the park.', 'in their backyard.'])
   })
-};
+});
 
-actionLibrary.realizeLove = {
-  type: 'realizeLove',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection',
+registerAction('realizeLove', {
   where: [
     '?affection "type" "affection"',
     '?affection "source" ?c1',
@@ -336,11 +307,9 @@ actionLibrary.realizeLove = {
     ],
     text: "💓 " + vars.n1 + " is in love with " + vars.n2 + "."
   })
-};
+});
 
-actionLibrary.askOut = {
-  type: 'askOut',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+registerAction('askOut', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c2romanceTarget',
@@ -381,11 +350,9 @@ actionLibrary.askOut = {
       }
     }
   } 
-};
+});
 
-actionLibrary.propose = {
-  type: 'propose',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+registerAction('propose', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c2romanceTarget',
@@ -425,11 +392,9 @@ actionLibrary.propose = {
       }
     }
   }
-};
+});
 
-actionLibrary.married = {
-  type: 'marry',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection',
+registerAction('married', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c1',
@@ -454,11 +419,9 @@ actionLibrary.married = {
       text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
     }
   }
-};
+});
 
-actionLibrary.haveKids = {
-  type: 'haveKids',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+registerAction('haveKids', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c2romanceTarget',
@@ -474,21 +437,19 @@ actionLibrary.haveKids = {
     '?c2 "romanceState" "married"',
   ],
   event: function(vars) {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'haveKids', char1:vars.c1, char2: vars.c2}
-          
-        ],
-        text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid."
-      }
-    } 
-  };
+    return {
+      actor: vars.c1,
+      target: vars.c2,
+      effects: [
+        {type: 'haveKids', char1:vars.c1, char2: vars.c2}
+        
+      ],
+      text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid."
+    }
+  } 
+});
 
-actionLibrary.breakUp = {
-  type: 'breakUp',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+registerAction('breakUp', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c2romanceTarget',
@@ -504,22 +465,19 @@ actionLibrary.breakUp = {
      [?c1 "romanceState" "engaged"])'
   ],
   event: function(vars) {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'breakUp', char1:vars.c1, char2: vars.c2}
-          
-        ],
-        text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up."
-      }
-    } 
-  };
+    return {
+      actor: vars.c1,
+      target: vars.c2,
+      effects: [
+        {type: 'breakUp', char1:vars.c1, char2: vars.c2}
+        
+      ],
+      text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up."
+    }
+  } 
+});
 
-
-actionLibrary.cheated = {
-  type: 'cheated',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+registerAction('cheated', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c2romanceTarget',
@@ -537,21 +495,19 @@ actionLibrary.cheated = {
 
   ],
   event: function(vars) {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'breakUp', char1:vars.c1, char2: vars.c2}
-          
-        ],
-        text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
-      }
-    } 
-  };
+    return {
+      actor: vars.c1,
+      target: vars.c2,
+      effects: [
+        {type: 'breakUp', char1:vars.c1, char2: vars.c2}
+        
+      ],
+      text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
+    }
+  } 
+});
 
-actionLibrary.divorce = {
-  type: 'divorced',
-  find: '?c1 ?n1 ?c2 ?n2 ?affection ?c2romanceTarget',
+registerAction('divorce', {
   where: [
     '?c1 "romanceTarget" ?c2',
     '?c2 "romanceTarget" ?c2romanceTarget',
@@ -567,21 +523,19 @@ actionLibrary.divorce = {
     '?c2 "romanceState" "married"'
   ],
   event: function(vars) {
-      return {
-        actor: vars.c1,
-        target: vars.c2,
-        effects: [
-          {type: 'divorce', char1:vars.c1, char2: vars.c2}
-          
-        ],
-        text: "💔 " + vars.n1 + " and  " + vars.n2+" have divorced due to cheating."
-      }
-    } 
-  };
+    return {
+      actor: vars.c1,
+      target: vars.c2,
+      effects: [
+        {type: 'divorce', char1:vars.c1, char2: vars.c2}
+        
+      ],
+      text: "💔 " + vars.n1 + " and  " + vars.n2+" have divorced due to cheating."
+    }
+  } 
+});
 
-actionLibrary.getPet = {
-  type: 'getPet',
-  find: '?c1 ?n1',
+registerAction('getPet', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -591,11 +545,9 @@ actionLibrary.getPet = {
        ],
       text: "🐶 "+ vars.n1 + " got a new pet. "
   })
-};
+});
 
-actionLibrary.upstagedMyEnemy = {
-  type: 'upstagedMyEnemy',
-  find: '?c1 ?n1',
+registerAction('upstagedMyEnemy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -605,11 +557,9 @@ actionLibrary.upstagedMyEnemy = {
        ],
       text: "😤 "+ vars.n1 + " upstaged their enemy. "
   })
-};
+});
 
-actionLibrary.wasUpstagedMyEnemy = {
-  type: 'wasUpstagedMyEnemy',
-  find: '?c1 ?n1',
+registerAction('wasUpstagedMyEnemy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -619,11 +569,9 @@ actionLibrary.wasUpstagedMyEnemy = {
        ],
       text: "😤 " + vars.n1 + " was upstaged by their enemy. "
   })
-};
+});
 
-actionLibrary.didWellOnTest = {
-  type: 'didWellOnTest',
-  find: '?c1 ?n1',
+registerAction('didWellOnTest', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -633,11 +581,9 @@ actionLibrary.didWellOnTest = {
        ],
       text: "💯 "+vars.n1 + " did well on a test. "
   })
-};
+});
 
-actionLibrary.didPoorlyOnTest = {
-  type: 'didPoorlyOnTest',
-  find: '?c1 ?n1',
+registerAction('didPoorlyOnTest', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -647,11 +593,9 @@ actionLibrary.didPoorlyOnTest = {
        ],
       text: "☹️ "+vars.n1 + " did poorly on a test. "
   })
-};
+});
 
-actionLibrary.gotTheJob = {
-  type: 'gotTheJob',
-  find: '?c1 ?n1',
+registerAction('gotTheJob', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -661,11 +605,9 @@ actionLibrary.gotTheJob = {
        ],
       text: "💼 "+vars.n1 + " got a job. "
   })
-};
+});
 
-actionLibrary.didNotGetTheJob = {
-  type: 'didNotGetTheJob',
-  find: '?c1 ?n1',
+registerAction('didNotGetTheJob', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -675,11 +617,9 @@ actionLibrary.didNotGetTheJob = {
        ],
       text: "🚫💼 "+vars.n1 + " did not get a job. "
   })
-};
+});
 
-actionLibrary.hadAJobInterview = {
-  type: 'hadAJobInterview',
-  find: '?c1 ?n1',
+registerAction('hadAJobInterview', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -687,11 +627,9 @@ actionLibrary.hadAJobInterview = {
         effects: [],
       text: "💼 "+vars.n1 + " had an interview. "
   })
-};
+});
 
-actionLibrary.firedFromJob = {
-  type: 'firedFromJob',
-  find: '?c1 ?n1',
+registerAction('firedFromJob', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -701,11 +639,9 @@ actionLibrary.firedFromJob = {
        ],
       text: "🔥 "+vars.n1 + " was fired from their job. "
   })
-};
+});
 
-actionLibrary.lostWeight = {
-  type: 'lostWeight',
-  find: '?c1 ?n1',
+registerAction('lostWeight', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -715,11 +651,9 @@ actionLibrary.lostWeight = {
        ],
       text: "🥗 "+vars.n1 + " lost weight. "
   })
-};
+});
 
-actionLibrary.danced = {
-  type: 'danced',
-  find: '?c1 ?n1',
+registerAction('danced', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -729,11 +663,9 @@ actionLibrary.danced = {
        ],
       text: "💃 "+vars.n1 + " danced. "
   })
-};
+});
 
-actionLibrary.feltHappy = {
-  type: 'feltHappy',
-  find: '?c1 ?n1',
+registerAction('feltHappy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -743,11 +675,9 @@ actionLibrary.feltHappy = {
        ],
       text: "😃 "+vars.n1 + " felt happy. "
   })
-};
+});
 
-actionLibrary.feltSad = {
-  type: 'feltSad',
-  find: '?c1 ?n1',
+registerAction('feltSad', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -757,11 +687,9 @@ actionLibrary.feltSad = {
        ],
       text: "😢 "+vars.n1 + " felt sad. "
   })
-};
+});
 
-actionLibrary.gotDrunk = {
-  type: 'gotDrunk',
-  find: '?c1 ?n1',
+registerAction('gotDrunk', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -771,11 +699,9 @@ actionLibrary.gotDrunk = {
        ],
       text: "🍷 "+ vars.n1 + " got drunk. "
   })
-};
+});
 
-actionLibrary.meditated = {
-  type: 'meditated',
-  find: '?c1 ?n1',
+registerAction('meditated', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -785,11 +711,9 @@ actionLibrary.meditated = {
        ],
       text: "🧘 "+vars.n1 + " meditated. "
   })
-};
+});
 
-actionLibrary.didChores = {
-  type: 'didChores',
-  find: '?c1 ?n1',
+registerAction('didChores', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -799,11 +723,9 @@ actionLibrary.didChores = {
        ],
       text: "🏠 "+vars.n1 + " did chores. "
   })
-};
+});
 
-actionLibrary.daydreamed = {
-  type: 'daydreamed',
-  find: '?c1 ?n1',
+registerAction('daydreamed', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -813,11 +735,9 @@ actionLibrary.daydreamed = {
        ],
       text: "💭 "+vars.n1 + " daydreamed. "
   })
-};
+});
 
-actionLibrary.movedHouses = {
-  type: 'movedHouses',
-  find: '?c1 ?n1',
+registerAction('movedHouses', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -827,11 +747,9 @@ actionLibrary.movedHouses = {
        ],
       text: "🏠 "+vars.n1 + " moved houses. "
   })
-};
+});
 
-actionLibrary.readBook = {
-  type: 'readBook',
-  find: '?c1 ?n1',
+registerAction('readBook', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -841,11 +759,9 @@ actionLibrary.readBook = {
        ],
       text: "📖 "+vars.n1 + " read a book. "
   })
-};
+});
 
-actionLibrary.lookedAtArt = {
-  type: 'lookedAtArt',
-  find: '?c1 ?n1',
+registerAction('lookedAtArt', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -855,11 +771,9 @@ actionLibrary.lookedAtArt = {
        ],
       text: "🖼 "+vars.n1 + " looked at art. "
   })
-};
+});
 
-actionLibrary.studied = {
-  type: 'studied',
-  find: '?c1 ?n1',
+registerAction('studied', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -869,11 +783,9 @@ actionLibrary.studied = {
        ],
       text: "📖 "+ vars.n1 + " studied. "
   })
-};
+});
 
-actionLibrary.tookAWalk = {
-  type: 'tookAWalk',
-  find: '?c1 ?n1',
+registerAction('tookAWalk', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -883,11 +795,9 @@ actionLibrary.tookAWalk = {
        ],
       text: "🚶 "+vars.n1 + " took a walk. "
   })
-};
+});
 
-actionLibrary.stormed = {
-  type: 'stormed',
-  find: '?c1 ?n1',
+registerAction('stormed', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -897,11 +807,9 @@ actionLibrary.stormed = {
        ],
       text: "🌩 It stormed. "
   })
-};
+});
 
-actionLibrary.waitedInTraffic = {
-  type: 'waitedInTraffic',
-  find: '?c1 ?n1',
+registerAction('waitedInTraffic', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -911,25 +819,9 @@ actionLibrary.waitedInTraffic = {
        ],
       text: "🚦 "+vars.n1 + " waited in traffic. "
   })
-};
+});
 
-actionLibrary.chattedWithAStranger = {
-  type: 'chattedWithAStranger',
-  find: '?c1 ?n1',
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changePopularity', amount: 1, target: vars.c1}
-       ],
-      text: "👥 "+vars.n1 + " chatted with a stranger. "
-  })
-};
-
-actionLibrary.wentToAParty = {
-  type: 'wentToAParty',
-  find: '?c1 ?n1',
+registerAction('wentToAParty', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -939,11 +831,9 @@ actionLibrary.wentToAParty = {
        ],
       text: "🎉 "+vars.n1 + " went to a party. "
   })
-};
+});
 
-actionLibrary.wentToASportsGame = {
-  type: 'wentToASportsGame',
-  find: '?c1 ?n1',
+registerAction('wentToASportsGame', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -953,11 +843,9 @@ actionLibrary.wentToASportsGame = {
        ],
       text: "🏀 "+vars.n1 + " went to a sports game. "
   })
-};
+});
 
-actionLibrary.exercise = {
-  type: 'exercise',
-  find: '?c1 ?n1',
+registerAction('exercise', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -967,11 +855,9 @@ actionLibrary.exercise = {
        ],
       text: "💪 " + vars.n1 + " exercised. "
   })
-};
+});
 
-actionLibrary.wentToTheGym = {
-  type: 'wentToTheGym',
-  find: '?c1 ?n1',
+registerAction('wentToTheGym', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -981,11 +867,9 @@ actionLibrary.wentToTheGym = {
        ],
       text: "🏋 "+vars.n1 + " went to the gym. "
   })
-};
+});
 
-actionLibrary.goSwimming = {
-  type: 'goSwimming',
-  find: '?c1 ?n1',
+registerAction('goSwimming', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -996,11 +880,9 @@ actionLibrary.goSwimming = {
     ],
     text: "🏊 " + vars.n1 + " went swimming. " 
   })
-};
+});
 
-actionLibrary.goDriving = {
-	type: 'goDriving',
-	find: '?c1 ?n1',
+registerAction('goDriving', {
 	where: [
 		'?c1 "name" ?n1'
 	],
@@ -1011,11 +893,9 @@ actionLibrary.goDriving = {
 		],
 		text: "🚗 " + vars.n1 + " went on a drive. "
 	})
-}; 
+}); 
 
-actionLibrary.goRunning = {
-	type: 'goRunning',
-	find: '?c1 ?n1',
+registerAction('goRunning', {
 	where: [
 		'?c1 "name" ?n1'
 	],
@@ -1026,11 +906,9 @@ actionLibrary.goRunning = {
 		],
 		text: "🏃 " + vars.n1 + " went on a run. "
 	})
-};
+});
 
-actionLibrary.goOnDateWith = {
-  type: 'goOnDateWith',
-  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+registerAction('goOnDateWith', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -1041,7 +919,6 @@ actionLibrary.goOnDateWith = {
     '?a2 "type" "affection"',
     '?a2 "source" ?c2',
     '?a2 "target" ?c1'
-    
   ],
   event: (vars) => ({
     actor: vars.c1,
@@ -1053,11 +930,9 @@ actionLibrary.goOnDateWith = {
     text: "😘 " + vars.n1 + " and " + vars.n2 +
           " went on a date at " + randNth(['the boba shop.','the movies.','italian restaurant.'])
   })
-};
+});
 
-actionLibrary.goOutWith = {
-  type: 'goOutWith',
-  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+registerAction('goOutWith', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -1079,38 +954,12 @@ actionLibrary.goOutWith = {
       {type: 'changePopularity', target: vars.c2, amount: +1},
     ],
     text: "🤪 " + vars.n1 + randNth([' ate out ',' went on a picnic ', 
-	    	' went hiking ', ' went camping ', ' went to the zoo ', ' shopped ', ' went on vacation ' ]) + "with " + vars.n2 + '.'
+	    	  ' went hiking ', ' went camping ', ' went to the zoo ', ' shopped ', ' went on vacation ' ]) +
+          "with " + vars.n2 + '.'
  })
-};
+});
 
-actionLibrary.goOnDateWith = {
-  type: 'goOnDateWith',
-  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
-  where: [
-    '?c1 "name" ?n1',
-    '?c2 "name" ?n2',
-    '(not= ?c1 ?c2)',
-    '?a1 "type" "affection"',
-    '?a1 "source" ?c1',
-    '?a1 "target" ?c2',
-    '?a2 "type" "affection"',
-    '?a2 "source" ?c2',
-    '?a2 "target" ?c1'
-  ],
-  event: (vars) => ({
-    actor: vars.c1,
-    target: vars.c2,
-    effects: [
-      {type: 'changeAffectionLevel', affection:vars.a1, amount: randNth([-1, 1, 2])},
-      {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth([-1, 1, 2])},
-    ],
-    text: "😘 " + vars.n1 + " went on a date with " + vars.n2 + '.'
- })
-};
-
-actionLibrary.wentToSchool = {
-  type: 'wentToSchool',
-  find: '?c1 ?n1',
+registerAction('wentToSchool', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1119,12 +968,9 @@ actionLibrary.wentToSchool = {
     effects: [],
     text: "🏫 " + vars.n1 + " went to school. " 
   })
-};
+});
 
-
-actionLibrary.pickedFlower = {
-  type: 'pickedFlower',
-  find: '?c1 ?n1',
+registerAction('pickedFlower', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1133,11 +979,9 @@ actionLibrary.pickedFlower = {
     effects: [],
     text: "🌺 " + vars.n1 + " picked a flower. " 
   })
-};
+});
 
-actionLibrary.didNothing = {
-	type: 'didNothing',
-	find: '?c1 ?n1',
+registerAction('didNothing', {
 	where: [
 		'?c1 "name" ?n1'
 	],
@@ -1148,11 +992,9 @@ actionLibrary.didNothing = {
 		],
 		text: "😒 " + vars.n1 + " was unproductive. "
 	})
-};
+});
 
-actionLibrary.gotSick = {
-	type: 'gotSick',
-	find: '?c1 ?n1',
+registerAction('gotSick', {
 	where: [
 		'?c1 "name" ?n1'
 	],
@@ -1163,11 +1005,9 @@ actionLibrary.gotSick = {
 		],
 		text: "🤢 " + vars.n1 + " got sick. "
 	})
-};
+});
 
-actionLibrary.madeAnEnemy = {
-  type: 'madeAnEnemy',
-  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+registerAction('madeAnEnemy', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -1190,11 +1030,9 @@ actionLibrary.madeAnEnemy = {
     ],
     text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies. "
   })
-};
+});
 
-actionLibrary.wentToWork = {
-	type: 'wentToWork',
-	find: '?c1 ?n1',
+registerAction('wentToWork', {
 	where: [
 		'?c1 "name" ?n1'
 	],
@@ -1205,11 +1043,9 @@ actionLibrary.wentToWork = {
 		],
 		text: "👔 " + vars.n1 + " went to work. "
 	})
-};
+});
 
-actionLibrary.wentToClass = {
-	type: 'wentToClass',
-	find: '?c1 ?n1',
+registerAction('wentToClass', {
 	where: [
 		'?c1 "name" ?n1'
 	],
@@ -1220,11 +1056,9 @@ actionLibrary.wentToClass = {
 		],
 		text: "📝 " + vars.n1 + " went to a class. "
 	})
-};
+});
 
-actionLibrary.getIntoFight = {
-  type: 'getIntoFight',
-  find: '?c1 ?n1 ?c2 ?n2 ?a1 ?a2',
+registerAction('getIntoFight', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -1245,11 +1079,9 @@ actionLibrary.getIntoFight = {
     ],
     text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight. "
  })
-};
+});
  
-actionLibrary.wentToDoctor_good = {
-  type: 'wentToDoctor_good',
-  find: '?c1 ?n1',
+registerAction('wentToDoctor_good', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1260,11 +1092,9 @@ actionLibrary.wentToDoctor_good = {
     ],
     text: "🏥 " + vars.n1 + "'s doctor appointment went well! "
   })
-};
+});
 
-actionLibrary.wentToDoctor_neutral= {
-  type: 'wentToDoctor_neutral',
-  find: '?c1 ?n1',
+registerAction('wentToDoctor_neutral', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1273,12 +1103,9 @@ actionLibrary.wentToDoctor_neutral= {
     effects: [],
     text: "🏥 " + vars.n1 + "'s doctor appointment went normal. "
   })
-};
+});
 
-
-actionLibrary.wentToDoctor_bad= {
-  type: 'wentToDoctor_bad',
-  find: '?c1 ?n1',
+registerAction('wentToDoctor_bad', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1289,11 +1116,9 @@ actionLibrary.wentToDoctor_bad= {
     ],
     text: "🏥 " + vars.n1 + "'s doctor appointment went bad. "
   })
-};
+});
 
-actionLibrary.surfedInternet_good= {
-  type: 'surfedInternet_good',
-  find: '?c1 ?n1',
+registerAction('surfedInternet_good', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1305,11 +1130,9 @@ actionLibrary.surfedInternet_good= {
     ],
     text: "💻 " + vars.n1 + " had fun surfing the internet! "
   })
-};
+});
 
-actionLibrary.surfedInternet_neutral= {
-  type: 'surfedInternet_neutral',
-  find: '?c1 ?n1',
+registerAction('surfedInternet_neutral', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1319,12 +1142,9 @@ actionLibrary.surfedInternet_neutral= {
     effects: [],
     text: "💻 " + vars.n1 + " felt meh after surfing the internet. "
   })
-};
+});
 
-
-actionLibrary.surfedInternet_bad = {
-  type: 'surfedInternet_bad',
-  find: '?c1 ?n1',
+registerAction('surfedInternet_bad', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1336,11 +1156,9 @@ actionLibrary.surfedInternet_bad = {
     ],
     text: "💻 " + vars.n1 + " felt bad after spending time on the internet. "
   })
-};
+});
 
-actionLibrary.playedVideoGames_good= {
-  type: 'playedVideoGames_good',
-  find: '?c1 ?n1',
+registerAction('playedVideoGames_good', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1352,11 +1170,9 @@ actionLibrary.playedVideoGames_good= {
     ],
     text: "🎮 " + vars.n1 + " had fun playing video games! "
   })
-};
+});
 
-actionLibrary.playedVideoGames_neutral= {
-  type: 'playedVideoGames_neutral',
-  find: '?c1 ?n1',
+registerAction('playedVideoGames_neutral', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1366,12 +1182,9 @@ actionLibrary.playedVideoGames_neutral= {
     effects: [],
     text: "🎮 " + vars.n1 + " felt meh after playing video games. "
   })
-};
+});
 
-
-actionLibrary.playedVideoGames_bad = {
-  type: 'playedVideoGames_bad',
-  find: '?c1 ?n1',
+registerAction('playedVideoGames_bad', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1383,11 +1196,9 @@ actionLibrary.playedVideoGames_bad = {
     ],
     text: "🎮 " + vars.n1 + " felt bad after playing video games. "
   })
-};
+});
 
-actionLibrary.bingeWatchedTV_good= {
-  type: 'bingeWatchedTV_good',
-  find: '?c1 ?n1',
+registerAction('bingeWatchedTV_good', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1399,11 +1210,9 @@ actionLibrary.bingeWatchedTV_good= {
     ],
     text: "📺 " + vars.n1 + " had fun binge-watching TV! "
   })
-};
+});
 
-actionLibrary.bingeWatchedTV_neutral= {
-  type: 'bingeWatchedTV_neutral',
-  find: '?c1 ?n1',
+registerAction('bingeWatchedTV_neutral', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1413,12 +1222,9 @@ actionLibrary.bingeWatchedTV_neutral= {
     effects: [],
     text: "📺 " + vars.n1 + " felt meh after binge-watching TV. "
   })
-};
+});
 
-
-actionLibrary.bingeWatchedTV_bad = {
-  type: 'bingeWatchedTV_bad',
-  find: '?c1 ?n1',
+registerAction('bingeWatchedTV_bad', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1430,11 +1236,9 @@ actionLibrary.bingeWatchedTV_bad = {
     ],
     text: "📺 " + vars.n1 + " felt bad after binge-watching TV. "
   })
-};
+});
 
-actionLibrary.chattedWithAStranger = {
-  type: 'chattedWithAStranger',
-  find: '?c1 ?n1',
+registerAction('chattedWithAStranger', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1445,11 +1249,9 @@ actionLibrary.chattedWithAStranger = {
     ],
     text: "👥 " + vars.n1 + " chatted with a stranger. "
   })
-};
+});
 
-actionLibrary.acceptedIntoProgram = {
-  type: 'acceptedIntoProgram',
-  find: '?c1 ?n1',
+registerAction('acceptedIntoProgram', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1459,11 +1261,9 @@ actionLibrary.acceptedIntoProgram = {
        ],
       text: "🏆 "+vars.n1 + " was accepted into a program. "
   })
-};
+});
 
-actionLibrary.rejectedFromProgram = {
-  type: 'rejectedFromProgram',
-  find: '?c1 ?n1',
+registerAction('rejectedFromProgram', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1473,12 +1273,9 @@ actionLibrary.rejectedFromProgram = {
        ],
       text: "😔 "+vars.n1 + " was rejected from a program. "
   })
-};
+});
 
-
-actionLibrary.performed_good= {
-  type: 'performed_good',
-  find: '?c1 ?n1',
+registerAction('performed_good', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1490,11 +1287,9 @@ actionLibrary.performed_good= {
     ],
     text: "🎭 " + vars.n1 + " felt great after performing in front of an audience! "
   })
-};
+});
 
-actionLibrary.performed_neutral= {
-  type: 'performed_neutral',
-  find: '?c1 ?n1',
+registerAction('performed_neutral', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1504,12 +1299,9 @@ actionLibrary.performed_neutral= {
     effects: [],
     text: "🎭 " + vars.n1 + " felt meh after their performance in front of an audience. "
   })
-};
+});
 
-
-actionLibrary.performed_bad= {
-  type: 'performed_bad',
-  find: '?c1 ?n1',
+registerAction('performed_bad', {
   where: [
     '?c1 "name" ?n1',
   ],
@@ -1521,11 +1313,9 @@ actionLibrary.performed_bad= {
     ],
     text: "🎭 " + vars.n1 + " felt bad after their performance in front of an audience. "
   })
-};
+});
 
-actionLibrary.chattedWithSomeone = {
-  type: 'chattedWithSomeone',
-  find: '?c1 ?n1 ?c2 ?n2',
+registerAction('chattedWithSomeone', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -1548,11 +1338,9 @@ actionLibrary.chattedWithSomeone = {
     ],
     text: "🧑‍🤝‍🧑 " + vars.n1 + " and " + vars.n2 + " chatted with each other. "
   })
-};
+});
 
-actionLibrary.workedWithSomeone = {
-  type: 'workedWithSomeone',
-  find: '?c1 ?n1 ?c2 ?n2',
+registerAction('workedWithSomeone', {
   where: [
     '?c1 "name" ?n1',
     '?c2 "name" ?n2',
@@ -1575,11 +1363,9 @@ actionLibrary.workedWithSomeone = {
     ],
     text: "🧑‍🤝‍🧑 " + vars.n1 + " and " + vars.n2 + " worked with each other. "
   })
-};
+});
 
-actionLibrary.playedInFountain = {
-  type: 'playedInFountain',
-  find: '?c1 ?n1',
+registerAction('playedInFountain', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1590,11 +1376,9 @@ actionLibrary.playedInFountain = {
     ],
     text: "⛲ " + vars.n1 + " played in a fountain. "
   })
-};
+});
 
-actionLibrary.makeAWishInFountain = {
-  type: 'makeAWishInFountain',
-  find: '?c1 ?n1',
+registerAction('makeAWishInFountain', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1605,11 +1389,9 @@ actionLibrary.makeAWishInFountain = {
     ],
     text: "⛲ " + vars.n1 + " made a wish in a fountain. "
   })
-};
+});
 
-actionLibrary.gotInAFight = {
-  type: 'gotInAFight',
-  find: '?c1 ?n1',
+registerAction('gotInAFight', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1620,11 +1402,9 @@ actionLibrary.gotInAFight = {
     ],
     text: "⚔️ " + vars.n1 + " got in a fight. "
   })
-};
+});
 
-actionLibrary.playedCatch = {
-  type: 'playedCatch',
-  find: '?c1 ?n1',
+registerAction('playedCatch', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1635,11 +1415,9 @@ actionLibrary.playedCatch = {
     ],
     text: "🎾 " + vars.n1 + " played catch. "
   })
-};
+});
 
-actionLibrary.staredAtPhone = {
-  type: 'staredAtPhone',
-  find: '?c1 ?n1',
+registerAction('staredAtPhone', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1650,11 +1428,9 @@ actionLibrary.staredAtPhone = {
     ],
     text: "📱 " + vars.n1 + " stared at their phone. "
   })
-};
+});
 
-actionLibrary.waitedForBus = {
-  type: 'staredAtPhone',
-  find: '?c1 ?n1',
+registerAction('waitedForBus', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1665,11 +1441,9 @@ actionLibrary.waitedForBus = {
     ],
     text: "🚌 " + vars.n1 + " waited for the bus. "
   })
-};
+});
 
-actionLibrary.skateboard = {
-  type: 'skateboard',
-  find: '?c1 ?n1',
+registerAction('skateboard', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1680,11 +1454,9 @@ actionLibrary.skateboard = {
     ],
     text: " " + vars.n1 + " went skateboarding. "
   })
-};
+});
 
-actionLibrary.walkedPet = {
-  type: 'walkedPet',
-  find: '?c1 ?n1',
+registerAction('walkedPet', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1695,11 +1467,9 @@ actionLibrary.walkedPet = {
     ],
     text: "🐶 " + vars.n1 + " walked their pet. "
   })
-};
+});
 
-actionLibrary.wentToPark = {
-  type: 'wentToPark',
-  find: '?c1 ?n1',
+registerAction('wentToPark', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1710,11 +1480,9 @@ actionLibrary.wentToPark = {
     ],
     text: "🏞️ " + vars.n1 + " went to the park. "
   })
-};
+});
 
-actionLibrary.laidOnGrass = {
-  type: 'laidOnGrass',
-  find: '?c1 ?n1',
+registerAction('laidOnGrass', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1725,11 +1493,9 @@ actionLibrary.laidOnGrass = {
     ],
     text: "🌿 " + vars.n1 + " laid on grass. "
   })
-};
+});
 
-actionLibrary.madeSnowAngels = {
-  type: 'madeSnowAngels',
-  find: '?c1 ?n1',
+registerAction('madeSnowAngels', {
   where: [
     '?c1 "name" ?n1'
   ],
@@ -1740,11 +1506,9 @@ actionLibrary.madeSnowAngels = {
     ],
     text: "🌨️ " + vars.n1 + " made snow angels. "
   })
-};
+});
 
-actionLibrary.hot = {
-  type: 'hot',
-  find: '?c1 ?n1',
+registerAction('hot', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1752,11 +1516,9 @@ actionLibrary.hot = {
        effects: [],
       text: "☀️ It was hot. "
   })
-};
+});
 
-actionLibrary.cold = {
-  type: 'cold',
-  find: '?c1 ?n1',
+registerAction('cold', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1764,11 +1526,9 @@ actionLibrary.cold = {
        effects: [],
       text: "❄️ It was cold. "
   })
-};
+});
 
-actionLibrary.windy = {
-  type: 'windy',
-  find: '?c1 ?n1',
+registerAction('windy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1776,11 +1536,9 @@ actionLibrary.windy = {
        effects: [],
       text: "💨 It was windy. "
   })
-};
+});
 
-actionLibrary.snowed = {
-  type: 'snowed',
-  find: '?c1 ?n1',
+registerAction('snowed', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1788,12 +1546,9 @@ actionLibrary.snowed = {
        effects: [],
       text: "🌨️ It snowed. "
   })
-};
+});
 
-
-actionLibrary.hailed = {
-  type: 'hailed',
-  find: '?c1 ?n1',
+registerAction('hailed', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1801,11 +1556,9 @@ actionLibrary.hailed = {
        effects: [],
       text: "🌨️ It hailed. "
   })
-};
+});
 
-actionLibrary.freezing = {
-  type: 'freezing',
-  find: '?c1 ?n1',
+registerAction('freezing', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1813,11 +1566,9 @@ actionLibrary.freezing = {
        effects: [],
       text: "❄️ It was freezing. "
   })
-};
+});
 
-actionLibrary.cloudy = {
-  type: 'cloudy',
-  find: '?c1 ?n1',
+registerAction('cloudy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1825,11 +1576,9 @@ actionLibrary.cloudy = {
        effects: [],
       text: "☁️ It was cloudy. "
   })
-};
+});
 
-actionLibrary.rainy = {
-  type: 'rainy',
-  find: '?c1 ?n1',
+registerAction('rainy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1837,12 +1586,9 @@ actionLibrary.rainy = {
        effects: [],
       text: "☔ It was rainy. "
   })
-};
+});
 
-
-actionLibrary.skipping = {
-  type: 'skipping',
-  find: '?c1 ?n1',
+registerAction('skipping', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
@@ -1850,4 +1596,4 @@ actionLibrary.skipping = {
        effects: [],
       text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
   })
-};
+});
