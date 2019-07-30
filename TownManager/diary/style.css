@@ -139,8 +139,6 @@ div.nested-tabs button {
   cursor: pointer;
   transition: 0.3s;
   background-color: black;
-  padding: 15px 15px;
-  border-radius: 0px;
   color: white;
   font-family: "Press Start 2P";
   border: 1px solid white;
@@ -179,20 +177,18 @@ div.nested-tabs button {
     background-color: rgba(0, 0, 0, .5);
 }
 
-.phrase {
-	float: left;
-	padding: 5px 10px;
+button.phrase {
+	padding: 5px 5px;
 	margin: 3px;
 	border-radius: 8px;
 	font-size: 10;
 	border-radius:0px;
+	border:1px solid white;
 }
-.phrase:hover {
+button.phrase:hover {
 	background-color:white;
-	border: 1px solid black;
 	color:black;
-	font-size:10;
-	padding:5px 5px;
+	padding:5px 5px
 }
 
 button#main-container {
