@@ -337,10 +337,12 @@ img {
 	text-align:center;
 	position:absolute;
 	padding-left:20px;
+x	height:0;
 	
 }
 #thirdBackButton {
 	font-size:10;
+	margin-bottom:60px;
 }
 
 
@@ -352,6 +354,7 @@ h2 {
 	color: white;
 	position: relative;
 	display: inline-block;
+	margin-top:5px;
 }
 
 .switchTemp {
@@ -373,7 +376,7 @@ h2 {
 #canvasBorders {
 	position:absolute;
 	width:50px;
-	left:1600;
+	right:65px;
 	top:200px;
 	text-align:center;
 	height:10px;
