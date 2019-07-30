@@ -357,6 +357,7 @@ h2 {
 	display: inline-block;
 	margin-top:5px;
 }
+
 h3{
 	font-size:15;
 	margin-left:20px;
@@ -419,7 +420,6 @@ h3{
 	font-size:10;
 }
 
-<<<<<<< HEAD
 div.scrollmenu {
   background-color: #000000;
   overflow: auto;
@@ -436,7 +436,8 @@ div.scrollmenu a {
 
 div.scrollmenu a:hover {
   background-color: #777;
-=======
+}
+
 #searchInput {
 	font-size:20;
 	background-color:black;
@@ -496,5 +497,3 @@ div.scrollmenu a:hover {
 .nested-tabs {
 	width:100%;
 	margin-bottom:15px;
->>>>>>> 7c565c44678df98186630da7134f1e7a792c8a31
-}
