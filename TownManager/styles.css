@@ -12,6 +12,7 @@ body {
 	image-rendering: pixelated;
 	position:relative;
 	outline:none;
+	width:100%;
 }
 audio {
 	display:none;
@@ -54,6 +55,15 @@ button:hover {
 	border: 1px solid black;
 
 }
+
+.subtab button:hover{
+	background-color: black;
+	padding: 15px 15px;
+	border-radius: 0px;
+	color: white;
+	font-family: "Press Start 2P";
+	
+}
 #startMenuButtons{
 	text-align:center;
 	padding:70px 0;
@@ -84,22 +94,23 @@ button:hover {
 	position:relative;
 	border:5px solid white;
 	margin-top:3%;
-	width:350;
-	height:600px;
+	width:20%;
+	height:auto;
 	margin-left:auto;
 	margin-right:auto;
 }
 .aboutMenu {
+	margin-top:30px;
 	text-indent:40px;
 	padding:40px;
+	margin-top:3%;
 	text-align:justify;
 	position:relative;
 	border:5px solid white;
-	margin-top:0%;
 	margin-left:auto;
 	margin-right:auto;
-	width:700;
-	height:810px;
+	width:40%;
+	height:auto;
 }
 #description {
 	font-size:15;
@@ -494,6 +505,7 @@ div.scrollmenu a:hover {
 #dateline:hover {
 	background-color:white;
 	color:black;
+	transition:0.3s;
 }
 
 #actions-events-phrases{
@@ -501,10 +513,31 @@ div.scrollmenu a:hover {
 	width:100%;
 	padding-right:25px;
 }
-.nested-tabs {
-	width:100%;
-	margin-bottom:15px;
+button.subtabs {
+
+	background-color: white;
+    padding: 15px 15px;
+    border-radius: 0px;
+    color: black;
+    font-family: "Press Start 2P";
+    border: 1px solid black;
+    font-size: 8;
+    transition: 0.3s;
 }
+
+button:hover {
+	background-color: black;
+	padding: 15px 15px;
+	border-radius: 0px;
+	color: white;
+	font-family: "Press Start 2P";
+	border: 1px solid black;
+
+}
+
+
+
+
 #diary::-webkit-scrollbar {
     -webkit-appearance: none;
 }
