@@ -2,8 +2,7 @@
 /// datascript
 /// util
 /// engine
-/// {actions,effects}
-/// sim
+/// {sim,actions,effects,siftpatterns}
 
 window.Sim = (function(){
 
@@ -175,8 +174,6 @@ return {
   registerEventHandler: function(handler) {
     simEventHandlers.push(handler);
   },
-  // Register a new sifting pattern.
-  registerSiftingPattern: registerSiftingPattern,
   // Run all registered sifting patterns over the database. Return all new nuggets that are found.
   runSiftingPatterns: runSiftingPatterns
 }
@@ -188,18 +185,6 @@ return {
 
 // To make a new diary entry...
 Sim.runDiaryAction('seeCuteAnimal', 'Today I saw a cute animal.');
-
-// To register a new sifting pattern...
-Sim.registerSiftingPattern('sawThreeAnimals', [
-  '?e1 "eventType" "seeCuteAnimal"',
-  '?e2 "eventType" "seeCuteAnimal"',
-  '?e3 "eventType" "seeCuteAnimal"',
-  '(< ?e1 ?e2 ?e3)',
-  '?e1 "actor" ?c1',
-  '?e2 "actor" ?c1',
-  '?e3 "actor" ?c1',
-  '?c1 "name" ?n1'
-]);
 
 // To write a function that'll be called whenever a new event happens...
 Sim.registerEventHandler(function(event) {
