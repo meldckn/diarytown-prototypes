@@ -11,6 +11,7 @@ let thirdBackButton = document.getElementById("thirdBackButton");
 let thirdBackButtonContainer = document.getElementById("thirdBackButtonContainer");
 let slider = document.getElementById('myRange');
 let music = document.getElementById('music');
+let backgroundMusic = document.getElementById('backgroundMusic');
 let writeNewDiary = document.getElementById('writeNewDiary');
 let diaryEditor = document.getElementById('diaryEditor');
 let fourthBackButton = document.getElementById('fourthBackButton');
@@ -39,9 +40,6 @@ diaryEditor.style.display = 'none';
 fourthBackButton.style.display = 'none';
 creatorButtons.style.display = 'none';
 writeNewDiaryContainer.style.display = 'none';
-
-
-//Akhil's Building management code below:
 
 //CANVAS COORDS
 let extraCharacterCanvasCoords = [
@@ -126,11 +124,6 @@ let treeCanvasCoords = [
 	[894, 515], [937, 515], [980, 515]
 ];
 
-
-
-
-
-
 //SHUFFLE FUNCTION
 function shuffle(a, b) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -148,11 +141,6 @@ function singleShuffle(a) {
     }
     return a;
 }
-
-
-
-
-
 
 // EXTRA CHARACTERS
 let extraCharacterImages = [document.getElementById("character1"), document.getElementById("character2"),
@@ -200,11 +188,6 @@ function drawCharacters() {
 		c.height = extraCharacterCanvasCoords[i][3];*/
 	}
 }
-
-
-
-
-
 
 //BUILDINGS
 let buildings = [document.getElementById("building1"), document.getElementById("building2"), document.getElementById("building3"),
@@ -273,11 +256,6 @@ function drawBuildings() {
 	}
 }
 
-
-
-
-
-
 //FOUNTAIN
 let fountainsEdited = [document.getElementById("fountain1"), document.getElementById("fountain2"),
 					   document.getElementById("fountain3"), document.getElementById("fountain4"),
@@ -327,11 +305,6 @@ function fountainStep() {
 
 	window.requestAnimationFrame(fountainStep);
 }
-
-
-
-
-
 
 //FLOWERS
 let flowersEdited = [document.getElementById("flower1"), document.getElementById("flower2"), document.getElementById("flower3")]
@@ -390,11 +363,6 @@ function flowerStep() {
 	window.requestAnimationFrame(flowerStep);
 }
 
-
-
-
-
-
 //TREES
 let treeCanvases = [];
 let treeCtxs = [];
@@ -424,9 +392,6 @@ function drawTrees() {
 	}
 }
 
-
-
-
 // TOGGLE CANVAS BORDERS
 function toggleCanvasBorders() {
 	if (document.getElementById("checkbox").checked) {
@@ -453,11 +418,6 @@ function toggleCanvasBorders() {
 		fountainCanvas.style.border = "none";
 	}
 }
-
-
-
-
-
 
 // TOWN CUSTOMIZATION
 let canvasCleared = [];
@@ -495,7 +455,6 @@ function deleteItem() {
 		}
 	}
 }
-
 
 function addBuilding1() {
 	window.onclick = function(e) {
@@ -668,14 +627,6 @@ function addBuilding5() {
 }
 
 
-
-
-
-
-
-
-
-
 //start of character animating thing
 
 //storage of image location addresses for the main character frames
@@ -729,9 +680,12 @@ function changeGender() {
 function turnOffMusic() {
 	if (document.getElementById("musicToggle").checked) {
 		music.muted = true;
+		backgroundMusic.muted = true;
 	}
 	if (!(document.getElementById("musicToggle").checked)) {
 		music.muted = false;
+		backgroundMusic.muted = false;
+
 	}
 }
 
@@ -961,9 +915,6 @@ function checkZ(x, y) {
 	}
 }
 
-
-
-
 //ABOUT BUTTON:
 
 aboutButton.onclick = function() {
@@ -1039,8 +990,6 @@ aboutButton.onclick = function() {
 		},500)
 	}
 }
-
-
 
 //OPTIONS BUTTON:
 
@@ -1121,7 +1070,37 @@ optionsButton.onclick = function() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //START BUTTON:
+
+//map music turned off
+music.pause();
+backgroundMusic.play();
+
 
 //Tracks keyup and keydown events
 let currentKeys = {};
@@ -1187,7 +1166,9 @@ startButton.onclick = function() {
 			translateY: 75,
 			duration:1000
 		})
-		
+		//starts the map music, pauses background Music
+		backgroundMusic.pause();
+		music.play();
 	},500)
 
 	//accounts for a possible pressing of the GenderToggle button in the options menu
@@ -1307,6 +1288,11 @@ startButton.onclick = function() {
 			})
 		},500)
 		clearInterval(refresh);
+
+		//starts the background music, pauses map music
+		music.pause();
+		backgroundMusic.currentTime = 0;
+		backgroundMusic.play();
 
 	}
 
