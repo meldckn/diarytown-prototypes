@@ -1388,7 +1388,7 @@ function runDiaryEditor() {
 }
 
 function openCategory(categoryName) {
-	console.log(document.getElementById(categoryName).style.display === "none", document.getElementById(categoryName).style.display === "none");
+	//console.log(document.getElementById(categoryName).style.display === "none", document.getElementById(categoryName).style.display === "none");
 	
 	if( getComputedStyle(document.getElementById(categoryName), null).display === "block" )
 	{		
@@ -1403,7 +1403,7 @@ function openCategory(categoryName) {
 
 function search() {
 	let actionsEventsPhrases = document.getElementById("actions-events-phrases");
-	let input, textValue;
+	let input, similarPhrase;
 
 	input = document.getElementById("searchInput");
 
@@ -1415,6 +1415,19 @@ function search() {
 			actionsEventsPhrases.children[i].style.display = "none";
 		}
 	}
+
+	/*for (let i = 0; i < actionsEventsPhrases.children.length; i++) {
+		let similarPhrase = Diary.getActionByText(input.value);
+
+		console.log(actionsEventsPhrases.children[i].innerText);
+		console.log(similarPhrase);
+
+		if (actionsEventsPhrases.children[i].innerText.indexOf(similarPhrase) > -1) {
+			actionsEventsPhrases.children[i].style.display = "";
+		} else {
+			actionsEventsPhrases.children[i].style.display = "none";
+		}
+	}*/
 }
 
 

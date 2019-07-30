@@ -1,16 +1,105 @@
-/// ENGINE CODE
+/// PARSE SIFTING PATTERNS
 
-// Given an action spec, preprocess it.
-function preprocessAction(action){
-  var query = '[:find ' + action.find + ' :where ';
-  query += action.where.map(whereClause => '[' + whereClause + ']');
-  query += ']';
-  action.query = query;
-  action.lvars = action.find.trim().split(/\s+/).map(s => s.substr(1));
-  return action;
+function findLvars(s) {
+  return s.match(/\?[a-zA-Z_][a-zA-Z0-9_]*/g).map(lvar => lvar.substring(1));
 }
 
+// Given part of a sifting pattern, return it, wrapping it in quotes if necessary.
+function quotewrapIfNeeded(part) {
+  if (part[0] === '?') return part;
+  if (['true','false','nil'].indexOf(part) > -1) return part;
+  if (!Number.isNaN(parseFloat(part))) return part;
+  if (part.length >= 2 && part[0] === '"' && part[part.length - 1] === '"') return part;
+  return '"' + part + '"';
+}
+
+function parseSiftingPatternClause(line) {
+  line = line.trim();
+  let lvars = distinct(findLvars(line));
+  let parts = line.split(/\s+/);
+  let clauseStr = line;
+  if (line[0] === '(') {
+    // handle complex clause
+    // can be `(or ...)`, `(not ...)`, `(not-join ...)`, `(pred arg*)`, `(rule arg*)`, `(function arg*) result`
+    if (['(or', '(not', '(not-join'].indexOf(parts[0]) > -1) {
+      // don't export lvars from `or`, `not`, `not-join` clauses
+      lvars = [];
+    } else {
+      // TODO also need to run this branch if the head of the clause is a rule name
+      clauseStr = '[' + line + ']';
+    }
+  } else {
+    // handle simple clause: `eid attr? value?`
+    if (parts.length < 1 || parts.length > 3) {
+      console.warn('Invalid query line: ' + line);
+    }
+    clauseStr = '[' + parts.map(quotewrapIfNeeded).join(' ') + ']';
+  }
+  return {clauseStr: clauseStr, lvars: lvars, original: line};
+}
+
+function parseSiftingPattern(lines) {
+  let clauses = lines.map(parseSiftingPatternClause);
+  let lvars = [];
+  for (let clause of clauses) {
+    lvars = lvars.concat(clause.lvars);
+  }
+  lvars = distinct(lvars);
+  let findPart = lvars.map(lvar => '?' + lvar).join(' ');
+  let wherePart = clauses.map(clause => clause.clauseStr).join();
+  let query = '[:find ' + findPart + ' :where ' + wherePart + ']';
+  return {lvars: lvars, clauses: clauses, query: query, findPart: findPart, wherePart: wherePart};
+}
+
+/// REGISTER SIFTING PATTERNS
+
+let siftingPatternLibrary = {};
+
+function registerSiftingPattern(name, patternLines) {
+  if (siftingPatternLibrary[name]) {
+    throw Error('A sifting pattern named ' + name + ' has already been registered!');
+  }
+  let pattern = parseSiftingPattern(patternLines);
+  pattern.name = name;
+  siftingPatternLibrary[name] = pattern;
+}
+
+/// REGISTER ACTIONS
+
+let actionLibrary = {};
+
+function registerAction(name, action) {
+  if (actionLibrary[name]) {
+    throw Error('An action named ' + name + ' has already been registered!');
+  }
+  action.name = name;
+  let pattern = parseSiftingPattern(action.where);
+  action.pattern = pattern;
+  action.wherePart = pattern.wherePart;
+  if (action.find) {
+    action.lvars = action.find.trim().split(/\s+/.map(s => s.substring(1)));
+    action.query = '[:find ' + action.find + ' :where ' + pattern.wherePart + ']';
+    action.findPart = action.find;
+  } else {
+    action.lvars = pattern.lvars;
+    action.query = pattern.query;
+    action.findPart = pattern.findPart;
+  }
+  actionLibrary[name] = action;
+}
+
+/// REGISTER EFFECT HANDLERS
+
 let effectHandlers = {};
+
+function registerEffectHandler(name, handler) {
+  if (effectHandlers[name]) {
+    throw Error('An effect handler named ' + name + ' has already been registered!');
+  }
+  effectHandlers[name] = handler;
+}
+
+/// COMMIT EVENTS TO DB
 
 // Given the DB and an effect, perform the effect and return an updated DB.
 function processEffect(db, effect){
@@ -35,7 +124,7 @@ function addEvent(db, event) {
   db = datascript.db_with(db, [eventEntity]);
   let eventID = newestEID(db);
   // process the event's effects
-  for (let effect of event.effects){
+  for (let effect of event.effects || []){
     effect.cause = eventID;
     db = processEffect(db, effect);
   }
@@ -51,9 +140,12 @@ function realizeEvent(action, bindings){
   }
   // build the event object
   let event = action.event(bindings);
-  event.type = action.type;
+  event.type = 'event';
+  event.eventType = action.name;
   return event;
 }
+
+/// RETRIEVE POSSIBLE ACTIONS
 
 // Given the DB and a list of action specs, return a list of "possible action" objects,
 // each of which contains an action spec and a set of possible lvar bindings for that action.
@@ -75,12 +167,10 @@ function possibleActionsByType(db, allActions){
   for (let action of allActions) {
     let allBindings = datascript.q(action.query, db);
     if (allBindings.length === 0) continue; // skip actions for which there's no valid bindings
-    possibleByType[action.type] = [];
+    possibleByType[action.name] = [];
     for (let bindings of allBindings) {
-      possibleByType[action.type].push({action: action, bindings: bindings});
+      possibleByType[action.name].push({action: action, bindings: bindings});
     }
   }
   return possibleByType;
 }
-
-let actionLibrary = {};

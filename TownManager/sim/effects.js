@@ -1,4 +1,4 @@
-effectHandlers.addAttitude = function(db, effect) {
+registerEffectHandler('addAttitude', function(db, effect) {
   return createEntity(db, {
     type: 'attitude',
     cause: effect.cause,
@@ -6,9 +6,9 @@ effectHandlers.addAttitude = function(db, effect) {
     source: effect.source,
     target: effect.target
   });
-};
+});
 
-effectHandlers.startProject = function(db, effect) {
+registerEffectHandler('startProject', function(db, effect) {
   return createEntity(db, {
     type: 'project',
     owner: effect.owner,
@@ -16,72 +16,67 @@ effectHandlers.startProject = function(db, effect) {
     state: 'active',
     dramaLevel: 0
   });
-};
+});
 
-effectHandlers.updateProjectState = function(db, effect) {
+registerEffectHandler('updateProjectState', function(db, effect) {
   return updateProperty(db, effect.project, 'state', effect.newState);
-};
+});
 
-effectHandlers.increaseProjectDrama = function(db, effect) {
+registerEffectHandler('increaseProjectDrama', function(db, effect) {
   let oldDramaLevel = getEntity(db, effect.project).dramaLevel;
   let newDramaLevel = oldDramaLevel + (effect.amount || 1);
   return updateProperty(db, effect.project, 'dramaLevel', newDramaLevel);
-};
+});
 
-effectHandlers.changeAffectionLevel = function(db, effect) {
+registerEffectHandler('changeAffectionLevel', function(db, effect) {
   let oldAffectionLevel = getEntity(db, effect.affection).level;
   let newAffectionLevel = oldAffectionLevel + effect.amount;
   return updateProperty(db, effect.affection, 'level', newAffectionLevel);
-};
+});
 
-effectHandlers.realizeLove = function(db, effect) {
+registerEffectHandler('realizeLove', function(db, effect) {
   db = updateProperty(db, effect.affection, 'realizedLove', true);
   return updateProperty(db, effect.romeo, 'romanceTarget', effect.juliet);
-};
+});
 
-effectHandlers.beginDating = function(db, effect) {
+registerEffectHandler('beginDating', function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'dating');
-  return updateProperty(db, effect.char2, 'romanceState', "dating");
-};
+  return updateProperty(db, effect.char2, 'romanceState', 'dating');
+});
 
-effectHandlers.propose = function(db, effect) {
+registerEffectHandler('propose', function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'engaged');
   return updateProperty(db, effect.char2, 'romanceState', 'engaged');
-};
+});
 
-effectHandlers.marry = function(db, effect) {
+registerEffectHandler('marry', function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'married');
-  return updateProperty(db, effect.char2, 'romanceState', "married");
-};
+  return updateProperty(db, effect.char2, 'romanceState', 'married');
+});
 
-effectHandlers.haveKids = function(db, effect) {
+registerEffectHandler('haveKids', function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'haveKids');
   return updateProperty(db, effect.char2, 'romanceState', 'haveKids');
-};
+});
 
-effectHandlers.marry = function(db, effect) {
-  db = updateProperty(db, effect.char1, 'romanceState', 'married');
-  return updateProperty(db, effect.char2, 'romanceState', "married");
-};
-
-effectHandlers.breakUp = function(db, effect) {
+registerEffectHandler('breakUp', function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'single');
   return updateProperty(db, effect.char2, 'romanceState', 'single');
-};
+});
 
-effectHandlers.divorce= function(db, effect) {
+registerEffectHandler('divorce', function(db, effect) {
   db = updateProperty(db, effect.char1, 'romanceState', 'single');
   return updateProperty(db, effect.char2, 'romanceState', 'single');
-};
+});
 
-effectHandlers.changeAttitudeTowardSelf = function(db, effect) {
+registerEffectHandler('changeAttitudeTowardSelf', function(db, effect) {
   let oldAttitude = getEntity(db, effect.target).attitudeTowardSelf || 0;
   let newAttitude = oldAttitude + effect.amount;
   return updateProperty(db, effect.target, 'attitudeTowardSelf', newAttitude);
-};
+});
 
-effectHandlers.changePopularity = function(db, effect){
+registerEffectHandler('changePopularity', function(db, effect){
   let oldPopularity = getEntity(db, effect.target).popularity || 0;
   let newPopularity = oldPopularity + effect.amount;
   return updateProperty (db, effect.target, 'popularity' , newPopularity);
-};
+});
