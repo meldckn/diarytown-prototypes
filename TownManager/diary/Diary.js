@@ -150,8 +150,8 @@ var Diary = ( function() {
 			diaryEntry.push(element.id);
 		});
 		console.log(diaryEntry);
+		drawEmoji(diaryEntry);
 		document.getElementById ("fourthBackButton").click();
-
 
  	}
 

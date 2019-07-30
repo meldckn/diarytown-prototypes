@@ -745,16 +745,27 @@ function drawHero() {
 	hero.style.top = 400;
 }
 
+function timer(ms) {
+ return new Promise(res => setTimeout(res, ms));
+}
+
 let emoji = document.createElement('p');
-let phraseForm = document.getElementById('phraseForm');
-function drawEmoji() {
+//let phraseForm = document.getElementById('phraseForm');
+async function drawEmoji(diaryEntry) {
 	emoji.id = "emoji";
 	hero.appendChild(emoji);
+
+	let diaryCounter = 0;
 	for (let i = 0; i < phrases.length; i++) {
-		for (let j = 0; j < phrases[i].text.length; j++) {
-			if (phraseForm.value === phrases[i].text[j]) {
-				emoji.innerText	= phrases[i].emoji;
+		if (diaryEntry[diaryCounter] === phrases[i].id) {
+			console.log(phrases[i].emoji);
+			emoji.innerText = phrases[i].emoji;
+			diaryCounter++;
+			i = 0;
+			if (diaryCounter > diaryEntry.length) {
+				break;
 			}
+			await timer(5000);
 		}
 	}
 }
