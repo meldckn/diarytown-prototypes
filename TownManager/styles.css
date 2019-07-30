@@ -452,6 +452,7 @@ div.scrollmenu a:hover {
 	font-family: "Press Start 2P";
 	letter-spacing:1px;
 	word-spacing:0em;
+	margin-bottom:15px;
 
 }
 #searchInput:focus {
@@ -477,6 +478,7 @@ div.scrollmenu a:hover {
 }
 #diary {
 	text-align:left;
+	height:70%;
 }
 #dateline {
 	outline:none;
@@ -497,3 +499,18 @@ div.scrollmenu a:hover {
 .nested-tabs {
 	width:100%;
 	margin-bottom:15px;
+}
+#diary::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+#diary::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+#diary::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+#diary::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
