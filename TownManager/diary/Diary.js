@@ -148,9 +148,10 @@ var Diary = ( function() {
  		var phraseNodes = document.getElementById("diary").querySelectorAll(".diary-phrase");
  		phraseNodes.forEach(function(element){
 			diaryEntry.push(element.id);
+			Sim.runDiaryAction(element.id, element.innerText);
 		});
 		console.log(diaryEntry);
-		drawEmoji(diaryEntry);
+		//drawEmoji(diaryEntry);
 		document.getElementById ("fourthBackButton").click();
 
  	}
