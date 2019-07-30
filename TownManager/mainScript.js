@@ -1403,31 +1403,18 @@ function openCategory(categoryName) {
 
 function search() {
 	let actionsEventsPhrases = document.getElementById("actions-events-phrases");
-	let input, similarPhrase;
+	let input = document.getElementById("searchInput");
 
-	input = document.getElementById("searchInput");
-
-	for (let i = 0; i < actionsEventsPhrases.children.length; i++) {
-		textValue = actionsEventsPhrases.children[i].innerText;
-		if (textValue.toUpperCase().indexOf(input.value.toUpperCase()) > -1) {
-			actionsEventsPhrases.children[i].style.display = "";
-		} else {
-			actionsEventsPhrases.children[i].style.display = "none";
+	for (let i = 0; i < phrases.length; i++) {
+		for (let j = 0; j < phrases[i].text.length; j++) {
+			if (phrases[i].text[j].toUpperCase().indexOf(input.value.toUpperCase()) > -1) {
+				document.getElementById(phrases[i].id).style.display = "block";
+				break;
+			} else {
+				document.getElementById(phrases[i].id).style.display = "none";
+			}
 		}
 	}
-
-	/*for (let i = 0; i < actionsEventsPhrases.children.length; i++) {
-		let similarPhrase = Diary.getActionByText(input.value);
-
-		console.log(actionsEventsPhrases.children[i].innerText);
-		console.log(similarPhrase);
-
-		if (actionsEventsPhrases.children[i].innerText.indexOf(similarPhrase) > -1) {
-			actionsEventsPhrases.children[i].style.display = "";
-		} else {
-			actionsEventsPhrases.children[i].style.display = "none";
-		}
-	}*/
 }
 
 
