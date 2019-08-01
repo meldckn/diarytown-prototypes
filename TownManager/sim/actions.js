@@ -31,7 +31,6 @@ registerAction('hangOutWith', {
     '?a2 "type" "affection"',
     '?a2 "source" ?c2',
     '?a2 "target" ?c1'
-    
   ],
   event: (vars) => ({
     actor: vars.c1,
@@ -46,6 +45,7 @@ registerAction('hangOutWith', {
           " hung out together at the " + randNth(['boba','ice cream','pizza']) + " place."
   })
 });
+
 
 registerAction('seeCuteAnimal', {
   where: [
@@ -329,12 +329,10 @@ registerAction('askOut', {
         target: vars.c2,
         effects: [
           {type: 'beginDating', char1:vars.c1, char2: vars.c2}
-          /*
-          {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
-          {type: 'addAttitude', charge: 'positive', source: vars.c2, target: vars.c1},
-          {type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
-          {type: 'changeAffectionLevel', affection:vars.affection, amount:1},
-          */
+          //{type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
+          //{type: 'addAttitude', charge: 'positive', source: vars.c2, target: vars.c1},
+          //{type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
+          //{type: 'changeAffectionLevel', affection:vars.affection, amount:1},
         ],
         text: "💞 " + vars.n1 + " is now in a relationship with " + vars.n2+"."
       }
@@ -709,7 +707,7 @@ registerAction('meditated', {
        effects: [
        {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
        ],
-      text: "🧘 "+vars.n1 + " meditated. "
+      text: "🙏 "+vars.n1 + " meditated. "
   })
 });
 
@@ -1595,5 +1593,49 @@ registerAction('skipping', {
       target: vars.c1,
        effects: [],
       text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
+  })
+});
+
+registerAction('lostWeight', {
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🥗 "+vars.n1 + " lost weight. "
+  })
+});
+
+registerAction('getPet', {
+  where: ['?c1 "name" ?n1'],
+  event: (vars) => ({
+    actor: vars.c1,
+      target: vars.c1,
+       effects: [
+       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+       ],
+      text: "🐶 "+ vars.n1 + " got a new pet. "
+  })
+});
+
+registerAction('lostWeightAndGotPet', {
+  where: [
+    '?e1 eventType lostWeight',
+    '?e2 eventType getPet',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: "🥗🐶 " + vars.n1 + 
+          " lost weight and got a pet."
   })
 });

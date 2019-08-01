@@ -139,6 +139,7 @@ function runSiftingPatterns() {
 /// return Sim singleton object
 
 return {
+  allNames,
   // Return the current simulation state as a DataScript DB.
   getDB: function() {
     return gameDB;

@@ -17,6 +17,7 @@ let diaryEditor = document.getElementById('diaryEditor');
 let fourthBackButton = document.getElementById('fourthBackButton');
 let creatorButtons = document.getElementById('customize');
 let writeNewDiaryContainer = document.getElementById('writeNewDiaryContainer');
+let diaryEvents = document.getElementById('diaryEvents');
 
 //assigning classNames
 map.className = "map";
@@ -30,6 +31,7 @@ diaryEditor.className = "diaryEditor";
 fourthBackButton.className = "fourthBackButton";
 creatorButtons.className = "creatorButtons";
 writeNewDiaryContainer.className = 'writeNewDiaryContainer';
+diaryEvents.className = "diaryEvents";
 
 //hiding certain things from appearing right away on the start menu
 map.style.display = 'none';
@@ -40,6 +42,7 @@ diaryEditor.style.display = 'none';
 fourthBackButton.style.display = 'none';
 creatorButtons.style.display = 'none';
 writeNewDiaryContainer.style.display = 'none';
+diaryEvents.style.display = 'none';
 
 //CANVAS COORDS
 let tempCanvasCoord = [
@@ -638,10 +641,11 @@ function addBuilding5() {
 // Diary events and sifting patterns
 let emoji = document.createElement('p');
 let emojiQueue = [];
-let emojiCounter = 0;
-let diaryEvents = document.getElementById('diaryEvents');
+let workloadCounter = 0;
 Sim.registerEventHandler(function(event) {
-	drawEmoji();
+	emoji.className = "emoji";
+	hero.appendChild(emoji);
+
 	if (event.isDiaryEvent) {
 		emojiQueue.push(Diary.getActionById(event.eventType).emoji);
 		diaryEvents.innerHTML += (event.text + "<br></br>");
@@ -655,7 +659,7 @@ Sim.registerEventHandler(function(event) {
 	let newNuggets = Sim.runSiftingPatterns();
 	for (let nugget of newNuggets) {
 		if (nugget.pattern.name === 'workloadIncrease') {
-			emojiCounter++;
+			workloadCounter++;
 
 			let rockClass = document.createElement('div');
 			let rockImg = document.createElement('img');
@@ -673,7 +677,7 @@ Sim.registerEventHandler(function(event) {
 			let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
 
 			rockClass.style.left = (leftMin + leftMax) / 2;
-			rockClass.style.top = topMin + (54*emojiCounter);
+			rockClass.style.top = topMin + (54*workloadCounter);
 		}
 	}
 });
@@ -685,13 +689,9 @@ window.setInterval(function(event) {
 	emoji.innerText = emojiQueue[0];
 	emojiQueue.shift();
 }, 1000 * 2.5);
-function drawEmoji() {
-	emoji.id = "emoji";
-	hero.appendChild(emoji);
-}
 window.setInterval(function(){
 	Sim.runRandomAction();
-}, 1000 * 5);
+}, 1000 * 2);
 
 
 
@@ -766,6 +766,7 @@ function turnOffMusic() {
 let hero = document.createElement('div');
 function drawHero() {
 	hero.className = "hero";
+	hero.id = "mainPlayer";
 	hero.appendChild(mainCharacterAnimations[1]);
 	map.appendChild(hero);
 	hero.style.left = 367;
@@ -1196,6 +1197,7 @@ startButton.onclick = function() {
 		creatorButtons.style.display = 'block';
 		thirdBackButtonContainer.style.display = 'block';
 		writeNewDiaryContainer.style.display = 'block';
+		diaryEvents.style.display = 'block';
 		map.style.opacity = 0;
 		//fades in the map
 		anime({
@@ -1222,8 +1224,6 @@ startButton.onclick = function() {
 	if (!alreadyDrawn) {
 		//draws hero
 		drawHero();
-		//draws emojis above hero
-		//drawEmoji();
 		//draws buildings
 		drawBuildings();
 		//draws flowers
@@ -1310,6 +1310,7 @@ startButton.onclick = function() {
 			thirdBackButtonContainer.style.display = 'none';
 			creatorButtons.style.display = 'none';
 			writeNewDiaryContainer.style.display = 'none';
+			diaryEvents.style.display = 'none';
 
 		}, 500)
 
@@ -1358,6 +1359,7 @@ startButton.onclick = function() {
 			thirdBackButton.style.display = 'none';
 			creatorButtons.style.display = 'none';
 			writeNewDiaryContainer.style.display = 'none';
+			diaryEvents.style.display = 'none';
 		}, 500)
 
 		//transition in the diary Editor
@@ -1409,6 +1411,7 @@ startButton.onclick = function() {
 				thirdBackButton.style.display = 'block';
 				creatorButtons.style.display = 'block';
 				writeNewDiaryContainer.style.display = 'block';
+				diaryEvents.style.display = 'block';
 				//fades in the StartMenu
 				anime({
 					targets:'.map',
