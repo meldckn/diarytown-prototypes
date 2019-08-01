@@ -72,7 +72,10 @@ function registerAction(name, action) {
   if (actionLibrary[name]) {
     throw Error('An action named ' + name + ' has already been registered!');
   }
+  actionLibrary[name] = action;
   action.name = name;
+  action.lvars = [];
+  if (!action.where) return; // don't need to do the rest for unconditional actions
   let pattern = parseSiftingPattern(action.where);
   action.pattern = pattern;
   action.wherePart = pattern.wherePart;
@@ -85,7 +88,6 @@ function registerAction(name, action) {
     action.query = pattern.query;
     action.findPart = pattern.findPart;
   }
-  actionLibrary[name] = action;
 }
 
 /// REGISTER EFFECT HANDLERS
@@ -102,7 +104,7 @@ function registerEffectHandler(name, handler) {
 /// COMMIT EVENTS TO DB
 
 // Given the DB and an effect, perform the effect and return an updated DB.
-function processEffect(db, effect){
+function processEffect(db, effect) {
   let handler = effectHandlers[effect.type];
   if (handler) {
     db = handler(db, effect);
@@ -133,7 +135,7 @@ function addEvent(db, event) {
 
 // Given an action spec and a set of lvar bindings, return a concrete event object
 // representing a performance of the specified action with the specified bindings.
-function realizeEvent(action, bindings){
+function realizeEvent(action, bindings) {
   // make bound lvars accessible by name
   for (let i = 0; i < action.lvars.length; i++){
     bindings[action.lvars[i]] = bindings[i]; 
@@ -149,12 +151,16 @@ function realizeEvent(action, bindings){
 
 // Given the DB and a list of action specs, return a list of "possible action" objects,
 // each of which contains an action spec and a set of possible lvar bindings for that action.
-function possibleActions(db, allActions){
+function possibleActions(db, allActions) {
   let possible = [];
   for (let action of allActions) {
-    let allBindings = datascript.q(action.query, db);
-    for (let bindings of allBindings){
-      possible.push({action: action, bindings: bindings});
+    if (action.query) {
+      let allBindings = datascript.q(action.query, db);
+      for (let bindings of allBindings){
+        possible.push({action: action, bindings: bindings});
+      }
+    } else {
+      possible.push({action: action, bindings: []});
     }
   }
   return possible;
@@ -162,14 +168,18 @@ function possibleActions(db, allActions){
 
 // Same as possibleActions, but returns an object grouping the "possible action" objects
 // by action type.
-function possibleActionsByType(db, allActions){
+function possibleActionsByType(db, allActions) {
   let possibleByType = {};
   for (let action of allActions) {
-    let allBindings = datascript.q(action.query, db);
-    if (allBindings.length === 0) continue; // skip actions for which there's no valid bindings
-    possibleByType[action.name] = [];
-    for (let bindings of allBindings) {
-      possibleByType[action.name].push({action: action, bindings: bindings});
+    if (action.query) {
+      let allBindings = datascript.q(action.query, db);
+      if (allBindings.length === 0) continue; // skip actions for which there's no valid bindings
+      possibleByType[action.name] = [];
+      for (let bindings of allBindings) {
+        possibleByType[action.name].push({action: action, bindings: bindings});
+      }
+    } else {
+      possibleByType[action.name] = [{action: action, bindings: []}];
     }
   }
   return possibleByType;

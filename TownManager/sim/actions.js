@@ -53,8 +53,6 @@ registerAction('seeCuteAnimal', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
-    effects: [],
     text: "🐶 " + vars.n1 + " saw a cute " + randNth(['dog','cat','snake']) + "."
   })
 });
@@ -69,7 +67,6 @@ registerAction('startProject', {
     let projectType = randNth(allProjectTypes);
     return {
       actor: vars.c1,
-      target: vars.c1,
       // TODO need to specify project: somehow, but can't, because its ID is only generated
       // once the effects are run
       effects: [
@@ -89,7 +86,6 @@ registerAction('makeProgressOnProject', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     project: vars.proj,
     effects: [
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
@@ -107,7 +103,6 @@ registerAction('workFruitlesslyOnProject', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     project: vars.proj,
     effects: [
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
@@ -125,7 +120,6 @@ registerAction('abandonProject', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     project: vars.proj,
     effects: [
       {type: 'updateProjectState', project: vars.proj, newState: 'inactive'},
@@ -144,7 +138,6 @@ registerAction('resumeProject', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     project: vars.proj,
     effects: [
       {type: 'updateProjectState', project: vars.proj, newState: 'active'},
@@ -165,7 +158,6 @@ registerAction('finishProject', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     project: vars.proj,
     effects: [
       {type: 'updateProjectState', project: vars.proj, newState: 'finished'}
@@ -261,7 +253,6 @@ registerAction('getDiscouraged', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     project: vars.proj,
     effects: [
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
@@ -537,11 +528,10 @@ registerAction('getPet', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🐶 "+ vars.n1 + " got a new pet. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🐶 " + vars.n1 + " got a new pet."
   })
 });
 
@@ -549,11 +539,10 @@ registerAction('upstagedMyEnemy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "😤 "+ vars.n1 + " upstaged their enemy. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "😤 " + vars.n1 + " upstaged their enemy."
   })
 });
 
@@ -561,11 +550,10 @@ registerAction('wasUpstagedMyEnemy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "😤 " + vars.n1 + " was upstaged by their enemy. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "😤 " + vars.n1 + " was upstaged by their enemy."
   })
 });
 
@@ -573,11 +561,10 @@ registerAction('didWellOnTest', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "💯 "+vars.n1 + " did well on a test. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "💯 " + vars.n1 + " did well on a test."
   })
 });
 
@@ -585,11 +572,10 @@ registerAction('didPoorlyOnTest', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "☹️ "+vars.n1 + " did poorly on a test. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "☹️ " + vars.n1 + " did poorly on a test."
   })
 });
 
@@ -597,11 +583,10 @@ registerAction('gotTheJob', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "💼 "+vars.n1 + " got a job. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "💼 " + vars.n1 + " got a job."
   })
 });
 
@@ -609,11 +594,10 @@ registerAction('didNotGetTheJob', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "🚫💼 "+vars.n1 + " did not get a job. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "🚫💼 " + vars.n1 + " did not get a job."
   })
 });
 
@@ -621,9 +605,7 @@ registerAction('hadAJobInterview', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-        effects: [],
-      text: "💼 "+vars.n1 + " had an interview. "
+    text: "💼 " + vars.n1 + " had an interview."
   })
 });
 
@@ -631,11 +613,10 @@ registerAction('firedFromJob', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "🔥 "+vars.n1 + " was fired from their job. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "🔥 " + vars.n1 + " was fired from their job."
   })
 });
 
@@ -643,11 +624,10 @@ registerAction('lostWeight', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🥗 "+vars.n1 + " lost weight. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🥗 " + vars.n1 + " lost weight."
   })
 });
 
@@ -655,11 +635,10 @@ registerAction('danced', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "💃 "+vars.n1 + " danced. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "💃 " + vars.n1 + " danced."
   })
 });
 
@@ -667,11 +646,10 @@ registerAction('feltHappy', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "😃 "+vars.n1 + " felt happy. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "😃 " + vars.n1 + " felt happy."
   })
 });
 
@@ -679,11 +657,10 @@ registerAction('feltSad', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "😢 "+vars.n1 + " felt sad. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "😢 " + vars.n1 + " felt sad."
   })
 });
 
@@ -691,11 +668,10 @@ registerAction('gotDrunk', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: randNth([-1, 1]), target: vars.c1}
-       ],
-      text: "🍷 "+ vars.n1 + " got drunk. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: randNth([-1, 1]), target: vars.c1}
+    ],
+    text: "🍷 " + vars.n1 + " got drunk."
   })
 });
 
@@ -715,11 +691,10 @@ registerAction('didChores', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🏠 "+vars.n1 + " did chores. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🏠 " + vars.n1 + " did chores."
   })
 });
 
@@ -727,11 +702,10 @@ registerAction('daydreamed', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 0, target: vars.c1}
-       ],
-      text: "💭 "+vars.n1 + " daydreamed. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 0, target: vars.c1}
+    ],
+    text: "💭 " + vars.n1 + " daydreamed."
   })
 });
 
@@ -739,11 +713,10 @@ registerAction('movedHouses', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🏠 "+vars.n1 + " moved houses. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🏠 " + vars.n1 + " moved houses."
   })
 });
 
@@ -751,11 +724,10 @@ registerAction('readBook', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "📖 "+vars.n1 + " read a book. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "📖 " + vars.n1 + " read a book."
   })
 });
 
@@ -763,11 +735,10 @@ registerAction('lookedAtArt', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🖼 "+vars.n1 + " looked at art. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🖼 " + vars.n1 + " looked at art."
   })
 });
 
@@ -775,11 +746,10 @@ registerAction('studied', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "📖 "+ vars.n1 + " studied. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "📖 " + vars.n1 + " studied."
   })
 });
 
@@ -787,23 +757,16 @@ registerAction('tookAWalk', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🚶 "+vars.n1 + " took a walk. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🚶 " + vars.n1 + " took a walk."
   })
 });
 
 registerAction('stormed', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 0, target: vars.c1}
-       ],
-      text: "🌩 It stormed. "
+    text: "🌩 It stormed."
   })
 });
 
@@ -811,11 +774,10 @@ registerAction('waitedInTraffic', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "🚦 "+vars.n1 + " waited in traffic. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "🚦 " + vars.n1 + " waited in traffic."
   })
 });
 
@@ -823,11 +785,10 @@ registerAction('wentToAParty', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changePopularity', amount: 1, target: vars.c1}
-       ],
-      text: "🎉 "+vars.n1 + " went to a party. "
+    effects: [
+      {type: 'changePopularity', amount: 1, target: vars.c1}
+    ],
+    text: "🎉 " + vars.n1 + " went to a party."
   })
 });
 
@@ -835,11 +796,10 @@ registerAction('wentToASportsGame', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changePopularity', amount: 1, target: vars.c1}
-       ],
-      text: "🏀 "+vars.n1 + " went to a sports game. "
+    effects: [
+      {type: 'changePopularity', amount: 1, target: vars.c1}
+    ],
+    text: "🏀 " + vars.n1 + " went to a sports game."
   })
 });
 
@@ -847,11 +807,10 @@ registerAction('exercise', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
-       effects: [        
-        {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
-       ],
-      text: "💪 " + vars.n1 + " exercised. "
+    effects: [        
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: "💪 " + vars.n1 + " exercised."
   })
 });
 
@@ -859,11 +818,10 @@ registerAction('wentToTheGym', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount:1, target:vars.c1}
-       ],
-      text: "🏋 "+vars.n1 + " went to the gym. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount:1, target:vars.c1}
+    ],
+    text: "🏋 " + vars.n1 + " went to the gym."
   })
 });
 
@@ -872,11 +830,11 @@ registerAction('goSwimming', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target:vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "🏊 " + vars.n1 + " went swimming. " 
+    text: "🏊 " + vars.n1 + " went swimming." 
   })
 });
 
@@ -885,11 +843,11 @@ registerAction('goDriving', {
 		'?c1 "name" ?n1'
 	],
 	event: (vars) => ({
-		target: vars.c1,
+		actor: vars.c1,
 		effects: [
 			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
 		],
-		text: "🚗 " + vars.n1 + " went on a drive. "
+		text: "🚗 " + vars.n1 + " went on a drive."
 	})
 }); 
 
@@ -898,11 +856,11 @@ registerAction('goRunning', {
 		'?c1 "name" ?n1'
 	],
 	event: (vars) => ({
-		target: vars.c1,
+		actor: vars.c1,
 		effects: [
 			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
 		],
-		text: "🏃 " + vars.n1 + " went on a run. "
+		text: "🏃 " + vars.n1 + " went on a run."
 	})
 });
 
@@ -962,9 +920,8 @@ registerAction('wentToSchool', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
-    effects: [],
-    text: "🏫 " + vars.n1 + " went to school. " 
+    actor: vars.c1,
+    text: "🏫 " + vars.n1 + " went to school." 
   })
 });
 
@@ -973,9 +930,8 @@ registerAction('pickedFlower', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
-    effects: [],
-    text: "🌺 " + vars.n1 + " picked a flower. " 
+    actor: vars.c1,
+    text: "🌺 " + vars.n1 + " picked a flower." 
   })
 });
 
@@ -984,11 +940,11 @@ registerAction('didNothing', {
 		'?c1 "name" ?n1'
 	],
 	event: (vars) => ({
-		target: vars.c1,
+		actor: vars.c1,
 		effects: [
 			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
 		],
-		text: "😒 " + vars.n1 + " was unproductive. "
+		text: "😒 " + vars.n1 + " was unproductive."
 	})
 });
 
@@ -997,11 +953,11 @@ registerAction('gotSick', {
 		'?c1 "name" ?n1'
 	],
 	event: (vars) => ({
-		target: vars.c1,
+		actor: vars.c1,
 		effects: [
 			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
 		],
-		text: "🤢 " + vars.n1 + " got sick. "
+		text: "🤢 " + vars.n1 + " got sick."
 	})
 });
 
@@ -1026,7 +982,7 @@ registerAction('madeAnEnemy', {
       {type: 'changePopularity', target: vars.c1, amount: -1},
       {type: 'changePopularity', target: vars.c2, amount: -1}
     ],
-    text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies. "
+    text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies."
   })
 });
 
@@ -1035,11 +991,11 @@ registerAction('wentToWork', {
 		'?c1 "name" ?n1'
 	],
 	event: (vars) => ({
-		target: vars.c1,
+		actor: vars.c1,
 		effects: [
 			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: +1}
 		],
-		text: "👔 " + vars.n1 + " went to work. "
+		text: "👔 " + vars.n1 + " went to work."
 	})
 });
 
@@ -1048,11 +1004,11 @@ registerAction('wentToClass', {
 		'?c1 "name" ?n1'
 	],
 	event: (vars) => ({
-		target: vars.c1,
+		actor: vars.c1,
 		effects: [
 			{type: 'changeAttitudeTowardSelf', target: vars.c1, amount: +1}
 		],
-		text: "📝 " + vars.n1 + " went to a class. "
+		text: "📝 " + vars.n1 + " went to a class."
 	})
 });
 
@@ -1075,7 +1031,7 @@ registerAction('getIntoFight', {
       {type: 'changeAffectionLevel', affection:vars.a1, amount: -1},
       {type: 'changeAffectionLevel', affection:vars.a2, amount: -1}
     ],
-    text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight. "
+    text: "😔 " + vars.n1 + " and " + vars.n2 + " got into a fight."
  })
 });
  
@@ -1088,7 +1044,7 @@ registerAction('wentToDoctor_good', {
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
-    text: "🏥 " + vars.n1 + "'s doctor appointment went well! "
+    text: "🏥 " + vars.n1 + "'s doctor appointment went well!"
   })
 });
 
@@ -1098,8 +1054,7 @@ registerAction('wentToDoctor_neutral', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    effects: [],
-    text: "🏥 " + vars.n1 + "'s doctor appointment went normal. "
+    text: "🏥 " + vars.n1 + "'s doctor appointment went normal."
   })
 });
 
@@ -1112,7 +1067,7 @@ registerAction('wentToDoctor_bad', {
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
-    text: "🏥 " + vars.n1 + "'s doctor appointment went bad. "
+    text: "🏥 " + vars.n1 + "'s doctor appointment went bad."
   })
 });
 
@@ -1122,11 +1077,10 @@ registerAction('surfedInternet_good', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
-    text: "💻 " + vars.n1 + " had fun surfing the internet! "
+    text: "💻 " + vars.n1 + " had fun surfing the internet!"
   })
 });
 
@@ -1136,9 +1090,7 @@ registerAction('surfedInternet_neutral', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
-    effects: [],
-    text: "💻 " + vars.n1 + " felt meh after surfing the internet. "
+    text: "💻 " + vars.n1 + " felt meh after surfing the internet."
   })
 });
 
@@ -1148,11 +1100,10 @@ registerAction('surfedInternet_bad', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
-    text: "💻 " + vars.n1 + " felt bad after spending time on the internet. "
+    text: "💻 " + vars.n1 + " felt bad after spending time on the internet."
   })
 });
 
@@ -1162,11 +1113,10 @@ registerAction('playedVideoGames_good', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
-    text: "🎮 " + vars.n1 + " had fun playing video games! "
+    text: "🎮 " + vars.n1 + " had fun playing video games!"
   })
 });
 
@@ -1176,9 +1126,7 @@ registerAction('playedVideoGames_neutral', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
-    effects: [],
-    text: "🎮 " + vars.n1 + " felt meh after playing video games. "
+    text: "🎮 " + vars.n1 + " felt meh after playing video games."
   })
 });
 
@@ -1188,11 +1136,10 @@ registerAction('playedVideoGames_bad', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
-    text: "🎮 " + vars.n1 + " felt bad after playing video games. "
+    text: "🎮 " + vars.n1 + " felt bad after playing video games."
   })
 });
 
@@ -1202,11 +1149,10 @@ registerAction('bingeWatchedTV_good', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
-    text: "📺 " + vars.n1 + " had fun binge-watching TV! "
+    text: "📺 " + vars.n1 + " had fun binge-watching TV!"
   })
 });
 
@@ -1216,9 +1162,8 @@ registerAction('bingeWatchedTV_neutral', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [],
-    text: "📺 " + vars.n1 + " felt meh after binge-watching TV. "
+    text: "📺 " + vars.n1 + " felt meh after binge-watching TV."
   })
 });
 
@@ -1228,11 +1173,10 @@ registerAction('bingeWatchedTV_bad', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
-    text: "📺 " + vars.n1 + " felt bad after binge-watching TV. "
+    text: "📺 " + vars.n1 + " felt bad after binge-watching TV."
   })
 });
 
@@ -1241,11 +1185,11 @@ registerAction('chattedWithAStranger', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changePopularity', target: vars.c1, amount: +1}
     ],
-    text: "👥 " + vars.n1 + " chatted with a stranger. "
+    text: "👥 " + vars.n1 + " chatted with a stranger."
   })
 });
 
@@ -1253,11 +1197,10 @@ registerAction('acceptedIntoProgram', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🏆 "+vars.n1 + " was accepted into a program. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
+    ],
+    text: "🏆 " + vars.n1 + " was accepted into a program."
   })
 });
 
@@ -1265,11 +1208,10 @@ registerAction('rejectedFromProgram', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
-       ],
-      text: "😔 "+vars.n1 + " was rejected from a program. "
+    effects: [
+      {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
+    ],
+    text: "😔 " + vars.n1 + " was rejected from a program."
   })
 });
 
@@ -1279,11 +1221,10 @@ registerAction('performed_good', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1},
     ],
-    text: "🎭 " + vars.n1 + " felt great after performing in front of an audience! "
+    text: "🎭 " + vars.n1 + " felt great after performing in front of an audience!"
   })
 });
 
@@ -1293,9 +1234,7 @@ registerAction('performed_neutral', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
-    effects: [],
-    text: "🎭 " + vars.n1 + " felt meh after their performance in front of an audience. "
+    text: "🎭 " + vars.n1 + " felt meh after their performance in front of an audience."
   })
 });
 
@@ -1305,11 +1244,10 @@ registerAction('performed_bad', {
   ],
   event: (vars) => ({
     actor: vars.c1,
-    target: vars.c1, 
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1},
     ],
-    text: "🎭 " + vars.n1 + " felt bad after their performance in front of an audience. "
+    text: "🎭 " + vars.n1 + " felt bad after their performance in front of an audience."
   })
 });
 
@@ -1334,7 +1272,7 @@ registerAction('chattedWithSomeone', {
       {type: 'changePopularity', target: vars.c1, amount: +1},
       {type: 'changePopularity', target: vars.c2, amount: +1}
     ],
-    text: "🧑‍🤝‍🧑 " + vars.n1 + " and " + vars.n2 + " chatted with each other. "
+    text: "🧑‍🤝‍🧑 " + vars.n1 + " and " + vars.n2 + " chatted with each other."
   })
 });
 
@@ -1359,7 +1297,7 @@ registerAction('workedWithSomeone', {
       {type: 'changePopularity', target: vars.c1, amount: +1},
       {type: 'changePopularity', target: vars.c2, amount: +1}
     ],
-    text: "🧑‍🤝‍🧑 " + vars.n1 + " and " + vars.n2 + " worked with each other. "
+    text: "🧑‍🤝‍🧑 " + vars.n1 + " and " + vars.n2 + " worked with each other."
   })
 });
 
@@ -1368,11 +1306,11 @@ registerAction('playedInFountain', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "⛲ " + vars.n1 + " played in a fountain. "
+    text: "⛲ " + vars.n1 + " played in a fountain."
   })
 });
 
@@ -1381,11 +1319,11 @@ registerAction('makeAWishInFountain', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "⛲ " + vars.n1 + " made a wish in a fountain. "
+    text: "⛲ " + vars.n1 + " made a wish in a fountain."
   })
 });
 
@@ -1394,11 +1332,11 @@ registerAction('gotInAFight', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
     ],
-    text: "⚔️ " + vars.n1 + " got in a fight. "
+    text: "⚔️ " + vars.n1 + " got in a fight."
   })
 });
 
@@ -1407,11 +1345,11 @@ registerAction('playedCatch', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "🎾 " + vars.n1 + " played catch. "
+    text: "🎾 " + vars.n1 + " played catch."
   })
 });
 
@@ -1420,11 +1358,11 @@ registerAction('staredAtPhone', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 0}
     ],
-    text: "📱 " + vars.n1 + " stared at their phone. "
+    text: "📱 " + vars.n1 + " stared at their phone."
   })
 });
 
@@ -1433,11 +1371,11 @@ registerAction('waitedForBus', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: -1}
     ],
-    text: "🚌 " + vars.n1 + " waited for the bus. "
+    text: "🚌 " + vars.n1 + " waited for the bus."
   })
 });
 
@@ -1446,11 +1384,11 @@ registerAction('skateboard', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: " " + vars.n1 + " went skateboarding. "
+    text: " " + vars.n1 + " went skateboarding."
   })
 });
 
@@ -1459,11 +1397,11 @@ registerAction('walkedPet', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "🐶 " + vars.n1 + " walked their pet. "
+    text: "🐶 " + vars.n1 + " walked their pet."
   })
 });
 
@@ -1472,11 +1410,11 @@ registerAction('wentToPark', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "🏞️ " + vars.n1 + " went to the park. "
+    text: "🏞️ " + vars.n1 + " went to the park."
   })
 });
 
@@ -1485,11 +1423,11 @@ registerAction('laidOnGrass', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "🌿 " + vars.n1 + " laid on grass. "
+    text: "🌿 " + vars.n1 + " laid on grass."
   })
 });
 
@@ -1498,91 +1436,59 @@ registerAction('madeSnowAngels', {
     '?c1 "name" ?n1'
   ],
   event: (vars) => ({
-    target: vars.c1,
+    actor: vars.c1,
     effects: [
       {type: 'changeAttitudeTowardSelf', target: vars.c1, amount: 1}
     ],
-    text: "🌨️ " + vars.n1 + " made snow angels. "
+    text: "🌨️ " + vars.n1 + " made snow angels."
   })
 });
 
 registerAction('hot', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "☀️ It was hot. "
+    text: "☀️ It was hot."
   })
 });
 
 registerAction('cold', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "❄️ It was cold. "
+    text: "❄️ It was cold."
   })
 });
 
 registerAction('windy', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "💨 It was windy. "
+    text: "💨 It was windy."
   })
 });
 
 registerAction('snowed', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "🌨️ It snowed. "
+    text: "🌨️ It snowed."
   })
 });
 
 registerAction('hailed', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "🌨️ It hailed. "
+    text: "🌨️ It hailed."
   })
 });
 
 registerAction('freezing', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "❄️ It was freezing. "
+    text: "❄️ It was freezing."
   })
 });
 
 registerAction('cloudy', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "☁️ It was cloudy. "
+    text: "☁️ It was cloudy."
   })
 });
 
 registerAction('rainy', {
-  where: ['?c1 "name" ?n1'],
   event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "☔ It was rainy. "
+    text: "☔ It was rainy."
   })
 });
 
@@ -1590,9 +1496,7 @@ registerAction('skipping', {
   where: ['?c1 "name" ?n1'],
   event: (vars) => ({
     actor: vars.c1,
-      target: vars.c1,
-       effects: [],
-      text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
+    text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
   })
 });
 
