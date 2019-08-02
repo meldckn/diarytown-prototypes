@@ -1565,5 +1565,307 @@ registerAction('wentToPartyAndDinedOut', {
   })
 });
 
+registerAction('hobbyAndExercised', {
+  where: [
+    '?e1 eventType hobby',
+    '?e2 eventType exercised',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " did a hobby and exercised."
+  })
+});
+
+registerAction('niceConvoAndHeardFrom', {
+  where: [
+    '?e1 eventType nice-convo',
+    '?e2 eventType heard-from',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changePopularity', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " had a nice conversation and heard from."
+  })
+});
+
+registerAction('playGameAndAvoidResponsibility', {
+  where: [
+    '?e1 eventType playedVideoGames_neutral',
+    '?e2 eventType avoided-responsibility',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " played video games and avoided responsibility."
+  })
+});
+
+registerAction('gotHelpAndFinishedWork', {
+  where: [
+    '?e1 eventType got-help',
+    '?e2 eventType finished-work',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " got help and finished work."
+  })
+});
+
+registerAction('shoppedAndFeltExcited', {
+  where: [
+    '?e1 eventType shopped',
+    '?e2 eventType feltHappy',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " shopped and felt excited."
+  })
+});
+
+registerAction('wentHomeAndWatchedTV', {
+  where: [
+    '?e1 eventType went-home',
+    '?e2 eventType bingeWatchedTV_neutral',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " went home and watched TV."
+  })
+});
+
+registerAction('daydreamedAndDidNothing', {
+  where: [
+    '?e1 eventType daydreamed',
+    '?e2 eventType did-nothing',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:-1}
+    ],
+    text: " " + vars.n1 +
+          " daydreamed and did nothing."
+  })
+});
+
+registerAction('helpedSomeoneAndNiceConvo', {
+  where: [
+    '?e1 eventType helped-somone',
+    '?e2 eventType nice-convo',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " helped someone and had a nice conversation."
+  })
+});
+
+registerAction('hungOutAndChattedWithSomeone', {
+  where: [
+    '?e1 eventType hung-out',
+    '?e2 eventType chattedWithSomeone',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " hung out and chatted with someone."
+  })
+});
+
+registerAction('meditatedAndAdventures', {
+  where: [
+    '?e1 eventType meditated',
+    '?e2 eventType adventured',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " meditated and adventured."
+  })
+});
+
+registerAction('wasProductiveAndWentToAMeeting', {
+  where: [
+    '?e1 eventType was-productive',
+    '?e2 eventType work-meeting',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " was productive and went to a meeting."
+  })
+});
+
+registerAction('avoidedResponsibilityAndDidNothing', {
+  where: [
+    '?e1 eventType avoided-responsibility',
+    '?e2 eventType did-nothing',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:-1}
+    ],
+    text: " " + vars.n1 +
+          " avoided responsibility and did nothing."
+  })
+});
+
+registerAction('sickAndMessedUp', {
+  where: [
+    '?e1 eventType sick',
+    '?e2 eventType messed-up',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:-1}
+    ],
+    text: " " + vars.n1 +
+          " got sick and messed up."
+  })
+});
+
+registerAction('studiedAndWasProductive', {
+  where: [
+    '?e1 eventType studied',
+    '?e2 eventType was-productive',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
+    ],
+    text: " " + vars.n1 +
+          " studied and was productive."
+  })
+});
+
+registerAction('internetedAndDidNothing', {
+  where: [
+    '?e1 eventType internet',
+    '?e2 eventType didNothing',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:-1}
+    ],
+    text: " " + vars.n1 +
+          " surfed the internet and did nothing."
+  })
+});
+
+
+
 // Change attitude towards self, popularity, and workload through mainScript.js
 // so that we can utilize siftpatterns.js instead of actions.js
