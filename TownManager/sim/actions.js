@@ -1,5 +1,5 @@
 /// ACTION DEFINITIONS
-/*
+
 registerAction('betray', {
   where: [
     '?dislike "type" "attitude"',
@@ -1498,7 +1498,7 @@ registerAction('skipping', {
     actor: vars.c1,
     text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
   })
-});*/
+});
 
 registerAction('movedAndMissingSomeone', {
   where: [
