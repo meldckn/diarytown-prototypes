@@ -1,5 +1,5 @@
 /// ACTION DEFINITIONS
-
+/*
 registerAction('betray', {
   where: [
     '?dislike "type" "attitude"',
@@ -1498,40 +1498,41 @@ registerAction('skipping', {
     actor: vars.c1,
     text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
   })
-});
+});*/
 
-registerAction('lostWeight', {
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🥗 "+vars.n1 + " lost weight. "
-  })
-});
-
-registerAction('getPet', {
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🐶 "+ vars.n1 + " got a new pet. "
-  })
-});
-
-registerAction('lostWeightAndGotPet', {
+registerAction('movedAndMissingSomeone', {
   where: [
-    '?e1 eventType lostWeight',
-    '?e2 eventType getPet',
+    '?e1 eventType moved',
+    '?e2 eventType missing-someone',
     '(< ?e1 ?e2)',
     '?e1 actor ?c1',
     '?e2 actor ?c1',
-    '?c1 name ?n1'
+    '?c1 name ?n1',
+    '?c2 name ?n2'
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:-1}
+    ],
+    text: "🏠😔 " + vars.n1 +
+          " moved but misses " + vars.n2 + "."
+  })
+});
+
+registerAction('readAndGoodIdea', {
+  where: [
+    '(or [?e1 "eventType" "read"]\
+        [?e1 "eventType" "finished-book"])',
+    '?e2 eventType good-idea',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+    '(not-join [?c1 ?e1 ?e2]\
+        [?eMid "actor" ?c1]\
+        [(< ?e1 ?eMid ?e2)])'
   ],
   event: (vars) => ({
     actor: vars.c1,
@@ -1539,7 +1540,30 @@ registerAction('lostWeightAndGotPet', {
     effects: [
       {type: 'changeAttitudeTowardSelf', target:vars.c1, amount:1}
     ],
-    text: "🥗🐶 " + vars.n1 + 
-          " lost weight and got a pet."
+    text: "📖💡 " + vars.n1 +
+          " read a book then got a good idea."
   })
 });
+
+registerAction('wentToPartyAndDinedOut', {
+  where: [
+    '?e1 eventType went-to-party',
+    '?e2 eventType dined-out',
+    '(< ?e1 ?e2)',
+    '?e1 actor ?c1',
+    '?e2 actor ?c1',
+    '?c1 name ?n1',
+  ],
+  event: (vars) => ({
+    actor: vars.c1,
+    target: vars.c1,
+    effects: [
+      {type: 'changePopularity', target:vars.c1, amount:1}
+    ],
+    text: "🎉🍔 " + vars.n1 +
+          " went to a party and went for food."
+  })
+});
+
+// Change attitude towards self, popularity, and workload through mainScript.js
+// so that we can utilize siftpatterns.js instead of actions.js
