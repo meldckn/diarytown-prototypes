@@ -1500,30 +1500,6 @@ registerAction('skipping', {
   })
 });
 
-registerAction('lostWeight', {
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🥗 "+vars.n1 + " lost weight. "
-  })
-});
-
-registerAction('getPet', {
-  where: ['?c1 "name" ?n1'],
-  event: (vars) => ({
-    actor: vars.c1,
-      target: vars.c1,
-       effects: [
-       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
-       ],
-      text: "🐶 "+ vars.n1 + " got a new pet. "
-  })
-});
-
 registerAction('lostWeightAndGotPet', {
   where: [
     '?e1 eventType lostWeight',
