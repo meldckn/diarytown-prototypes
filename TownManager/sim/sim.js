@@ -75,7 +75,8 @@ let schema = {
   actor:  {':db/valueType': ':db.type/ref'},
   cause:  {':db/valueType': ':db.type/ref'},
   source: {':db/valueType': ':db.type/ref'},
-  target: {':db/valueType': ':db.type/ref'}
+  target: {':db/valueType': ':db.type/ref'},
+  tag:    {':db/cardinality': ':db.cardinality/many'}
 };
 let gameDB = datascript.empty_db(schema);
 

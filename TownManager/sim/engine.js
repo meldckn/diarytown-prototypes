@@ -139,8 +139,8 @@ function addEvent(db, event) {
   // add the actual event to the DB as an entity
   let eventEntity = {':db/id': -1};
   for (let prop of Object.keys(event)) {
-    // add all properties of event (except effects) to DB
-    if (['effects'].indexOf(prop) !== -1) continue;
+    // add all properties of event (except effects and tags) to DB
+    if (['effects', 'tags'].indexOf(prop) !== -1) continue;
     eventEntity[prop] = event[prop];
   }
   db = datascript.db_with(db, [eventEntity]);
@@ -149,6 +149,10 @@ function addEvent(db, event) {
   for (let effect of event.effects || []){
     effect.cause = eventID;
     db = processEffect(db, effect);
+  }
+  // add the event's tags to the DB
+  for (let tag of event.tags || []) {
+    db = updateProperty(db, eventID, 'tag', tag);
   }
   return db;
 }
