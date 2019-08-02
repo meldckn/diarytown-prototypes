@@ -103,6 +103,26 @@ function registerEffectHandler(name, handler) {
 
 /// COMMIT EVENTS TO DB
 
+// Throw an error if `effect` doesn't contain exactly the keys in `desiredKeys`.
+function checkEffectKeys(effect, desiredKeys) {
+  desiredKeys = desiredKeys.concat(['type', 'cause']);
+  let actualKeys = Object.keys(effect);
+  let missingKeys = desiredKeys.filter(key => actualKeys.indexOf(key) === -1);
+  let extraKeys = actualKeys.filter(key => desiredKeys.indexOf(key) === -1);
+  if (missingKeys.length > 0 || extraKeys.length > 0) {
+    let msg = 'Incorrect keys for ' + effect.type + ' effect\n' +
+              '  Expected keys: ' + desiredKeys.join(', ') + '\n' +
+              '  Actual keys: ' + actualKeys.join(', ');
+    let err = Error(msg);
+    err.effect = effect;
+    err.desiredKeys = desiredKeys;
+    err.actualKeys = actualKeys;
+    err.missingKeys = missingKeys;
+    err.extraKeys = extraKeys;
+    throw err;
+  }
+}
+
 // Given the DB and an effect, perform the effect and return an updated DB.
 function processEffect(db, effect) {
   let handler = effectHandlers[effect.type];

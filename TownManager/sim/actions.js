@@ -319,7 +319,7 @@ registerAction('askOut', {
         actor: vars.c1,
         target: vars.c2,
         effects: [
-          {type: 'beginDating', char1:vars.c1, char2: vars.c2}
+          {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'dating'}
           //{type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
           //{type: 'addAttitude', charge: 'positive', source: vars.c2, target: vars.c1},
           //{type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
@@ -365,7 +365,7 @@ registerAction('propose', {
         actor: vars.c1,
         target: vars.c2,
         effects: [
-          {type: 'propose', char1:vars.c1, char2: vars.c2}
+          {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'engaged'}
         ],
         text: "💞 " + vars.n1 + " has proposed to  " + vars.n2+"."
       }
@@ -402,7 +402,7 @@ registerAction('married', {
       actor: vars.c1,
       target: vars.c2,
       effects: [
-        {type: 'marry', char1:vars.c1, char2: vars.c2}
+        {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'married'}
         
       ],
       text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
@@ -430,7 +430,7 @@ registerAction('haveKids', {
       actor: vars.c1,
       target: vars.c2,
       effects: [
-        {type: 'haveKids', char1:vars.c1, char2: vars.c2}
+        {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'haveKids'}
         
       ],
       text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid."
@@ -458,7 +458,7 @@ registerAction('breakUp', {
       actor: vars.c1,
       target: vars.c2,
       effects: [
-        {type: 'breakUp', char1:vars.c1, char2: vars.c2}
+        {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'single'}
         
       ],
       text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up."
@@ -488,7 +488,7 @@ registerAction('cheated', {
       actor: vars.c1,
       target: vars.c2,
       effects: [
-        {type: 'breakUp', char1:vars.c1, char2: vars.c2}
+        {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'single'}
         
       ],
       text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
@@ -516,7 +516,7 @@ registerAction('divorce', {
       actor: vars.c1,
       target: vars.c2,
       effects: [
-        {type: 'divorce', char1:vars.c1, char2: vars.c2}
+        {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'single'}
         
       ],
       text: "💔 " + vars.n1 + " and  " + vars.n2+" have divorced due to cheating."
