@@ -46,7 +46,6 @@ registerAction('hangOutWith', {
   })
 });
 
-
 registerAction('seeCuteAnimal', {
   where: [
     '?c1 "name" ?n1'
@@ -72,7 +71,8 @@ registerAction('startProject', {
       effects: [
         {type: 'startProject', owner: vars.c1, projectType: projectType}
       ],
-      text: "🎨 " + vars.n1 + " started a new " + projectType + " project!"
+      text: "🎨 " + vars.n1 + " started a new " + projectType + " project!",
+      tags: ['projects']
     };
   }
 });
@@ -90,7 +90,8 @@ registerAction('makeProgressOnProject', {
     effects: [
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
-    text: "🎨 " + vars.n1 + " made a lot of progress on their " + vars.projtype + " project."
+    text: "🎨 " + vars.n1 + " made a lot of progress on their " + vars.projtype + " project.",
+    tags: ['projects']
   })
 });
 
@@ -107,7 +108,8 @@ registerAction('workFruitlesslyOnProject', {
     effects: [
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
-    text: "🎨 " + vars.n1 + " tried to work on their " + vars.projtype + " project, but got nowhere."
+    text: "🎨 " + vars.n1 + " tried to work on their " + vars.projtype + " project, but got nowhere.",
+    tags: ['projects']
   })
 });
 
@@ -125,7 +127,8 @@ registerAction('abandonProject', {
       {type: 'updateProjectState', project: vars.proj, newState: 'inactive'},
       {type: 'increaseProjectDrama', project: vars.proj, amount: 2}
     ],
-    text: "🎨 " + vars.n1 + " gave up on their " + vars.projtype + " project."
+    text: "🎨 " + vars.n1 + " gave up on their " + vars.projtype + " project.",
+    tags: ['projects']
   })
 });
 
@@ -143,7 +146,8 @@ registerAction('resumeProject', {
       {type: 'updateProjectState', project: vars.proj, newState: 'active'},
       {type: 'increaseProjectDrama', project: vars.proj, amount: 2}
     ],
-    text: "🎨 " + vars.n1 + " started working on their " + vars.projtype + " project again!"
+    text: "🎨 " + vars.n1 + " started working on their " + vars.projtype + " project again!",
+    tags: ['projects']
   })
 });
 
@@ -162,7 +166,8 @@ registerAction('finishProject', {
     effects: [
       {type: 'updateProjectState', project: vars.proj, newState: 'finished'}
     ],
-    text: "🎨 " + vars.n1 + " finished their " + vars.projtype + " project!"
+    text: "🎨 " + vars.n1 + " finished their " + vars.projtype + " project!",
+    tags: ['projects']
   })
 });
 
@@ -184,7 +189,8 @@ registerAction('showProject_loved', {
       {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
-    text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who loved it ☺️"
+    text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who loved it ☺️",
+    tags: ['projects']
   })
 });
 
@@ -206,7 +212,8 @@ registerAction('showProject_neutral', {
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 +
-          ", who was kinda meh about it 😐"
+          ", who was kinda meh about it 😐",
+    tags: ['projects']
   })
 });
 
@@ -228,7 +235,8 @@ registerAction('showProject_hated', {
       {type: 'addAttitude', charge: 'negative', source: vars.c2, target: vars.c1},
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
-    text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who hated it 😡"
+    text: "🎨 " + vars.n1 + " showed their " + vars.projtype + " project to " + vars.n2 + ", who hated it 😡",
+    tags: ['projects']
   })
 });
 
@@ -258,7 +266,8 @@ registerAction('getDiscouraged', {
       {type: 'increaseProjectDrama', project: vars.proj, amount: 1}
     ],
     text: "🎨 " + vars.n1 + " considered restarting their abandoned " + vars.projtype +
-          " project, but then remembered " + vars.n2 + "'s negative remarks and decided to leave it alone."
+          " project, but then remembered " + vars.n2 + "'s negative remarks and decided to leave it alone.",
+    tags: ['projects']
   })
 });
 
@@ -296,7 +305,8 @@ registerAction('realizeLove', {
       {type: 'addAttitude', charge: 'positive', source: vars.c1, target: vars.c2},
       {type: 'realizeLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2}
     ],
-    text: "💓 " + vars.n1 + " is in love with " + vars.n2 + "."
+    text: "💓 " + vars.n1 + " is in love with " + vars.n2 + ".",
+    tags: ['romance']
   })
 });
 
@@ -325,7 +335,8 @@ registerAction('askOut', {
           //{type: 'realizedLove', affection:vars.affection, romeo:vars.c1, juliet:vars.c2},
           //{type: 'changeAffectionLevel', affection:vars.affection, amount:1},
         ],
-        text: "💞 " + vars.n1 + " is now in a relationship with " + vars.n2+"."
+        text: "💞 " + vars.n1 + " is now in a relationship with " + vars.n2+".",
+        tags: ['romance']
       }
     } else {
       return {
@@ -335,7 +346,8 @@ registerAction('askOut', {
           {type: 'addAttitude', charge: 'negative', source: vars.c1, target: vars.c2},
           {type: 'changeAffectionLevel', affection:vars.affection, amount:-2}
         ],
-        text: "💔 " + vars.n1 + " was brutally rejected by " + vars.n2+"."
+        text: "💔 " + vars.n1 + " was brutally rejected by " + vars.n2+".",
+        tags: ['romance']
       }
     }
   } 
@@ -367,7 +379,8 @@ registerAction('propose', {
         effects: [
           {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'engaged'}
         ],
-        text: "💞 " + vars.n1 + " has proposed to  " + vars.n2+"."
+        text: "💞 " + vars.n1 + " has proposed to  " + vars.n2+".",
+        tags: ['romance']
       }
     } else {
       return {
@@ -377,7 +390,8 @@ registerAction('propose', {
           {type: 'addAttitude', charge: 'negative', source: vars.c1, target: vars.c2},
           {type: 'changeAffectionLevel', affection:vars.affection, amount:-2}
         ],
-        text: "💔 " + vars.n1 + "'s proposal was brutally rejected by ' " + vars.n2+"."
+        text: "💔 " + vars.n1 + "'s proposal was brutally rejected by ' " + vars.n2+".",
+        tags: ['romance']
       }
     }
   }
@@ -405,7 +419,8 @@ registerAction('married', {
         {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'married'}
         
       ],
-      text: "💞 " + vars.n1 + " is married to  " + vars.n2+"."
+      text: "💞 " + vars.n1 + " is married to  " + vars.n2+".",
+      tags: ['romance']
     }
   }
 });
@@ -431,9 +446,9 @@ registerAction('haveKids', {
       target: vars.c2,
       effects: [
         {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'haveKids'}
-        
       ],
-      text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid."
+      text: "👪 " + vars.n1 + " and  " + vars.n2+" now have a kid.",
+      tags: ['romance']
     }
   } 
 });
@@ -461,7 +476,8 @@ registerAction('breakUp', {
         {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'single'}
         
       ],
-      text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up."
+      text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up.",
+      tags: ['romance']
     }
   } 
 });
@@ -491,7 +507,8 @@ registerAction('cheated', {
         {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'single'}
         
       ],
-      text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating."
+      text: "💔 " + vars.n1 + " and  " + vars.n2+" have broken up due to cheating.",
+      tags: ['romance']
     }
   } 
 });
@@ -519,7 +536,8 @@ registerAction('divorce', {
         {type: 'updateRomanceState', char1:vars.c1, char2: vars.c2, newState: 'single'}
         
       ],
-      text: "💔 " + vars.n1 + " and  " + vars.n2+" have divorced due to cheating."
+      text: "💔 " + vars.n1 + " and  " + vars.n2+" have divorced due to cheating.",
+      tags: ['romance']
     }
   } 
 });
@@ -542,7 +560,8 @@ registerAction('upstagedMyEnemy', {
     effects: [
       {type: 'changeAttitudeTowardSelf', amount: 1, target: vars.c1}
     ],
-    text: "😤 " + vars.n1 + " upstaged their enemy."
+    text: "😤 " + vars.n1 + " upstaged their enemy.",
+    tags: ['rivalry']
   })
 });
 
@@ -553,7 +572,8 @@ registerAction('wasUpstagedMyEnemy', {
     effects: [
       {type: 'changeAttitudeTowardSelf', amount: -1, target: vars.c1}
     ],
-    text: "😤 " + vars.n1 + " was upstaged by their enemy."
+    text: "😤 " + vars.n1 + " was upstaged by their enemy.",
+    tags: ['rivalry']
   })
 });
 
@@ -766,7 +786,8 @@ registerAction('tookAWalk', {
 
 registerAction('stormed', {
   event: (vars) => ({
-    text: "🌩 It stormed."
+    text: "🌩 It stormed.",
+    tags: ['weather']
   })
 });
 
@@ -884,7 +905,8 @@ registerAction('goOnDateWith', {
       {type: 'changeAffectionLevel', affection:vars.a2, amount: randNth([-1, 1, 2])}
     ],
     text: "😘 " + vars.n1 + " and " + vars.n2 +
-          " went on a date at " + randNth(['the boba shop.','the movies.','italian restaurant.'])
+          " went on a date at " + randNth(['the boba shop.','the movies.','italian restaurant.']),
+    tags: ['romance']
   })
 });
 
@@ -982,7 +1004,8 @@ registerAction('madeAnEnemy', {
       {type: 'changePopularity', target: vars.c1, amount: -1},
       {type: 'changePopularity', target: vars.c2, amount: -1}
     ],
-    text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies."
+    text: "😡 " + vars.n1 + " and " + vars.n2 + " are now enemies.",
+    tags: ['rivalry']
   })
 });
 
@@ -1446,49 +1469,57 @@ registerAction('madeSnowAngels', {
 
 registerAction('hot', {
   event: (vars) => ({
-    text: "☀️ It was hot."
+    text: "☀️ It was hot.",
+    tags: ['weather']
   })
 });
 
 registerAction('cold', {
   event: (vars) => ({
-    text: "❄️ It was cold."
+    text: "❄️ It was cold.",
+    tags: ['weather']
   })
 });
 
 registerAction('windy', {
   event: (vars) => ({
-    text: "💨 It was windy."
+    text: "💨 It was windy.",
+    tags: ['weather']
   })
 });
 
 registerAction('snowed', {
   event: (vars) => ({
-    text: "🌨️ It snowed."
+    text: "🌨️ It snowed.",
+    tags: ['weather']
   })
 });
 
 registerAction('hailed', {
   event: (vars) => ({
-    text: "🌨️ It hailed."
+    text: "🌨️ It hailed.",
+    tags: ['weather']
   })
 });
 
 registerAction('freezing', {
   event: (vars) => ({
-    text: "❄️ It was freezing."
+    text: "❄️ It was freezing.",
+    tags: ['weather']
   })
 });
 
 registerAction('cloudy', {
   event: (vars) => ({
-    text: "☁️ It was cloudy."
+    text: "☁️ It was cloudy.",
+    tags: ['weather']
   })
 });
 
 registerAction('rainy', {
   event: (vars) => ({
-    text: "☔ It was rainy."
+    text: "☔ It was rainy.",
+    tags: ['weather']
   })
 });
 
