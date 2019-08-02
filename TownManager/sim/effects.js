@@ -45,40 +45,10 @@ registerEffectHandler('realizeLove', function(db, effect) {
   return updateProperty(db, effect.romeo, 'romanceTarget', effect.juliet);
 });
 
-registerEffectHandler('beginDating', function(db, effect) {
-  checkEffectKeys(effect, ['char1', 'char2']);
-  db = updateProperty(db, effect.char1, 'romanceState', 'dating');
-  return updateProperty(db, effect.char2, 'romanceState', 'dating');
-});
-
-registerEffectHandler('propose', function(db, effect) {
-  checkEffectKeys(effect, ['char1', 'char2']);
-  db = updateProperty(db, effect.char1, 'romanceState', 'engaged');
-  return updateProperty(db, effect.char2, 'romanceState', 'engaged');
-});
-
-registerEffectHandler('marry', function(db, effect) {
-  checkEffectKeys(effect, ['char1', 'char2']);
-  db = updateProperty(db, effect.char1, 'romanceState', 'married');
-  return updateProperty(db, effect.char2, 'romanceState', 'married');
-});
-
-registerEffectHandler('haveKids', function(db, effect) {
-  checkEffectKeys(effect, ['char1', 'char2']);
-  db = updateProperty(db, effect.char1, 'romanceState', 'haveKids');
-  return updateProperty(db, effect.char2, 'romanceState', 'haveKids');
-});
-
-registerEffectHandler('breakUp', function(db, effect) {
-  checkEffectKeys(effect, ['char1', 'char2']);
-  db = updateProperty(db, effect.char1, 'romanceState', 'single');
-  return updateProperty(db, effect.char2, 'romanceState', 'single');
-});
-
-registerEffectHandler('divorce', function(db, effect) {
-  checkEffectKeys(effect, ['char1', 'char2']);
-  db = updateProperty(db, effect.char1, 'romanceState', 'single');
-  return updateProperty(db, effect.char2, 'romanceState', 'single');
+registerEffectHandler('updateRomanceState', function(db, effect) {
+  checkEffectKeys(effect, ['char1', 'char2', 'newState']);
+  db = updateProperty(db, effect.char1, 'romanceState', newState);
+  return updateProperty(db, effect.char2, 'romanceState', newState);
 });
 
 registerEffectHandler('changeAttitudeTowardSelf', function(db, effect) {
