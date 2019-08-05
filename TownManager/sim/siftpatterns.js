@@ -215,7 +215,7 @@ registerSiftingPattern('studiedAndWasProductive', [
 ]);
 
 registerSiftingPattern('internetedAndDidNothing', [
-  '?e1 eventType internet',
+  '?e1 eventType interneted',
   '?e2 eventType did-nothing',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',

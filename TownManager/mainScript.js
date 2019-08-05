@@ -817,6 +817,9 @@ Sim.registerEventHandler(function(event) {
 		if (nugget.pattern.name === 'visitedPeopleAndHungOutWith') {
 			popularityIncrease();
 		}
+		console.log("Attitude Towards Self: " + attitudeTowardsSelfCounter);
+		console.log("Popularity: " + popularityCounter);
+		console.log("Workload: " + workloadCounter);
 	}
 
 	/*counter++;
