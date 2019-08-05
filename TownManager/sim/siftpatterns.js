@@ -159,9 +159,67 @@ registerSiftingPattern('studiedAndWasProductive', [
 
 registerSiftingPattern('internetedAndDidNothing', [
   '?e1 eventType internet',
-  '?e2 eventType didNothing',
+  '?e2 eventType did-nothing',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
   '?c1 name ?n1'
 ]);
+
+registerSiftingPattern('productiveAndWorkMeeting', [
+  '?e1 eventType productive',
+  '?e2 eventType work-meeting',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('hurtSelfAndMessedUp', [
+  '?e1 eventType hurt-self',
+  '?e2 eventType messed-up',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+  ]);
+
+registerSiftingPattern('hobbyAndMeditated', [
+  '?e1 eventType productive',
+  '?e2 eventType meditated',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('choresAndWentToMeeting', [
+  '?e1 eventType chores',
+  '?e2 eventType went-to-meeting',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('fightAndAngryWithMe', [
+  '?e1 eventType fight',
+  '?e2 eventType angry-with-me',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+    '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('choresAndWentToClass', [
+  '?e1 eventType chores',
+  '?e2 eventType went-to-class',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
