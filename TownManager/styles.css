@@ -330,9 +330,28 @@ img {
 
 .emoji {
 	font-size:25;
-	position:relative;
-	bottom:90;
+	position:absolute;
+	bottom:5;
 }
+.attitudeTowardsSelfEmoji {
+	font-size:25;
+	position:absolute;
+	bottom:-30;
+	right:30;
+}
+.popularityEmoji {
+	font-size:25;
+	position:absolute;
+	bottom:-60;
+	left:0;
+}
+.workloadEmoji {
+	font-size:25;
+	position:absolute;
+	bottom:-30;
+	left:30;
+}
+
 
 .characters {
 	z-index: 6;

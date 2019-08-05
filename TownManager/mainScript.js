@@ -641,10 +641,56 @@ function addBuilding5() {
 // Diary events and sifting patterns
 let emoji = document.createElement('p');
 let emojiQueue = [];
-let siftingCounter = 0;
+let attitudeTowardsSelfCounter = 0;
+let popularityCounter = 0;
+let workloadCounter = 0;
+
+function attitudeTowardsSelfIncrease () {
+	attitudeTowardsSelfCounter += 1;
+	let attitudeTowardsSelfEmoji = document.createElement('p');
+	attitudeTowardsSelfEmoji.className = "attitudeTowardsSelfEmoji";
+	attitudeTowardsSelfDiv.insertBefore(attitudeTowardsSelfEmoji, attitudeTowardsSelfDiv.firstChild);
+	attitudeTowardsSelfEmoji.style.bottom = -30 + (24*(attitudeTowardsSelfCounter-1));
+	attitudeTowardsSelfEmoji.innerText = "😀";
+}
+function attitudeTowardsSelfDecrease () {
+	if (attitudeTowardsSelfCounter > 0) {
+		attitudeTowardsSelfCounter -= 1;
+		attitudeTowardsSelfDiv.removeChild(attitudeTowardsSelfDiv.firstChild);
+	}
+}
+function popularityIncrease () {
+	popularityCounter += 1;
+	let popularityEmoji = document.createElement('p');
+	popularityEmoji.className = "popularityEmoji";
+	popularityDiv.insertBefore(popularityEmoji, popularityDiv.firstChild);
+	popularityEmoji.style.bottom = -55 - (24*(popularityCounter-1));
+	popularityEmoji.innerText = "👪";
+}
+function popularityDecrease () {
+	if (popularityCounter > 0) {
+		popularityCounter -= 1;
+		popularityDiv.removeChild(popularityDiv.lastChild);
+	}
+}
+function workloadIncrease () {
+	workloadCounter += 1;
+	let workloadEmoji = document.createElement('p');
+	workloadEmoji.className = "workloadEmoji";
+	workloadDiv.insertBefore(workloadEmoji, workloadDiv.firstChild);
+	workloadEmoji.style.bottom = -30 + (20*(workloadCounter-1));
+	workloadEmoji.innerText = "📚";
+}
+function workloadDecrease () {
+	if (workloadCounter > 0) {
+		workloadCounter -= 1;
+		workloadDiv.removeChild(workloadDiv.firstChild);
+	}
+}
+
 Sim.registerEventHandler(function(event) {
 	emoji.className = "emoji";
-	hero.appendChild(emoji);
+	emojiDiv.appendChild(emoji);
 
 	if (event.isDiaryEvent) {
 		emojiQueue.push(Diary.getActionById(event.eventType).emoji);
@@ -658,28 +704,51 @@ Sim.registerEventHandler(function(event) {
 	// To perform story sifting every time a new event takes place...
 	let newNuggets = Sim.runSiftingPatterns();
 	for (let nugget of newNuggets) {
+		if (nugget.pattern.name === 'movedAndMissingSomeone') {
+			attitudeTowardsSelfDecrease();
+		}
+		if (nugget.pattern.name === 'readAndGoodIdea') {
+			attitudeTowardsSelfIncrease();
+		}
 		if (nugget.pattern.name === 'wentToPartyAndDinedOut') {
-			siftingCounter++;
-
-			let rockClass = document.createElement('div');
-			let rockImg = document.createElement('img');
-			rockImg.src = "assets/rock.png";
-			rockImg.style.display = "block";
-			rockImg.style.width = 75;
-			rockImg.style.height = 49;
-			rockClass.className = "rockClass";
-			map.appendChild(rockClass);
-			rockClass.appendChild(rockImg);
-
-			let leftMin = tempCanvasCoord[0][0];
-			let leftMax = tempCanvasCoord[0][0] + tempCanvasCoord[0][2] - 75;
-			let topMin = tempCanvasCoord[0][1];
-			let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
-
-			rockClass.style.left = (leftMin + leftMax) / 2;
-			rockClass.style.top = topMin + (54*siftingCounter);
+			popularityIncrease();
+		}
+		if (nugget.pattern.name === 'hobbyAndExercised') {
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'niceConvoAndHeardFrom') {
+			popularityIncrease();
+		}
+		if (nugget.pattern.name === 'playGameAndAvoidResponsibility') {
+			attitudeTowardsSelfDecrease();
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'gotHelpAndFinishedWork') {
+			popularityIncrease();
+			workloadDecrease();
+			attitudeTowardsSelfIncrease();
 		}
 	}
+
+	/*counter++;
+
+	let rockClass = document.createElement('div');
+	let rockImg = document.createElement('img');
+	rockImg.src = "assets/rock.png";
+	rockImg.style.display = "block";
+	rockImg.style.width = 75;
+	rockImg.style.height = 49;
+	rockClass.className = "rockClass";
+	map.appendChild(rockClass);
+	rockClass.appendChild(rockImg);
+
+	let leftMin = tempCanvasCoord[0][0];
+	let leftMax = tempCanvasCoord[0][0] + tempCanvasCoord[0][2] - 75;
+	let topMin = tempCanvasCoord[0][1];
+	let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
+
+	rockClass.style.left = (leftMin + leftMax) / 2;
+	rockClass.style.top = topMin + (54*counter);*/
 });
 window.setInterval(function(event) {
 	if (emojiQueue.length === 0) {
@@ -691,7 +760,7 @@ window.setInterval(function(event) {
 }, 1000 * 3);
 window.setInterval(function(){
 	Sim.runRandomAction();
-}, 1000 * 10);
+}, 1000 * 30);
 
 
 
@@ -764,13 +833,26 @@ function turnOffMusic() {
 
 //initializes Hero, and assigns starting position of Hero div
 let hero = document.createElement('div');
+let emojiDiv = document.createElement('div');
+let attitudeTowardsSelfDiv = document.createElement('div');
+let popularityDiv = document.createElement('div');
+let workloadDiv = document.createElement('div');
 function drawHero() {
 	hero.className = "hero";
 	hero.id = "mainPlayer";
 	hero.appendChild(mainCharacterAnimations[1]);
 	map.appendChild(hero);
+
+	emojiDiv.id = "emojiDiv";
+	emojiDiv.style.position = "relative";
+	hero.appendChild(emojiDiv);
+	emojiDiv.appendChild(attitudeTowardsSelfDiv);
+	emojiDiv.appendChild(popularityDiv);
+	emojiDiv.appendChild(workloadDiv);
+
 	hero.style.left = 367;
 	hero.style.top = 400;
+
 }
 
 
