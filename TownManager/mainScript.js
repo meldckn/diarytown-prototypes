@@ -641,7 +641,7 @@ function addBuilding5() {
 // Diary events and sifting patterns
 let emoji = document.createElement('p');
 let emojiQueue = [];
-let workloadCounter = 0;
+let siftingCounter = 0;
 Sim.registerEventHandler(function(event) {
 	emoji.className = "emoji";
 	hero.appendChild(emoji);
@@ -658,8 +658,9 @@ Sim.registerEventHandler(function(event) {
 	// To perform story sifting every time a new event takes place...
 	let newNuggets = Sim.runSiftingPatterns();
 	for (let nugget of newNuggets) {
-		if (nugget.pattern.name === 'workloadIncrease') {
-			workloadCounter++;
+		if (nugget.pattern.name === 'readAndGoodIdea') {
+			console.log("got here");
+			siftingCounter++;
 
 			let rockClass = document.createElement('div');
 			let rockImg = document.createElement('img');
@@ -677,7 +678,7 @@ Sim.registerEventHandler(function(event) {
 			let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
 
 			rockClass.style.left = (leftMin + leftMax) / 2;
-			rockClass.style.top = topMin + (54*workloadCounter);
+			rockClass.style.top = topMin + (54*siftingCounter);
 		}
 	}
 });
@@ -688,10 +689,10 @@ window.setInterval(function(event) {
 	}
 	emoji.innerText = emojiQueue[0];
 	emojiQueue.shift();
-}, 1000 * 2.5);
+}, 1000 * 3);
 window.setInterval(function(){
 	Sim.runRandomAction();
-}, 1000 * 2);
+}, 1000 * 10);
 
 
 
