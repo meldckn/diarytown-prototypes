@@ -207,7 +207,11 @@ registerSiftingPattern('studiedAndWasProductive', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "studied"])'
 ]);
 
 registerSiftingPattern('internetedAndDidNothing', [
@@ -216,7 +220,11 @@ registerSiftingPattern('internetedAndDidNothing', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "internet"])'
 ]);
 
 registerSiftingPattern('productiveAndWorkMeeting', [
@@ -225,7 +233,11 @@ registerSiftingPattern('productiveAndWorkMeeting', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "productive"])'
 ]);
 
 registerSiftingPattern('hurtSelfAndMessedUp', [
@@ -234,7 +246,11 @@ registerSiftingPattern('hurtSelfAndMessedUp', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "hurt-self"])'
   ]);
 
 registerSiftingPattern('hobbyAndMeditated', [
@@ -243,7 +259,11 @@ registerSiftingPattern('hobbyAndMeditated', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "productive"])'
 ]);
 
 registerSiftingPattern('choresAndWentToMeeting', [
@@ -252,7 +272,11 @@ registerSiftingPattern('choresAndWentToMeeting', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "chores"])'
 ]);
 
 registerSiftingPattern('fightAndAngryWithMe', [
@@ -273,7 +297,11 @@ registerSiftingPattern('choresAndWentToClass', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "chores"])'
 ]);
 
 registerSiftingPattern('chattedWithSomeoneAndSomeoneBothered', [
@@ -318,16 +346,24 @@ registerSiftingPattern('vacationedAndAdventured', [
    '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "vacationed"])'
 ]);
 
 registerSiftingPattern('tvAndLazy', [
-  '?e1 eventType wentHomeAndWatchedTV',
+  '?e1 eventType watched',
   '?e2 eventType lazy',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "watched"])'
 ]);
 
 registerSiftingPattern('playedGamesAndLazy', [
@@ -345,11 +381,15 @@ registerSiftingPattern('playedGamesAndLazy', [
 
 registerSiftingPattern('playedGamesAndTV', [
   '?e1 eventType played-game',
-  '?e2 eventType wentHomeAndWatchedTV',
+  '?e2 eventType watched',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "played-game"])'
 ]);
 
 registerSiftingPattern('sleptInAndLazy', [
@@ -358,16 +398,24 @@ registerSiftingPattern('sleptInAndLazy', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "slept-in"])'
 ]);
 
 registerSiftingPattern('sleptInAndTV', [
   '?e1 eventType slept-in',
-  '?e2 eventType wentHomeAndWatchedTV',
+  '?e2 eventType watched',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "slept-in"])'
 ]);
 
 registerSiftingPattern('sleptInAndPlayedGames', [
@@ -376,7 +424,11 @@ registerSiftingPattern('sleptInAndPlayedGames', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "slept-in"])'
 ]);
 
 registerSiftingPattern('visitedPeopleAndHungOutWith', [
@@ -385,5 +437,9 @@ registerSiftingPattern('visitedPeopleAndHungOutWith', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+   '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "visited-people"])'
 ]);
