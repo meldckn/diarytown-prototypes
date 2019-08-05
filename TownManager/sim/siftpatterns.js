@@ -208,7 +208,7 @@ registerSiftingPattern('fightAndAngryWithMe', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
     '(not-join [?c1 ?e1 ?e2]\
       [?eMid "actor" ?c1]\
       [(< ?e1 ?eMid ?e2)])'
