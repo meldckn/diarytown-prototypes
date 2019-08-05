@@ -147,3 +147,81 @@ registerSiftingPattern('internetedAndDidNothing', [
   '?e2 actor ?c1',
   '?c1 name ?n1'
 ]);
+
+registerSiftingPattern('stormAndPowerOutage', [
+  '?e1 eventType storm',
+  '?e2 eventType power-outage',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+  '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('hungOutWithAndResolvedConflict', [
+  '?e1 eventType hung-out',
+  '?e2 eventType resolved-conflict',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+  '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('dinedOutAndChattedWithSomeone', [
+  '?e1 eventType dined-out',
+  '?e2 eventType chattedWithSomeone',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('productiveAndWentToClass', [
+  '?e1 eventType productive',
+  '?e2 eventType went-to-class',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('wentToPartyAndChattedWithSomeone', [
+  '?e1 eventType went-to-party',
+  '?e2 eventType chattedWithSomeone',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+  '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('wentToPartyAndChattedWithStranger', [
+  '?e1 eventType went-to-party',
+  '?e2 eventType ChattedWithStranger',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+  '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('wentToPartyAndHungOutWith', [
+  '?e1 eventType went-to-party',
+  '?e2 eventType hung-out',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+  '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
