@@ -1530,7 +1530,7 @@ registerAction('skipping', {
     text: "🚶 " + vars.n1 + " was " + randNth(["skipping.", "power walking."])
   })
 });
-
+/*
 registerAction('movedAndMissingSomeone', {
   where: [
     '?e1 eventType moved',
@@ -1539,7 +1539,8 @@ registerAction('movedAndMissingSomeone', {
     '?e1 actor ?c1',
     '?e2 actor ?c1',
     '?c1 name ?n1',
-    '?c2 name ?n2'
+    '?c2 name ?n2',
+    '(not= ?c1 ?c2)'
   ],
   event: (vars) => ({
     actor: vars.c1,
@@ -1895,8 +1896,4 @@ registerAction('internetedAndDidNothing', {
           " surfed the internet and did nothing."
   })
 });
-
-
-
-// Change attitude towards self, popularity, and workload through mainScript.js
-// so that we can utilize siftpatterns.js instead of actions.js
+*/
