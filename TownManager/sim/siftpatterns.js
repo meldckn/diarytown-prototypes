@@ -223,3 +223,49 @@ registerSiftingPattern('choresAndWentToClass', [
   '?c1 name ?n1'
 ]);
 
+registerSiftingPattern('chattedWithSomeoneAndSomeoneBothered', [
+  '?e1 eventType chatted-with-someone',
+  '?e2 eventType someone-bothered',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1',
+    '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('chattedWithSomeoneAndSomeoneWasJerk', [
+  '?e1 eventType chatted-with-someone',
+  '?e2 eventType someone-was-jerk',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1',
+    '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('chattedWithSomeoneAndWasMean', [
+  '?e1 eventType chatted-with-someone',
+  '?e2 eventType was-mean',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1',
+    '(not-join [?c1 ?e1 ?e2]\
+      [?eMid "actor" ?c1]\
+      [(< ?e1 ?eMid ?e2)])'
+]);
+
+registerSiftingPattern('vacationedAndAdventured', [
+  '?e1 eventType vacationed',
+  '?e2 eventType adventured',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+
