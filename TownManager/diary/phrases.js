@@ -1136,6 +1136,17 @@ var phrases = [
 		afterContext : "",
 		flippable : false
 	},{
+		id : "was-productive",
+		text : [ "was productive" ],
+		type : "event",
+		category : "self",
+		otherCategories : "",
+		relatedPhrases : [],
+		beforeContext : "",
+		afterContext : "",
+		flippable : false,
+		emoji: "👍"
+	},{
 		id : "got-recognition",
 		text : [ "people said nice things about me", "felt recognized", "got recognition" ],
 		type : "event",

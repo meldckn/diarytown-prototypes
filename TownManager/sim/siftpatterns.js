@@ -228,7 +228,7 @@ registerSiftingPattern('internetedAndDidNothing', [
 ]);
 
 registerSiftingPattern('productiveAndWorkMeeting', [
-  '?e1 eventType productive',
+  '?e1 eventType was-productive',
   '?e2 eventType work-meeting',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',

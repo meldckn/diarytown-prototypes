@@ -728,6 +728,95 @@ Sim.registerEventHandler(function(event) {
 			workloadDecrease();
 			attitudeTowardsSelfIncrease();
 		}
+		if (nugget.pattern.name === 'shoppedAndFeltExcited') {
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'wentHomeAndWatchedTV') {
+			attitudeTowardsSelfIncrease();
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'daydreamedAndDidNothing') {
+			attitudeTowardsSelfDecrease();
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'helpedSomeoneAndNiceConvo') {
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'hungOutAndChattedWithSomeone') {
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'meditatedAndAdventures') {
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'wasProductiveAndWentToAMeeting') {
+			workloadDecrease();
+		}
+		if (nugget.pattern.name === 'avoidedResponsibilityAndDidNothing') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'sickAndMessedUp') {
+			attitudeTowardsSelfDecrease();
+		}
+		if (nugget.pattern.name === 'studiedAndWasProductive') {
+			workloadDecrease();
+		}
+		if (nugget.pattern.name === 'internetedAndDidNothing') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'productiveAndWorkMeeting') {
+			workloadDecrease();
+		}
+		if (nugget.pattern.name === 'hurtSelfAndMessedUp') {
+			attitudeTowardsSelfDecrease();
+		}
+		if (nugget.pattern.name === 'hobbyAndMeditated') {
+			workloadIncrease();
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'choresAndWentToMeeting') {
+			workloadDecrease();
+		}
+		if (nugget.pattern.name === 'fightAndAngryWithMe') {
+			attitudeTowardsSelfDecrease();
+			popularityDecrease();
+		}
+		if (nugget.pattern.name === 'choresAndWentToClass') {
+			workloadDecrease();
+		}
+		if (nugget.pattern.name === 'chattedWithSomeoneAndSomeoneBothered') {
+			attitudeTowardsSelfDecrease();
+		}
+		if (nugget.pattern.name === 'chattedWithSomeoneAndSomeoneWasJerk') {
+			attitudeTowardsSelfDecrease();
+		}
+		if (nugget.pattern.name === 'chattedWithSomeoneAndWasMean') {
+			attitudeTowardsSelfDecrease();
+			popularityDecrease();
+		}
+		if (nugget.pattern.name === 'vacationedAndAdventured') {
+			attitudeTowardsSelfIncrease();
+		}
+		if (nugget.pattern.name === 'tvAndLazy') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'playedGamesAndLazy') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'playedGamesAndTV') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'sleptInAndLazy') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'sleptInAndTV') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'sleptInAndPlayedGames') {
+			workloadIncrease();
+		}
+		if (nugget.pattern.name === 'visitedPeopleAndHungOutWith') {
+			popularityIncrease();
+		}
 	}
 
 	/*counter++;
@@ -1483,7 +1572,6 @@ startButton.onclick = function() {
 			window.setTimeout(function(){
 				diaryEditor.style.display = 'none';
 				fourthBackButton.style.display = 'none';
-
 			}, 500)
 
 			//transition in the Start Menu
