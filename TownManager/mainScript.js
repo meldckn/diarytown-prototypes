@@ -658,8 +658,7 @@ Sim.registerEventHandler(function(event) {
 	// To perform story sifting every time a new event takes place...
 	let newNuggets = Sim.runSiftingPatterns();
 	for (let nugget of newNuggets) {
-		if (nugget.pattern.name === 'readAndGoodIdea') {
-			console.log("got here");
+		if (nugget.pattern.name === 'wentToPartyAndDinedOut') {
 			siftingCounter++;
 
 			let rockClass = document.createElement('div');
