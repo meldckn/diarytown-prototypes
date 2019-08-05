@@ -262,6 +262,69 @@ registerSiftingPattern('chattedWithSomeoneAndWasMean', [
 registerSiftingPattern('vacationedAndAdventured', [
   '?e1 eventType vacationed',
   '?e2 eventType adventured',
+   '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('tvAndLazy', [
+  '?e1 eventType wentHomeAndWatchedTV',
+  '?e2 eventType lazy',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('playedGamesAndLazy', [
+  '?e1 eventType played-game',
+  '?e2 eventType lazy',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('playedGamesAndTV', [
+  '?e1 eventType played-game',
+  '?e2 eventType wentHomeAndWatchedTV',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('sleptInAndLazy', [
+  '?e1 eventType slept-in',
+  '?e2 eventType lazy',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('sleptInAndTV', [
+  '?e1 eventType slept-in',
+  '?e2 eventType wentHomeAndWatchedTV',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('sleptInAndPlayedGames', [
+  '?e1 eventType slept-in',
+  '?e2 eventType played-game',
+  '(< ?e1 ?e2)',
+  '?e1 actor ?c1',
+  '?e2 actor ?c1',
+  '?c1 name ?n1'
+]);
+
+registerSiftingPattern('visitedPeopleAndHungOutWith', [
+  '?e1 eventType visited-people',
+  '?e2 eventType hung-out-with',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
