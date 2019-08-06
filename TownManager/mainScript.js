@@ -645,52 +645,56 @@ let attitudeTowardsSelfCounter = 0;
 let popularityCounter = 0;
 let workloadCounter = 0;
 
+let emojiDiv = document.getElementById('emojiDiv')
+let attitudeTowardsSelfEmojiDiv = document.getElementById('attitudeTowardsSelfEmojiDiv');
+let popularityEmojiDiv = document.getElementById('popularityEmojiDiv');
+let workloadEmojiDiv = document.getElementById('workloadEmojiDiv');
+
+document.getElementById('attitudeTowardsSelf').appendChild(attitudeTowardsSelfEmojiDiv);
+document.getElementById('popularity').appendChild(popularityEmojiDiv);
+document.getElementById('workload').appendChild(workloadEmojiDiv);
+
 function attitudeTowardsSelfIncrease () {
 	attitudeTowardsSelfCounter += 1;
 	let attitudeTowardsSelfEmoji = document.createElement('p');
-	attitudeTowardsSelfEmoji.className = "attitudeTowardsSelfEmoji";
-	attitudeTowardsSelfDiv.insertBefore(attitudeTowardsSelfEmoji, attitudeTowardsSelfDiv.firstChild);
-	attitudeTowardsSelfEmoji.style.bottom = -30 + (24*(attitudeTowardsSelfCounter-1));
+	attitudeTowardsSelfEmoji.className = "siftingEffectEmoji";
+	attitudeTowardsSelfEmojiDiv.appendChild(attitudeTowardsSelfEmoji);
 	attitudeTowardsSelfEmoji.innerText = "😀";
 }
 function attitudeTowardsSelfDecrease () {
 	if (attitudeTowardsSelfCounter > 0) {
 		attitudeTowardsSelfCounter -= 1;
-		attitudeTowardsSelfDiv.removeChild(attitudeTowardsSelfDiv.firstChild);
+		attitudeTowardsSelfEmojiDiv.removeChild(attitudeTowardsSelfEmojiDiv.lastChild);
 	}
 }
 function popularityIncrease () {
 	popularityCounter += 1;
 	let popularityEmoji = document.createElement('p');
-	popularityEmoji.className = "popularityEmoji";
-	popularityDiv.insertBefore(popularityEmoji, popularityDiv.firstChild);
-	popularityEmoji.style.bottom = -55 - (24*(popularityCounter-1));
-	popularityEmoji.innerText = "👪";
+	popularityEmoji.className = "siftingEffectEmoji";
+	popularityEmojiDiv.appendChild(popularityEmoji);
+	popularityEmoji.innerText = "🎉";
 }
 function popularityDecrease () {
 	if (popularityCounter > 0) {
 		popularityCounter -= 1;
-		popularityDiv.removeChild(popularityDiv.lastChild);
+		popularityEmojiDiv.removeChild(popularityEmojiDiv.lastChild);
 	}
 }
 function workloadIncrease () {
 	workloadCounter += 1;
 	let workloadEmoji = document.createElement('p');
-	workloadEmoji.className = "workloadEmoji";
-	workloadDiv.insertBefore(workloadEmoji, workloadDiv.firstChild);
-	workloadEmoji.style.bottom = -30 + (20*(workloadCounter-1));
+	workloadEmoji.className = "siftingEffectEmoji";
+	workloadEmojiDiv.appendChild(workloadEmoji);
 	workloadEmoji.innerText = "📚";
 }
 function workloadDecrease () {
 	if (workloadCounter > 0) {
 		workloadCounter -= 1;
-		workloadDiv.removeChild(workloadDiv.firstChild);
+		workloadEmojiDiv.removeChild(workloadEmojiDiv.lastChild);
 	}
 }
-
 Sim.registerEventHandler(function(event) {
 	emoji.className = "emoji";
-	emojiDiv.appendChild(emoji);
 
 	if (event.isDiaryEvent) {
 		emojiQueue.push(Diary.getActionById(event.eventType).emoji);
@@ -925,22 +929,11 @@ function turnOffMusic() {
 
 //initializes Hero, and assigns starting position of Hero div
 let hero = document.createElement('div');
-let emojiDiv = document.createElement('div');
-let attitudeTowardsSelfDiv = document.createElement('div');
-let popularityDiv = document.createElement('div');
-let workloadDiv = document.createElement('div');
 function drawHero() {
 	hero.className = "hero";
 	hero.id = "mainPlayer";
 	hero.appendChild(mainCharacterAnimations[1]);
 	map.appendChild(hero);
-
-	emojiDiv.id = "emojiDiv";
-	emojiDiv.style.position = "relative";
-	hero.appendChild(emojiDiv);
-	emojiDiv.appendChild(attitudeTowardsSelfDiv);
-	emojiDiv.appendChild(popularityDiv);
-	emojiDiv.appendChild(workloadDiv);
 
 	hero.style.left = 367;
 	hero.style.top = 400;

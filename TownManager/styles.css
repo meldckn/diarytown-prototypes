@@ -333,23 +333,32 @@ img {
 	position:absolute;
 	bottom:5;
 }
-.attitudeTowardsSelfEmoji {
-	font-size:25;
+.emojiDiv {
 	position:absolute;
-	bottom:-30;
-	right:30;
+	width:200px;
+	height:500px;
+	left:-350px;
+	top:60px;
+	background-color:gray;
+	border-radius:10px;
 }
-.popularityEmoji {
-	font-size:25;
-	position:absolute;
-	bottom:-60;
-	left:0;
+
+
+.siftingEffectTitle {
+	text-align:center;
+	line-height:150%;
+	font-size:105%;
+	margin:15px;
+	position:relative;
 }
-.workloadEmoji {
-	font-size:25;
-	position:absolute;
-	bottom:-30;
-	left:30;
+.siftingEffectEmojiDiv {
+	text-align:center;
+	position:relative;
+}
+.siftingEffectEmoji {
+	font-size:35px;
+	margin:0px;
+	display:inline-block;
 }
 
 
