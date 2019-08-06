@@ -310,7 +310,7 @@ input:checked + .slider:before {
 	position:absolute;
 	font:8;
 	left:290;
-	top:190px;
+	top:188px;
 	z-index:6;
 	text-shadow:
 			-1px -1px 0 #000,
@@ -348,20 +348,29 @@ img {
 }
 .emojiDiv {
 	position:absolute;
-	width:200px;
-	height:500px;
-	left:-250px;
-	top:60px;
-	background-color:gray;
+	width:160px;
+	height:auto;
+	left:3%;
+	top:200px;
+	background-color:#404040;
 	border-radius:10px;
+	border:1px solid gray;
 }
 
-
+#ratingsTag {
+	position:absolute;
+	font-size:150%;
+	text-align:center;
+	margin:0px;
+	line-height:150%;
+	left:-16%;
+	top:-27%;
+}
 .siftingEffectTitle {
 	text-align:center;
 	line-height:150%;
-	font-size:105%;
-	margin:15px;
+	font-size:90%;
+	margin:10px;
 	position:relative;
 }
 .siftingEffectEmojiDiv {

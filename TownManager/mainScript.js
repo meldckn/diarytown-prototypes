@@ -18,6 +18,7 @@ let fourthBackButton = document.getElementById('fourthBackButton');
 let creatorButtons = document.getElementById('customize');
 let writeNewDiaryContainer = document.getElementById('writeNewDiaryContainer');
 let diaryEvents = document.getElementById('diaryEvents');
+let emojiDiv = document.getElementById('emojiDiv');
 
 //assigning classNames
 map.className = "map";
@@ -43,6 +44,7 @@ fourthBackButton.style.display = 'none';
 creatorButtons.style.display = 'none';
 writeNewDiaryContainer.style.display = 'none';
 diaryEvents.style.display = 'none';
+emojiDiv.style.display = 'none';
 
 //CANVAS COORDS
 let tempCanvasCoord = [
@@ -633,19 +635,14 @@ function addBuilding5() {
 	}
 }
 
-
-
-
-
-
-// Diary events and sifting patterns
+// DIARY EVENTS AND SIFTING PATTERNS
 let emoji = document.createElement('p');
 let emojiQueue = [];
 let attitudeTowardsSelfCounter = 0;
 let popularityCounter = 0;
 let workloadCounter = 0;
 
-let emojiDiv = document.getElementById('emojiDiv')
+
 let attitudeTowardsSelfEmojiDiv = document.getElementById('attitudeTowardsSelfEmojiDiv');
 let popularityEmojiDiv = document.getElementById('popularityEmojiDiv');
 let workloadEmojiDiv = document.getElementById('workloadEmojiDiv');
@@ -654,6 +651,25 @@ document.getElementById('attitudeTowardsSelf').appendChild(attitudeTowardsSelfEm
 document.getElementById('popularity').appendChild(popularityEmojiDiv);
 document.getElementById('workload').appendChild(workloadEmojiDiv);
 
+// Initial character ratings
+let initialAttitudeTowardsSelfEmoji = document.createElement('p');
+initialAttitudeTowardsSelfEmoji.className = "siftingEffectEmoji";
+attitudeTowardsSelfEmojiDiv.appendChild(initialAttitudeTowardsSelfEmoji);
+initialAttitudeTowardsSelfEmoji.innerText = "😀";
+
+let initialPopularityEmoji = document.createElement('p');
+initialPopularityEmoji.className = "siftingEffectEmoji";
+popularityEmojiDiv.appendChild(initialPopularityEmoji);
+initialPopularityEmoji.innerText = "🎉";
+
+let initialWorkloadEmoji = document.createElement('p');
+initialWorkloadEmoji.className = "siftingEffectEmoji";
+workloadEmojiDiv.appendChild(initialWorkloadEmoji);
+initialWorkloadEmoji.innerText = "📚";
+
+
+
+//Defining increase and decrease in ratings
 function attitudeTowardsSelfIncrease () {
 	attitudeTowardsSelfCounter += 1;
 	let attitudeTowardsSelfEmoji = document.createElement('p');
@@ -693,6 +709,8 @@ function workloadDecrease () {
 		workloadEmojiDiv.removeChild(workloadEmojiDiv.lastChild);
 	}
 }
+
+//Handles automatic events and diary entries, including sifting patterns
 Sim.registerEventHandler(function(event) {
 	emoji.className = "emoji";
 	hero.appendChild(emoji);
@@ -826,26 +844,6 @@ Sim.registerEventHandler(function(event) {
 		console.log("Popularity: " + popularityCounter);
 		console.log("Workload: " + workloadCounter);
 	}
-
-	/*counter++;
-
-	let rockClass = document.createElement('div');
-	let rockImg = document.createElement('img');
-	rockImg.src = "assets/rock.png";
-	rockImg.style.display = "block";
-	rockImg.style.width = 75;
-	rockImg.style.height = 49;
-	rockClass.className = "rockClass";
-	map.appendChild(rockClass);
-	rockClass.appendChild(rockImg);
-
-	let leftMin = tempCanvasCoord[0][0];
-	let leftMax = tempCanvasCoord[0][0] + tempCanvasCoord[0][2] - 75;
-	let topMin = tempCanvasCoord[0][1];
-	let topMax = tempCanvasCoord[0][1] + tempCanvasCoord[0][3] - 49;
-
-	rockClass.style.left = (leftMin + leftMax) / 2;
-	rockClass.style.top = topMin + (54*counter);*/
 });
 window.setInterval(function(event) {
 	if (emojiQueue.length === 0) {
@@ -859,7 +857,14 @@ window.setInterval(function(){
 	Sim.runRandomAction();
 }, 1000 * 30);
 
-//start of character animating thing
+
+
+
+
+
+
+
+//Start of character animating thing
 
 //storage of image location addresses for the main character frames
 //front1-2-3, left1-2-3, right 1-2-3, back1-2-3
@@ -1365,16 +1370,28 @@ startButton.onclick = function() {
 		creatorButtons.style.display = 'block';
 		thirdBackButtonContainer.style.display = 'block';
 		diaryEvents.style.display = 'block';
+		emojiDiv.style.display = 'block';
 		map.style.opacity = 0;
+		emojiDiv.style.opacity = 0;
 		//fades in the map
 		anime({
 			targets:'.map',
 			opacity:1,
 			delay:200			
 		})
+		anime({
+			targets:'.emojiDiv',
+			opacity:1,
+			delay:200			
+		})
 		//bounces the map down to appear
 		anime({
 			targets:'.map',
+			translateY: 75,
+			duration:1000
+		})
+		anime({
+			targets:'.emojiDiv',
 			translateY: 75,
 			duration:1000
 		})
@@ -1473,9 +1490,19 @@ startButton.onclick = function() {
 			opacity:0,
 			delay:200	
 		})
+		anime({
+			targets:'.emojiDiv',
+			opacity:0,
+			delay:200	
+		})
 		//bounces the map left to disappear
 		anime({
 			targets:'.map',
+			translateY:0,
+			duration: 1000
+		})
+		anime({
+			targets:'.emojiDiv',
 			translateY:0,
 			duration: 1000
 		})
@@ -1486,6 +1513,7 @@ startButton.onclick = function() {
 			creatorButtons.style.display = 'none';
 			writeNewDiaryContainer.style.display = 'none';
 			diaryEvents.style.display = 'none';
+			emojiDiv.style.display = 'none';
 
 		}, 500)
 
@@ -1523,9 +1551,19 @@ startButton.onclick = function() {
 			opacity:0,
 			delay:200	
 		})
+		anime({
+			targets:'.emojiDiv',
+			opacity:0,
+			delay:200	
+		})
 		//bounces the map left to disappear
 		anime({
 			targets:'.map',
+			translateY:0,
+			duration: 1000
+		})
+		anime({
+			targets:'.emojiDiv',
 			translateY:0,
 			duration: 1000
 		})
@@ -1536,6 +1574,7 @@ startButton.onclick = function() {
 			creatorButtons.style.display = 'none';
 			writeNewDiaryContainer.style.display = 'none';
 			diaryEvents.style.display = 'none';
+			emojiDiv.style.display = 'none';
 		}, 500)
 
 		//transition in the diary Editor
@@ -1581,19 +1620,31 @@ startButton.onclick = function() {
 			//transition in the Map 
 			window.setTimeout(function(){
 				map.style.display = 'block'
-				map.style.opactiy = 0;
+				map.style.opacity = 0;
 				thirdBackButton.style.display = 'block';
 				creatorButtons.style.display = 'block';
 				diaryEvents.style.display = 'block';
+				emojiDiv.style.display = 'block';
+				emojiDiv.style.opacity = 0;
 				//fades in the Map
 				anime({
 					targets:'.map',
 					opacity:1,
 					delay:200			
 				})
+				anime({
+					targets:'.emojiDiv',
+					opacity:1,
+					delay:200			
+				})
 				//bounces the Map back right to appear
 				anime({
 					targets:'.map',
+					translateY: 75,
+					duration:1000
+				})
+				anime({
+					targets:'.emojiDiv',
 					translateY: 75,
 					duration:1000
 				})
