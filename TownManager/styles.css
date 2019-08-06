@@ -310,7 +310,7 @@ input:checked + .slider:before {
 	position:absolute;
 	font:8;
 	left:290;
-	top:195px;
+	top:190px;
 	z-index:6;
 	text-shadow:
 			-1px -1px 0 #000,

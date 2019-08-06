@@ -150,7 +150,7 @@ var Diary = ( function() {
  		phraseNodes.forEach(function(element){
 			diaryEntry.push(element.id);
 			Sim.runDiaryAction(element.id, element.innerText);
-			//element.remove();
+			element.remove();
 		});
 		console.log(diaryEntry);
 		//drawEmoji(diaryEntry);
