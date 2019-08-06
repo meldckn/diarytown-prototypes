@@ -1317,7 +1317,6 @@ optionsButton.onclick = function() {
 
 //map music turned off
 music.pause();
-backgroundMusic.play();
 
 
 //Tracks keyup and keydown events
@@ -1386,6 +1385,7 @@ startButton.onclick = function() {
 		})
 		//starts the map music, pauses background Music
 		backgroundMusic.pause();
+		music.currentTime = 0;
 		music.play();
 	},500)
 
