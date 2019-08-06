@@ -1334,6 +1334,7 @@ slider.oninput = function() {
 }
 
 let alreadyDrawn = false;
+let onTheMapPage = false;
 //start button main method
 startButton.onclick = function() {
 	//transitions out all of the title screen
@@ -1408,6 +1409,8 @@ startButton.onclick = function() {
 	let aCounter = 2;
 	let sCounter = 2;
 	let dCounter = 2;
+
+	onTheMapPage = true;
 	var refresh = window.setInterval(function(event) {
 		//do not change below
 		let stepSpeed = 1;
@@ -1453,7 +1456,7 @@ startButton.onclick = function() {
 			dCounter+=stepSpeed;
 		}
 		checkZ(currentX, currentY);
-		if (atHome(currentX, currentY)) {
+		if (atHome(currentX, currentY) && onTheMapPage) {
 			writeNewDiaryContainer.style.display = 'block';
 		} else {
 			writeNewDiaryContainer.style.display = 'none';
@@ -1513,18 +1516,19 @@ startButton.onclick = function() {
 
 	//brings in the diaryEditor page and transitions out the Map
 	writeNewDiary.onclick = function() {
+		onTheMapPage = false;
 		anime({
 			targets:'.map',
 			opacity:0,
 			delay:200	
 		})
-		//bounces the optionsMenu left to disappear
+		//bounces the map left to disappear
 		anime({
 			targets:'.map',
 			translateY:0,
 			duration: 1000
 		})
-		//gets rid of options Menu screen
+		//gets rid of map screen
 		window.setTimeout(function(){
 			map.style.display = 'none';
 			thirdBackButton.style.display = 'none';
@@ -1553,41 +1557,40 @@ startButton.onclick = function() {
 		},500)
 
 		runDiaryEditor();
-		//stops the setInterval function
 
 		fourthBackButton.onclick = function() {
-
+			onTheMapPage = true;
 			anime({
 				targets:'.diaryEditor',
 				opacity:0,
 				delay:200	
 			})
-			//bounces the map left to disappear
+			//bounces the diaryEditor left to disappear
 			anime({
 				targets:'.diaryEditor',
 				translateY:0,
 				duration: 1000
 			})
-			//gets rid of map screen
+			//gets rid of diaryEditor screen
 			window.setTimeout(function(){
 				diaryEditor.style.display = 'none';
 				fourthBackButton.style.display = 'none';
 			}, 500)
 
-			//transition in the Start Menu
+			//transition in the Map 
 			window.setTimeout(function(){
 				map.style.display = 'block'
 				map.style.opactiy = 0;
 				thirdBackButton.style.display = 'block';
 				creatorButtons.style.display = 'block';
 				diaryEvents.style.display = 'block';
-				//fades in the StartMenu
+				//fades in the Map
 				anime({
 					targets:'.map',
 					opacity:1,
 					delay:200			
 				})
-				//bounces the StartMenu back right to appear
+				//bounces the Map back right to appear
 				anime({
 					targets:'.map',
 					translateY: 75,
