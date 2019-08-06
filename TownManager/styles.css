@@ -310,7 +310,7 @@ input:checked + .slider:before {
 	position:absolute;
 	font:8;
 	left:290;
-	top:188px;
+	top:180px;
 	z-index:6;
 	text-shadow:
 			-1px -1px 0 #000,
@@ -342,9 +342,11 @@ img {
 }
 
 .emoji {
-	font-size:25;
-	position:absolute;
-	bottom:5;
+	font-size:26px;
+	position:relative;
+	margin:0px;
+	bottom:190%;
+	text-align:center;
 }
 .emojiDiv {
 	position:absolute;
