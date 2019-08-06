@@ -30,11 +30,11 @@
 		<script type = "text/javascript" src = "mainScript.js" defer> </script>
 
 		<audio id = "music" controls loop>
-		  <source src="assets/musicB.mp3" type="audio/mpeg">
-		Your browser does not support the audio element.
+			<source src="assets/musicB.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
 		</audio>
 
-		<audio id = "backgroundMusic" controls loop>
+		<audio id = "backgroundMusic" autoplay controls loop>
 			<source src = "assets/backgroundMusic.mp3" type = "audio/mpeg">
 				Your browser does not support the audio element.
 		</audio>
@@ -102,6 +102,7 @@
 				<img id="character4" src="assets/extraChar4Edited.png" style="display: none"/>
 				<img id="character5" src="assets/extraChar5Edited.png" style="display: none"/>
 				<img id = "background" src="assets/testCity1Edited.png" alt="HTML5 Icon" style="width:1200;height:800;"/>
+				<p id = "homeTag">HOME</p>
 				<br></br><br></br><br></br>
 			</div>
 
@@ -121,14 +122,14 @@
 				<button id = "writeNewDiary">Make New Diary!</button>
 			</div>
 
-
+			<p id="diaryEvents"></p>
 			
 			<!--back button from Map to Start Menu-->
 			<div id = "thirdBackButtonContainer"> 
 				<button id = "thirdBackButton">Back</button>
 			</div>
 
-			<p id="diaryEvents"></p>
+			
 
 			<!-- Diary Editor menu-->
 			<div id = "diaryEditor">

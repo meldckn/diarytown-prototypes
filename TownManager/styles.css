@@ -306,6 +306,19 @@ input:checked + .slider:before {
 	margin-right:auto;
 	width:1200;
 }
+#homeTag {
+	position:absolute;
+	font:8;
+	left:290;
+	top:195px;
+	z-index:6;
+	text-shadow:
+			-1px -1px 0 #000,
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000;
+
+}
 img {
 	position:relative;
 	width:25px;

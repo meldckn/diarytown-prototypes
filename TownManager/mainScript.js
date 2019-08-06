@@ -858,13 +858,6 @@ window.setInterval(function(){
 	Sim.runRandomAction();
 }, 1000 * 30);
 
-
-
-
-
-
-
-
 //start of character animating thing
 
 //storage of image location addresses for the main character frames
@@ -1126,6 +1119,13 @@ function checkZ(x, y) {
 	}
 }
 
+function atHome(x,y) {
+	if ((x>267 && x<321) && y<270) {
+		return true;
+	}
+	return false;
+}
+
 //ABOUT BUTTON:
 
 aboutButton.onclick = function() {
@@ -1310,7 +1310,6 @@ optionsButton.onclick = function() {
 
 //map music turned off
 music.pause();
-backgroundMusic.play();
 
 
 //Tracks keyup and keydown events
@@ -1363,7 +1362,6 @@ startButton.onclick = function() {
 		map.style.display = 'block';
 		creatorButtons.style.display = 'block';
 		thirdBackButtonContainer.style.display = 'block';
-		writeNewDiaryContainer.style.display = 'block';
 		diaryEvents.style.display = 'block';
 		map.style.opacity = 0;
 		//fades in the map
@@ -1380,6 +1378,7 @@ startButton.onclick = function() {
 		})
 		//starts the map music, pauses background Music
 		backgroundMusic.pause();
+		music.currentTime = 0;
 		music.play();
 	},500)
 
@@ -1454,6 +1453,11 @@ startButton.onclick = function() {
 			dCounter+=stepSpeed;
 		}
 		checkZ(currentX, currentY);
+		if (atHome(currentX, currentY)) {
+			writeNewDiaryContainer.style.display = 'block';
+		} else {
+			writeNewDiaryContainer.style.display = 'none';
+		}
 
 	}, 1)
 
@@ -1576,7 +1580,6 @@ startButton.onclick = function() {
 				map.style.opactiy = 0;
 				thirdBackButton.style.display = 'block';
 				creatorButtons.style.display = 'block';
-				writeNewDiaryContainer.style.display = 'block';
 				diaryEvents.style.display = 'block';
 				//fades in the StartMenu
 				anime({
