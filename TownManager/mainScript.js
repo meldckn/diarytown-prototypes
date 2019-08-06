@@ -695,6 +695,7 @@ function workloadDecrease () {
 }
 Sim.registerEventHandler(function(event) {
 	emoji.className = "emoji";
+	hero.appendChild(emoji);
 
 	if (event.isDiaryEvent) {
 		emojiQueue.push(Diary.getActionById(event.eventType).emoji);
