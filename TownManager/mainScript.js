@@ -855,7 +855,7 @@ window.setInterval(function(event) {
 }, 1000 * 3);
 window.setInterval(function(){
 	Sim.runRandomAction();
-}, 1000 * 10);
+}, 1000 * 30);
 
 
 
