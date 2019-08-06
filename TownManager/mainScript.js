@@ -852,10 +852,10 @@ window.setInterval(function(event) {
 	}
 	emoji.innerText = emojiQueue[0];
 	emojiQueue.shift();
-}, 1000 * 2);
+}, 1000 * 3);
 window.setInterval(function(){
 	Sim.runRandomAction();
-}, 1000 * 2);
+}, 1000 * 10);
 
 
 
