@@ -110,6 +110,7 @@ var Diary = ( function() {
 	 * onclick event listeners to them.
 	 */
 	function displayPhrases () {
+		$('.phrase-container').empty();
 		
 		var elements = [];
 		getAllActions().forEach( function(action) {
