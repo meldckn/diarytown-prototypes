@@ -56,7 +56,7 @@ button:hover {
 
 }
 
-.subtab button:hover{
+.subtabs:hover{
 	background-color: black;
 	padding: 15px 15px;
 	border-radius: 0px;
@@ -579,7 +579,7 @@ div.scrollmenu a:hover {
 	padding-right:25px;
 }
 
-button.subtabs {
+.subtabs {
 
 	background-color: white;
     padding: 15px 15px;
