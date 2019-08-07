@@ -125,6 +125,25 @@ var Diary = ( function() {
 		$('.phrase-container').append(elements);
 	}
 
+	// Display a certain category based on diary crafter tabs
+	function displayCategory (categoryName) {
+		$('.phrase-container').empty();
+
+		var elements = [];
+		getAllActions().forEach( function(action) {
+			if (categoryName.toLowerCase() === action.category) {
+		    	var element = $('<button ' + 
+		    			'class="phrase '+ action["category"] + '" ' +
+		    			'id="'+ action["id"] + '" ' +
+		    			'onclick="Diary.addToDiary(this.id)"' + '>' +
+		    				action["text"][0] + 
+		    		'</button>');
+
+		    	elements.push(element);
+			}
+		});
+		$('.phrase-container').append(elements);
+	}
 	
 	function addPhraseToDiary ( actionObj, textIndex ) {
 		var element = $('<div class="diary-phrase close" id = '+actionObj["id"] + '>' + actionObj["text"][textIndex] + '</div>')
@@ -141,7 +160,8 @@ var Diary = ( function() {
  		addToDiary : addToDiary,
  		getActionById : getActionById,
  		getActionByText : getActionByText,
- 		getActionBySubstring : getActionBySubstring
+ 		getActionBySubstring : getActionBySubstring,
+ 		displayCategory : displayCategory
  	}
 
 	function submitEntry() {
