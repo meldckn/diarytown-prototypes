@@ -5,8 +5,6 @@ registerSiftingPattern('movedAndMissingSomeone', [
   '?e1 actor ?c1',
   '?e2 actor ?c1',
   '?c1 name ?n1',
-  //'?c2 name ?n2',
-  //'(not= ?c1 ?c2)'
   '(not-join [?c1 ?e1 ?e2]\
     [?eMid "actor" ?c1]\
     [(< ?e1 ?eMid ?e2)]\
@@ -15,15 +13,16 @@ registerSiftingPattern('movedAndMissingSomeone', [
 
 registerSiftingPattern('readAndGoodIdea', [
   '(or [?e1 "eventType" "read"]\
-      [?e1 "eventType" "finished-book"])',
-  '?e2 eventType good-idea',
+       [?e1 "eventType" "finished-book"])',
+  '(or [?e2 "eventType" "good-idea"]\
+       [?e2 "eventType" "realized-something"])',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
   '?c1 name ?n1',
   '(not-join [?c1 ?e1 ?e2]\
-      [?eMid "actor" ?c1]\
-      [(< ?e1 ?eMid ?e2)])'
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)])'
 ]);
 
 registerSiftingPattern('wentToPartyAndDinedOut', [
@@ -60,8 +59,8 @@ registerSiftingPattern('niceConvoAndHeardFrom', [
   '?e2 actor ?c1',
   '?c1 name ?n1',
   '(not-join [?c1 ?e1 ?e2]\
-      [?eMid "actor" ?c1]\
-      [(< ?e1 ?eMid ?e2)])'
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)])'
 
 ]);
 
@@ -73,8 +72,8 @@ registerSiftingPattern('playGameAndAvoidResponsibility', [
   '?e2 actor ?c1',
   '?c1 name ?n1',
   '(not-join [?c1 ?e1 ?e2]\
-      [?eMid "actor" ?c1]\
-      [(< ?e1 ?eMid ?e2)])'
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)])'
 ]);
 
 registerSiftingPattern('gotHelpAndFinishedWork', [
@@ -92,7 +91,7 @@ registerSiftingPattern('gotHelpAndFinishedWork', [
 
 registerSiftingPattern('shoppedAndFeltExcited', [
   '?e1 eventType shopped',
-  '?e2 eventType feltHappy',
+  '?e2 eventType feeling-excited',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
@@ -142,7 +141,8 @@ registerSiftingPattern('helpedSomeoneAndNiceConvo', [
 
 registerSiftingPattern('hungOutAndChattedWithSomeone', [
   '?e1 eventType hung-out',
-  '?e2 eventType chattedWithSomeone',
+  '(or [?e2 "eventType" "chatted-with-someone"]\
+       [?e2 "eventType" "chatted-with-stranger"])',
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
@@ -172,7 +172,11 @@ registerSiftingPattern('wasProductiveAndWentToAMeeting', [
   '(< ?e1 ?e2)',
   '?e1 actor ?c1',
   '?e2 actor ?c1',
-  '?c1 name ?n1'
+  '?c1 name ?n1',
+  '(not-join [?c1 ?e1 ?e2]\
+    [?eMid "actor" ?c1]\
+    [(< ?e1 ?eMid ?e2)]\
+    [?eMid "eventType" "was-productive"])'
 ]);
 
 registerSiftingPattern('avoidedResponsibilityAndDidNothing', [

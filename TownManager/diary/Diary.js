@@ -21,6 +21,7 @@ var Diary = ( function() {
 		// Use JQueryUI to make the diary entry divs sortable (via drag-and-drop)
 		//$( ".sortable" ).sortable();
 		document.getElementById("submit").onclick = function () {submitEntry()};
+		document.getElementById("clear").onclick = function () {clearEntry()};
 		position = 0;
 	}
 
@@ -150,12 +151,19 @@ var Diary = ( function() {
  		phraseNodes.forEach(function(element){
 			diaryEntry.push(element.id);
 			Sim.runDiaryAction(element.id, element.innerText);
-			element.remove();
 		});
 		console.log(diaryEntry);
 		//drawEmoji(diaryEntry);
 		document.getElementById ("fourthBackButton").click();
 
+ 	}
+
+ 	function clearEntry() {
+ 		console.log ("entry cleared!");
+ 		var phraseNodes = document.getElementById("diary").querySelectorAll(".diary-phrase");
+ 		phraseNodes.forEach(function(element){
+ 			element.remove();
+ 		});
  	}
 
 

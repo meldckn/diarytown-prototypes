@@ -552,6 +552,11 @@ div.scrollmenu a:hover {
 	position:relative;
 	text-align:left;
 }
+#clear {
+	font-size:15px;
+	position:relative;
+	text-align:left;
+}
 #diary {
 	text-align:left;
 	height:70%;
