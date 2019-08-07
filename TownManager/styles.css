@@ -44,6 +44,7 @@ button {
 	border: 1px solid white;
 	margin-bottom: 1rem;
 	font-size: 36;
+	cursor: pointer;
 
 }
 button:hover {
@@ -53,6 +54,7 @@ button:hover {
 	color: black;
 	font-family: "Press Start 2P";
 	border: 1px solid black;
+	transition: 0.3s;
 
 }
 
@@ -566,12 +568,13 @@ div.scrollmenu a:hover {
 	background-color:black;
 	color:white;
 	font-size:12;
+	cursor:default;
 }
-#dateline:hover {
+/*#dateline:hover {
 	background-color:white;
 	color:black;
 	transition:0.3s;
-}
+}*/
 
 #actions-events-phrases{
 	height:90%;
