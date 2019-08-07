@@ -16,7 +16,7 @@ var Diary = ( function() {
 
 		// Initialize all other modules 
 		initActionsData();
-		initDisplay( getAllActions() );
+		initDisplay();
 
 		// Use JQueryUI to make the diary entry divs sortable (via drag-and-drop)
 		//$( ".sortable" ).sortable();
@@ -91,12 +91,12 @@ var Diary = ( function() {
 		console.log(getAllActions());
 	}
 
-	function initDisplay (actionLibrary) {
+	function initDisplay () {
 		var d = new Date();
 		var month = d.getMonth() + 1;
 		var day = d.getDate();
 		var year = d.getFullYear();
-		displayPhrases (actionLibrary);
+		displayPhrases ();
 		addDateLine (month + "/" + day + "/" + year);
 
     }
@@ -109,10 +109,10 @@ var Diary = ( function() {
 	 * Construct phrases display HTML elements, and attach 
 	 * onclick event listeners to them.
 	 */
-	function displayPhrases (actionLibrary) {
+	function displayPhrases () {
 		
 		var elements = [];
-		actionLibrary.forEach( function(action) {
+		getAllActions().forEach( function(action) {
 	    	var element = $('<button ' + 
 	    			'class="phrase '+ action["category"] + '" ' +
 	    			'id="'+ action["id"] + '" ' +
@@ -141,6 +141,16 @@ var Diary = ( function() {
 
 		    	elements.push(element);
 			}
+			if (categoryName.toLowerCase().includes(action.type)) {
+				var element = $('<button ' + 
+						'class="phrase '+ action["category"] + '" ' +
+						'id="'+ action["id"] + '" ' +
+						'onclick="Diary.addToDiary(this.id)"' + '>' +
+							action["text"][0] + 
+					'</button>');
+
+				elements.push(element);
+			}
 		});
 		$('.phrase-container').append(elements);
 	}
@@ -161,6 +171,7 @@ var Diary = ( function() {
  		getActionById : getActionById,
  		getActionByText : getActionByText,
  		getActionBySubstring : getActionBySubstring,
+ 		displayPhrases : displayPhrases,
  		displayCategory : displayCategory
  	}
 
