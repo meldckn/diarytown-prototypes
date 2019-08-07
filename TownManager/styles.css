@@ -573,6 +573,7 @@ div.scrollmenu a:hover {
 	width:100%;
 	padding-right:25px;
 }
+
 button.subtabs {
 
 	background-color: white;
@@ -584,7 +585,7 @@ button.subtabs {
     font-size: 8;
     transition: 0.3s;
 }
-
+/*
 button:hover {
 	background-color: black;
 	padding: 15px 15px;
@@ -594,7 +595,7 @@ button:hover {
 	border: 1px solid black;
 
 }
-
+*/
 
 
 
